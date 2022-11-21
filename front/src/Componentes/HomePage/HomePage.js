@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import NavBar from '../NavBar/NavBar';
 import stl from "./HomePage.module.css";
 
 export default function HomePage () {
@@ -8,7 +9,7 @@ export default function HomePage () {
        
         <div className={stl.homepage}>
 
-       <div>Este es el homepage</div>
+          <NavBar />
 
             <div className={stl.adoptarDarEnAdopcion}>
 
