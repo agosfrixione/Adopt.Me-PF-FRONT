@@ -1,0 +1,21 @@
+.adoptarDarEnAdopcion {
+    /* border: 2px solid red; */
+    justify-content: space-around;
+    display: flex;
+    margin-top: 200px;
+}
+
+.adoptar {
+    /* border: 2px solid green; */
+}
+
+.darEnAdopcion {
+    /* border: 2px solid yellow; */
+}
+
+.otrosServicios {
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+}
