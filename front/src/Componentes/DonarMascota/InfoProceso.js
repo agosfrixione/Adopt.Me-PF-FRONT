@@ -25,7 +25,7 @@ export default function InfoProceso () {
             <h2>Crea tu cuenta en Adopta.ME</h2>
             <h3>Registrate gratis. Una vez que completes el formulario vas a recibir un correo con tu usuario y contraseña y vas a poder comenzar a publicar tus mascotas.</h3>
             <Link to='/sigin'>
-                <button>SIGN IN</button>
+                <button>REGISTRARSE</button>
             </Link>
             </div>
 
@@ -38,8 +38,8 @@ export default function InfoProceso () {
             </div>
 
             <Link to='/homepage'>
-                <button>RETURN</button>
+                <button>VOLVER</button>
             </Link>
         </div>
-    )
-}
+    );
+};
