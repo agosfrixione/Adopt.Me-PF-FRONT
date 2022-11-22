@@ -14,8 +14,8 @@ h1 {
   font-size:5em;
   font:bold 7.5vw/1.6 'Signika', sans-serif;
   user-select:none;
-  margin-top: 50px;
-  /* border: 2px solid green; */
+  margin-top: 100px;
+  /* border: 2px solid green;  */
  }
  
  h1 span { display:inline-block; animation:float .2s ease-in-out infinite; }
@@ -57,88 +57,129 @@ h1 {
     height: 100%;
     width: 100%;
     /* border: 3px solid red; */
-    position: absolute;
+    position: relative;
 }
 
+
 .button {
+  align-items: center;
   appearance: none;
-  background-color: brown;
-  border: 2px solid grey;
-  border-radius: 13px;
+  background-image: radial-gradient(100% 100% at 100% 0, #0ba625 0, #7de38b 100%);
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: rgb(4, 19, 46);
   cursor: pointer;
-  display: inline-block;
-  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-  font-size: 16px;
-  font-weight: 600;
-  line-height: normal;
-  margin: 0;
-  margin-top: 100px;
-  margin-bottom: 90px;
-  min-height: 90px;
-  min-width: 200px;
-  outline: none;
-  padding: 6px 24px;
-  text-align: center;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
   text-decoration: none;
-  font-size: 45px;
-  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  transition: box-shadow .15s,transform .15s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  will-change: transform;
-  border-bottom: 3px solid #737474;
-    border-right: 3px solid #737474;
-    box-shadow: 0px 4px 6px #999;
-    /* border: 6px solid yellow; */
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+  /* border: 1px solid red; */
+  margin-top: 60px;
 }
 
-.button:disabled {
-  pointer-events: none;
+.button:focus {
+  box-shadow: #17b74a 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #9fdd3b 0 -3px 0 inset;
 }
 
 .button:hover {
-  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #17b74a 0 -3px 0 inset;
   transform: translateY(-2px);
 }
 
 .button:active {
-  box-shadow: none;
-  transform: translateY(0);
+  box-shadow: #17b74a 0 3px 7px inset;
+  transform: translateY(2px);
 }
 
-.carousel {
-  height: 150px;
-  /* border: 1px solid green; */
-}
 
 .imagen1 {
-  background-image: url("../../Imagenes/mascotas.jpg");
-  height: 100px;
+  background-image: url("../../Imagenes/Cachorro-Perro-y-Gato.jpg");
+  height: 300px;
   background-size: cover;
   margin-left: 20px;
 }
 
 .imagen2 {
-  background-image: url("../../Imagenes/mascotas.jpg");
-  height: 100px;
+  background-image: url("../../Imagenes/Cachorros-de-Perro-y-Gato.jpg");
+  height: 300px;
   background-size: cover;
   margin-left: 20px;
 }
 
 .imagen3 {
-  background-image: url("../../Imagenes/mascotas.jpg");
-  height: 100px;
+  background-image: url("../../Imagenes/Fotografia-Perro-y-Gato.jpg");
+  height: 300px;
   background-size: cover;
   margin-left: 20px;
 }
 
 .imagen4 {
-  background-image: url("../../Imagenes/mascotas.jpg");
-  height: 100px;
+  background-image: url("../../Imagenes/Perro-y-Gato.jpg");
+  height: 300px;
   background-size: cover;
   margin-left: 20px;
 }
 
+.facebook {
+  background-image: url("../../Imagenes/facebook.png");
+  /* border: 1px solid green; */
+  height: 30px;
+  width: 30px;
+  background-size: contain;
+  margin: 10px;
+}
 
+.instagram {
+  background-image: url("../../Imagenes/instagram.png");
+  /* border: 1px solid blue; */
+  height: 30px;
+  width: 30px;
+  background-size: contain;
+  margin: 10px;
+}
+
+.twitter {
+  background-image: url("../../Imagenes/twitter.png");
+  /* border: 1px solid yellow; */
+  height: 30px;
+  width: 30px;
+  background-size: contain;
+  margin: 10px;
+  position: relative;
+}
+
+.icons {
+  /* border: 1px solid red; */
+  height: 80px;
+  display: flex;
+  flex-wrap: nowrap;
+  background-size: contain;
+  justify-content: flex-end;
+  margin-right: 30px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.fineslucro {
+  margin-right: 900px;
+}
+
+
+	
