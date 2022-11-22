@@ -5,6 +5,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 
+
 export default function LandingPage() {
 
    const responsive = {
@@ -44,16 +45,23 @@ export default function LandingPage() {
          </div> 
 
          <Carousel responsive={responsive}>
-  <div className={stl.imagen1}>Item 1</div>
-  <div className={stl.imagen2}>Item 2</div>
-  <div className={stl.imagen3}>Item 3</div>
-  <div className={stl.imagen4}>Item 4</div>
-</Carousel>;
+  <div className={stl.imagen1}></div>
+  <div className={stl.imagen2}></div>
+  <div className={stl.imagen3}></div>
+  <div className={stl.imagen4}></div>
+</Carousel>
        
        <Link to = '/homepage'> 
             <button className={stl.button}>Entrar</button>
          </Link>
        
+         <div className={stl.icons}>
+          <p className={stl.fineslucro}>@Adopt.Me Es una pagina sin fines de lucro</p>
+          <div className={stl.facebook}></div>
+          <div className={stl.instagram}></div>
+          <div className={stl.twitter}></div>
+        </div>
+
       </div>
        
    )   
