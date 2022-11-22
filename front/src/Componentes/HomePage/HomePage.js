@@ -43,15 +43,10 @@ export default function HomePage () {
                     </p>
                 </div>
 
+          <div>
                 <div className={stl.darEnAdopcion}> 
                 <p className={stl.darTitulo}>Dar en Adopcion</p>
-                <p className={stl.parrafoDarEnAdopcion}>Adoptar a un perro en casa es una de las decisiones más importantes que puedes tomar, 
-                                   ya que tu estilo de vida se verá condicionado por su cuidado. Evidentemente, tener a un 
-                                   pequeño peludo es un acto voluntario y nadie debe verse obligado a acogerlo, pero una vez 
-                                   dado el paso es fundamental garantizarle los cuidados básicos a lo largo de su vida para 
-                                   que goce de una buena salud.
-
-                                   No obstante, determinadas circunstancias, como problemas de salud del dueño, problemas económicos 
+                <p className={stl.parrafoDarEnAdopcion}>Determinadas circunstancias, como problemas de salud del dueño, problemas económicos 
                                    que impidan mantener a un perro en casa, una inesperada camada de cachorros, el fallecimiento del 
                                    dueño o una convivencia complicada entre animales y personas, pueden provocar que no se pueda 
                                    seguir atendiendo debidamente al animal y que se vea afectado por malos o pobres cuidados. 
@@ -64,15 +59,39 @@ export default function HomePage () {
                          
                  </div>
 
+                 <div className={stl.reportarMascota}> 
+                <p className={stl.reportarTitulo}>Reportar Mascota Perdida</p>
+                <p className={stl.parrafoReportar}>Si encontraste una mascota en la calle y queres reportar que la tenes. 
+                Ademas si perdiste una mascota y queres ver si figura en la lista de mascotas encontradas entra aqui 
+                para obtener mas informacion</p>
+                      
+                            <Link to = '/lalala'>
+                                 <button className={stl.botonReportar}>Reportar Mascota</button>
+                            </Link>
+                         
+                 </div>
+               </div>
+
          </div>
 
                 <div className={stl.otrosServicios}>
+                    <div className={stl.maltrato}>
+                    <p>Si fuiste testigo de un maltrato o tenes un vecino 
+                         que maltrata a su mascota. Ahora podes denunciarlo. Enterate como
+                        </p>
                         <Link to = '/animalabuse'> 
                             <button className={stl.botonOtrosServicios}>Denunciar maltrato</button>
                         </Link>
+                        </div>
+                        
+                        <div className={stl.masInfo}>
+                         <p>Aqui podras obtener informacion sobre como cuidar a tu mascota, vacunas y 
+                              demas informacion que podria interesarte
+                         </p>
                         <Link to = '/otherthings'> 
                              <button className={stl.botonOtrosServicios}>Te puede Interesar</button>
                         </Link>
+                        </div>
                 </div>
                 
           <div id="footer">
