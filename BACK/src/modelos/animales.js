@@ -23,7 +23,7 @@ const AnimalSchema = new Schema({
         required: false,
     },
     tamaño: {
-        type: Number,
+        type: String,
         required: false,
     },
     peso: {
