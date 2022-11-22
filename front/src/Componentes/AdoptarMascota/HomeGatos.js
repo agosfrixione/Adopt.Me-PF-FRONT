@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function AdoptCat () {
+export default function HomeGatos () {
 
     return (
 
