@@ -1,6 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
+
 .footer {
-    background-color: grey;
-    display: block;
-    height: 200px;
+   background-color: #393E46;
+    display: flex;
+    height: 230px;
     margin-top: 20px;
+    flex-direction: row;
+    justify-content: space-around;
+    border-top: 3px solid black;
+    color: #F7F7F7;
+    font-family: 'Viga', sans-serif;
+}
+
+.titulo {
+    /* border: 1px solid red; */
+    /* display: flex; */
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 400px;
+    margin-right: 90px;
+}
+
+.columna1 {
+ /* border: 1px solid green; */
+ flex-direction: column;
+ text-align: left;
+}
+
+.columna2 {
+ /* border: 1px solid yellow; */
+ flex-direction: column;
+ text-align: left;
+}
+
+.columna3 {
+ /* border: 1px solid brown; */
+ flex-direction: column;
+ text-align: left;
+}
+
+.columna4 {
+ /* border: 1px solid pink; */
+ flex-direction: column;
+ text-align: left;
+}
+
+.iconos {
+ /* border: 1px solid blue; */
+ width: 200px;
+ display: flex;
+ align-items: center;
+ flex-direction: column;
+ justify-content: space-around;
+ width: 100px;
+}
+
+.facebook {
+ /* border: 1px solid violet; */
+ background-image: url("../../Imagenes/facebook.png");
+ background-size: contain;
+ width: 30px;
+ height: 30px;
+}
+
+.instagram {
+ /* border: 1px solid fuchsia; */
+ background-image: url("../../Imagenes/instagram.png");
+ background-size: contain;
+ width: 30px;
+ height: 30px;
+}
+
+.twitter {
+ /* border: 1px solid chocolate; */
+ background-image: url("../../Imagenes/twitter.png");
+ background-size: contain;
+ width: 30px;
+ height: 30px;
+}
+
+.columnas {
+    /* border: 3px solid black; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 800px;
+    line-height: 10px;
+    margin-top: 30px;
+}
+
+h2 {
+    font-size: 45px;
+    margin-right: 50px;
+}
+
+h4 {
+    font-size: 15px;
 }
