@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useParams } from 'react-router-dom';
 
-export default function InfoProceso () {
+export default function DetalleAdopcion () {
 
     const params = useParams();
 
