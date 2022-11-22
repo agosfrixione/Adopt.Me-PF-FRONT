@@ -26,4 +26,4 @@ export default function InfoProceso () {
             </Link>
         </div>
     );
-};
+}; 
