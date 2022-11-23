@@ -1,12 +1,15 @@
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import stl from "../FormRegistro/FormRegistro.module.css";
+import createuser from '../../Actions/createuser';
 
 export default function FormRegistro () {
 
     const params = useParams();
+    const dispatch = useDispatch();
     // const dispatch = useDispatch();
     const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
 
@@ -92,8 +95,10 @@ export default function FormRegistro () {
             localidad:""
         }); // Reinicio el formulario
 
-        navigate('/confirmation')
+        dispatch(createuser(input))
+
       }
+      navigate('/confirmation')
 }
 
 
@@ -111,11 +116,11 @@ export default function FormRegistro () {
 
     return (
 
-        <div className={stl.registro} key={params.id}>
+        <div className={stl.registro} key={params.id} onSubmit={handleSubmit}>
 
             <NavBar/>
 
-            <div className={stl.form} key={params.id}>
+            <div className={stl.form} key={params.id} >
                       
               <div key={params.id}>
                   <label>NOMBRE DE USUARIO </label>
@@ -130,7 +135,7 @@ export default function FormRegistro () {
                   <div key={params.id}>
                   <label>CONTRASEÑA </label>
                   <input
-                  type="text"
+                  type="password"
                   name="contraseña"
                   value={input.contraseña}
                   onChange={(e) => handleChange(e)}/>
@@ -139,7 +144,7 @@ export default function FormRegistro () {
               <div key={params.id}>
                   <label>REPITA CONTRASEÑA </label>
                   <input
-                  type="text"
+                  type="password"
                   name="repitaContraseña"
                   value={input.repitaContraseña}
                   onChange={(e) => handleChange(e)}/>
@@ -206,6 +211,10 @@ export default function FormRegistro () {
 
             </div>
             </div>
+
+            <Link to='/homepage'>
+                <button className={stl.buttons} type="submit">SUBMIT</button>
+            </Link>
 
             <Link to='/givepet'>
                 <button className={stl.buttons}>CANCELAR</button>

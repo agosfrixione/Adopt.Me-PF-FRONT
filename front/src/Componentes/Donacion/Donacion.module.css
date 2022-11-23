@@ -4,7 +4,7 @@
     /* border: 2px solid red; */
     display: flex;
     width: 600px;  
-    height: 450px; 
+    height: 550px; 
     margin-top: 60px;
     justify-content: center;
     position: relative;
@@ -48,8 +48,8 @@ input {
 .metodosPago {
     display: flex;
     position: absolute;
-    margin-top: 350px;
-    border: 2px solid violet;
+    margin-top: 410px;
+    /* border: 2px solid violet; */
     width: 400px;
     justify-content: space-between;
 }
@@ -61,4 +61,13 @@ input {
 
 label {
     margin-top: 20px;
+}
+
+.paypal {
+    background-image: url("../../Imagenes/paypal.png");
+    background-repeat:no-repeat ;
+    background-size: contain;
+   width: 100px;
+   height: 80px;
+   cursor: pointer;
 }
