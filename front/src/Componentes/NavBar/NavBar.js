@@ -21,12 +21,14 @@ export default function NavBar() {
         <div className={stl.navbar}>
         </div>
             
+            <Link to = "/homepage">
              <p className={stl.logo}>Adopt.Me</p>
+             </Link>
              
 
         <div className={stl.algomas}>
              <h4>Blog</h4>
-             {/* <a href="#footer">+ Info</a> */}
+  
              <div className="dropdown">
       <p onClick={handleOpen}>Info</p>
       {open ? (
@@ -37,17 +39,17 @@ export default function NavBar() {
             </Link>
           </li>
           <li className="menu-item">
-            <Link to = "/lalala">
+            <Link to = "/missingPet">
             <p className="drop">Mascota Perdida</p>
             </Link>
           </li>
           <li className="menu-item">
-          <Link to = "/animalabuse">
+          <Link to = "/reportarmaltrato">
             <p className="drop">Denunciar Maltrato</p>
             </Link>
           </li>
           <li className="menu-item">
-          <Link to = "/otherthings">
+          <Link to = "/tepuedeinteresar">
             <p className="drop">Otras Cosas</p>
             </Link>
           </li>
@@ -63,8 +65,10 @@ export default function NavBar() {
         </div>
       
 
-        <div className={stl.login}>      
+        <div className={stl.login}>
+          <Link to = "/sigup">      
              <button className={stl.buttons}>Registrarse</button>
+             </Link>
             <button className={stl.buttons}>Log In</button>
         </div>
 
