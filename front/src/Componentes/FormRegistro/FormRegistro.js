@@ -19,6 +19,10 @@ export default function FormRegistro () {
         logo:[]
     });
 
+    const [institucion, setinstitucion] = useState(false);
+    const [adoptante, setadoptante] = useState(false);
+
+
     function handleSubmit(e) {
         e.preventDefault();
         if(!input.institucion.length || !input.responsable || !input.telefono || !input.repiteTelefono || !input.correo || !input.repiteCorreo){
@@ -61,6 +65,17 @@ export default function FormRegistro () {
         }
       }
 
+    function handleFormInstitucion(e) {
+        e.preventDefault();
+        institucion ? setinstitucion(false) : setinstitucion(true)
+      }
+
+    function handleFormAdoptante(e) {
+        e.preventDefault();
+        adoptante === false ? setadoptante(true) : setadoptante(false)
+      }
+      
+
 
 
     return (
@@ -68,112 +83,217 @@ export default function FormRegistro () {
         <div key={params.id}>
 
             <div key={params.id}>
-            <h1>REGISTRO DE INSTITUCIÒN PROTECTORA</h1>
+            <h1>REGISTRO</h1>
             <h2>NOTA: LOS CAMPOS CON * SON OBLIGATORIOS</h2>
 
+            <div>
+            <button onClick={(e) => handleFormAdoptante(e)}>QUIERO ADOPTAR</button>
+            {adoptante && institucion === false && (
+              <form onSubmit={e => handleSubmit(e)}>
+                      
+              <div key={params.id}>
+                  <label>NOMBRE Y APELLIDO* </label>
+                  <input
+                  type="text"
+                  required
+                  name="responsable"
+                  value={input.responsable}
+                  onChange={(e) => handleChange(e)}/>
+                  </div>
+  
+              <div key={params.id}>
+                  <label>TELÉFONO DE CONTACTO* </label>
+                  <input
+                  type="text"
+                  required
+                  name="telefono"
+                  value={input.telefono}
+                  onChange={(e) => handleChange(e)}/>
+                  </div>
+  
+              <div key={params.id}>
+                  <label>REPITE TELÉFONO* </label>
+                  <input
+                  type="text"
+                  required
+                  name="repiteTelefono"
+                  value={input.repiteTelefono}
+                  onChange={(e) => handleChange(e)}/>
+                  </div>
+  
+              <div key={params.id}>
+                  <label>CORREO* </label>
+                  <input
+                  type="text"
+                  required
+                  name="correo"
+                  value={input.correo}
+                  onChange={(e) => handleChange(e)}/>
+                  </div>
+  
+              <div key={params.id}>
+                  <label>REPITE CORREO* </label>
+                  <input
+                  type="text"
+                  required
+                  name="repiteCorreo"
+                  value={input.repiteCorreo}
+                  onChange={(e) => handleChange(e)}/>
+                  </div>
+  
+              <div key={params.id}>
+                  <label>Facebook URL </label>
+                  <input
+                  type="text"
+                  name="facebookURL"
+                  value={input.facebookURL}
+                  onChange={(e) => handleChange(e)}/>
+                  </div>
+  
+              <div key={params.id}>
+                  <label>Twitter URL </label>
+                  <input
+                  type="text"
+                  name="twitterURL"
+                  value={input.twitterURL}
+                  onChange={(e) => handleChange(e)}/>
+                  </div>
+                  
+              <div key={params.id}>
+                  <label>Instagram URL </label>
+                  <input
+                  type="text"
+                  name="instagramURL"
+                  value={input.instagramURL}
+                  onChange={(e) => handleChange(e)}/>
+                  </div>
+  
+                  <div key={params.id}>
+                  <label>FOTO DE PERFIL </label>
+                  <input
+                  type="file"
+                  name="logo"
+                  value={input.logo}
+                  onChange={(e) => handleChange(e)} />
+                  </div>
+                  
+                  <div key={params.id}>
+                      <button type="submit">ACEPTAR</button>
+                      </div>
+  
+          </form>
+            )}
+            </div>
+            
+
+            <div>
+            <button onClick={(e) => handleFormInstitucion(e)}>QUIERO DAR EN ADOPCION</button>
+            {institucion && adoptante === false && (
             <form onSubmit={e => handleSubmit(e)}>
 
-                <div key={params.id}>
-                    <label>INSTITUCION* </label>
-                    <select defaultValue="default" onChange={(e) => handleInstitucion(e)}>
-                        <option value="default" disabled hidden>ALBERGUE - FUNDACION - PROTECTOR INDEPENDIENTE</option>
-                        <option value="albergue">ALBERGUE</option>
-                        <option value="fundacion" selected>FUNDACIÓN</option>
-                        <option value="independiente">PROTECTOR INDEPENDIENTE</option>
-                        </select>
-                        </div>
-                        
-                <div key={params.id}>
-                    <label>RESPONSABLE* </label>
-                    <input
-                    type="text"
-                    required
-                    name="responsable"
-                    value={input.responsable}
-                    onChange={(e) => handleChange(e)}/>
-                    </div>
-
-                <div key={params.id}>
-                    <label>TELÉFONO DE CONTACTO* </label>
-                    <input
-                    type="text"
-                    required
-                    name="telefono"
-                    value={input.telefono}
-                    onChange={(e) => handleChange(e)}/>
-                    </div>
-
-                <div key={params.id}>
-                    <label>REPITE TELÉFONO* </label>
-                    <input
-                    type="text"
-                    required
-                    name="repiteTelefono"
-                    value={input.repiteTelefono}
-                    onChange={(e) => handleChange(e)}/>
-                    </div>
-
-                <div key={params.id}>
-                    <label>CORREO* </label>
-                    <input
-                    type="text"
-                    required
-                    name="correo"
-                    value={input.correo}
-                    onChange={(e) => handleChange(e)}/>
-                    </div>
-
-                <div key={params.id}>
-                    <label>REPITE CORREO* </label>
-                    <input
-                    type="text"
-                    required
-                    name="repiteCorreo"
-                    value={input.repiteCorreo}
-                    onChange={(e) => handleChange(e)}/>
-                    </div>
-
-                <div key={params.id}>
-                    <label>Facebook URL </label>
-                    <input
-                    type="text"
-                    name="facebookURL"
-                    value={input.facebookURL}
-                    onChange={(e) => handleChange(e)}/>
-                    </div>
-
-                <div key={params.id}>
-                    <label>Twitter URL </label>
-                    <input
-                    type="text"
-                    name="twitterURL"
-                    value={input.twitterURL}
-                    onChange={(e) => handleChange(e)}/>
+            <div key={params.id}>
+                <label>INSTITUCION* </label>
+                <select defaultValue="default" onChange={(e) => handleInstitucion(e)}>
+                    <option value="default" disabled hidden>ALBERGUE - FUNDACION - PROTECTOR INDEPENDIENTE</option>
+                    <option value="albergue">ALBERGUE</option>
+                    <option value="fundacion" selected>FUNDACIÓN</option>
+                    <option value="independiente">PROTECTOR INDEPENDIENTE</option>
+                    </select>
                     </div>
                     
+            <div key={params.id}>
+                <label>RESPONSABLE* </label>
+                <input
+                type="text"
+                required
+                name="responsable"
+                value={input.responsable}
+                onChange={(e) => handleChange(e)}/>
+                </div>
+
+            <div key={params.id}>
+                <label>TELÉFONO DE CONTACTO* </label>
+                <input
+                type="text"
+                required
+                name="telefono"
+                value={input.telefono}
+                onChange={(e) => handleChange(e)}/>
+                </div>
+
+            <div key={params.id}>
+                <label>REPITE TELÉFONO* </label>
+                <input
+                type="text"
+                required
+                name="repiteTelefono"
+                value={input.repiteTelefono}
+                onChange={(e) => handleChange(e)}/>
+                </div>
+
+            <div key={params.id}>
+                <label>CORREO* </label>
+                <input
+                type="text"
+                required
+                name="correo"
+                value={input.correo}
+                onChange={(e) => handleChange(e)}/>
+                </div>
+
+            <div key={params.id}>
+                <label>REPITE CORREO* </label>
+                <input
+                type="text"
+                required
+                name="repiteCorreo"
+                value={input.repiteCorreo}
+                onChange={(e) => handleChange(e)}/>
+                </div>
+
+            <div key={params.id}>
+                <label>Facebook URL </label>
+                <input
+                type="text"
+                name="facebookURL"
+                value={input.facebookURL}
+                onChange={(e) => handleChange(e)}/>
+                </div>
+
+            <div key={params.id}>
+                <label>Twitter URL </label>
+                <input
+                type="text"
+                name="twitterURL"
+                value={input.twitterURL}
+                onChange={(e) => handleChange(e)}/>
+                </div>
+                
+            <div key={params.id}>
+                <label>Instagram URL </label>
+                <input
+                type="text"
+                name="instagramURL"
+                value={input.instagramURL}
+                onChange={(e) => handleChange(e)}/>
+                </div>
+
                 <div key={params.id}>
-                    <label>Instagram URL </label>
-                    <input
-                    type="text"
-                    name="instagramURL"
-                    value={input.instagramURL}
-                    onChange={(e) => handleChange(e)}/>
+                <label>LOGO </label>
+                <input
+                type="file"
+                name="logo"
+                value={input.logo}
+                onChange={(e) => handleChange(e)} />
+                </div>
+                
+                <div key={params.id}>
+                    <button type="submit">ACEPTAR</button>
                     </div>
 
-                    <div key={params.id}>
-                    <label>LOGO </label>
-                    <input
-                    type="file"
-                    name="logo"
-                    value={input.logo}
-                    onChange={(e) => handleChange(e)} />
-                    </div>
-                    
-                    <div key={params.id}>
-                        <button type="submit">ACEPTAR</button>
-                        </div>
-
-            </form>
+        </form>
+            )}
+            </div>
 
             </div>
 
