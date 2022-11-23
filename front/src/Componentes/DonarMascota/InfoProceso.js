@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, useParams } from 'react-router-dom';
+import Footer from '../Footer/Footer';
+import NavBar from '../NavBar/NavBar';
 
 export default function InfoProceso () {
 
@@ -8,6 +10,7 @@ export default function InfoProceso () {
     return (
 
         <div key={params.id}>
+            <NavBar/>
             <div>
             <h1>PUBLICA LOS ANIMALES QUE TIENES EN ADOPCIÓN</h1>
             </div>
@@ -40,6 +43,11 @@ export default function InfoProceso () {
             <Link to='/homepage'>
                 <button>VOLVER</button>
             </Link>
+
+            <div id="footer">
+                <Footer />
+                </div>
+                
         </div>
     );
 };

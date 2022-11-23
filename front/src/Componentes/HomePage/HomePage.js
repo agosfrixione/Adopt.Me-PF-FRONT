@@ -92,7 +92,7 @@ export default function HomePage () {
                          <p>Aqui podras obtener informacion sobre como cuidar a tu mascota, vacunas y 
                               demas informacion que podria interesarte
                          </p>
-                        <Link to = '/otherthings'> 
+                        <Link to = '/tepuedeinteresar'> 
                              <button className={stl.botonOtrosServicios}>Te puede Interesar</button>
                         </Link>
                         </div>
