@@ -1,5 +1,5 @@
 import React from "react";
 
-const UploadImages = (props) => {
+export default function UploadImages() {
   return <div>prueba imagenes</div>;
-};
+}

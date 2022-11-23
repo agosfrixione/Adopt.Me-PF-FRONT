@@ -67,10 +67,10 @@ export default function HomePage() {
               informacion
             </p>
 
-            <Link to="/lalala">
+            <Link to="/reportpet">
               <button className={stl.botonReportar}>Reportar Mascota</button>
             </Link>
-            <Link to="/dododo">
+            <Link to="/lookforpet">
               <button className={stl.botonReportar}>Buscar Mascota</button>
             </Link>
           </div>
