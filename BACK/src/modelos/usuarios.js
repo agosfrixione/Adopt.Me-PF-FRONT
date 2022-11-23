@@ -29,14 +29,14 @@ const UsuarioSchema = new Schema({
 });
 
 // METODO PARA HASHEAR CONTRASEÑA
-UserSchema.methods.encryptPassword = async (contraseña) => {
+UsuarioSchema.methods.encryptPassword = async (contraseña) => {
   const salt = await bcrypt.genSalt(10); // veces q aplica el algoritmo para obtener el hash
   const hash = bcrypt.hash(contraseña, salt); // combinamos hash y contraseña para encriptarla
   return hash
 }
 
 // METODO PARA TOMAR LA CONTRASEÑA Y HASHEARLA PARA COMPARARLA CON LA HASHEADA EN LA DB
-UserSchema.methods.compararContraseña = async function(contraseña){
+UsuarioSchema.methods.compararContraseña = async function(contraseña){
   return await bcrypt.compare(contraseña, this.contraseña)
 }
 
