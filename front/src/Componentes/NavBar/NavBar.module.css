@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
 
 .navbar {
-    background-color: #6D9886;
+    /* background-color: #6D9886; */
     color: #F7F7F7;
     display: flex;
     flex-wrap: nowrap;
@@ -79,6 +79,8 @@ h4 {
   -webkit-user-select: none;
   touch-action: manipulation;
   box-shadow: -6px 8px 10px rgba(81,41,10,0.1),0px 2px 2px rgba(81,41,10,0.2);
+  height: 32px;
+  align-items: center;
 }
 
 .buttons:active {
