@@ -1,0 +1,49 @@
+
+.formulario {
+    border: 2px solid red;
+    display: flex;
+    width: 600px;  
+    height: 450px; 
+    margin-top: 60px;
+    justify-content: center;
+    position: relative;
+}
+
+.pagina {
+    display: flex;
+    justify-content: center;
+    border: 5px solid yellow;
+    position: relative;
+    height: 743px;
+    background-image: url("../../Imagenes/pisadas.jpg");
+    background-size: contain;
+}
+
+.datos {
+    border: 1px solid blue;
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 70px;
+    flex-wrap: wrap;
+}
+
+input {
+    height: 20px;
+}
+
+.titulo {
+    border: 1px solid green;
+    display: flex;
+    position: absolute;
+}
+
+.metodosPago {
+    display: flex;
+    position: absolute;
+    margin-top: 350px;
+    border: 2px solid violet;
+    width: 400px;
+    justify-content: space-between;
+}

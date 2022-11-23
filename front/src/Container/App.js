@@ -10,6 +10,8 @@ import DetalleAdopcion from '../Componentes/AdoptarMascota/DetalleAdopcion'
 import Confirmacion from '../Componentes/DonarMascota/Confirmacion';
 import AnimalAbuse from '../Componentes/DenunciarMaltrato/DenunciarMaltrato';
 import OtherThings from '../Componentes/TePuedeInteresar/TePuedeInteresar';
+import Donar from '../Componentes/Donacion/Donacion';
+import MissingPet from '../Componentes/MascotaPerdida/MascotaPerdida';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
     <Route exact path = '/confirmation' element = {<Confirmacion/>} />
     <Route exact path = '/animalabuse' element = {<AnimalAbuse/>} />
     <Route exact path = '/otherthings' element = {<OtherThings/>} />
+    <Route exact path = '/donation' element = {<Donar/>} />
+    <Route exact path = '/missingPet' element = {<MissingPet/>} />
     </Routes>
     </div>
     </BrowserRouter>

@@ -11,10 +11,14 @@ export default function HomePage () {
         <div className={stl.homepage}>
         
           <NavBar />
-
-         <div>
           
-            </div>
+          <div className={stl.donacion}>
+          <p className={stl.textoDonacion}>Realiza tu donacion</p>
+          <Link to = "/donation">
+          <button className={stl.botonDonar}>Donar</button>
+          </Link>
+          </div>
+
             <div className={stl.adoptarDarEnAdopcion}>
           
                 <div className={stl.adoptar}>
@@ -65,7 +69,7 @@ export default function HomePage () {
                 Ademas si perdiste una mascota y queres ver si figura en la lista de mascotas encontradas entra aqui 
                 para obtener mas informacion</p>
                       
-                            <Link to = '/lalala'>
+                            <Link to = '/missingPet'>
                                  <button className={stl.botonReportar}>Reportar Mascota</button>
                             </Link>
                          
