@@ -5,6 +5,7 @@ export default function BuscarMascota() {
   return (
     <>
       <div>Aqui puedes buscar a tu mascota </div>
+      <button>Buscar</button>
       <UploadImages />
     </>
   );
