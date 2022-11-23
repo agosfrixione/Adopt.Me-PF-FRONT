@@ -2,6 +2,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
+import stl from "../FormRegistro/FormRegistro.module.css";
 
 export default function FormRegistro () {
 
@@ -110,15 +111,11 @@ export default function FormRegistro () {
 
     return (
 
-        <div key={params.id}>
+        <div className={stl.registro} key={params.id}>
 
             <NavBar/>
 
             <div key={params.id}>
-
-            <h1>REGISTRO</h1>
-
-              <form onSubmit={e => handleSubmit(e)}>
                       
               <div key={params.id}>
                   <label>NOMBRE DE USUARIO </label>
@@ -206,14 +203,11 @@ export default function FormRegistro () {
                   </div>
                   
                   <div key={params.id}>
-                      <button type="submit">CONFIRMAR</button>
-                      </div>
-  
-          </form>
+
             </div>
 
             <Link to='/givepet'>
-                <button>CANCELAR</button>
+                <button className={stl.buttons}>CANCELAR</button>
             </Link>
             
             <Footer />

@@ -6,6 +6,8 @@ import stl from "./HomePage.module.css";
 
 export default function HomePage () {
 
+
+
     return (
        
         <div className={stl.homepage}>
@@ -25,11 +27,11 @@ export default function HomePage () {
                      
                      <div className={stl.opciones}>
                             <Link to = '/adoptdog'> 
-                                 <div className={stl.perros}>Adoptar Perro</div>
+                                 <div className={stl.perros}></div>
                             </Link>
           
                             <Link to = '/adoptcat'> 
-                                 <div className={stl.gatos}>Adoptar Gato</div>
+                                 <div className={stl.gatos}></div>
                             </Link>
           
                     </div>
@@ -83,7 +85,7 @@ export default function HomePage () {
                     <p>Si fuiste testigo de un maltrato o tenes un vecino 
                          que maltrata a su mascota. Ahora podes denunciarlo. Enterate como
                         </p>
-                        <Link to = '/animalabuse'> 
+                        <Link to = '/reportarmaltrato'> 
                             <button className={stl.botonOtrosServicios}>Denunciar maltrato</button>
                         </Link>
                         </div>
@@ -98,11 +100,11 @@ export default function HomePage () {
                         </div>
                 </div>
                 
-          <div id="footer">
+          
           <Footer />
-          </div>
+          
         </div>
         
         
-    )                     
+    )                  
 }

@@ -2,19 +2,20 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
+import stl from "../TePuedeInteresar/ReportarMaltrato.module.css";
 
 export default function ReportarMaltrato () {
 
     const params = useParams();
 
     return (
-        <div key={params.id}>
+        <div className={stl.maltrato} key={params.id}>
             
             <NavBar />
 
             <div>
-            <h1>REPORTAR MALTRATO ANIMAL</h1>
-            <h2>La ley 14.346 protege a los animales del maltrato y la crueldad de las personas. Estos actos son delitos penados con prisión de 15 días a 1 año y podés denunciarlos.</h2>
+            <h1 className={stl.titulo}>REPORTAR MALTRATO ANIMAL</h1>
+            <h2 className={stl.ley}>La ley 14.346 protege a los animales del maltrato y la crueldad de las personas. Estos actos son delitos penados con prisión de 15 días a 1 año y podés denunciarlos.</h2>
             </div>
 
             <div>
@@ -64,11 +65,11 @@ export default function ReportarMaltrato () {
             </div>
 
             <div>
-                <h3>Fuente:<a href="https://www.argentina.gob.ar/justicia/derechofacil/leysimple/maltrato-animales" title="gob">argentina.gob.ar</a></h3>
+                <h3>Fuente:<a href="https://www.argentina.gob.ar/justicia/derechofacil/leysimple/maltrato-animales" title="gob" target="_blank" rel="noreferrer">argentina.gob.ar</a></h3>
             </div>
 
-            <Link to='/tepuedeinteresar'>
-                <button>VOLVER</button>
+            <Link to='/homepage'>
+                <button className={stl.boton}>VOLVER</button>
             </Link>
             
             <Footer />

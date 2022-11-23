@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
+import stl from "../TePuedeInteresar/TePuedeInteresar.module.css";
 
 export default function TePuedeInteresar () {
 
@@ -9,24 +10,27 @@ export default function TePuedeInteresar () {
 
     return (
 
-        <div key={params.id}>
+        <div className={stl.pagina} key={params.id}>
             
             <NavBar />
 
-            <h1>TE PUEDE INTERESAR</h1>
+            <h1 className={stl.titulo}>TE PUEDE INTERESAR</h1>
 
-            <Link to = '/reportarmaltrato'> 
-            <button>REPORTAR MALTRATO ANIMAL</button>
-            </Link>
+            <p className={stl.texto}>En esta seccion encontraras datos utiles como veterinarias y hogares de transito<br></br>
+            <br>
+            </br>
+            Ademas tendras acceso el blog para compartir tu experiencias con otras personas</p>
+
+            <div className={stl.vacunacion}></div>
 
             <Link to = '/directorio'> 
-            <button>DIRECTORIO DE HOGARES DE TRANSITO, VETERINARIAS, ONG'S.</button>
+            <button className={stl.boton}>DIRECTORIO DE HOGARES DE TRANSITO, VETERINARIAS, ONG'S.</button>
             </Link>
 
-            <button>BLOG</button>
+            <button className={stl.boton}>BLOG</button>
 
             <Link to='/homepage'>
-                <button>VOLVER</button>
+                <button className={stl.boton}>VOLVER</button>
             </Link>
             
             <Footer />
