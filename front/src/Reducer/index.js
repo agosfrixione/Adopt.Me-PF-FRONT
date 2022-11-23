@@ -1,7 +1,8 @@
-import { GET_MASCOTAS } from "../Actions";
+import { CREATE_ANIMAL, CREATE_USER, GET_ANIMAL_BY_ID, GET_MASCOTAS } from "../Actions";
 
 const initialState = {
-   animales: []
+   animales: [],
+   animalesdetail: []
 }
 
 export default function rootReducer(state = initialState, action){
@@ -16,6 +17,15 @@ export default function rootReducer(state = initialState, action){
         } else { 
             return { ...state, animales:[] } }
 
+        case CREATE_USER:
+            return {...state}
+
+        case CREATE_ANIMAL:
+            return {...state}
+
+        case GET_ANIMAL_BY_ID:  
+            return { ...state, animalesdetail: action.payload }
+            
         default:
             return state;
     }

@@ -35,7 +35,7 @@ export default function Donar() {
 
            <div className={stl.metodosPago}>
 
-                <button>Paypal</button>
+                <div className={stl.paypal}></div>
                 <button>Mercado Pago</button>
                 <button>Crypto</button>
 
