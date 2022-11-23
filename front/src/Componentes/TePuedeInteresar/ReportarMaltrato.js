@@ -71,9 +71,7 @@ export default function ReportarMaltrato () {
                 <button>VOLVER</button>
             </Link>
             
-            <div id="footer">
-                <Footer />
-                </div>
+            <Footer />
 
         </div>
     )

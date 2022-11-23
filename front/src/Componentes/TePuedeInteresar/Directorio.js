@@ -19,9 +19,7 @@ export default function Directorio () {
                 <button>VOLVER</button>
             </Link>
             
-            <div id="footer">
-                <Footer />
-                </div>
+            <Footer />
 
         </div>
     )

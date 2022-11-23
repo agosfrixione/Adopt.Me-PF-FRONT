@@ -29,9 +29,7 @@ export default function TePuedeInteresar () {
                 <button>VOLVER</button>
             </Link>
             
-            <div id="footer">
-                <Footer />
-                </div>
+            <Footer />
 
         </div>
     )

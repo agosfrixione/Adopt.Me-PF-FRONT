@@ -43,11 +43,9 @@ export default function InfoProceso () {
             <Link to='/homepage'>
                 <button>VOLVER</button>
             </Link>
+            
+            <Footer />
 
-            <div id="footer">
-                <Footer />
-                </div>
-                
         </div>
     );
 };

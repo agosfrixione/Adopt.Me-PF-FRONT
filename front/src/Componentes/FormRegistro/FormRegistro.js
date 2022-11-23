@@ -304,10 +304,8 @@ export default function FormRegistro () {
             <Link to='/givepet'>
                 <button>CANCELAR</button>
             </Link>
-
-            <div id="footer">
-                <Footer />
-                </div>
+            
+            <Footer />
 
         </div>
     );

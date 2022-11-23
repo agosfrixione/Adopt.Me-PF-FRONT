@@ -27,10 +27,9 @@ export default function Confirmacion () {
             <Link to='/homepage'>
                 <button>VOLVER</button>
             </Link>
+            
+            <Footer />
 
-            <div id="footer">
-                <Footer />
-                </div>
         </div>
     );
 };
