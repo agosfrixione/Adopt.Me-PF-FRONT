@@ -217,7 +217,7 @@ export default function FormRegistro () {
             </Link>
             
             <Footer />
-
+            
         </div>
     );
 };
