@@ -27,11 +27,11 @@ export default function HomePage () {
                      
                      <div className={stl.opciones}>
                             <Link to = '/adoptdog'> 
-                                 <div className={stl.perros}>Adoptar Perro</div>
+                                 <div className={stl.perros}></div>
                             </Link>
           
                             <Link to = '/adoptcat'> 
-                                 <div className={stl.gatos}>Adoptar Gato</div>
+                                 <div className={stl.gatos}></div>
                             </Link>
           
                     </div>

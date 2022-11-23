@@ -44,6 +44,8 @@
     background-size: contain;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     border-radius: 5%;
+    /* margin-left: 20px; */
+    margin-right: 20px;
 }
 
 .perros:hover {
@@ -55,7 +57,7 @@
     background-image: url("../../Imagenes//Gatos.jpg");
     width: 180px;
     height: 180px;
-    background-size: cover;
+    background-size: cover; 
     background-repeat: no-repeat;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     border-radius: 5%;

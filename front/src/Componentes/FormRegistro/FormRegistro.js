@@ -2,6 +2,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
+import stl from "../FormRegistro/FormRegistro.module.css";
 
 export default function FormRegistro () {
 
@@ -82,18 +83,18 @@ export default function FormRegistro () {
 
     return (
 
-        <div key={params.id}>
+        <div className={stl.registro} key={params.id}>
 
             <NavBar/>
 
             <div key={params.id}>
-            <h1>REGISTRO</h1>
-            <h2>NOTA: LOS CAMPOS CON * SON OBLIGATORIOS</h2>
+            <h1 className={stl.registroTitulo}>REGISTRO</h1>
+            <h2 className={stl.nota}>NOTA: LOS CAMPOS CON * SON OBLIGATORIOS</h2>
 
             <div>
-            <button onClick={(e) => handleFormAdoptante(e)}>QUIERO ADOPTAR</button>
+            <button className={stl.buttons} onClick={(e) => handleFormAdoptante(e)}>QUIERO ADOPTAR</button>
             {adoptante && institucion === false && (
-              <form onSubmit={e => handleSubmit(e)}>
+              <form className={stl.form} onSubmit={e => handleSubmit(e)}>
                       
               <div key={params.id}>
                   <label>NOMBRE Y APELLIDO* </label>
@@ -182,7 +183,7 @@ export default function FormRegistro () {
                   </div>
                   
                   <div key={params.id}>
-                      <button type="submit">ACEPTAR</button>
+                      <button className={stl.buttons} type="submit">ACEPTAR</button>
                       </div>
   
           </form>
@@ -191,11 +192,11 @@ export default function FormRegistro () {
             
 
             <div>
-            <button onClick={(e) => handleFormInstitucion(e)}>QUIERO DAR EN ADOPCION</button>
+            <button className={stl.buttons} onClick={(e) => handleFormInstitucion(e)}>QUIERO DAR EN ADOPCION</button>
             {institucion && adoptante === false && (
-            <form onSubmit={e => handleSubmit(e)}>
+            <form className={stl.form} onSubmit={e => handleSubmit(e)}>
 
-            <div key={params.id}>
+            <div className={stl.selects} key={params.id}>
                 <label>INSTITUCION* </label>
                 <select defaultValue="default" onChange={(e) => handleInstitucion(e)}>
                     <option value="default" disabled hidden>ALBERGUE - FUNDACION - PROTECTOR INDEPENDIENTE</option>
@@ -292,7 +293,7 @@ export default function FormRegistro () {
                 </div>
                 
                 <div key={params.id}>
-                    <button type="submit">ACEPTAR</button>
+                    <button className={stl.buttons} type="submit">ACEPTAR</button>
                     </div>
 
         </form>
@@ -302,7 +303,7 @@ export default function FormRegistro () {
             </div>
 
             <Link to='/givepet'>
-                <button>CANCELAR</button>
+                <button className={stl.buttons}>CANCELAR</button>
             </Link>
             
             <Footer />
