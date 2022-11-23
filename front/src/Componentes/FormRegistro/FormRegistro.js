@@ -115,7 +115,7 @@ export default function FormRegistro () {
 
             <NavBar/>
 
-            <div key={params.id}>
+            <div className={stl.form} key={params.id}>
                       
               <div key={params.id}>
                   <label>NOMBRE DE USUARIO </label>
@@ -205,6 +205,7 @@ export default function FormRegistro () {
                   <div key={params.id}>
 
             </div>
+            </div>
 
             <Link to='/givepet'>
                 <button className={stl.buttons}>CANCELAR</button>
@@ -212,7 +213,7 @@ export default function FormRegistro () {
             
             <Footer />
             
-        </div>
+        
         </div>
     );
 };

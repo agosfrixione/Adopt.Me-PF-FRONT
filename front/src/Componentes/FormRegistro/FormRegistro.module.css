@@ -8,15 +8,7 @@
     font-family: 'Viga', sans-serif;
 }
 
-.registroTitulo {
-    font-family: 'Viga', sans-serif;
-    font-size: 60px;
-}
 
-.nota {
-    font-size: 20px;
-    margin-left: 60px;
-}
 
 .buttons {
     appearance: button;
@@ -68,6 +60,11 @@
     margin-left: 656px;
   }
   
-  select {
-    border: 1px solid red;
+  input {
+    width: 200px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-size: 13px;
   }
