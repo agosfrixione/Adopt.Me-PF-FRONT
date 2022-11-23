@@ -22,13 +22,22 @@ export default function Donar() {
                <label>Email:</label>
                <input placeholder="Email"></input>
 
+               <label>Donar a:
+                <select className={stl.opcionesDonacion}>
+                    <option>Andres</option>
+                    <option>Noelia</option>
+                    <option>Agos</option>
+                    <option>Nacho</option>
+                </select>
+               </label>
+
            </div>
 
            <div className={stl.metodosPago}>
 
                 <button>Paypal</button>
                 <button>Mercado Pago</button>
-                <button>Blockchain</button>
+                <button>Crypto</button>
 
            </div>
 

@@ -44,19 +44,28 @@
     background-size: contain;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     border-radius: 5%;
-
 }
 
-.gatos {
-    
+.perros:hover {
+  box-shadow: 4px 4px grey;
+  transform: translateY(-2px);  
+}
+
+.gatos {  
     background-image: url("../../Imagenes//Gatos.jpg");
     width: 180px;
     height: 180px;
     background-size: cover;
     background-repeat: no-repeat;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-        border-radius: 5%;
+    border-radius: 5%;
 }   
+
+.gatos:hover {
+  box-shadow: 4px 4px grey;
+  transform: translateY(-2px);  
+}
+
 .tituloAdoptar {
     font-size: 35px;
 
