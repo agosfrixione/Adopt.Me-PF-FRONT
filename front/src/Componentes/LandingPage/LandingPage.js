@@ -1,32 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import stl from "../LandingPage/LandingPage.module.css";
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+// import Carousel from 'react-multi-carousel';
+// import 'react-multi-carousel/lib/styles.css';
 
 
 
 export default function LandingPage() {
 
-   const responsive = {
-      superLargeDesktop: {
-        // the naming can be any, depends on you.
-        breakpoint: { max: 4000, min: 3000 },
-        items: 5
-      },
-      desktop: {
-        breakpoint: { max: 3000, min: 1024 },
-        items: 3
-      },
-      tablet: {
-        breakpoint: { max: 1024, min: 464 },
-        items: 2
-      },
-      mobile: {
-        breakpoint: { max: 464, min: 0 },
-        items: 1
-      }
-    };
+  //  const responsive = {
+  //     superLargeDesktop: {
+  //       // the naming can be any, depends on you.
+  //       breakpoint: { max: 4000, min: 3000 },
+  //       items: 5
+  //     },
+  //     desktop: {
+  //       breakpoint: { max: 3000, min: 1024 },
+  //       items: 3
+  //     },
+  //     tablet: {
+  //       breakpoint: { max: 1024, min: 464 },
+  //       items: 2
+  //     },
+  //     mobile: {
+  //       breakpoint: { max: 464, min: 0 },
+  //       items: 1
+  //     }
+  //   };
    
       return (
       <div className={stl.landingPage}> 
@@ -44,12 +44,12 @@ export default function LandingPage() {
             </h1>
          </div> 
 
-         <Carousel responsive={responsive}>
+         {/* <Carousel responsive={responsive}>
   <div className={stl.imagen1}></div>
   <div className={stl.imagen2}></div>
   <div className={stl.imagen3}></div>
   <div className={stl.imagen4}></div>
-</Carousel>
+</Carousel> */}
        
        <Link to = '/homepage'> 
             <button className={stl.button}>Entrar</button>
