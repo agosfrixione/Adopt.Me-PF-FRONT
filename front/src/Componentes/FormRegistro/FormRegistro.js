@@ -1,5 +1,7 @@
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
+import Footer from '../Footer/Footer';
+import NavBar from '../NavBar/NavBar';
 
 export default function FormRegistro () {
 
@@ -81,6 +83,8 @@ export default function FormRegistro () {
     return (
 
         <div key={params.id}>
+
+            <NavBar/>
 
             <div key={params.id}>
             <h1>REGISTRO</h1>
@@ -300,6 +304,8 @@ export default function FormRegistro () {
             <Link to='/givepet'>
                 <button>CANCELAR</button>
             </Link>
+            
+            <Footer />
 
         </div>
     );

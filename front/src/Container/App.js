@@ -9,7 +9,9 @@ import FormRegistro from '../Componentes/FormRegistro/FormRegistro';
 import DetalleAdopcion from '../Componentes/AdoptarMascota/DetalleAdopcion'
 import Confirmacion from '../Componentes/DonarMascota/Confirmacion';
 import AnimalAbuse from '../Componentes/DenunciarMaltrato/DenunciarMaltrato';
-import OtherThings from '../Componentes/TePuedeInteresar/TePuedeInteresar';
+import TePuedeInteresar from '../Componentes/TePuedeInteresar/TePuedeInteresar';
+import ReportarMaltrato from '../Componentes/TePuedeInteresar/ReportarMaltrato';
+import Directorio from '../Componentes/TePuedeInteresar/Directorio';
 import Donar from '../Componentes/Donacion/Donacion';
 import MissingPet from '../Componentes/MascotaPerdida/MascotaPerdida';
 
@@ -27,7 +29,9 @@ function App() {
     <Route exact path = '/contacto' element = {<DetalleAdopcion/>} />
     <Route exact path = '/confirmation' element = {<Confirmacion/>} />
     <Route exact path = '/animalabuse' element = {<AnimalAbuse/>} />
-    <Route exact path = '/otherthings' element = {<OtherThings/>} />
+    <Route exact path = '/tepuedeinteresar' element = {<TePuedeInteresar/>} />
+    <Route exact path = '/reportarmaltrato' element = {<ReportarMaltrato/>} />
+    <Route exact path = '/directorio' element = {<Directorio/>} />
     <Route exact path = '/donation' element = {<Donar/>} />
     <Route exact path = '/missingPet' element = {<MissingPet/>} />
     </Routes>
