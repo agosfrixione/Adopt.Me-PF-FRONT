@@ -8,7 +8,6 @@ import InfoProceso from '../Componentes/DonarMascota/InfoProceso';
 import FormRegistro from '../Componentes/FormRegistro/FormRegistro';
 import DetalleAdopcion from '../Componentes/AdoptarMascota/DetalleAdopcion'
 import Confirmacion from '../Componentes/DonarMascota/Confirmacion';
-import AnimalAbuse from '../Componentes/DenunciarMaltrato/DenunciarMaltrato';
 import TePuedeInteresar from '../Componentes/TePuedeInteresar/TePuedeInteresar';
 import ReportarMaltrato from '../Componentes/TePuedeInteresar/ReportarMaltrato';
 import Directorio from '../Componentes/TePuedeInteresar/Directorio';
@@ -29,7 +28,6 @@ function App() {
     <Route exact path = '/sigup' element = {<FormRegistro/>} />
     <Route exact path = '/contacto' element = {<DetalleAdopcion/>} />
     <Route exact path = '/confirmation' element = {<Confirmacion/>} />
-    <Route exact path = '/animalabuse' element = {<AnimalAbuse/>} />
     <Route exact path = '/tepuedeinteresar' element = {<TePuedeInteresar/>} />
     <Route exact path = '/reportarmaltrato' element = {<ReportarMaltrato/>} />
     <Route exact path = '/directorio' element = {<Directorio/>} />

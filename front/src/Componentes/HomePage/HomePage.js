@@ -85,7 +85,7 @@ export default function HomePage () {
                     <p>Si fuiste testigo de un maltrato o tenes un vecino 
                          que maltrata a su mascota. Ahora podes denunciarlo. Enterate como
                         </p>
-                        <Link to = '/animalabuse'> 
+                        <Link to = '/reportarmaltrato'> 
                             <button className={stl.botonOtrosServicios}>Denunciar maltrato</button>
                         </Link>
                         </div>
