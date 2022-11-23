@@ -51,7 +51,7 @@ putUsuario = async (req, res) => {
     publicaciones,
   } = req.body;
   try {
-    let mascota = await AnimalModel.updateOne(
+    let usuarios = await UsuarioModel.updateOne(
       { _id: id },
       {
         $set: {
@@ -64,8 +64,8 @@ putUsuario = async (req, res) => {
         },
       }
     );
-    if (mascota) {
-      res.status(200).json(mascota);
+    if (usuarios) {
+      res.status(200).json(usuarios);
     } else {
       res.status(400).json({ msg: "no coincide el id que deseas modificar" });
     }
