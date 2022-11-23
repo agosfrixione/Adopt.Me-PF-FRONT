@@ -2,8 +2,8 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandingPage from '../Componentes/LandingPage/LandingPage';
 import HomePage from '../Componentes/HomePage/HomePage';
-import AdoptCat from '../Componentes/AdoptarMascota/HomeGatos';
-import AdoptDog from '../Componentes/AdoptarMascota/HomePerros';
+import HomePerros from '../Componentes/AdoptarMascota/HomePerros';
+import HomeGatos from '../Componentes/AdoptarMascota/HomeGatos';
 import InfoProceso from '../Componentes/DonarMascota/InfoProceso';
 import FormRegistro from '../Componentes/FormRegistro/FormRegistro';
 import DetalleAdopcion from '../Componentes/AdoptarMascota/DetalleAdopcion'
@@ -13,6 +13,7 @@ import OtherThings from '../Componentes/TePuedeInteresar/TePuedeInteresar';
 import Donar from '../Componentes/Donacion/Donacion';
 import MissingPet from '../Componentes/MascotaPerdida/MascotaPerdida';
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -20,8 +21,8 @@ function App() {
     <Routes>
     <Route exact path = '/' element = {<LandingPage/>} />
     <Route exact path = '/homepage' element = {<HomePage/>} />
-    <Route exact path = '/adoptcat' element = {<AdoptCat/>} />
-    <Route exact path = '/adoptdog' element = {<AdoptDog/>} />
+    <Route exact path = '/adoptcat' element = {<HomeGatos/>} />
+    <Route exact path = '/adoptdog' element = {<HomePerros/>} />
     <Route exact path = '/givepet' element = {<InfoProceso/>} />
     <Route exact path = '/sigup' element = {<FormRegistro/>} />
     <Route exact path = '/contacto' element = {<DetalleAdopcion/>} />

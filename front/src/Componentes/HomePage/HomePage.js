@@ -6,6 +6,8 @@ import stl from "./HomePage.module.css";
 
 export default function HomePage () {
 
+
+
     return (
        
         <div className={stl.homepage}>
@@ -98,9 +100,9 @@ export default function HomePage () {
                         </div>
                 </div>
                 
-          <div id="footer">
+          
           <Footer />
-          </div>
+          
         </div>
         
         
