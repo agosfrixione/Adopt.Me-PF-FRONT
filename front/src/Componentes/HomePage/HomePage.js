@@ -6,26 +6,32 @@ import stl from "./HomePage.module.css";
 
 export default function HomePage () {
 
+
+
     return (
        
         <div className={stl.homepage}>
         
           <NavBar />
-
-         <div>
           
-            </div>
+          <div className={stl.donacion}>
+          <p className={stl.textoDonacion}>Realiza tu donacion</p>
+          <Link to = "/donation">
+          <button className={stl.botonDonar}>Donar</button>
+          </Link>
+          </div>
+
             <div className={stl.adoptarDarEnAdopcion}>
           
                 <div className={stl.adoptar}>
                      
                      <div className={stl.opciones}>
                             <Link to = '/adoptdog'> 
-                                 <div className={stl.perros}>Adoptar Perro</div>
+                                 <div className={stl.perros}></div>
                             </Link>
           
                             <Link to = '/adoptcat'> 
-                                 <div className={stl.gatos}>Adoptar Gato</div>
+                                 <div className={stl.gatos}></div>
                             </Link>
           
                     </div>
@@ -65,7 +71,7 @@ export default function HomePage () {
                 Ademas si perdiste una mascota y queres ver si figura en la lista de mascotas encontradas entra aqui 
                 para obtener mas informacion</p>
                       
-                            <Link to = '/lalala'>
+                            <Link to = '/missingPet'>
                                  <button className={stl.botonReportar}>Reportar Mascota</button>
                             </Link>
                          
@@ -79,7 +85,7 @@ export default function HomePage () {
                     <p>Si fuiste testigo de un maltrato o tenes un vecino 
                          que maltrata a su mascota. Ahora podes denunciarlo. Enterate como
                         </p>
-                        <Link to = '/animalabuse'> 
+                        <Link to = '/reportarmaltrato'> 
                             <button className={stl.botonOtrosServicios}>Denunciar maltrato</button>
                         </Link>
                         </div>
@@ -88,17 +94,17 @@ export default function HomePage () {
                          <p>Aqui podras obtener informacion sobre como cuidar a tu mascota, vacunas y 
                               demas informacion que podria interesarte
                          </p>
-                        <Link to = '/otherthings'> 
+                        <Link to = '/tepuedeinteresar'> 
                              <button className={stl.botonOtrosServicios}>Te puede Interesar</button>
                         </Link>
                         </div>
                 </div>
                 
-          <div id="footer">
+          
           <Footer />
-          </div>
+          
         </div>
         
         
-    )                     
+    )                  
 }

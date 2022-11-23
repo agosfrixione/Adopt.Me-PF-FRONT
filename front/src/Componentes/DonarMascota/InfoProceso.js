@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, useParams } from 'react-router-dom';
+import Footer from '../Footer/Footer';
+import NavBar from '../NavBar/NavBar';
 
 export default function InfoProceso () {
 
@@ -8,6 +10,7 @@ export default function InfoProceso () {
     return (
 
         <div key={params.id}>
+            <NavBar/>
             <div>
             <h1>PUBLICA LOS ANIMALES QUE TIENES EN ADOPCIÓN</h1>
             </div>
@@ -24,7 +27,7 @@ export default function InfoProceso () {
             <div>
             <h2>Crea tu cuenta en Adopta.ME</h2>
             <h3>Registrate gratis. Una vez que completes el formulario vas a recibir un correo con tu usuario y contraseña y vas a poder comenzar a publicar tus mascotas.</h3>
-            <Link to='/sigin'>
+            <Link to='/sigup'>
                 <button>REGISTRARSE</button>
             </Link>
             </div>
@@ -40,6 +43,9 @@ export default function InfoProceso () {
             <Link to='/homepage'>
                 <button>VOLVER</button>
             </Link>
+            
+            <Footer />
+
         </div>
     );
 };

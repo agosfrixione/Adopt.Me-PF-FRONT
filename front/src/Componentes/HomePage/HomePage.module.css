@@ -1,41 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
 
 .adoptarDarEnAdopcion {
-    /* border: 2px solid red; */
     justify-content: space-around;
     display: flex;
-    margin-top: 100px;
+    margin-top: 30px;
     font-family: 'Viga', sans-serif;
-    
+  
 }
 
 .adoptar {
-    /* border: 2px solid green; */
+    
     height: 700px;
     width: 500px;
     align-items: center; 
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    background-color: #F2E7D5;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;    background-color: #F2E7D5;
   } 
 
 .darEnAdopcion {
-    /* border: 2px solid yellow; */
+    
     height: 300px;
     width: 600px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    /* border: 1px solid red; */
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     background-color: #F2E7D5;  
   }
 
 .otrosServicios {
-    /* border: 2px solid black; */
+  
     display: flex;
     justify-content: center;
     margin-top: 100px;
     width: 1000px;
     height: 150px;
     margin-left: 260px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     font-family: 'Viga', sans-serif;
     background-color: #F2E7D5;
 }
@@ -45,24 +42,35 @@
     width: 180px;
     height: 180px;
     background-size: contain;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;       
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     border-radius: 5%;
-     /* border: 1px solid red; */
+    /* margin-left: 20px; */
+    margin-right: 20px;
 }
 
-.gatos {
-    /* border: 1px solid green; */
+.perros:hover {
+  box-shadow: 4px 4px grey;
+  transform: translateY(-2px);  
+}
+
+.gatos {  
     background-image: url("../../Imagenes//Gatos.jpg");
     width: 180px;
     height: 180px;
-    background-size: cover;
+    background-size: cover; 
     background-repeat: no-repeat;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     border-radius: 5%;
 }   
+
+.gatos:hover {
+  box-shadow: 4px 4px grey;
+  transform: translateY(-2px);  
+}
+
 .tituloAdoptar {
     font-size: 35px;
-    /* border: 1px solid red; */
+
     margin: 1px;
     margin-bottom: 33px;
     margin-top: 50px;
@@ -71,7 +79,7 @@
 
 .opciones {
     display: flex;
-    /* border: 1px solid green; */
+    
     justify-content: center;
     align-items: center ;
     margin-top: 30px;
@@ -101,7 +109,7 @@
     margin: 0;
     outline: 2px solid transparent;
     padding: 9px 10px;
-    /* margin-right: 20px; */
+
     text-align: center;
     text-transform: none;
     transition: all .1s cubic-bezier(.4, 0, .2, 1);
@@ -152,7 +160,7 @@
     margin: 0;
     outline: 2px solid transparent;
     padding: 9px 10px;
-    /* margin-right: 20px; */
+    
     text-align: center;
     text-transform: none;
     transition: all .1s cubic-bezier(.4, 0, .2, 1);
@@ -175,9 +183,8 @@
   .reportarMascota {
     height: 300px;
     width: 600px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     margin-top: 100px;
-    /* border: 1px solid yellow; */
     background-color: #F2E7D5;  
   }
 
@@ -212,7 +219,6 @@
     margin: 0;
     outline: 2px solid transparent;
     padding: 9px 10px;
-    /* margin-right: 20px; */
     text-align: center;
     text-transform: none;
     transition: all .1s cubic-bezier(.4, 0, .2, 1);
@@ -233,8 +239,6 @@
   }
 
   .maltrato {
-    /* border: 1px solid red; */
-    /* margin-right: 50px; */
     border-right: 2px solid black;
     color: #393E46;
   }
@@ -245,6 +249,65 @@
 
   .homepage {
     background-image: url("../../Imagenes/pisadas.jpg");
-    background-size:33%;
-    background-repeat: repeat;
+    background-size: 33%;
+    background-repeat: repeat; 
   }
+
+
+.botonDonar {
+  align-self: center;
+  background-color: rgba(241, 9, 9, 0.734);
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #f0e5dc;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-top: 30px;
+  margin-left: 4px; 
+  margin-right: 50px;
+  font-size: 20px;
+  font-family: 'Viga', sans-serif;
+}
+
+.botonDonar:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.botonDonar:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+.donacion {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+  margin-top: 30px;
+}
+
+.textoDonacion {
+  font-family: 'Viga', sans-serif;
+  font-size: 25px;
+  margin-top: 30px;
+}
