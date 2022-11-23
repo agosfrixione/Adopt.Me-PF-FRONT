@@ -6,42 +6,89 @@ import NavBar from '../NavBar/NavBar';
 export default function FormRegistro () {
 
     const params = useParams();
+    // const dispatch = useDispatch();
     const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
 
     const [input, setInput] = useState({
-        institucion:[],
-        responsable:"",
+        usuario:"",
+        contraseña:"",
+        repitaContraseña:"",
+        nombre:"",
         telefono:"",
-        repiteTelefono:"",
-        correo:"",
-        repiteCorreo:"",
-        facebookURL:"",
-        twitterURL:"",
-        instagramURL:"",
-        logo:[]
+        mail:"",
+        nacimiento:"",
+        localidad:""
     });
 
-    const [institucion, setinstitucion] = useState(false);
-    const [adoptante, setadoptante] = useState(false);
+    const [errors, setErrors] = useState({});
+    const [isSubmit, setisSubmit] = useState(true);
+
+    function validation(input) {
+        let errors = {}
+
+        if(!input.usuario) {
+          errors.usuario = "Tenes que ingresar un nombre de usuario";
+        } else if (typeof input.name !== "string") {
+          errors.name = "El nombre de usuario no es válido";
+        } else if (input.name.length > 20) {
+          errors.name = "El nombre de usuario es muy largo (máx 20 caracteres)";
+        }
+
+        if(!input.contraseña) {
+          errors.contraseña = "Tenes que ingresar una contraseña";
+        } else if (/^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,}$/.test(input.contraseña)) {
+          errors.contraseña = "La contraseña debe tener mínimo 8 caracteres, al menos una letra y un número"
+        }
+
+        if(!input.repitaContraseña) {
+          errors.repitaContraseña = "Tenes que repetir la contraseña";
+        } else if (input.repitaContraseña !== input.contraseña) {
+          errors.repitaContraseña = "La contraseña no coincide"
+        }
+
+        if(!input.nombre){
+          errors.nombre = "Tenes que ingresar un nombre";
+        }
+
+        if(!input.telefono) {
+            errors.telefono = "Tenes que ingresar un telefono";
+          } else if (input.telefono > 15) {
+            errors.telefono = "El teléfono no es válido"
+          }
+
+        if(!input.mail) {
+            errors.mail = "Tenes que ingresar un e-mail";
+          }
+
+        if(!input.nacimiento) {
+            errors.nacimiento = "Tenes que ingresar una fecha de nacimiento";
+          } else if (input.nacimiento.length > 10 || !/^[0-9-]+$/.test(input.nacimiento)) {
+            errors.nacimiento = "Tenes  que ingresar una fecha válida (dd-mm-yyyy)"
+          }
+
+        if ((Object.keys(errors).length) === 0){
+            setisSubmit(false)
+          };
+        
+        return errors;
+    }
 
 
     function handleSubmit(e) {
         e.preventDefault();
-        if(!input.institucion.length || !input.responsable || !input.telefono || !input.repiteTelefono || !input.correo || !input.repiteCorreo){
-          alert("Missing info")
+        if(!input.usuario || !input.contraseña || !input.repitaContraseña || !input.nombre || !input.telefono || !input.mail || !input.nacimiento || !input.localidad){
+          alert("Falta información")
       }else {
         // dispatch(createUser(input))
         setInput({
-            institucion:[],
-            responsable:"",
+            usuario:"",
+            contraseña:"",
+            repitaContraseña:"",
+            nombre:"",
             telefono:"",
-            repiteTelefono:"",
-            correo:"",
-            repiteCorreo:"",
-            facebookURL:"",
-            twitterURL:"",
-            instagramURL:"",
-            logo:[]
+            mail:"",
+            nacimiento:"",
+            localidad:""
         }); // Reinicio el formulario
 
         navigate('/confirmation')
@@ -52,31 +99,12 @@ export default function FormRegistro () {
     function handleChange(e) {
         e.preventDefault();
         setInput((prev) => ({ ...prev, [e.target.name]: e.target.value })); // e.target.name seria el input que se va a estar modificando
-        // setErrors(validation({                                              // voy a tomar el valor del input que se modifico y voy a ir llenando el estado
-        //   ...input,
-        //   [e.target.name]: [e.target.value]
-        // })                                  
-        // )
+        setErrors(validation({                                              // voy a tomar el valor del input que se modifico y voy a ir llenando el estado
+          ...input,
+          [e.target.name]: [e.target.value]
+        })                                  
+        )
       }
-    function handleInstitucion(e) {
-        if(!input.institucion.includes(e.target.value)) {
-          setInput({
-            ...input,
-            institucion: [...input.institucion, e.target.value]
-          })
-        }
-      }
-
-    function handleFormInstitucion(e) {
-        e.preventDefault();
-        institucion ? setinstitucion(false) : setinstitucion(true)
-      }
-
-    function handleFormAdoptante(e) {
-        e.preventDefault();
-        adoptante === false ? setadoptante(true) : setadoptante(false)
-      }
-      
 
 
 
@@ -87,26 +115,51 @@ export default function FormRegistro () {
             <NavBar/>
 
             <div key={params.id}>
-            <h1>REGISTRO</h1>
-            <h2>NOTA: LOS CAMPOS CON * SON OBLIGATORIOS</h2>
 
-            <div>
-            <button onClick={(e) => handleFormAdoptante(e)}>QUIERO ADOPTAR</button>
-            {adoptante && institucion === false && (
+            <h1>REGISTRO</h1>
+
               <form onSubmit={e => handleSubmit(e)}>
                       
               <div key={params.id}>
-                  <label>NOMBRE Y APELLIDO* </label>
+                  <label>NOMBRE DE USUARIO </label>
                   <input
                   type="text"
                   required
-                  name="responsable"
-                  value={input.responsable}
+                  name="usuario"
+                  value={input.usuario}
+                  onChange={(e) => handleChange(e)}/>
+                  </div>
+
+                  <div key={params.id}>
+                  <label>CONTRASEÑA </label>
+                  <input
+                  type="text"
+                  name="contraseña"
+                  value={input.contraseña}
                   onChange={(e) => handleChange(e)}/>
                   </div>
   
               <div key={params.id}>
-                  <label>TELÉFONO DE CONTACTO* </label>
+                  <label>REPITA CONTRASEÑA </label>
+                  <input
+                  type="text"
+                  name="repitaContraseña"
+                  value={input.repitaContraseña}
+                  onChange={(e) => handleChange(e)}/>
+                  </div>
+
+              <div key={params.id}>
+                  <label>NOMBRE Y APELLIDO / REFUGIO </label>
+                  <input
+                  type="text"
+                  required
+                  name="nombre"
+                  value={input.nombre}
+                  onChange={(e) => handleChange(e)}/>
+                  </div>
+  
+              <div key={params.id}>
+                  <label>TELÉFONO DE CONTACTO </label>
                   <input
                   type="text"
                   required
@@ -116,189 +169,47 @@ export default function FormRegistro () {
                   </div>
   
               <div key={params.id}>
-                  <label>REPITE TELÉFONO* </label>
+                  <label>E-MAIL </label>
                   <input
-                  type="text"
+                  type="email"
                   required
-                  name="repiteTelefono"
-                  value={input.repiteTelefono}
-                  onChange={(e) => handleChange(e)}/>
-                  </div>
-  
-              <div key={params.id}>
-                  <label>CORREO* </label>
-                  <input
-                  type="text"
-                  required
-                  name="correo"
-                  value={input.correo}
-                  onChange={(e) => handleChange(e)}/>
-                  </div>
-  
-              <div key={params.id}>
-                  <label>REPITE CORREO* </label>
-                  <input
-                  type="text"
-                  required
-                  name="repiteCorreo"
-                  value={input.repiteCorreo}
-                  onChange={(e) => handleChange(e)}/>
-                  </div>
-  
-              <div key={params.id}>
-                  <label>Facebook URL </label>
-                  <input
-                  type="text"
-                  name="facebookURL"
-                  value={input.facebookURL}
-                  onChange={(e) => handleChange(e)}/>
-                  </div>
-  
-              <div key={params.id}>
-                  <label>Twitter URL </label>
-                  <input
-                  type="text"
-                  name="twitterURL"
-                  value={input.twitterURL}
+                  name="mail"
+                  value={input.mail}
+                  pattern=".+@globex\.com"
+                  size="30"
                   onChange={(e) => handleChange(e)}/>
                   </div>
                   
               <div key={params.id}>
-                  <label>Instagram URL </label>
+                <label>FECHA DE NACIMIENTO </label>
+                <input
+                required
+                type='date'
+                name="nacimiento"
+                value={input.nacimiento}
+                placeholder='dd-mm-yyyy'
+                onChange={(e) => handleChange(e)}
+                /> <span className='barra'></span>
+                {errors.released && (
+                <p className='danger'>{errors.released}</p>
+                )}
+                </div>
+
+              <div key={params.id}>
+                  <label>LOCALIDAD </label>
                   <input
                   type="text"
-                  name="instagramURL"
-                  value={input.instagramURL}
+                  required
+                  name="localidad"
+                  value={input.localidad}
                   onChange={(e) => handleChange(e)}/>
-                  </div>
-  
-                  <div key={params.id}>
-                  <label>FOTO DE PERFIL </label>
-                  <input
-                  type="file"
-                  name="logo"
-                  value={input.logo}
-                  onChange={(e) => handleChange(e)} />
                   </div>
                   
                   <div key={params.id}>
-                      <button type="submit">ACEPTAR</button>
+                      <button type="submit">CONFIRMAR</button>
                       </div>
   
           </form>
-            )}
-            </div>
-            
-
-            <div>
-            <button onClick={(e) => handleFormInstitucion(e)}>QUIERO DAR EN ADOPCION</button>
-            {institucion && adoptante === false && (
-            <form onSubmit={e => handleSubmit(e)}>
-
-            <div key={params.id}>
-                <label>INSTITUCION* </label>
-                <select defaultValue="default" onChange={(e) => handleInstitucion(e)}>
-                    <option value="default" disabled hidden>ALBERGUE - FUNDACION - PROTECTOR INDEPENDIENTE</option>
-                    <option value="albergue">ALBERGUE</option>
-                    <option value="fundacion" selected>FUNDACIÓN</option>
-                    <option value="independiente">PROTECTOR INDEPENDIENTE</option>
-                    </select>
-                    </div>
-                    
-            <div key={params.id}>
-                <label>RESPONSABLE* </label>
-                <input
-                type="text"
-                required
-                name="responsable"
-                value={input.responsable}
-                onChange={(e) => handleChange(e)}/>
-                </div>
-
-            <div key={params.id}>
-                <label>TELÉFONO DE CONTACTO* </label>
-                <input
-                type="text"
-                required
-                name="telefono"
-                value={input.telefono}
-                onChange={(e) => handleChange(e)}/>
-                </div>
-
-            <div key={params.id}>
-                <label>REPITE TELÉFONO* </label>
-                <input
-                type="text"
-                required
-                name="repiteTelefono"
-                value={input.repiteTelefono}
-                onChange={(e) => handleChange(e)}/>
-                </div>
-
-            <div key={params.id}>
-                <label>CORREO* </label>
-                <input
-                type="text"
-                required
-                name="correo"
-                value={input.correo}
-                onChange={(e) => handleChange(e)}/>
-                </div>
-
-            <div key={params.id}>
-                <label>REPITE CORREO* </label>
-                <input
-                type="text"
-                required
-                name="repiteCorreo"
-                value={input.repiteCorreo}
-                onChange={(e) => handleChange(e)}/>
-                </div>
-
-            <div key={params.id}>
-                <label>Facebook URL </label>
-                <input
-                type="text"
-                name="facebookURL"
-                value={input.facebookURL}
-                onChange={(e) => handleChange(e)}/>
-                </div>
-
-            <div key={params.id}>
-                <label>Twitter URL </label>
-                <input
-                type="text"
-                name="twitterURL"
-                value={input.twitterURL}
-                onChange={(e) => handleChange(e)}/>
-                </div>
-                
-            <div key={params.id}>
-                <label>Instagram URL </label>
-                <input
-                type="text"
-                name="instagramURL"
-                value={input.instagramURL}
-                onChange={(e) => handleChange(e)}/>
-                </div>
-
-                <div key={params.id}>
-                <label>LOGO </label>
-                <input
-                type="file"
-                name="logo"
-                value={input.logo}
-                onChange={(e) => handleChange(e)} />
-                </div>
-                
-                <div key={params.id}>
-                    <button type="submit">ACEPTAR</button>
-                    </div>
-
-        </form>
-            )}
-            </div>
-
             </div>
 
             <Link to='/givepet'>
