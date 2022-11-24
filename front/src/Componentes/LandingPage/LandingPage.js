@@ -32,6 +32,7 @@ export default function LandingPage() {
       <div className={stl.landingPage}> 
  
          <div className={stl.titulo}>
+            
             <h1>
                <span>A</span>
                <span>D</span>
@@ -43,7 +44,7 @@ export default function LandingPage() {
                <span>E</span>
             </h1>
          </div> 
-
+         <div className={stl.logo}></div>
          {/* <Carousel responsive={responsive}>
   <div className={stl.imagen1}></div>
   <div className={stl.imagen2}></div>

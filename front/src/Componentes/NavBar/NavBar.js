@@ -21,6 +21,7 @@ export default function NavBar() {
         <div className={stl.navbar}>
         </div>
             
+        <div className={stl.logo2}></div>
             <Link to = "/homepage">
              <p className={stl.logo}>Adopt.Me</p>
              </Link>
