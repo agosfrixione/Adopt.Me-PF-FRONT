@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
-import { link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-//import { getmascotas } from "../../Actions/getmascotas";
+import React from "react";
+import stl from "../Card/Card.module.css";
 
 export default function Card({
   especie,
@@ -17,15 +15,10 @@ export default function Card({
   vacunado,
   imagen,
 }) {
-  let estadoanimales = useSelector((state) => state.animales);
-  const dispatch = useDispatch();
-
-  //useEffect(() => {
-  //  dispatch(getmascotas());
-  //}, []);
 
   return (
     <>
+    <div className={stl.card}>
       <div>
         <img src={imagen} alt={nombre} />
       </div>
@@ -40,6 +33,7 @@ export default function Card({
       <div> {descripcion} </div>
       <div> {castrado} </div>
       <div> {vacunado} </div>
+      </div>
     </>
   );
 }
