@@ -116,12 +116,14 @@ export default function FormRegistro () {
 
     return (
 
-        <div className={stl.registro} key={params.id} onSubmit={handleSubmit}>
+        <div className={stl.registro} key={params.id}>
 
             <NavBar/>
 
             <div className={stl.form} key={params.id} >
-                      
+
+            <form onSubmit={e => handleSubmit(e)}>
+              
               <div key={params.id}>
                   <label>NOMBRE DE USUARIO </label>
                   <input
@@ -130,6 +132,9 @@ export default function FormRegistro () {
                   name="usuario"
                   value={input.usuario}
                   onChange={(e) => handleChange(e)}/>
+                  {errors.usuario && (
+                  <p>{errors.usuario}</p>
+                  )}
                   </div>
 
                   <div key={params.id}>
@@ -139,6 +144,9 @@ export default function FormRegistro () {
                   name="contraseña"
                   value={input.contraseña}
                   onChange={(e) => handleChange(e)}/>
+                  {errors.contraseña && (
+                  <p>{errors.contraseña}</p>
+                  )}
                   </div>
   
               <div key={params.id}>
@@ -148,6 +156,9 @@ export default function FormRegistro () {
                   name="repitaContraseña"
                   value={input.repitaContraseña}
                   onChange={(e) => handleChange(e)}/>
+                  {errors.repitaContraseña && (
+                  <p>{errors.repitaContraseña}</p>
+                  )}
                   </div>
 
               <div key={params.id}>
@@ -158,6 +169,9 @@ export default function FormRegistro () {
                   name="nombre"
                   value={input.nombre}
                   onChange={(e) => handleChange(e)}/>
+                  {errors.nombre && (
+                  <p>{errors.nombre}</p>
+                  )}
                   </div>
   
               <div key={params.id}>
@@ -168,6 +182,9 @@ export default function FormRegistro () {
                   name="telefono"
                   value={input.telefono}
                   onChange={(e) => handleChange(e)}/>
+                  {errors.telefono && (
+                  <p>{errors.telefono}</p>
+                  )}
                   </div>
   
               <div key={params.id}>
@@ -180,6 +197,9 @@ export default function FormRegistro () {
                   pattern=".+@globex\.com"
                   size="30"
                   onChange={(e) => handleChange(e)}/>
+                  {errors.mail && (
+                  <p>{errors.mail}</p>
+                  )}
                   </div>
                   
               <div key={params.id}>
@@ -190,10 +210,9 @@ export default function FormRegistro () {
                 name="nacimiento"
                 value={input.nacimiento}
                 placeholder='dd-mm-yyyy'
-                onChange={(e) => handleChange(e)}
-                /> <span className='barra'></span>
-                {errors.released && (
-                <p className='danger'>{errors.released}</p>
+                onChange={(e) => handleChange(e)}/>
+                {errors.nacimiento && (
+                <p className='danger'>{errors.nacimiento}</p>
                 )}
                 </div>
 
@@ -205,16 +224,19 @@ export default function FormRegistro () {
                   name="localidad"
                   value={input.localidad}
                   onChange={(e) => handleChange(e)}/>
+                  {errors.localidad && (
+                  <p>{errors.localidad}</p>
+                  )}
                   </div>
                   
                   <div key={params.id}>
 
             </div>
-            </div>
 
-            <Link to='/homepage'>
-                <button className={stl.buttons} type="submit">SUBMIT</button>
-            </Link>
+                <button className={stl.buttons} type="submit">REGISTRARSE</button>
+
+            </form>
+            </div>
 
             <Link to='/givepet'>
                 <button className={stl.buttons}>CANCELAR</button>
