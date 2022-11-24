@@ -45,7 +45,7 @@ export default function FormRegistro () {
 
         if(!input.repitaContraseña) {
           errors.repitaContraseña = "Tenes que repetir la contraseña";
-        } else if (input.repitaContraseña !== input.contraseña) {
+        } else if (input.repitaContraseña != input.contraseña) {
           errors.repitaContraseña = "Las contraseñas no coincide"
         }
 
