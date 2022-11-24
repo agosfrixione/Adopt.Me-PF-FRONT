@@ -39,7 +39,7 @@ export default function NavBar() {
             </Link>
           </li>
           <li className="menu-item">
-            <Link to = "/missingPet">
+            <Link to = "/buscarmascota">
             <p className="drop">Mascota Perdida</p>
             </Link>
           </li>
