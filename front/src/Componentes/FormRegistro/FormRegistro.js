@@ -57,7 +57,7 @@ export default function FormRegistro () {
 
         if(!input.telefono) {
             errors.telefono = "Tenes que ingresar un telefono";
-          } else if (input.telefono > 15) {
+          } else if (input.telefono.length > 15) {
             errors.telefono = "El teléfono no es válido"
           }
 
@@ -210,8 +210,6 @@ export default function FormRegistro () {
                   required
                   name="mail"
                   value={input.mail}
-                  pattern=".+@globex\.com"
-                  size="30"
                   onChange={(e) => handleChange(e)}
                   /> <span></span>
                   {errors.mail && (
