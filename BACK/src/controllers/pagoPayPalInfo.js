@@ -45,8 +45,8 @@ getOrden = async (req,res)=>{
                 Authorization: `Bearer ${access_token}`
             }
         });
-        // console.log(response.data);
-        return res.status(200).json(response.data)    
+        console.log(response.data.links[1].href);
+        return res.status(200).json(response.data.links[1].href)    
     } catch (error) {
         return res.status(400).send('Ups! Algo salió mal :(')      
     }
@@ -55,6 +55,14 @@ getOrden = async (req,res)=>{
 
 getCapturarOrden = async (req,res)=>{
     try {
+        const {token} = req.query;
+        const response = await axios.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {}, {
+            auth: {
+                username: PAYPAL_CLIENT_ID,
+                password: PAYPAL_SECRET,
+            }
+        })
+        console.log(response.data);
         res.send('capturar orden')     
     } catch (error) {        
     }
