@@ -12,7 +12,7 @@ export default function FormRegistro () {
     const dispatch = useDispatch();
     // const dispatch = useDispatch();
     const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
-    const allUsers = useSelector((state) => state.allUsers); // (o el estado global que usemos para guardar todos los usuarios)
+    const users = useSelector((state) => state.users); // (o el estado global que usemos para guardar todos los usuarios)
 
     const [input, setInput] = useState({
         usuario:"",
@@ -83,8 +83,8 @@ export default function FormRegistro () {
 
     function handleSubmit(e) {
         e.preventDefault();
-        let noRepeatUser = allUsers.filter(v => v.usuario === input.usuario);
-        let noRepeatMail = allUsers.filter(v => v.mail === input.mail)
+        let noRepeatUser = users.filter(u => u.usuario === input.usuario);
+        let noRepeatMail = users.filter(u => u.mail === input.mail)
         if(noRepeatUser.length) {
           errors.usuario = `El nombre de usuario ${input.usuario} no está disponible`;
         }else if(noRepeatMail){
