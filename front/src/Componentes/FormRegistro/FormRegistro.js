@@ -93,7 +93,7 @@ export default function FormRegistro () {
         if(!input.usuario || !input.contraseña || !input.repitaContraseña || !input.nombre || !input.telefono || !input.mail || !input.nacimiento || !input.localidad){
           alert("Falta información")
       }else {
-        // dispatch(createUser(input))
+        dispatch(createuser(input))
         setInput({
             usuario:"",
             contraseña:"",
@@ -105,7 +105,7 @@ export default function FormRegistro () {
             localidad:""
         }); // Reinicio el formulario
 
-        dispatch(createuser(input))
+        
 
       }
     }
@@ -133,7 +133,7 @@ export default function FormRegistro () {
 
             <div className={stl.form} key={params.id} >
 
-            <form onSubmit={e => handleSubmit(e)}>
+            <form onSubmit={e => handleSubmit(e)} action="/usuarios/sigup" method='POST'>
               
               <div key={params.id}>
                   <label>NOMBRE DE USUARIO </label>
