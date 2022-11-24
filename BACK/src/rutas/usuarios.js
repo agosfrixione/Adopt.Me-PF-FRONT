@@ -39,16 +39,17 @@ router.post("/sigup", async (req, res) => {
         //Cuando haya un error y renderice con los datos que ya escribio el usuario y no se vuelva a renderizar el formulario vacio, hay q agregarle el value a los imputs
     } else { 
         const mailUser = await UsuarioModel.findOne({ mail: mail })
-        if (mailUser) { /*
-            req.flash("error_msg", "El mail ya esta en uso") */// HAY QUE ENVIAR ERROR ANTES DE REDIRIGIR
-            res.redirect("/usuarios/sigup")
+        if (mailUser) {
+            /*req.flash("error_msg", "El mail ya esta en uso") */    // HAY QUE ENVIAR ERROR ANTES DE REDIRIGIR
+            /*res.redirect("/usuarios/sigup")*/  // HAY Q REDIRIGIRLO
         }
 
         const nuevoUsuario = new UsuarioModel({ nombre, mail, contraseña, usuario, telefono, localidad, nacimiento }) // llenamos los datos del usuario
         nuevoUsuario.contraseña = await nuevoUsuario.encryptPassword(contraseña) // cambiamos la contraseña normal por la hasheada
         await nuevoUsuario.save() // lo guardamos
-        /*req.flash("succes_msg","Usuario registrado correctamente") */// HAY QUE INDICAR QUE SE CREO EXITOSAMENTE ANTES DE REDIRIGIR
-        res.redirect("/homepage") // deberiamos redirigirlo al /signIn
+        /*req.flash("succes_msg","Usuario registrado correctamente") */   // HAY QUE INDICAR QUE SE CREO EXITOSAMENTE ANTES DE REDIRIGIR
+        /* res.redirect("/homepage") */   // deberiamos redirigirlo al /signIn
+        console.log(nuevoUsuario)
     }
     
 })
