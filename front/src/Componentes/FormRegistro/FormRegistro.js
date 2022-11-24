@@ -51,7 +51,7 @@ export default function FormRegistro () {
 
         if(!input.nombre){
           errors.nombre = "Tenes que ingresar un nombre";
-        } else if (typeof input.nombre !== "string") {
+        } else if (!/^[a-z\s]+$/i.test(input.nombre)) {
           errors.nombre = "El nombre no es válido"
         }
 
