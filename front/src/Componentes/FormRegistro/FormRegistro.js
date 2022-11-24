@@ -1,6 +1,6 @@
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import stl from "../FormRegistro/FormRegistro.module.css";
@@ -12,6 +12,7 @@ export default function FormRegistro () {
     const dispatch = useDispatch();
     // const dispatch = useDispatch();
     const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
+    const users = useSelector((state) => state.users); // (o el estado global que usemos para guardar todos los usuarios)
 
     const [input, setInput] = useState({
         usuario:"",
@@ -32,10 +33,8 @@ export default function FormRegistro () {
 
         if(!input.usuario) {
           errors.usuario = "Tenes que ingresar un nombre de usuario";
-        } else if (typeof input.name !== "string") {
-          errors.name = "El nombre de usuario no es válido";
-        } else if (input.name.length > 20) {
-          errors.name = "El nombre de usuario es muy largo (máx 20 caracteres)";
+        } else if (!/^(?=.*[a-zA-Z]{1,})(?=.*[\d]{0,})[a-zA-Z0-9]{1,15}$/.test(input.usuario)) { // max 15 caracteres alfanumericos
+          errors.usuario = "El nombre de usuario no es válido";
         }
 
         if(!input.contraseña) {
@@ -46,22 +45,26 @@ export default function FormRegistro () {
 
         if(!input.repitaContraseña) {
           errors.repitaContraseña = "Tenes que repetir la contraseña";
-        } else if (input.repitaContraseña !== input.contraseña) {
-          errors.repitaContraseña = "La contraseña no coincide"
+        } else if (input.repitaContraseña != input.contraseña) {
+          errors.repitaContraseña = "Las contraseñas no coincide"
         }
 
         if(!input.nombre){
           errors.nombre = "Tenes que ingresar un nombre";
+        } else if (!/^[a-z\s]+$/i.test(input.nombre)) {
+          errors.nombre = "El nombre no es válido"
         }
 
         if(!input.telefono) {
             errors.telefono = "Tenes que ingresar un telefono";
-          } else if (input.telefono > 15) {
+          } else if (input.telefono.length > 15) {
             errors.telefono = "El teléfono no es válido"
           }
 
         if(!input.mail) {
             errors.mail = "Tenes que ingresar un e-mail";
+          } else if (!/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm.test(input.mail)) {
+            errors.mail = "El e-mail no es válido"
           }
 
         if(!input.nacimiento) {
@@ -80,6 +83,13 @@ export default function FormRegistro () {
 
     function handleSubmit(e) {
         e.preventDefault();
+        let noRepeatUser = users.filter(u => u.usuario === input.usuario);
+        let noRepeatMail = users.filter(u => u.mail === input.mail)
+        if(noRepeatUser.length) {
+          errors.usuario = `El nombre de usuario ${input.usuario} no está disponible`;
+        }else if(noRepeatMail){
+          errors.mail = "Ya existe una cuenta vinculada a ese mail"
+        }else{
         if(!input.usuario || !input.contraseña || !input.repitaContraseña || !input.nombre || !input.telefono || !input.mail || !input.nacimiento || !input.localidad){
           alert("Falta información")
       }else {
@@ -98,6 +108,7 @@ export default function FormRegistro () {
         dispatch(createuser(input))
 
       }
+    }
       navigate('/confirmation')
 }
 
@@ -116,12 +127,14 @@ export default function FormRegistro () {
 
     return (
 
-        <div className={stl.registro} key={params.id} onSubmit={handleSubmit}>
+        <div className={stl.registro} key={params.id}>
 
             <NavBar/>
 
             <div className={stl.form} key={params.id} >
-                      
+
+            <form onSubmit={e => handleSubmit(e)}>
+              
               <div key={params.id}>
                   <label>NOMBRE DE USUARIO </label>
                   <input
@@ -129,7 +142,11 @@ export default function FormRegistro () {
                   required
                   name="usuario"
                   value={input.usuario}
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
+                  {errors.usuario && (
+                  <p>{errors.usuario}</p>
+                  )}
                   </div>
 
                   <div key={params.id}>
@@ -138,7 +155,11 @@ export default function FormRegistro () {
                   type="password"
                   name="contraseña"
                   value={input.contraseña}
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
+                  {errors.contraseña && (
+                  <p>{errors.contraseña}</p>
+                  )}
                   </div>
   
               <div key={params.id}>
@@ -147,7 +168,11 @@ export default function FormRegistro () {
                   type="password"
                   name="repitaContraseña"
                   value={input.repitaContraseña}
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
+                  {errors.repitaContraseña && (
+                  <p>{errors.repitaContraseña}</p>
+                  )}
                   </div>
 
               <div key={params.id}>
@@ -157,7 +182,11 @@ export default function FormRegistro () {
                   required
                   name="nombre"
                   value={input.nombre}
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
+                  {errors.nombre && (
+                  <p>{errors.nombre}</p>
+                  )}
                   </div>
   
               <div key={params.id}>
@@ -167,7 +196,11 @@ export default function FormRegistro () {
                   required
                   name="telefono"
                   value={input.telefono}
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
+                  {errors.telefono && (
+                  <p>{errors.telefono}</p>
+                  )}
                   </div>
   
               <div key={params.id}>
@@ -177,9 +210,11 @@ export default function FormRegistro () {
                   required
                   name="mail"
                   value={input.mail}
-                  pattern=".+@globex\.com"
-                  size="30"
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
+                  {errors.mail && (
+                  <p>{errors.mail}</p>
+                  )}
                   </div>
                   
               <div key={params.id}>
@@ -191,9 +226,9 @@ export default function FormRegistro () {
                 value={input.nacimiento}
                 placeholder='dd-mm-yyyy'
                 onChange={(e) => handleChange(e)}
-                /> <span className='barra'></span>
-                {errors.released && (
-                <p className='danger'>{errors.released}</p>
+                /> <span></span>
+                {errors.nacimiento && (
+                <p>{errors.nacimiento}</p>
                 )}
                 </div>
 
@@ -204,17 +239,21 @@ export default function FormRegistro () {
                   required
                   name="localidad"
                   value={input.localidad}
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
+                  {errors.localidad && (
+                  <p>{errors.localidad}</p>
+                  )}
                   </div>
                   
                   <div key={params.id}>
 
             </div>
-            </div>
 
-            <Link to='/homepage'>
-                <button className={stl.buttons} type="submit">SUBMIT</button>
-            </Link>
+                <button className={stl.buttons} type="submit">ACEPTAR</button>
+
+            </form>
+            </div>
 
             <Link to='/givepet'>
                 <button className={stl.buttons}>CANCELAR</button>

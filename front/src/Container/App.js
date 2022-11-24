@@ -7,7 +7,7 @@ import HomeGatos from "../Componentes/AdoptarMascota/HomeGatos";
 import InfoProceso from "../Componentes/DonarMascota/InfoProceso";
 import FormRegistro from "../Componentes/FormRegistro/FormRegistro";
 import DetalleAdopcion from "../Componentes/AdoptarMascota/DetalleAdopcion";
-import Confirmacion from "../Componentes/DonarMascota/Confirmacion";
+import Confirmacion from "../Componentes/FormRegistro/Confirmacion";
 import TePuedeInteresar from "../Componentes/TePuedeInteresar/TePuedeInteresar";
 import ReportarMaltrato from "../Componentes/TePuedeInteresar/ReportarMaltrato";
 import Directorio from "../Componentes/TePuedeInteresar/Directorio";
