@@ -1,47 +1,93 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
+import Dropzone from "react-dropzone";
+import Container from "react-bootstrap/Container";
+import "./UploadImages.css";
+import axios from "axios";
 
-export default function UploadImages(props) {
-  const { image, setImage } = useState("");
-  const { loading, setLoading } = useState(false);
+const Uploads = (props) => {
+  const { image, setImage } = useState({ array: [] });
+  const { loading, setLoading } = useState("");
 
-  const uploadImage = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "mascotas");
-    setLoading(true);
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/dvw0vrnxp/image/upload",
-      {
-        method: "POST",
-        body: data,
-      }
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-    );
-    setLoading(false);
+  const handleDrop = (files) => {
+    const uploaders = files.map(async (file) => {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("tags", `codeinfuse, medium, gist`);
+      formData.append("upload_preset", "mascotas");
+      formData.append("api_key", "636473186254919");
+      formData.append("timestamp", (Date.now() / 1000) | 0);
+      setLoading("true");
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dvw0vrnxp/image/upload",
+        formData,
+        {
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+        }
+      );
+      const data = response.data;
+      //console.log(data);
+      const fileURL = data.secure_url;
+      //console.log(fileURL);
+      let foticos = image.array;
+      foticos.push(fileURL);
+      const newobj = { ...image, foticos };
+      setImage(newobj);
+      //console.log(image);
+    });
+    axios.all(uploaders).then(() => {
+      setLoading("false");
+    });
   };
+
+  function imagePreview() {
+    if (loading === "true") {
+      return <h3>Cargando Imagenes...</h3>;
+    }
+    if (loading === "false") {
+      return (
+        <h3>
+          {image.array.length <= 0
+            ? "No hay fotos"
+            : image.array.map((item, index) => (
+                <img
+                  alt="fotos"
+                  style={{
+                    width: "125px",
+                    height: "105px",
+                    backgroundSize: "cover",
+                    paddingRight: "21px",
+                  }}
+                  src={item}
+                />
+              ))}
+        </h3>
+      );
+    }
+  }
 
   return (
     <div>
-      <div style={{ textAlign: "center" }}>
-        <h1>Subiendo Imagenes</h1>
-        <Form>
-          <input type="file" name="file" placeholder="Agrega Imagenes" />
-          <button onClick={uploadImage}>UPLOAD</button>
-          {loading ? (
-            <h3>Cargando imagenes...</h3>
-          ) : (
-            <img src={image} style={{ width: "300px" }} />
+      <Container>
+        <h1 className="text-center">Sube tus fotos aqui</h1>
+        <Dropzone
+          onDrop={handleDrop}
+          onChange={(e) => setImage(e.target.value)}
+          value={image}
+        >
+          {({ getRootProps, getInputProps }) => (
+            <section>
+              <div {...getRootProps({ className: "dropzone" })}>
+                <input {...getInputProps()} />
+                <span>😼</span>
+                <p>Coloca aqui tus fotos o clickea para seleccionar</p>
+              </div>
+            </section>
           )}
-        </Form>
-      </div>
+        </Dropzone>
+        {imagePreview()}
+      </Container>
     </div>
   );
-}
+};
+
+export default Uploads;

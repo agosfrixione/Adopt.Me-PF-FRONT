@@ -7,7 +7,7 @@ import stl from "./Donacion.module.css";
 
 export default function Donar() {
     
-    const [checkout, setCheckOut] = useState(false)
+    // const [checkout, setCheckOut] = useState(false)
 
     return (
 
