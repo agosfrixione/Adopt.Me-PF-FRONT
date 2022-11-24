@@ -17,12 +17,12 @@ router.delete("/:id", deleteUsuario);
 
 router.post("/sigup", async (req, res) => {
     console.log(req.body)
-    const { nombre, mail, contraseña, validar_contraseña } = req.body;
+    const { nombre, mail, contraseña, validar_contraseña, usuario, telefono, nacimiento, localidad} = req.body;
     const errors = [];
 
-    // Checkeamos que no envien el formulario con un campo vacio
-    if (nombre.length <= 0 || mail.length <= 0 || contraseña.length <= 0 | validar_contraseña.length <= 0) { 
-        errors.push({text: "Por favor completa todos los campos"})
+    // Checkeamos que no envien el formulario con un campo obligatorio vacio
+    if (nombre.length <= 0 || mail.length <= 0 || contraseña.length <= 0 || validar_contraseña.length <= 0 || usuario.length <= 0) { 
+        errors.push({text: "Por favor completa los campos obligatorios"})
     }
    
     // Checkeamos que las contraseñas coincidan y q sea mayor a 4 digitos
@@ -35,7 +35,7 @@ router.post("/sigup", async (req, res) => {
 
     //renderizar el formulario con los errores , sino confirma la creacion.
     if (errors.length > 0) {
-        res.render("/sigup", { errors, nombre, mail, contraseña, validar_contraseña })
+        res.render("/usuarios/sigup", { errors, nombre, mail, contraseña, validar_contraseña })
         //Cuando haya un error y renderice con los datos que ya escribio el usuario y no se vuelva a renderizar el formulario vacio, hay q agregarle el value a los imputs
     } else { 
         const mailUser = await UsuarioModel.findOne({ mail: mail })
@@ -44,7 +44,7 @@ router.post("/sigup", async (req, res) => {
             res.redirect("/usuarios/sigup")
         }
 
-        const nuevoUsuario = new UsuarioModel({ nombre, mail, contraseña }) // llenamos los datos del usuario
+        const nuevoUsuario = new UsuarioModel({ nombre, mail, contraseña, usuario, telefono, localidad, nacimiento }) // llenamos los datos del usuario
         nuevoUsuario.contraseña = await nuevoUsuario.encryptPassword(contraseña) // cambiamos la contraseña normal por la hasheada
         await nuevoUsuario.save() // lo guardamos
         /*req.flash("succes_msg","Usuario registrado correctamente") */// HAY QUE INDICAR QUE SE CREO EXITOSAMENTE ANTES DE REDIRIGIR
