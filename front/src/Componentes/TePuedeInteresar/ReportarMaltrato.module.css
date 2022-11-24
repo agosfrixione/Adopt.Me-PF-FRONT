@@ -5,7 +5,8 @@
     color: #393E46;
     background-image: url("../../Imagenes/pisadas.jpg");
     background-size: contain;
-    background-position: -250px;
+    background-repeat: no-repeat;
+    background-position: -350px;
 }
 
 .titulo {
@@ -65,4 +66,9 @@ li {
   
  .boton:focus {
     box-shadow: rgba(72, 35, 7, .46) 0 0 0 4px, -6px 8px 10px rgba(81,41,10,0.1), 0px 2px 2px rgba(81,41,10,0.2);
+  }
+
+  .h3s {
+    color: #6D9886;
+    font-size: 27px;
   }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import Container from "react-bootstrap/Container";
-import styles from "./UploadImages.module.css";
+import "./UploadImages.css";
 import axios from "axios";
 
 const Uploads = (props) => {

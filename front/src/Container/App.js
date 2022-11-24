@@ -32,16 +32,8 @@ function App() {
           <Route exact path="/confirmation" element={<Confirmacion />} />
           <Route exact path="/detailDog" element={<DetallePerro />} />
           <Route exact path="/detailCat" element={<DetalleGato />} />
-          <Route
-            exact
-            path="/tepuedeinteresar"
-            element={<TePuedeInteresar />}
-          />
-          <Route
-            exact
-            path="/reportarmaltrato"
-            element={<ReportarMaltrato />}
-          />
+          <Route exact path="/tepuedeinteresar" element={<TePuedeInteresar />} />
+          <Route exact path="/reportarmaltrato" element={<ReportarMaltrato />} />
           <Route exact path="/directorio" element={<Directorio />} />
           <Route exact path="/donation" element={<Donar />} />
           <Route exact path="/reportarmascota" element={<ReportarMascota />} />

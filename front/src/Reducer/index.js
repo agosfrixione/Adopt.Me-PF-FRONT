@@ -1,4 +1,4 @@
-import { CREATE_ANIMAL, CREATE_USER, GET_ANIMAL_BY_ID, GET_MASCOTAS, GET_USERS, PAGO_PAYPAL } from "../Actions";
+import { CREATE_ANIMAL, CREATE_USER, GET_ANIMAL_BY_ID, GET_MASCOTAS, GET_USERS } from "../Actions";
 
 const initialState = {
    animales: [],
@@ -25,7 +25,6 @@ export default function rootReducer(state = initialState, action){
             return {...state}
 
         case GET_ANIMAL_BY_ID:  
-        console.log("estoy en el reducer")
             return { ...state, animalesdetail: action.payload }
 
         case GET_USERS:
@@ -34,8 +33,8 @@ export default function rootReducer(state = initialState, action){
                 users: action.payload
             }
 
-        case PAGO_PAYPAL:
-            return {...state}
+        // case PAGO_PAYPAL:
+        //     return {...state}
             
         default:
             return state;
