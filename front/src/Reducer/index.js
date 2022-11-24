@@ -25,6 +25,7 @@ export default function rootReducer(state = initialState, action){
             return {...state}
 
         case GET_ANIMAL_BY_ID:  
+        console.log("estoy en el reducer")
             return { ...state, animalesdetail: action.payload }
 
         case GET_USERS:

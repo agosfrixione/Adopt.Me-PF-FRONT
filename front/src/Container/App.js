@@ -14,6 +14,8 @@ import Directorio from "../Componentes/TePuedeInteresar/Directorio";
 import Donar from "../Componentes/Donacion/Donacion";
 import ReportarMascota from "../Componentes/ReportarMascota/ReportarMascota";
 import BuscarMascota from "../Componentes/BuscarMascota/BuscarMascota";
+import DetallePerro from "../Componentes/AdoptarMascota/DetallePerro";
+import DetalleGato from "../Componentes/AdoptarMascota/DetalleGato";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
           <Route exact path="/sigup" element={<FormRegistro />} />
           <Route exact path="/contacto" element={<DetalleAdopcion />} />
           <Route exact path="/confirmation" element={<Confirmacion />} />
+          <Route exact path="/detailDog" element={<DetallePerro />} />
+          <Route exact path="/detailCat" element={<DetalleGato />} />
           <Route
             exact
             path="/tepuedeinteresar"
