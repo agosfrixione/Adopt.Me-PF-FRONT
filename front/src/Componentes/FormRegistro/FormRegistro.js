@@ -1,6 +1,6 @@
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import stl from "../FormRegistro/FormRegistro.module.css";
@@ -12,6 +12,7 @@ export default function FormRegistro () {
     const dispatch = useDispatch();
     // const dispatch = useDispatch();
     const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
+    const allUsers = useSelector((state) => state.allUsers); // (o el estado global que usemos para guardar todos los usuarios)
 
     const [input, setInput] = useState({
         usuario:"",
@@ -32,10 +33,8 @@ export default function FormRegistro () {
 
         if(!input.usuario) {
           errors.usuario = "Tenes que ingresar un nombre de usuario";
-        } else if (typeof input.name !== "string") {
-          errors.name = "El nombre de usuario no es válido";
-        } else if (input.name.length > 20) {
-          errors.name = "El nombre de usuario es muy largo (máx 20 caracteres)";
+        } else if (!/^(?=.*[a-zA-Z]{1,})(?=.*[\d]{0,})[a-zA-Z0-9]{1,15}$/.test(input.usuario)) { // max 15 caracteres alfanumericos
+          errors.usuario = "El nombre de usuario no es válido";
         }
 
         if(!input.contraseña) {
@@ -47,11 +46,13 @@ export default function FormRegistro () {
         if(!input.repitaContraseña) {
           errors.repitaContraseña = "Tenes que repetir la contraseña";
         } else if (input.repitaContraseña !== input.contraseña) {
-          errors.repitaContraseña = "La contraseña no coincide"
+          errors.repitaContraseña = "Las contraseñas no coincide"
         }
 
         if(!input.nombre){
           errors.nombre = "Tenes que ingresar un nombre";
+        } else if (typeof input.nombre !== "string") {
+          errors.nombre = "El nombre no es válido"
         }
 
         if(!input.telefono) {
@@ -62,6 +63,8 @@ export default function FormRegistro () {
 
         if(!input.mail) {
             errors.mail = "Tenes que ingresar un e-mail";
+          } else if (!/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm.test(input.mail)) {
+            errors.mail = "El e-mail no es válido"
           }
 
         if(!input.nacimiento) {
@@ -80,6 +83,13 @@ export default function FormRegistro () {
 
     function handleSubmit(e) {
         e.preventDefault();
+        let noRepeatUser = allUsers.filter(v => v.usuario === input.usuario);
+        let noRepeatMail = allUsers.filter(v => v.mail === input.mail)
+        if(noRepeatUser.length) {
+          errors.usuario = `El nombre de usuario ${input.usuario} no está disponible`;
+        }else if(noRepeatMail){
+          errors.mail = "Ya existe una cuenta vinculada a ese mail"
+        }else{
         if(!input.usuario || !input.contraseña || !input.repitaContraseña || !input.nombre || !input.telefono || !input.mail || !input.nacimiento || !input.localidad){
           alert("Falta información")
       }else {
@@ -98,6 +108,7 @@ export default function FormRegistro () {
         dispatch(createuser(input))
 
       }
+    }
       navigate('/confirmation')
 }
 
@@ -131,7 +142,8 @@ export default function FormRegistro () {
                   required
                   name="usuario"
                   value={input.usuario}
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
                   {errors.usuario && (
                   <p>{errors.usuario}</p>
                   )}
@@ -143,7 +155,8 @@ export default function FormRegistro () {
                   type="password"
                   name="contraseña"
                   value={input.contraseña}
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
                   {errors.contraseña && (
                   <p>{errors.contraseña}</p>
                   )}
@@ -155,7 +168,8 @@ export default function FormRegistro () {
                   type="password"
                   name="repitaContraseña"
                   value={input.repitaContraseña}
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
                   {errors.repitaContraseña && (
                   <p>{errors.repitaContraseña}</p>
                   )}
@@ -168,7 +182,8 @@ export default function FormRegistro () {
                   required
                   name="nombre"
                   value={input.nombre}
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
                   {errors.nombre && (
                   <p>{errors.nombre}</p>
                   )}
@@ -181,7 +196,8 @@ export default function FormRegistro () {
                   required
                   name="telefono"
                   value={input.telefono}
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
                   {errors.telefono && (
                   <p>{errors.telefono}</p>
                   )}
@@ -196,7 +212,8 @@ export default function FormRegistro () {
                   value={input.mail}
                   pattern=".+@globex\.com"
                   size="30"
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
                   {errors.mail && (
                   <p>{errors.mail}</p>
                   )}
@@ -210,9 +227,10 @@ export default function FormRegistro () {
                 name="nacimiento"
                 value={input.nacimiento}
                 placeholder='dd-mm-yyyy'
-                onChange={(e) => handleChange(e)}/>
+                onChange={(e) => handleChange(e)}
+                /> <span></span>
                 {errors.nacimiento && (
-                <p className='danger'>{errors.nacimiento}</p>
+                <p>{errors.nacimiento}</p>
                 )}
                 </div>
 
@@ -223,7 +241,8 @@ export default function FormRegistro () {
                   required
                   name="localidad"
                   value={input.localidad}
-                  onChange={(e) => handleChange(e)}/>
+                  onChange={(e) => handleChange(e)}
+                  /> <span></span>
                   {errors.localidad && (
                   <p>{errors.localidad}</p>
                   )}
@@ -233,7 +252,7 @@ export default function FormRegistro () {
 
             </div>
 
-                <button className={stl.buttons} type="submit">REGISTRARSE</button>
+                <button className={stl.buttons} type="submit">ACEPTAR</button>
 
             </form>
             </div>
