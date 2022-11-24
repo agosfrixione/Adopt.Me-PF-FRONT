@@ -19,6 +19,9 @@ const UsuarioSchema = new Schema({
     type: String,
     required: true,
   },
+  fotoPerfil: {
+    type: String,
+  },
   telefono: {
     type: String,
   },
