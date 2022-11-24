@@ -1,7 +1,13 @@
 import React from "react";
+import { useState } from "react";
+import Paypal from "../Paypal/Paypal";
+
 import stl from "./Donacion.module.css";
 
+
 export default function Donar() {
+    
+    const [checkout, setCheckOut] = useState(false)
 
     return (
 
@@ -34,13 +40,17 @@ export default function Donar() {
            </div>
 
            <div className={stl.metodosPago}>
-
-                <div className={stl.paypal}></div>
-                <button>Mercado Pago</button>
-                <button>Crypto</button>
-
-           </div>
-
+                
+                {/* {checkout ? ( */}
+                <Paypal />
+                {/* //  ) : ( */}
+                {/* // <button className={stl.paypal} onClick={() => {setCheckOut(true)}}></button>
+                // )}
+                // </div> */}
+                {/* <button>Mercado Pago</button>
+                <button>Crypto</button> */}
+            
+        </div>
        </form>
 
 
