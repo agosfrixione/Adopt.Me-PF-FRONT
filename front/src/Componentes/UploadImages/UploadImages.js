@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import styles from "./UploadImages.module.css";
 import axios from "axios";
 
-const UploadImages = (props) => {
+const Uploads = (props) => {
   const { image, setImage } = useState({ array: [] });
   const { loading, setLoading } = useState("");
 
@@ -25,14 +25,14 @@ const UploadImages = (props) => {
         }
       );
       const data = response.data;
-      console.log(data);
+      //console.log(data);
       const fileURL = data.secure_url;
-      console.log(fileURL);
+      //console.log(fileURL);
       let foticos = image.array;
       foticos.push(fileURL);
       const newobj = { ...image, foticos };
       setImage(newobj);
-      console.log(image);
+      //console.log(image);
     });
     axios.all(uploaders).then(() => {
       setLoading("false");
@@ -75,7 +75,7 @@ const UploadImages = (props) => {
           value={image}
         >
           {({ getRootProps, getInputProps }) => (
-            <section className={styles.dropzone}>
+            <section>
               <div {...getRootProps({ className: "dropzone" })}>
                 <input {...getInputProps()} />
                 <span>😼</span>
@@ -90,4 +90,4 @@ const UploadImages = (props) => {
   );
 };
 
-export default UploadImages;
+export default Uploads;
