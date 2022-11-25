@@ -27,7 +27,8 @@ function App() {
           <Route exact path="/adoptcat" element={<HomeGatos />} />
           <Route exact path="/adoptdog" element={<HomePerros />} />
           <Route exact path="/givepet" element={<InfoProceso />} />
-          <Route exact path="/sigup" element={<FormRegistro />} />
+          <Route exact path="/signup" element={<FormRegistro />} />
+          <Route exact path="/signin" element={<FormRegistro />} />
           <Route exact path="/contacto" element={<DetalleAdopcion />} />
           <Route exact path="/confirmation" element={<Confirmacion />} />
           <Route exact path="/detailDog" element={<DetallePerro />} />
