@@ -325,5 +325,6 @@ export default function FormRegistro() {
 
       <Footer />
     </div>
+    
   );
 }
