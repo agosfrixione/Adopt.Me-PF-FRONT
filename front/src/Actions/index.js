@@ -4,3 +4,5 @@ export const CREATE_USER = "CREATE_USER";
 export const CREATE_ANIMAL = "CREATE_ANIMAL";
 export const GET_ANIMAL_BY_ID = "GET_ANIMAL_BY_ID";
 export const PAGO_PAYPAL = "PAGO_PAYPAL";
+export const GET_GATO = 'GET_GATO';
+export const GET_PERRO = 'GET_PERRO';

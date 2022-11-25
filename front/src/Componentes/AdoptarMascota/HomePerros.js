@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import getmascotas from "../../Actions/getmascotas";
+import getperros from "../../Actions/getperros";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import stl from "./HomePerros.module.css";
@@ -12,7 +12,9 @@ import Footer from "../Footer/Footer";
 export default function HomePerros () {
 
     const dispatch = useDispatch();
-    const alldogs = useSelector((state) => state.animales);
+
+    const alldogs = useSelector((state) => state.perros);
+
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(3)
 
@@ -24,7 +26,7 @@ export default function HomePerros () {
 
     useEffect(() => {
         if (alldogs.length === 0) {
-            dispatch(getmascotas())
+            dispatch(getperros())
         }
     }, [alldogs.length, dispatch])
 
@@ -43,7 +45,7 @@ export default function HomePerros () {
                   <Link to ={"/detailDog"}>
                      <Card 
                      id={p.id}
-                     especie={p.especie}
+                     perro = {p.perro}
                      nombre={p.nombre}
                      localidad={p.localidad}
                      imagen={p.imagen}
