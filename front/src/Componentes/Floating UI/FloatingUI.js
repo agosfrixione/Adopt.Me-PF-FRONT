@@ -6,7 +6,7 @@ export default function FloatingUI() {
         
         <div id="container-floating">
 
-<Link to = "/adoptcat">
+<Link to = "/tepuedeinteresar">
   <div class="nd4 nds">
     <p class="letter"></p>
   </div>
@@ -18,7 +18,7 @@ export default function FloatingUI() {
   </div>
   </Link>
   
-  <Link to = "/tepuedeinteresar">
+  <Link to = "/adoptcat">
   <div class="nd1 nds">
     <p class="letter"></p>
   </div>
