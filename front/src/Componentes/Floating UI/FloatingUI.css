@@ -135,18 +135,17 @@
   }
   
   .nd1{
-    background: #d3a411;
     right: 40px;
     bottom: 350px;
     animation-delay: 0.2s;
       animation: bounce-out-nds 0.3s linear;
     animation-fill-mode:  forwards;
-    background-image: url("../../Imagenes/info.png");
+    background-image: url("../../Imagenes/cat.png");
     background-size: contain;
   }
   
   .nd3{
-    /* background: #3c80f6; */
+
     right: 40px;
     bottom: 410px;
     animation-delay: 0.15s;
@@ -158,12 +157,12 @@
   
   .nd4{
     /* background: #ba68c8; */
-    right: 40px;
-    bottom: 470px;
+    right: 36px;
+    bottom: 213px;
     animation-delay: 0.1s;
       animation: bounce-out-nds 0.1s linear;
     animation-fill-mode:  forwards;
-    background-image: url("../../Imagenes/cat.png");
+    background-image: url("../../Imagenes/info.png");
     background-size: contain;
   }
   
