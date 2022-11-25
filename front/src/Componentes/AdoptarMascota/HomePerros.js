@@ -13,23 +13,23 @@ export default function HomePerros () {
 
     const dispatch = useDispatch();
 
-    const alldogs = useSelector((state) => state.perros);
+    const allPets = useSelector((state) => state.perros);
 
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(3)
 
     const lastPetIndex = currentPage * mascotasPerPage 
     const firstPetIndex = lastPetIndex - mascotasPerPage 
-    const currentDogs = alldogs.slice(firstPetIndex,lastPetIndex) 
+    const currentPets = allPets.slice(firstPetIndex,lastPetIndex) 
 
 
     const actualPage = (pageNumber) => {setCurrentPage(pageNumber)}
 
         useEffect(() => {
-            if (alldogs.length === 0) {
+            if (allPets.length === 0) {
                 dispatch(getperros())
             }
-        }, [alldogs.length, dispatch])
+        }, [allPets.length, dispatch])
 
     return (
         <div>
@@ -38,16 +38,16 @@ export default function HomePerros () {
 
         <Paging 
         mascotasPerPage={mascotasPerPage} 
-        alldogs={alldogs.length} 
+        allPets={allPets.length} 
         currentPage={currentPage} 
         actualPage={actualPage}
-        currentDogs={currentDogs}
+        currentPets={currentPets}
         />
 
         <div className={stl.listadoCards}> 
      
 
-        {currentDogs.length > 1 && currentDogs.map(p => {
+        {currentPets.length > 1 && currentPets.map(p => {
 
                    
             return (                                          
