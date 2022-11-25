@@ -2,7 +2,7 @@ import React from 'react';
 import stl from "../Pagination/Pagination.module.css"
 
 
-export default function Paging({mascotasPerPage, alldogs, actualPage}) {
+export default function Paging({mascotasPerPage, alldogs, actualPage, currentPage, currentDogs}) {
 
     const pageNumbers = []
     const maxpage = Math.ceil(alldogs/mascotasPerPage)
@@ -14,6 +14,13 @@ export default function Paging({mascotasPerPage, alldogs, actualPage}) {
     return (
         <nav>
             <div className={stl.pagination}>
+            <button
+                className={stl.buttonpaging}
+                disabled={currentPage <= 1 ? true : false}
+                onClick={() => actualPage(currentPage - 1)}
+              >
+                ⬅
+              </button>
                 {pageNumbers && pageNumbers.map(num => {
                     return (
                 
@@ -25,6 +32,13 @@ export default function Paging({mascotasPerPage, alldogs, actualPage}) {
 
                     )
                 })}
+                <button
+                className={stl.buttonpaging}
+                disabled={currentDogs.length < mascotasPerPage ? true : false}
+                onClick={() => actualPage(currentPage + 1)}
+              >
+                ⮕
+              </button>
             </div>  
 
         </nav>        
