@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
 const AnimalSchema = new Schema({
-    
+
+    // _id: {
+    //     type: String,
+    //     require: true        
+    // },    
     perro: {
         type: Boolean,
         require: true

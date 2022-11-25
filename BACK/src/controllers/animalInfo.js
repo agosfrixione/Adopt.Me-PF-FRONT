@@ -33,36 +33,61 @@ getGatos = async (req,res) => {
 }
 
 postAnimal = async (req, res) => {
-  const animal = await AnimalModel(req.body);
   try {
-    if (animal) {
-      await animal.save();
-      res.status(200).json(animal);
-    } else {
-      res.status(400).json({ msg: "no se creó el posteo" });
-    }
+    const {      
+      perro,
+      gato,
+      nombre,
+      raza,
+      edad,
+      estado,
+      tamaño,
+      peso,
+      localidad,
+      descripcion,
+      castrado,
+      vacunado,
+      imagen,} = req.body;
+
+      const animales = await new AnimalModel({
+      
+      perro,
+      gato,
+      nombre,
+      raza,
+      edad,
+      estado,
+      tamaño,
+      peso,
+      localidad,
+      descripcion,
+      castrado,
+      vacunado,
+      imagen,        
+      })
+    
+      if (animales.length) await animales.save()
+      res.status(200).json(animales)
+      
+    
   } catch (error) {
     res.status(400).json({ msg: "no se creó el posteo" });
   }
 };
 
 getDetalleAnimal = async (req, res) => {
-  const { id } = req.params;
   try {
-    let anmId = await AnimalModel.findById(id);
-    if (anmId) {
-      let a = await anmId.save();
-      res.status(200).json(a);
-    } else {
-      res.status(400).json(`${id} no encontrado`);
-    }
+    const { id } = req.params;
+    let anmId = await AnimalModel.findById( id );
+    console.log(anmId);
+    if (anmId) return res.status(200).json(anmId);   
   } catch (error) {
-    res.status(400).json(`${id} no encontrado`);
+    res.status(400).json(`${id}no encontrado`);
   }
 };
 
 putAnimal = async (req, res) => {
-  const { id } = req.params; //es lo que buscamos
+  const { id } = req.params; 
   const {
     perro,
     gato,
@@ -110,7 +135,7 @@ putAnimal = async (req, res) => {
 };
 
 deleteAnimal = async (req, res) => {
-  const { id } = req.params; //es lo que buscamos para eliminar
+  const { id } = req.params;
   try {
     await AnimalModel.remove({ _id: id });
     res.status(200).json(`la mascota ${id} eliminado con exito`);
