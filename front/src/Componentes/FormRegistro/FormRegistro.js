@@ -23,6 +23,7 @@ export default function FormRegistro() {
     mail: "",
     nacimiento: "",
     localidad: "",
+    fotoPerfil: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -39,48 +40,6 @@ export default function FormRegistro() {
       // max 15 caracteres alfanumericos
       errors.usuario = "El nombre de usuario no es válido";
     }
-
-import createuser from '../../Actions/createuser';
-
-export default function FormRegistro () {
-
-    const params = useParams();
-    const dispatch = useDispatch();
-    // const dispatch = useDispatch();
-    const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
-    const users = useSelector((state) => state.users); // (o el estado global que usemos para guardar todos los usuarios)
-
-    const [input, setInput] = useState({
-        usuario:"",
-        contraseña:"",
-        repitaContraseña:"",
-        nombre:"",
-        telefono:"",
-        mail:"",
-        nacimiento:"",
-        localidad:"",
-        fotoPerfil:""
-    });
-
-    const [errors, setErrors] = useState({});
-    const [isSubmit, setisSubmit] = useState(true);
-    
-
-    function validation(input) {
-        let errors = {}
-
-        if(!input.usuario) {
-          errors.usuario = "Tenes que ingresar un nombre de usuario";
-        } else if (!/^(?=.*[a-zA-Z]{1,})(?=.*[\d]{0,})[a-zA-Z0-9]{1,15}$/.test(input.usuario)) { // max 15 caracteres alfanumericos
-          errors.usuario = "El nombre de usuario no es válido";
-        }
-
-        if(!input.contraseña) {
-          errors.contraseña = "Tenes que ingresar una contraseña";
-        } else if (/^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,}$/.test(input.contraseña)) {
-          errors.contraseña = "La contraseña debe tener mínimo 8 caracteres, al menos una letra y un número"
-        }
-
 
     if (!input.contraseña) {
       errors.contraseña = "Tenes que ingresar una contraseña";
@@ -147,8 +106,8 @@ export default function FormRegistro () {
       mail: "",
       nacimiento: "",
       localidad: "",
-    })
-    
+    });
+
     /*
     if (noRepeatUser.length) {
       errors.usuario = `El nombre de usuario ${input.usuario} no está disponible`;
@@ -185,11 +144,10 @@ export default function FormRegistro () {
         }); // Reinicio el formulario
       }
       */
-    }
+  }
 
-    /*
+  /*
     navigate("/confirmation");*/
-  
 
   function handleChange(e) {
     e.preventDefault();
@@ -200,184 +158,172 @@ export default function FormRegistro () {
         ...input,
         [e.target.name]: [e.target.value],
       })
---
-      navigate('/confirmation')
-}
-
-
-   
-    function handleOpenWidget(e){
-      const imagen = document.querySelector('#user-photo')
-      var myWidget = window.cloudinary.createUploadWidget({
-        cloudName: 'dvw0vrnxp', 
-        uploadPreset: 'usuarios'}, (error, result) => { 
-          if (!error && result && result.event === "success") { 
-            // console.log('Done! Here is the image info: ', result.info);
-            imagen.src = result.info.secure_url;
-            setInput((prev) => ({ ...prev, [e.target.name]: result.info.secure_url }));
-          }
-        }
-      )
-      myWidget.open();
-    }
-
-
-
-    return (
-
-        <div className={stl.registro} key={params.id}>
-
-            <NavBar/>
-
-            <div className={stl.form} key={params.id} >
-
-            <form onSubmit={e => handleSubmit(e)}>
-              
-              <div key={params.id}>
-                  <label>NOMBRE DE USUARIO </label>
-                  <input
-                  type="text"
-                  required
-                  name="usuario"
-                  value={input.usuario}
-                  onChange={(e) => handleChange(e)}
-                  /> <span></span>
-                  {errors.usuario && (
-                  <p>{errors.usuario}</p>
-                  )}
-                  </div>
-
-                  <div key={params.id}>
-                  <label>CONTRASEÑA </label>
-                  <input
-                  type="password"
-                  name="contraseña"
-                  value={input.contraseña}
-                  onChange={(e) => handleChange(e)}
-                  /> <span></span>
-                  {errors.contraseña && (
-                  <p>{errors.contraseña}</p>
-                  )}
-                  </div>
-  
-              <div key={params.id}>
-                  <label>REPITA CONTRASEÑA </label>
-                  <input
-                  type="password"
-                  name="repitaContraseña"
-                  value={input.repitaContraseña}
-                  onChange={(e) => handleChange(e)}
-                  /> <span></span>
-                  {errors.repitaContraseña && (
-                  <p>{errors.repitaContraseña}</p>
-                  )}
-                  </div>
-
-              <div key={params.id}>
-                  <label>NOMBRE Y APELLIDO / REFUGIO </label>
-                  <input
-                  type="text"
-                  required
-                  name="nombre"
-                  value={input.nombre}
-                  onChange={(e) => handleChange(e)}
-                  /> <span></span>
-                  {errors.nombre && (
-                  <p>{errors.nombre}</p>
-                  )}
-                  </div>
-  
-              <div key={params.id}>
-                  <label>TELÉFONO DE CONTACTO </label>
-                  <input
-                  type="text"
-                  required
-                  name="telefono"
-                  value={input.telefono}
-                  onChange={(e) => handleChange(e)}
-                  /> <span></span>
-                  {errors.telefono && (
-                  <p>{errors.telefono}</p>
-                  )}
-                  </div>
-  
-              <div key={params.id}>
-                  <label>E-MAIL </label>
-                  <input
-                  type="email"
-                  required
-                  name="mail"
-                  value={input.mail}
-                  onChange={(e) => handleChange(e)}
-                  /> <span></span>
-                  {errors.mail && (
-                  <p>{errors.mail}</p>
-                  )}
-                  </div>
-                  
-              <div key={params.id}>
-                <label>FECHA DE NACIMIENTO </label>
-                <input
-                required
-                type='date'
-                name="nacimiento"
-                value={input.nacimiento}
-                placeholder='dd-mm-yyyy'
-                onChange={(e) => handleChange(e)}
-                /> <span></span>
-                {errors.nacimiento && (
-                <p>{errors.nacimiento}</p>
-                )}
-                </div>
-
-              <div key={params.id}>
-                  <label>LOCALIDAD </label>
-                  <input
-                  type="text"
-                  required
-                  name="localidad"
-                  value={input.localidad}
-                  onChange={(e) => handleChange(e)}
-                  /> <span></span>
-                  {errors.localidad && (
-                  <p>{errors.localidad}</p>
-                  )}
-                  </div>
-                  
-                  <div key={params.id}>
-                  <img 
-                  src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
-                  id="user-photo"
-                  alt="profile picture" 
-                  height="150" 
-                  width="150"
-                  />
-                  
-                  <button
-                  id="btn-foto"
-                  name="fotoPerfil"
-                  onClick={(e) => handleOpenWidget(e)}
-                  >SELECCIONE FOTO DE PERFIL</button>
-                  <span></span>
-                  {errors.fotoPerfil && (
-                  <p>{errors.fotoPerfil}</p>
-                  )}
-                  </div>
-
-                <button className={stl.buttons} type="submit">ACEPTAR</button>
-
-            </form>
-            </div>
-
-            <Link to='/givepet'>
-                <button className={stl.buttons}>CANCELAR</button>
-            </Link>
-            
-            <Footer />
-            
-        
-        </div>
-
+    );
+    /*
+      navigate('/confirmation')*/
   }
 
-  
+  function handleOpenWidget(e) {
+    const imagen = document.querySelector("#user-photo");
+    var myWidget = window.cloudinary.createUploadWidget(
+      {
+        cloudName: "dvw0vrnxp",
+        uploadPreset: "usuarios",
+      },
+      (error, result) => {
+        if (!error && result && result.event === "success") {
+          // console.log('Done! Here is the image info: ', result.info);
+          imagen.src = result.info.secure_url;
+          setInput((prev) => ({
+            ...prev,
+            [e.target.name]: result.info.secure_url,
+          }));
+        }
+      }
+    );
+    myWidget.open();
+  }
+
+  return (
+    <div className={stl.registro} key={params.id}>
+      <NavBar />
+
+      <div className={stl.form} key={params.id}>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div key={params.id}>
+            <label>NOMBRE DE USUARIO </label>
+            <input
+              type="text"
+              required
+              name="usuario"
+              value={input.usuario}
+              onChange={(e) => handleChange(e)}
+            />{" "}
+            <span></span>
+            {errors.usuario && <p>{errors.usuario}</p>}
+          </div>
+
+          <div key={params.id}>
+            <label>CONTRASEÑA </label>
+            <input
+              type="password"
+              name="contraseña"
+              value={input.contraseña}
+              onChange={(e) => handleChange(e)}
+            />{" "}
+            <span></span>
+            {errors.contraseña && <p>{errors.contraseña}</p>}
+          </div>
+
+          <div key={params.id}>
+            <label>REPITA CONTRASEÑA </label>
+            <input
+              type="password"
+              name="repitaContraseña"
+              value={input.repitaContraseña}
+              onChange={(e) => handleChange(e)}
+            />{" "}
+            <span></span>
+            {errors.repitaContraseña && <p>{errors.repitaContraseña}</p>}
+          </div>
+
+          <div key={params.id}>
+            <label>NOMBRE Y APELLIDO / REFUGIO </label>
+            <input
+              type="text"
+              required
+              name="nombre"
+              value={input.nombre}
+              onChange={(e) => handleChange(e)}
+            />{" "}
+            <span></span>
+            {errors.nombre && <p>{errors.nombre}</p>}
+          </div>
+
+          <div key={params.id}>
+            <label>TELÉFONO DE CONTACTO </label>
+            <input
+              type="text"
+              required
+              name="telefono"
+              value={input.telefono}
+              onChange={(e) => handleChange(e)}
+            />{" "}
+            <span></span>
+            {errors.telefono && <p>{errors.telefono}</p>}
+          </div>
+
+          <div key={params.id}>
+            <label>E-MAIL </label>
+            <input
+              type="email"
+              required
+              name="mail"
+              value={input.mail}
+              onChange={(e) => handleChange(e)}
+            />{" "}
+            <span></span>
+            {errors.mail && <p>{errors.mail}</p>}
+          </div>
+
+          <div key={params.id}>
+            <label>FECHA DE NACIMIENTO </label>
+            <input
+              required
+              type="date"
+              name="nacimiento"
+              value={input.nacimiento}
+              placeholder="dd-mm-yyyy"
+              onChange={(e) => handleChange(e)}
+            />{" "}
+            <span></span>
+            {errors.nacimiento && <p>{errors.nacimiento}</p>}
+          </div>
+
+          <div key={params.id}>
+            <label>LOCALIDAD </label>
+            <input
+              type="text"
+              required
+              name="localidad"
+              value={input.localidad}
+              onChange={(e) => handleChange(e)}
+            />{" "}
+            <span></span>
+            {errors.localidad && <p>{errors.localidad}</p>}
+          </div>
+
+          <div key={params.id}>
+            <img
+              src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
+              id="user-photo"
+              alt="profile picture"
+              height="150"
+              width="150"
+            />
+
+            <button
+              id="btn-foto"
+              name="fotoPerfil"
+              onClick={(e) => handleOpenWidget(e)}
+            >
+              SELECCIONE FOTO DE PERFIL
+            </button>
+            <span></span>
+            {errors.fotoPerfil && <p>{errors.fotoPerfil}</p>}
+          </div>
+
+          <button className={stl.buttons} type="submit">
+            ACEPTAR
+          </button>
+        </form>
+      </div>
+
+      <Link to="/givepet">
+        <button className={stl.buttons}>CANCELAR</button>
+      </Link>
+
+      <Footer />
+    </div>
+  );
+}
