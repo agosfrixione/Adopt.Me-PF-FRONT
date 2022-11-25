@@ -14,7 +14,7 @@ export default function HomePerros () {
 
     const dispatch = useDispatch();
 
-    const allPets = useSelector((state) => state.animales);
+    const allPets = useSelector((state) => state.perros);
 
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(4)
@@ -33,9 +33,9 @@ export default function HomePerros () {
         }, [allPets.length, dispatch])
 
     return (
-        <div>
+        <div className={stl.paginaadopcionperros}>
             <NavBar />
-        <div>Listado de perros</div>
+        <div className={stl.tituloPerros}>Perros en Adopcion</div>
 
         <Paging 
         mascotasPerPage={mascotasPerPage} 

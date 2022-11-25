@@ -1,8 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
 
 .listadoCards {
-    border: 3px solid rgb(0, 13, 255);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     padding: 30px;
+}
+.tituloGatos {
+    font-family: 'Viga', sans-serif;
+    margin-top: 40px;
+    font-size: 45px;
+    color: #393E46;
+    text-shadow: 2px 2px rgb(38, 37, 37);
+}
+
+.paginaadopciongatos {
+    background-image: url("../../Imagenes/pisadas.jpg");
+    background-size:40%;
+    background-repeat: no-repeat;
+    background-position: -130px;
 }
