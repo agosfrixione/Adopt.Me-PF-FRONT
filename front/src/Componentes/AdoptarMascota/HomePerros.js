@@ -20,7 +20,7 @@ export default function HomePerros () {
 
     const lastPetIndex = currentPage * mascotasPerPage 
     const firstPetIndex = lastPetIndex - mascotasPerPage 
-    const currentVgames = alldogs.slice(firstPetIndex,lastPetIndex) 
+    const currentDogs = alldogs.slice(firstPetIndex,lastPetIndex) 
 
     const actualPage = (pageNumber) => {setCurrentPage(pageNumber)}
 
@@ -35,11 +35,17 @@ export default function HomePerros () {
             <NavBar />
         <div>Listado de perros</div>
 
-        <Paging mascotasPerPage={mascotasPerPage} alldogs={alldogs.length} currpage={currentPage} actualPage={actualPage}/>
+        <Paging 
+        mascotasPerPage={mascotasPerPage} 
+        alldogs={alldogs.length} 
+        currentPage={currentPage} 
+        actualPage={actualPage}
+        currentDogs={currentDogs}
+        />
 
         <div className={stl.listadoCards}> 
      
-        {currentVgames.length > 1 && currentVgames.map(p => {
+        {currentDogs.length > 1 && currentDogs.map(p => {
                    
             return (                                          
                   <Link to ={"/detailDog"}>
