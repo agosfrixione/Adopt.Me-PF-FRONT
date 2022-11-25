@@ -22,13 +22,14 @@ export default function HomePerros () {
     const firstPetIndex = lastPetIndex - mascotasPerPage 
     const currentDogs = alldogs.slice(firstPetIndex,lastPetIndex) 
 
+
     const actualPage = (pageNumber) => {setCurrentPage(pageNumber)}
 
-    useEffect(() => {
-        if (alldogs.length === 0) {
-            dispatch(getperros())
-        }
-    }, [alldogs.length, dispatch])
+        useEffect(() => {
+            if (alldogs.length === 0) {
+                dispatch(getperros())
+            }
+        }, [alldogs.length, dispatch])
 
     return (
         <div>
@@ -45,7 +46,9 @@ export default function HomePerros () {
 
         <div className={stl.listadoCards}> 
      
+
         {currentDogs.length > 1 && currentDogs.map(p => {
+
                    
             return (                                          
                   <Link to ={"/detailDog"}>
