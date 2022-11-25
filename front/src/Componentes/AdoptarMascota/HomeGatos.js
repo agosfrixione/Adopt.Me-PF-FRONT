@@ -15,7 +15,7 @@ const HomeGatos = () => {
     const allPets = useSelector((state)=> state.gatos);
 
     const [currentPage, setCurrentPage] = useState(1) 
-    const [mascotasPerPage] = useState(3)
+    const [mascotasPerPage] = useState(4)
 
     const lastPetIndex = currentPage * mascotasPerPage 
     const firstPetIndex = lastPetIndex - mascotasPerPage 

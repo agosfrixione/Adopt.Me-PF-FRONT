@@ -7,16 +7,17 @@ import stl from "./HomePerros.module.css";
 import NavBar from "../NavBar/NavBar";
 import Paging from "../Pagination/Pagination";
 import Footer from "../Footer/Footer";
+import getmascotas from "../../Actions/getmascotas";
 
 
 export default function HomePerros () {
 
     const dispatch = useDispatch();
 
-    const allPets = useSelector((state) => state.perros);
+    const allPets = useSelector((state) => state.animales);
 
     const [currentPage, setCurrentPage] = useState(1) 
-    const [mascotasPerPage] = useState(3)
+    const [mascotasPerPage] = useState(4)
 
     const lastPetIndex = currentPage * mascotasPerPage 
     const firstPetIndex = lastPetIndex - mascotasPerPage 
@@ -27,7 +28,7 @@ export default function HomePerros () {
 
         useEffect(() => {
             if (allPets.length === 0) {
-                dispatch(getperros())
+                dispatch(getmascotas())
             }
         }, [allPets.length, dispatch])
 
