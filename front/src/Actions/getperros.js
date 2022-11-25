@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {GET_PERRO} from '.';
 
-export default function getgato() {
+export default function getperro() {
     return async function (dispatch) {
       const perros = await axios.get("http://localhost:3001/animales/perro");
       console.log(perros)
