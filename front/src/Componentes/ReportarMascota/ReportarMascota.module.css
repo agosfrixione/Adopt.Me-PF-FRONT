@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Viga&display=swap");
+ @import url("https://fonts.googleapis.com/css2?family=Viga&display=swap");
 
 .maltrato {
   font-family: "Viga", sans-serif;
@@ -22,14 +22,13 @@
   color: #c82f08;
 }
 
-li {
-  /* border: 1px solid red; */
+/* li {
   width: 600px;
   margin-left: 430px;
   font-size: 20px;
   padding: 10px;
   list-style: none;
-}
+} */
 
 .boton {
   appearance: button;
@@ -70,4 +69,4 @@ li {
 .boton:focus {
   box-shadow: rgba(72, 35, 7, 0.46) 0 0 0 4px,
     -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
-}
+}   
