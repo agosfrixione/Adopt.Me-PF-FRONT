@@ -16,7 +16,7 @@ const HomeGatos = () => {
     useEffect(()=>{
         dispatch(getmascotas())
     }, [dispatch])
-
+    if(allCats.map(e=>e.perro === true))
     return (
 
         <div>
@@ -29,7 +29,7 @@ const HomeGatos = () => {
                     <Link to ={'detailCat'}>
                         <Card
                         id = {g.id}
-                        especie = {g.especie}
+                        perro = {g.perro}
                         nombre = {g.nombre}
                         localidad = {g.localidad}
                         imagen = {g.imagen}
