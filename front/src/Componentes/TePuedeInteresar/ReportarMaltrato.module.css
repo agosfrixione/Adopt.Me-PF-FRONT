@@ -23,13 +23,13 @@
     color: #c82f08;
 }
 
-li {
-    /* border: 1px solid red; */
-    width: 600px;
-    margin-left: 430px;
+ /* li {
+   
+     width: 600px; 
+     margin-left: 430px; 
     padding: 10px;
     list-style:none
-}
+}  */
 
 .boton {
     appearance: button;

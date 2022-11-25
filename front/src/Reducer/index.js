@@ -1,9 +1,11 @@
-import { CREATE_ANIMAL, CREATE_USER, GET_ANIMAL_BY_ID, GET_MASCOTAS, GET_USERS } from "../Actions";
+import { CREATE_ANIMAL, CREATE_USER, GET_ANIMAL_BY_ID, GET_GATO, GET_MASCOTAS, GET_PERRO, GET_USERS } from "../Actions";
 
 const initialState = {
    animales: [],
    animalesdetail: [],
-   users: []
+   users: [],
+   gatos: [],
+   perros: [],
 }
 
 export default function rootReducer(state = initialState, action){
@@ -31,6 +33,16 @@ export default function rootReducer(state = initialState, action){
             return {
                 ...state,
                 users: action.payload
+            }
+        case GET_GATO:
+            return{
+                ...state,
+                gatos: action.payload
+            };
+        case GET_PERRO:
+            return{
+                ...state,
+                perros: action.payload,
             }
 
         // case PAGO_PAYPAL:

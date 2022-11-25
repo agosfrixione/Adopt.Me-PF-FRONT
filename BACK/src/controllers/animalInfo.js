@@ -10,6 +10,28 @@ getAnimales = async (req, res) => {
   }
 };
 
+getPerros = async (req,res) => {  
+    try {
+    let animalitos = await AnimalModel.find({perro: true});
+    console.log(animalitos);           
+    if(animalitos.length) 
+    await res.status(200).json(animalitos)
+  } catch (error) {
+    res.status(400).json('UPS! no se encontraron perritos')    
+  }
+}
+
+getGatos = async (req,res) => {
+  try {
+    let animalitos1 = await AnimalModel.find({gato: true});
+    console.log(animalitos1);
+    if(animalitos1.length)
+    await res.status(200).json(animalitos1) 
+  } catch (error) {
+    res.status(400).json('UPS! No se encontraron gatitos')   
+  }
+}
+
 postAnimal = async (req, res) => {
   const animal = await AnimalModel(req.body);
   try {
@@ -42,7 +64,8 @@ getDetalleAnimal = async (req, res) => {
 putAnimal = async (req, res) => {
   const { id } = req.params; //es lo que buscamos
   const {
-    especie, //es lo que modificamos
+    perro,
+    gato,
     nombre,
     raza,
     edad,
@@ -60,7 +83,8 @@ putAnimal = async (req, res) => {
       { _id: id },
       {
         $set: {
-          especie,
+          perro,
+          gato,          
           nombre,
           raza,
           edad,

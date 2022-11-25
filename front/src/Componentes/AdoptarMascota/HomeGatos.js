@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { Link } from "react-router-dom";
-import getmascotas from "../../Actions/getmascotas";
+import getgato from "../../Actions/getgatos";
 import Card from "../Card/Card";
 import NavBar from "../NavBar/NavBar";
 import stl from './HomeGatos.module.css';
@@ -11,12 +11,12 @@ import stl from './HomeGatos.module.css';
 const HomeGatos = () => {
 
     const dispatch = useDispatch();
-    const allCats = useSelector((state)=> state.animales);
+    const allCats = useSelector((state)=> state.gatos);
 
     useEffect(()=>{
-        dispatch(getmascotas())
+        dispatch(getgato())
     }, [dispatch])
-
+    // if(allCats.map(e=>e.perro === true))
     return (
 
         <div>
@@ -29,7 +29,7 @@ const HomeGatos = () => {
                     <Link to ={'detailCat'}>
                         <Card
                         id = {g.id}
-                        especie = {g.especie}
+                        gato = {g.gato}
                         nombre = {g.nombre}
                         localidad = {g.localidad}
                         imagen = {g.imagen}
