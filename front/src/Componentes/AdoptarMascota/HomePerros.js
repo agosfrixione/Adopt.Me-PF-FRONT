@@ -20,15 +20,15 @@ export default function HomePerros () {
 
     const lastPetIndex = currentPage * mascotasPerPage 
     const firstPetIndex = lastPetIndex - mascotasPerPage 
-    const currentVgames = alldogs.slice(firstPetIndex,lastPetIndex) 
+    const currentPets = alldogs.slice(firstPetIndex,lastPetIndex) 
 
     const actualPage = (pageNumber) => {setCurrentPage(pageNumber)}
 
-    useEffect(() => {
-        if (alldogs.length === 0) {
-            dispatch(getperros())
-        }
-    }, [alldogs.length, dispatch])
+        useEffect(() => {
+            if (alldogs.length === 0) {
+                dispatch(getperros())
+            }
+        }, [alldogs.length, dispatch])
 
     return (
         <div>
@@ -39,7 +39,7 @@ export default function HomePerros () {
 
         <div className={stl.listadoCards}> 
      
-        {currentVgames.length > 1 && currentVgames.map(p => {
+        {currentPets.length > 1 && currentPets.map(p => {
                    
             return (                                          
                   <Link to ={"/detailDog"}>
