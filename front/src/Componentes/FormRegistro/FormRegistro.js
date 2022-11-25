@@ -22,11 +22,13 @@ export default function FormRegistro () {
         telefono:"",
         mail:"",
         nacimiento:"",
-        localidad:""
+        localidad:"",
+        fotoPerfil:""
     });
 
     const [errors, setErrors] = useState({});
     const [isSubmit, setisSubmit] = useState(true);
+    
 
     function validation(input) {
         let errors = {}
@@ -102,7 +104,8 @@ export default function FormRegistro () {
             telefono:"",
             mail:"",
             nacimiento:"",
-            localidad:""
+            localidad:"",
+            fotoPerfil:""
         }); // Reinicio el formulario
 
         dispatch(createuser(input))
@@ -122,6 +125,21 @@ export default function FormRegistro () {
         })                                  
         )
       }
+
+    function handleOpenWidget(e){
+      const imagen = document.querySelector('#user-photo')
+      var myWidget = window.cloudinary.createUploadWidget({
+        cloudName: 'dvw0vrnxp', 
+        uploadPreset: 'usuarios'}, (error, result) => { 
+          if (!error && result && result.event === "success") { 
+            // console.log('Done! Here is the image info: ', result.info);
+            imagen.src = result.info.secure_url;
+            setInput((prev) => ({ ...prev, [e.target.name]: result.info.secure_url }));
+          }
+        }
+      )
+      myWidget.open();
+    }
 
 
 
@@ -247,8 +265,24 @@ export default function FormRegistro () {
                   </div>
                   
                   <div key={params.id}>
-
-            </div>
+                  <img 
+                  src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
+                  id="user-photo"
+                  alt="profile picture" 
+                  height="150" 
+                  width="150"
+                  />
+                  
+                  <button
+                  id="btn-foto"
+                  name="fotoPerfil"
+                  onClick={(e) => handleOpenWidget(e)}
+                  >SELECCIONE FOTO DE PERFIL</button>
+                  <span></span>
+                  {errors.fotoPerfil && (
+                  <p>{errors.fotoPerfil}</p>
+                  )}
+                  </div>
 
                 <button className={stl.buttons} type="submit">ACEPTAR</button>
 
