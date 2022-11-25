@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
+import FloatingUI from "../Floating UI/FloatingUI";
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import stl from "../TePuedeInteresar/ReportarMaltrato.module.css";
@@ -12,6 +13,7 @@ export default function ReportarMaltrato () {
         <div className={stl.maltrato} key={params.id}>
             
             <NavBar />
+            <FloatingUI />
 
             <div>
             <h1 className={stl.titulo}>REPORTAR MALTRATO ANIMAL</h1>
