@@ -64,11 +64,10 @@ postAnimal = async (req, res) => {
       castrado,
       vacunado,
       imagen,        
-      })
-    
+      })    
       if (animales.length) await animales.save()
-      res.status(200).json(animales)
-      
+      const nuevoAnimal = await animales.save()      
+      res.status(200).json(nuevoAnimal)      
     
   } catch (error) {
     res.status(400).json({ msg: "no se creó el posteo" });
