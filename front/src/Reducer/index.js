@@ -50,6 +50,9 @@ export default function rootReducer(state = initialState, action){
             return {...state}
 
         case PAGO_MERCADO_PAGO:
+            return { ...state }
+        
+        case "signin":
             return {...state}
             
         default:

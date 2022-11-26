@@ -4,8 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import stl from "../FormSignIn/FormSignIn.module.css";
-
-import createuser from "../../Actions/createuser";
+import signinUser from "../../Actions/signinUser";
 
 export default function FormSignIn() {
   const params = useParams();
@@ -17,13 +16,6 @@ export default function FormSignIn() {
   const [input, setInput] = useState({
     usuario: "",
     contraseña: "",
-    repitaContraseña: "",
-    nombre: "",
-    telefono: "",
-    mail: "",
-    nacimiento: "",
-    localidad: "",
-    fotoPerfil: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -96,16 +88,10 @@ export default function FormSignIn() {
     let noRepeatMail = users.filter((u) => u.mail === input.mail);
 
     console.log("entro al else del handleSubmit");
-    dispatch(createuser(input));
+    dispatch(signinUser(input));
     setInput({
       usuario: "",
       contraseña: "",
-      repitaContraseña: "",
-      nombre: "",
-      telefono: "",
-      mail: "",
-      nacimiento: "",
-      localidad: "",
     });
 
     /*
