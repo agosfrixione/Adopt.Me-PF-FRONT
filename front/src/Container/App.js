@@ -16,7 +16,7 @@ import Donar from "../Componentes/Donacion/Donacion";
 import ReportarMascota from "../Componentes/ReportarMascota/ReportarMascota";
 import BuscarMascota from "../Componentes/BuscarMascota/BuscarMascota";
 import DetallePerro from "../Componentes/AdoptarMascota/DetallePerro";
-
+import FormDarEnAdopcion from "../Componentes/DonarMascota/formularioDar";
 
 function App() {
   return (
