@@ -1,14 +1,18 @@
 const express = require ('express');
-require('../BACK/src/db');
-const app = express ();
 const cors = require('cors')
 const animalRutas = require('../BACK/src/rutas/animales');
 const usuarioRutas = require('../BACK/src/rutas/usuarios');
 const pagosPayPalRutas = require('../BACK/src/rutas/pagosPayPal');
 const pagosMercadoPago = require('../BACK/src/rutas/mercadoPago');
-const morgan = require('morgan')
+const morgan = require('morgan');
 require('dotenv').config();
+const passport = require("passport");
+const session = require("express-session");
 
+//inicializacion
+const app = express ();
+require('../BACK/src/db');
+require("./src/passport/local-auth")
 
 app.use(cors());
 app.set ('port', process.env.PORT || 3001);
@@ -16,6 +20,13 @@ app.use(express.json());
 
 //middlewares
 app.use(morgan('dev'));
+app.use(session({
+    secret: "mysecretsession",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 app.use('/animales', animalRutas);

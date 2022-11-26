@@ -106,6 +106,7 @@ export default function FormRegistro() {
       mail: "",
       nacimiento: "",
       localidad: "",
+      fotoPerfil: "",
     });
 
     /*
