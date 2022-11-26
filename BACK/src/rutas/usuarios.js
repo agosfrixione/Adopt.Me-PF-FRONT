@@ -18,14 +18,17 @@ router.put("/:id", putUsuario);
 router.delete("/:id", deleteUsuario);
 
 
-router.get("/signup", (req, res) => {
-  res.render(/*view del formulario*/)
-})
-
 router.post("/signup", passport.authenticate("local-signup" /*, {
     successRedirect: "/usuarios/signin",
     failureRedirect: "/usuarios/signup",
     passReqToCallback: true,
 }*/));
+
+router.post("/signin", passport.authenticate("local-signin" /*, {
+  successRedirect: "/usuarios/signin",
+  failureRedirect: "/usuarios/signup",
+  passReqToCallback: true,
+}*/));
+
   
 module.exports = router;

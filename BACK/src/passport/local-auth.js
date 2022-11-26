@@ -1,4 +1,5 @@
 const passport = require("passport");
+
 const localStrategy = require("passport-local").Strategy;
 const User = require("../modelos/usuarios");
 
@@ -23,18 +24,74 @@ passport.use(
     },
     async (req, usuario, contraseña, done) => {
       console.log("entre al passport local-signup");
+
+      // Verificamos que el mail no este en uso
+      const userMail = await User.findOne({ mail: req.body.mail });
+      if (userMail) {
+        return done(
+          null,
+          false/*,
+          req.flash("signupMessage", "El mail ya esta en uso")*/
+        );
+      }
+
+      // Verificamos que el userName no este en uso
+      const userName = await User.findOne({ usuario: usuario });
+      if (userName) {
+        return done(
+          null,
+          false /*,
+          req.flash("signupMessage", "El mail ya esta en uso")*/
+        );
+      }
+
+      // Si no exisate un usuario con ese mail y ese userName, lo creamos
       const nuevoUsuario = new User();
       nuevoUsuario.usuario = usuario;
-      nuevoUsuario.contraseña = contraseña;
       nuevoUsuario.nombre = req.body.nombre;
       nuevoUsuario.telefono = req.body.telefono;
       nuevoUsuario.mail = req.body.mail;
       nuevoUsuario.nacimiento = req.body.nacimiento;
       nuevoUsuario.localidad = req.body.localidad;
       nuevoUsuario.fotoPerfil = req.body.fotoPerfil;
+      nuevoUsuario.contraseña = contraseña //nuevoUsuario.encryptPassword(contraseña); // encriptamos la contraseña antes de guardarla
       await nuevoUsuario.save();
-      console.log("usuario guardado");
-      done(null, nuevoUsuario);
+      console.log("Usuario guardado");
+      done(
+        null,
+        nuevoUsuario/*,
+        req.flash("signupMessage", "Usuario creado correctamente")*/
+      );
+    }
+  )
+);
+
+passport.use(
+  "local-signin",
+  new localStrategy(
+    {
+      usernameField: "usuario",
+      passwordField: "contraseña",
+      passReqToCallback: true,
+    },
+    async (req, usuario, contraseña, done) => {
+      const user = await User.findOne({ mail: req.body.mail });
+      if (!user) {
+        return done(
+          null,
+          false /*,
+          req.flash("signinMessage", "Usuario no encontrado")*/
+        );
+      }
+      if (!user.compararContraseña(contraseña)) {
+        // El compararContraseña revuelve un booleano, true si coincide, false si no.
+        return done(
+          null,
+          false/*,
+          req.flash("signinMessage", "Contraseña incorrecta")*/
+        );
+      }
+      done(null, user);
     }
   )
 );
