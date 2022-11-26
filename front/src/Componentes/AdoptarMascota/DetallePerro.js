@@ -2,72 +2,49 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import getmascotasbyid from "../../Actions/getmascotabyid";
+import { useParams } from "react-router-dom";
 
-export default function DetallePerro (id) {
 
+export default function DetallePerro (props) {
+    const {id} = useParams();
+    // console.log(id);
+    
     const dispatch = useDispatch();
-    const detail = useSelector((state) => state.animalesdetail) 
-    console.log("en el reducer", detail)
+    const detail = useSelector((state) => state.animalesdetail);
+   
+
 
     useEffect(() => {
         dispatch(getmascotasbyid(id))
-        console.log("este es el id:", id)
-    })
+        // console.log(id);                
+    }, [dispatch])
 
     return (
 
         <div>
+        <div>Detalle</div>
 
-        <div>Detalle de perro</div>
-
-        <img src={detail.imagen} alt=""/>
-
-        <div>
-            <h2>{detail.nombre}</h2>
+        <div >                   
+              <img>{detail.imagen}</img>
+              <h2>Mascota</h2>              
+              <h3>Nombre: {detail.nombre}</h3>
+              <h3>Localidad: {detail.localidad} </h3>              
+              <h3>Raza: {detail.raza}</h3>
+              <h3>Edad: {detail.edad}</h3>
+              <h3>Estado: {detail.estado}</h3>
+              <h3>Tamaño: {detail.tamaño}</h3>
+              <h3>Peso: {detail.peso}</h3>
+              <h3>Descripcion: {detail.descripcion}</h3>
+              <h3>Castrado: {detail.castrado}</h3>
+              <h3>Vacunado: {detail.vacunado}</h3>     
         </div>
-
-        <div>
-            <h2>{detail.raza}</h2>
-        </div>
-
-        <div>
-            <h2>{detail.edad}</h2>
-        </div>
-
-        <div>
-            <h2>{detail.estado}</h2>
-        </div>
-
-        <div>
-            <h2>{detail.tamaño}</h2>
-        </div>
-
-        <div>
-            <h2>{detail.peso}</h2>
-        </div>
-
-        <div>
-            <h2>{detail.localidad}</h2>
-        </div>
-
-        <div>
-            <h2>{detail.descripcion}</h2>
-        </div>
-
-        <div>
-            <h2>{detail.castrado}</h2>
-        </div>
-
-        <div>
-            <h2>{detail.vacunado}</h2>
-        </div>
-
 
 
         <Link to='/contacto'>
                 <button>ADOPTAR</button>
         </Link>
+
         </div>
 
-    )
-}
+    );
+};

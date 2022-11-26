@@ -3,6 +3,7 @@ import { CREATE_ANIMAL, CREATE_USER, GET_ANIMAL_BY_ID, GET_MASCOTAS, PAGO_PAYPAL
 const initialState = {
    animales: [],
    animalesdetail: [],
+//    animalesdetailgatos: [],
    users: [],
    gatos: [],
    perros: [],
@@ -27,7 +28,8 @@ export default function rootReducer(state = initialState, action){
             return {...state}
 
         case GET_ANIMAL_BY_ID:  
-            return { ...state, animalesdetail: action.payload }
+            return { ...state,
+                animalesdetail: action.payload }
 
         case GET_USERS:
             return {
@@ -45,6 +47,11 @@ export default function rootReducer(state = initialState, action){
                 ...state,
                 perros: action.payload,
             }
+        // case GET_GATO_BY_ID:
+        //     return{
+        //         ...state,
+        //         animalesdetailgatos: action.payload,
+        //     }
 
         case PAGO_PAYPAL:
             return {...state}

@@ -16,8 +16,7 @@ import Donar from "../Componentes/Donacion/Donacion";
 import ReportarMascota from "../Componentes/ReportarMascota/ReportarMascota";
 import BuscarMascota from "../Componentes/BuscarMascota/BuscarMascota";
 import DetallePerro from "../Componentes/AdoptarMascota/DetallePerro";
-import DetalleGato from "../Componentes/AdoptarMascota/DetalleGato";
-import FormDarEnAdopcion from "../Componentes/DonarMascota/formularioDar";
+
 
 function App() {
   return (
@@ -33,8 +32,7 @@ function App() {
           <Route exact path="/usuarios/signin" element={<FormSignIn />} />
           <Route exact path="/contacto" element={<DetalleAdopcion />} />
           <Route exact path="/confirmation" element={<Confirmacion />} />
-          <Route exact path="/detailDog" element={<DetallePerro />} />
-          <Route exact path="/detailCat" element={<DetalleGato />} />
+          <Route exact path="/animales/:id" element={<DetallePerro />} />       
           <Route exact path="/tepuedeinteresar" element={<TePuedeInteresar />} />
           <Route exact path="/reportarmaltrato" element={<ReportarMaltrato />} />
           <Route exact path="/directorio" element={<Directorio />} />

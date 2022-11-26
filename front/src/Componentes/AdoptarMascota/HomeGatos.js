@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import { Link } from "react-router-dom";
 import getgato from "../../Actions/getgatos";
-import Card from "../Card/Card";
+import CardGato from "../Card/CardGato";
 import NavBar from "../NavBar/NavBar";
 import Paging from "../Pagination/Pagination";
 import stl from './HomeGatos.module.css';
@@ -45,19 +44,20 @@ const HomeGatos = () => {
 
         <div className={stl.listadoCards}>
 
-            {currentPets.length > 1 && currentPets.map(g =>{
+
+            {currentPets.length > 0 && currentPets.map(g =>{
+
                 return(
-                    <Link to ={'/detailCat'}>
-                        <Card
-                        id = {g.id}
+                  
+                        <CardGato
+                        id = {g._id}
                         gato = {g.gato}
                         nombre = {g.nombre}
                         localidad = {g.localidad}
-                        imagen = {g.imagen}
-                        />
-                    </Link>
+                        />                  
                 )
             })}
+            
 
         </div>
 

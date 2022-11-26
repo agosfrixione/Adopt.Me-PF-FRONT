@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Link } from "react-router-dom";
+
 import Card from "../Card/Card";
 import stl from "./HomePerros.module.css";
 import NavBar from "../NavBar/NavBar";
@@ -9,6 +9,7 @@ import Paging from "../Pagination/Pagination";
 import Footer from "../Footer/Footer";
 
 import getperro from "../../Actions/getperros";
+
 
 
 export default function HomePerros () {
@@ -49,19 +50,21 @@ export default function HomePerros () {
         <div className={stl.listadoCards}> 
      
 
-        {currentPets.length > 1 && currentPets.map(p => {
+        {currentPets.length > 0 && currentPets.map(p => {
 
                    
             return (                                          
-                  <Link to ={"/detailDog"}>
-                     <Card 
-                     id={p.id}
+                
+                     <Card
+                     id={p._id}
                      perro = {p.perro}
                      nombre={p.nombre}
                      localidad={p.localidad}
                      imagen={p.imagen}
                      />
-                  </Link>                                          
+                    
+                
+                                                         
             )})     
                                   
         }
