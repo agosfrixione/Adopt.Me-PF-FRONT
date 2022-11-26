@@ -31,31 +31,31 @@ export default function NavBar() {
              <h4>Blog</h4>
   
              <div className="dropdown">
-      <p onClick={handleOpen}>Info</p>
+      <div className="info" onClick={handleOpen}>Info</div>
       {open ? (
-        <ul className="menu">
-          <li className="menu-item">
+        <div className="menu">
+          <div className="menu-item">
             <Link to = "/givepet">
-            <p className="drop">Donar Mascota</p>
+            <div className="drop">Donar Mascota</div>
             </Link>
-          </li>
-          <li className="menu-item">
+          </div>
+          <div className="menu-item">
             <Link to = "/buscarmascota">
-            <p className="drop">Mascota Perdida</p>
+            <div className="drop">Mascota Perdida</div>
             </Link>
-          </li>
-          <li className="menu-item">
+          </div>
+          <div className="menu-item">
           <Link to = "/reportarmaltrato">
-            <p className="drop">Denunciar Maltrato</p>
+            <div className="drop">Denunciar Maltrato</div>
             </Link>
-          </li>
-          <li className="menu-item">
+          </div>
+          <div className="menu-item">
           <Link to = "/tepuedeinteresar">
-            <p className="drop">Otras Cosas</p>
+            <div className="drop">Otras Cosas</div>
             </Link>
-          </li>
+          </div>
           
-        </ul>
+        </div>
       ) : null}
       {open ? <div></div> : <div></div>}
     </div>

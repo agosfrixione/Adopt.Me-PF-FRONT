@@ -31,7 +31,7 @@ const HomeGatos = () => {
     // if(allPets.map(e=>e.perro === true))
     return (
 
-        <div className={stl.paginaadopciongatoss}>
+        <div className={stl.paginaadopcionperros}>
             <NavBar/>
         <div className={stl.tituloGatos}>Gatos en Adopcion</div>
 

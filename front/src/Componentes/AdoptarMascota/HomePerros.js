@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import getperros from "../../Actions/getperros";
+
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import stl from "./HomePerros.module.css";
 import NavBar from "../NavBar/NavBar";
 import Paging from "../Pagination/Pagination";
 import Footer from "../Footer/Footer";
-import getmascotas from "../../Actions/getmascotas";
+
+import getperro from "../../Actions/getperros";
 
 
 export default function HomePerros () {
@@ -28,7 +29,7 @@ export default function HomePerros () {
 
         useEffect(() => {
             if (allPets.length === 0) {
-                dispatch(getmascotas())
+                dispatch(getperro())
             }
         }, [allPets.length, dispatch])
 
