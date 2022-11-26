@@ -3,7 +3,7 @@ import React from "react";
 import "./Card.css";
 import { Link } from "react-router-dom";
 
-export default function Card({ nombre, raza, localidad,id, perro }) {
+export default function CardGato({ nombre, raza, localidad,id, gato}) {
 
   return (
     <div class="cardstodas">
@@ -11,7 +11,7 @@ export default function Card({ nombre, raza, localidad,id, perro }) {
   <div class="viendo">
     <div href="" class="card">
             <Link to = {`/animales/${id}`}>
-      <img src="https://t1.ea.ltmcdn.com/es/posts/2/6/8/la_presentacion_de_un_perro_y_un_gato_adultos_21862_1_600.jpg" class="card__image" alt="" />
+      <img src="https://th.bing.com/th/id/OIP.1TmhCNzC-HzF9FW8y6R7AgHaFj?pid=ImgDet&rs=1" class="card__image" alt="" />
             </Link>
       <div class="card__overlay">
         <div class="card__header">
@@ -20,7 +20,7 @@ export default function Card({ nombre, raza, localidad,id, perro }) {
           <div class="card__header-text">
             <div class="card__title">{nombre}</div>            
             <div class="card__status">{raza}</div>
-            <div>{perro}</div>
+            <div>{gato}</div>
             {/* <div>{id}</div> */}
           </div>
         </div>
