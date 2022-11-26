@@ -54,7 +54,7 @@ passport.use(
       nuevoUsuario.nacimiento = req.body.nacimiento;
       nuevoUsuario.localidad = req.body.localidad;
       nuevoUsuario.fotoPerfil = req.body.fotoPerfil;
-      nuevoUsuario.contraseña = contraseña //nuevoUsuario.encryptPassword(contraseña); // encriptamos la contraseña antes de guardarla
+      nuevoUsuario.contraseña = await nuevoUsuario.encryptPassword(contraseña); // encriptamos la contraseña antes de guardarla
       await nuevoUsuario.save();
       console.log("Usuario guardado");
       done(
