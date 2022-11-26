@@ -1,3 +1,4 @@
+const { isObjectIdOrHexString } = require("mongoose");
 const AnimalModel = require("../modelos/animales");
 const infoAnimal = {};
 
@@ -34,7 +35,8 @@ getGatos = async (req,res) => {
 
 postAnimal = async (req, res) => {
   try {
-    const {      
+    const {  
+      _id: _id,    
       perro,
       gato,
       nombre,
@@ -50,7 +52,7 @@ postAnimal = async (req, res) => {
       imagen,} = req.body;
 
       const animales = await new AnimalModel({
-      
+      _id: _id,
       perro,
       gato,
       nombre,
@@ -77,9 +79,11 @@ postAnimal = async (req, res) => {
 getDetalleAnimal = async (req, res) => {
   try {
     const { id } = req.params;
-    let anmId = await AnimalModel.findById( id );
+    console.log({id});
+    let anmId = await AnimalModel.findById(id); 
     console.log(anmId);
-    if (anmId) return res.status(200).json(anmId);   
+    res.status(200).send(anmId);
+    
   } catch (error) {
     res.status(400).json(`no encontrado`);
   }
