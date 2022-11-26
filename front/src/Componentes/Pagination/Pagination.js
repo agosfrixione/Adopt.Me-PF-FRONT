@@ -14,6 +14,9 @@ export default function Paging({mascotasPerPage, allPets, actualPage, currentPag
     return (
         <nav>
             <div className={stl.pagination}>
+              <button className={stl.buttonpaging} onClick={() => actualPage(pageNumbers.at(0))}>
+              ⬅⬅
+              </button>
             <button
                 className={stl.buttonpaging}
                 disabled={currentPage <= 1 ? true : false}
@@ -34,11 +37,13 @@ export default function Paging({mascotasPerPage, allPets, actualPage, currentPag
                 })}
                 <button
                 className={stl.buttonpaging}
-                disabled={currentPets.length < mascotasPerPage ? true : false}
+                disabled={currentPage === pageNumbers.at(-1) ? true : false}
                 onClick={() => actualPage(currentPage + 1)}
               >
                 ⮕
               </button>
+              <button className={stl.buttonpaging} onClick={() => actualPage(pageNumbers.at(-1))}>
+              ⮕⮕</button>
             </div>  
 
         </nav>        

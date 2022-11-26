@@ -11,7 +11,8 @@ import stl from './HomeGatos.module.css';
 const HomeGatos = () => {
 
     const dispatch = useDispatch();
-    const allPets = useSelector((state)=> state.gatos);
+
+    const allPets = useSelector((state) => state.gatos);
 
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(4)
@@ -29,11 +30,11 @@ const HomeGatos = () => {
     // if(allPets.map(e=>e.perro === true))
     return (
 
-        <div>
+        <div className={stl.paginaadopcionperros}>
             <NavBar/>
-        <div>Listado de Gatos ♥</div>
+        <div className={stl.tituloGatos}>Gatos en Adopcion</div>
 
-        <Paging
+       <Paging 
         mascotasPerPage={mascotasPerPage} 
         allPets={allPets.length} 
         currentPage={currentPage} 
@@ -43,7 +44,9 @@ const HomeGatos = () => {
 
         <div className={stl.listadoCards}>
 
+
             {currentPets.length > 0 && currentPets.map(g =>{
+
                 return(
                   
                         <CardGato

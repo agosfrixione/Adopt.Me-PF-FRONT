@@ -1,61 +1,58 @@
 import React, { useState } from "react";
 import stl from "../NavBar/NavBar.module.css";
-import DayNightToggle from 'react-day-and-night-toggle';
+import DayNightToggle from "react-day-and-night-toggle";
 import "./darkmode.css";
 import "./dropdown.css";
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
+  const [darkTheme, setDarkTheme] = useState(false);
 
-    const [darkTheme, setDarkTheme] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
-    const [open, setOpen] = React.useState(false);
-
-    const handleOpen = () => {
-      setOpen(!open);
+  const handleOpen = () => {
+    setOpen(!open);
   };
 
-    return (
+  return (
+    
+    <div className={darkTheme ? "dark-theme" : "light-theme"}>
+      <div className={stl.navbar}></div>
 
-        <div className={darkTheme ? 'dark-theme' : 'light-theme'}>
-        <div className={stl.navbar}>
-        </div>
-            
-        <div className={stl.logo2}></div>
-            <Link to = "/homepage">
-             <p className={stl.logo}>Adopt.Me</p>
-             </Link>
-             
+      <div className={stl.logo2}></div>
+      <Link to="/homepage">
+        <p className={stl.logo}>Adopt.Me</p>
+      </Link>
 
         <div className={stl.algomas}>
              <h4>Blog</h4>
   
              <div className="dropdown">
-      <p onClick={handleOpen}>Info</p>
+      <div className="info" onClick={handleOpen}>Info</div>
       {open ? (
-        <ul className="menu">
-          <li className="menu-item">
+        <div className="menu">
+          <div className="menu-item">
             <Link to = "/givepet">
-            <p className="drop">Donar Mascota</p>
+            <div className="drop">Donar Mascota</div>
             </Link>
-          </li>
-          <li className="menu-item">
+          </div>
+          <div className="menu-item">
             <Link to = "/buscarmascota">
-            <p className="drop">Mascota Perdida</p>
+            <div className="drop">Mascota Perdida</div>
             </Link>
-          </li>
-          <li className="menu-item">
+          </div>
+          <div className="menu-item">
           <Link to = "/reportarmaltrato">
-            <p className="drop">Denunciar Maltrato</p>
+            <div className="drop">Denunciar Maltrato</div>
             </Link>
-          </li>
-          <li className="menu-item">
+          </div>
+          <div className="menu-item">
           <Link to = "/tepuedeinteresar">
-            <p className="drop">Otras Cosas</p>
+            <div className="drop">Otras Cosas</div>
             </Link>
-          </li>
+          </div>
           
-        </ul>
+        </div>
       ) : null}
       {open ? <div></div> : <div></div>}
     </div>
@@ -65,17 +62,14 @@ export default function NavBar() {
             />
         </div>
       
-
-        <div className={stl.login}>
-          <Link to = "/sigup">      
-             <button className={stl.buttons}>Registrarse</button>
-             </Link>
-            <button className={stl.buttons}>Log In</button>
-        </div>
-
-
-     </div>
-     
-
-    )
+      <div className={stl.login}>
+        <Link to="/usuarios/signup">
+          <button className={stl.buttons}>Registrarse</button>
+        </Link>
+        <Link to="/usuarios/signin">
+          <button className={stl.buttons}>Ingresar</button>
+        </Link>
+      </div>
+    </div>
+  );
 }

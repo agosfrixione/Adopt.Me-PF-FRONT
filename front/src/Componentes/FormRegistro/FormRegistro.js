@@ -50,7 +50,7 @@ export default function FormRegistro() {
 
     if (!input.repitaContraseña) {
       errors.repitaContraseña = "Tenes que repetir la contraseña";
-    } else if (input.repitaContraseña != input.contraseña) {
+    } else if (input.repitaContraseña !== input.contraseña) {
       errors.repitaContraseña = "Las contraseñas no coincide";
     }
 
@@ -88,14 +88,16 @@ export default function FormRegistro() {
     return errors;
   }
 
+
   function handleSubmit(e) {
-    console.log("entro al handlesubmit");
+    console.log("Formulario recibido estos son los input:" + input);
 
     e.preventDefault();
     let noRepeatUser = users.filter((u) => u.usuario === input.usuario);
     let noRepeatMail = users.filter((u) => u.mail === input.mail);
 
-    console.log("entro al else del handleSubmit");
+    console.log(input);
+    console.log("Voy a despachar la action con esos datos");
     dispatch(createuser(input));
     setInput({
       usuario: "",
@@ -106,7 +108,10 @@ export default function FormRegistro() {
       mail: "",
       nacimiento: "",
       localidad: "",
-    });
+      fotoPerfil: "",
+    })
+    navigate('/confirmation')
+  }
 
     /*
     if (noRepeatUser.length) {
@@ -144,7 +149,6 @@ export default function FormRegistro() {
         }); // Reinicio el formulario
       }
       */
-  }
 
   /*
     navigate("/confirmation");*/
@@ -159,8 +163,8 @@ export default function FormRegistro() {
         [e.target.name]: [e.target.value],
       })
     );
-    /*
-      navigate('/confirmation')*/
+    
+    
   }
 
   function handleOpenWidget(e) {
@@ -189,7 +193,11 @@ export default function FormRegistro() {
       <NavBar />
 
       <div className={stl.form} key={params.id}>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form
+          onSubmit={(e) => handleSubmit(e)}
+          action="/usuarios/signup"
+          method="POST"
+        >
           <div key={params.id}>
             <label>NOMBRE DE USUARIO </label>
             <input
@@ -297,7 +305,7 @@ export default function FormRegistro() {
             <img
               src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
               id="user-photo"
-              alt="profile picture"
+              alt=""
               height="150"
               width="150"
             />
@@ -325,6 +333,5 @@ export default function FormRegistro() {
 
       <Footer />
     </div>
-    
   );
 }

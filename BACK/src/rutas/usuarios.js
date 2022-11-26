@@ -3,7 +3,9 @@ require("../db");
 const UsuarioModel = require("../modelos/usuarios");
 const router = express.Router();
 const infoUser = require("../controllers/userInfo");
-const flash = require('connect-flash');
+const flash = require("connect-flash");
+const passport = require("passport");
+const { setRandomFallback } = require("bcryptjs");
 
 router.post("/", postUsuario);
 
@@ -15,43 +17,21 @@ router.put("/:id", putUsuario);
 
 router.delete("/:id", deleteUsuario);
 
-router.post("/sigup", async (req, res) => {
-    console.log(req.body)
-    const { nombre, mail, contraseña, repitaContraseña, usuario, telefono, nacimiento, localidad} = req.body;
-    const errors = [];
+router.post("/signup", passport.authenticate("local-signup" , {
+    successRedirect: "http://localhost:3000/usuarios/signin",
+    failureRedirect: "http://localhost:3000/homepage",
+    passReqToCallback: true,
+}));
 
-    // Checkeamos que no envien el formulario con un campo obligatorio vacio
-    if (nombre.length <= 0 || mail.length <= 0 || contraseña.length <= 0 || repitaContraseña.length <= 0 || usuario.length <= 0) { 
-        errors.push({text: "Por favor completa los campos obligatorios"})
-    }
-   
-    // Checkeamos que las contraseñas coincidan y q sea mayor a 4 digitos
-    if (contraseña != repitaContraseña) {
-        errors.push({ text: "Las contraseñas no coinciden" })
-    }
-    if (contraseña.length < 4) {
-        errors.push({ text: "La contraseña debe contener por lo menos 4 caracteres" })
-    }
+router.post("/signin", passport.authenticate("local-signin" /*, {
+  successRedirect: "/usuarios/signin",
+  failureRedirect: "/usuarios/signup",
+  passReqToCallback: true,
+}*/));
 
-    //renderizar el formulario con los errores , sino confirma la creacion.
-    if (errors.length > 0) {
-        res.render("/usuarios/sigup", { errors, nombre, mail, contraseña, repitaContraseña })
-        //Cuando haya un error y renderice con los datos que ya escribio el usuario y no se vuelva a renderizar el formulario vacio, hay q agregarle el value a los imputs
-    } else { 
-        const mailUser = await UsuarioModel.findOne({ mail: mail })
-        if (mailUser) {
-            /*req.flash("error_msg", "El mail ya esta en uso") */    // HAY QUE ENVIAR ERROR ANTES DE REDIRIGIR
-            /*res.redirect("/usuarios/sigup")*/  // HAY Q REDIRIGIRLO
-        }
-
-        const nuevoUsuario = new UsuarioModel({ nombre, mail, contraseña, usuario, telefono, localidad, nacimiento }) // llenamos los datos del usuario
-        nuevoUsuario.contraseña = await nuevoUsuario.encryptPassword(contraseña) // cambiamos la contraseña normal por la hasheada
-        await nuevoUsuario.save() // lo guardamos
-        /*req.flash("succes_msg","Usuario registrado correctamente") */   // HAY QUE INDICAR QUE SE CREO EXITOSAMENTE ANTES DE REDIRIGIR
-        /* res.redirect("/homepage") */   // deberiamos redirigirlo al /signIn
-        console.log("Usuario creado exitosamente:" + nuevoUsuario)
-    }
-    
+router.get("/logout", (req, res) => {
+  req.logOut();
+  res.redirect("/")
 })
-
+  
 module.exports = router;

@@ -11,6 +11,7 @@ getUsuarios = async (req, res) => {
 };
 
 postUsuario = async (req, res) => {
+  console.log(req.body)
   const user = await UsuarioModel(req.body);
   try {
     if (user) {

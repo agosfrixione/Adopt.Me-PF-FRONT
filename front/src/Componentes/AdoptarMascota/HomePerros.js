@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+
 import Card from "../Card/Card";
 import stl from "./HomePerros.module.css";
 import NavBar from "../NavBar/NavBar";
 import Paging from "../Pagination/Pagination";
 import Footer from "../Footer/Footer";
-import getmascotas from "../../Actions/getmascotas";
+
+import getperro from "../../Actions/getperros";
 
 
 
@@ -13,7 +16,7 @@ export default function HomePerros () {
 
     const dispatch = useDispatch();
 
-    const allPets = useSelector((state) => state.animales);
+    const allPets = useSelector((state) => state.perros);
 
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(4)
@@ -27,14 +30,14 @@ export default function HomePerros () {
 
         useEffect(() => {
             if (allPets.length === 0) {
-                dispatch(getmascotas())
+                dispatch(getperro())
             }
         }, [allPets.length, dispatch])
 
     return (
-        <div>
+        <div className={stl.paginaadopcionperros}>
             <NavBar />
-        <div>Listado de perros</div>
+        <div className={stl.tituloPerros}>Perros en Adopcion</div>
 
         <Paging 
         mascotasPerPage={mascotasPerPage} 
