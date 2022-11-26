@@ -6,6 +6,7 @@ import HomePerros from "../Componentes/AdoptarMascota/HomePerros";
 import HomeGatos from "../Componentes/AdoptarMascota/HomeGatos";
 import InfoProceso from "../Componentes/DonarMascota/InfoProceso";
 import FormRegistro from "../Componentes/FormRegistro/FormRegistro";
+import FormSignIn from "../Componentes/FormSignIn/FormSingIn";
 import DetalleAdopcion from "../Componentes/AdoptarMascota/DetalleAdopcion";
 import Confirmacion from "../Componentes/FormRegistro/Confirmacion";
 import TePuedeInteresar from "../Componentes/TePuedeInteresar/TePuedeInteresar";
@@ -27,13 +28,22 @@ function App() {
           <Route exact path="/adoptcat" element={<HomeGatos />} />
           <Route exact path="/adoptdog" element={<HomePerros />} />
           <Route exact path="/givepet" element={<InfoProceso />} />
-          <Route exact path="/sigup" element={<FormRegistro />} />
+          <Route exact path="/usuarios/signup" element={<FormRegistro />} />
+          <Route exact path="/usuarios/signin" element={<FormSignIn />} />
           <Route exact path="/contacto" element={<DetalleAdopcion />} />
           <Route exact path="/confirmation" element={<Confirmacion />} />
           <Route exact path="/detailDog" element={<DetallePerro />} />
           <Route exact path="/detailCat" element={<DetalleGato />} />
-          <Route exact path="/tepuedeinteresar" element={<TePuedeInteresar />} />
-          <Route exact path="/reportarmaltrato" element={<ReportarMaltrato />} />
+          <Route
+            exact
+            path="/tepuedeinteresar"
+            element={<TePuedeInteresar />}
+          />
+          <Route
+            exact
+            path="/reportarmaltrato"
+            element={<ReportarMaltrato />}
+          />
           <Route exact path="/directorio" element={<Directorio />} />
           <Route exact path="/donation" element={<Donar />} />
           <Route exact path="/reportarmascota" element={<ReportarMascota />} />

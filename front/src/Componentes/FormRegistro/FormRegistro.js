@@ -89,13 +89,14 @@ export default function FormRegistro() {
   }
 
   function handleSubmit(e) {
-    console.log("entro al handlesubmit");
+    console.log("Formulario recibido estos son los input:" + input);
 
     e.preventDefault();
     let noRepeatUser = users.filter((u) => u.usuario === input.usuario);
     let noRepeatMail = users.filter((u) => u.mail === input.mail);
 
-    console.log("entro al else del handleSubmit");
+    console.log(input);
+    console.log("Voy a despachar la action con esos datos");
     dispatch(createuser(input));
     setInput({
       usuario: "",
@@ -106,6 +107,7 @@ export default function FormRegistro() {
       mail: "",
       nacimiento: "",
       localidad: "",
+      fotoPerfil: "",
     });
 
     /*
@@ -189,7 +191,11 @@ export default function FormRegistro() {
       <NavBar />
 
       <div className={stl.form} key={params.id}>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form
+          onSubmit={(e) => handleSubmit(e)}
+          action="/usuarios/signup"
+          method="POST"
+        >
           <div key={params.id}>
             <label>NOMBRE DE USUARIO </label>
             <input
@@ -325,6 +331,5 @@ export default function FormRegistro() {
 
       <Footer />
     </div>
-    
   );
 }
