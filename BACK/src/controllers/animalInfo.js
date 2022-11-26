@@ -81,7 +81,7 @@ getDetalleAnimal = async (req, res) => {
     console.log(anmId);
     if (anmId) return res.status(200).json(anmId);   
   } catch (error) {
-    res.status(400).json(`${id}no encontrado`);
+    res.status(400).json(`no encontrado`);
   }
 };
 
