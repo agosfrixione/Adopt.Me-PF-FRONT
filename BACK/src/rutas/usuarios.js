@@ -17,12 +17,11 @@ router.put("/:id", putUsuario);
 
 router.delete("/:id", deleteUsuario);
 
-
-router.post("/signup", passport.authenticate("local-signup" /*, {
-    successRedirect: "/usuarios/signin",
-    failureRedirect: "/usuarios/signup",
+router.post("/signup", passport.authenticate("local-signup" , {
+    successRedirect: "http://localhost:3000/usuarios/signin",
+    failureRedirect: "http://localhost:3000/homepage",
     passReqToCallback: true,
-}*/));
+}));
 
 router.post("/signin", passport.authenticate("local-signin" /*, {
   successRedirect: "/usuarios/signin",
@@ -30,5 +29,9 @@ router.post("/signin", passport.authenticate("local-signin" /*, {
   passReqToCallback: true,
 }*/));
 
+router.get("/logout", (req, res) => {
+  req.logOut();
+  res.redirect("/")
+})
   
 module.exports = router;
