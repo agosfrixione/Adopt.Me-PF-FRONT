@@ -1,24 +1,24 @@
 import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
-// import getmascotasbyid from "../../Actions/getmascotabyid";
+import getmascotasbyid from "../../Actions/getmascotabyid";
 
 export default function DetallePerro (id) {
 
-    // const dispatch = useDispatch();
-    // const detail = useSelector((state) => state.animalesdetail) 
-    // console.log("en el reducer", detail)
+    const dispatch = useDispatch();
+    const detail = useSelector((state) => state.animalesdetail) 
+    console.log("en el reducer", detail)
 
-    // useEffect(() => {
-    //     dispatch(getmascotasbyid(id))
-    //     console.log("este es el id:", id)
-    // })
+    useEffect(() => {
+        dispatch(getmascotasbyid(id))
+        console.log("este es el id:", id)
+    })
 
     return (
 
         <div>
 
-        {/* <div>Detalle de perro</div>
+        <div>Detalle de perro</div>
 
         <img src={detail.imagen} alt=""/>
 
@@ -60,7 +60,7 @@ export default function DetallePerro (id) {
 
         <div>
             <h2>{detail.vacunado}</h2>
-        </div> */}
+        </div>
 
 
 

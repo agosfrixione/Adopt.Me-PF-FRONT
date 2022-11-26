@@ -37,7 +37,7 @@ export default function Paging({mascotasPerPage, allPets, actualPage, currentPag
                 })}
                 <button
                 className={stl.buttonpaging}
-                disabled={currentPets.length < mascotasPerPage ? true : false}
+                disabled={currentPage === pageNumbers.at(-1) ? true : false}
                 onClick={() => actualPage(currentPage + 1)}
               >
                 ⮕
