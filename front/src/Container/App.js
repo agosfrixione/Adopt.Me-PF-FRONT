@@ -28,8 +28,8 @@ function App() {
           <Route exact path="/adoptcat" element={<HomeGatos />} />
           <Route exact path="/adoptdog" element={<HomePerros />} />
           <Route exact path="/givepet" element={<InfoProceso />} />
-          <Route exact path="/signup" element={<FormRegistro />} />
-          <Route exact path="/signin" element={<FormSignIn />} />
+          <Route exact path="/usuarios/signup" element={<FormRegistro />} />
+          <Route exact path="/usuarios/signin" element={<FormSignIn />} />
           <Route exact path="/contacto" element={<DetalleAdopcion />} />
           <Route exact path="/confirmation" element={<Confirmacion />} />
           <Route exact path="/detailDog" element={<DetallePerro />} />

@@ -13,17 +13,17 @@ const session = require("express-session");
 const app = express ();
 require('../BACK/src/db');
 require("./src/passport/local-auth")
-
 app.use(cors());
-app.set ('port', process.env.PORT || 3001);
+app.set ('port', process.env.PORT || 3001 );
 app.use(express.json());
 
 //middlewares
 app.use(morgan('dev'));
+app.use(express.urlencoded({extended: false}))
 app.use(session({
     secret: "mysecretsession",
-    resave: false,
-    saveUninitialized: false
+    resave: true,
+    saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());

@@ -61,10 +61,10 @@ export default function NavBar() {
       </div>
 
       <div className={stl.login}>
-        <Link to="/signup">
+        <Link to="/usuarios/signup">
           <button className={stl.buttons}>Registrarse</button>
         </Link>
-        <Link to="/signin">
+        <Link to="/usuarios/signin">
           <button className={stl.buttons}>Ingresar</button>
         </Link>
       </div>

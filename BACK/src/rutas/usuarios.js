@@ -5,6 +5,7 @@ const router = express.Router();
 const infoUser = require("../controllers/userInfo");
 const flash = require("connect-flash");
 const passport = require("passport");
+const { setRandomFallback } = require("bcryptjs");
 
 router.post("/", postUsuario);
 
@@ -16,13 +17,15 @@ router.put("/:id", putUsuario);
 
 router.delete("/:id", deleteUsuario);
 
-router.post(
-  "/signup",
-  passport.authenticate("local-signup", {
-    successRedirect: "/homepage",
-    failureRedirect: "/homepage",
-    passReqToCallback: true,
-  })
-);
 
+router.get("/signup", (req, res) => {
+  res.render(/*view del formulario*/)
+})
+
+router.post("/signup", passport.authenticate("local-signup" /*, {
+    successRedirect: "/usuarios/signin",
+    failureRedirect: "/usuarios/signup",
+    passReqToCallback: true,
+}*/));
+  
 module.exports = router;
