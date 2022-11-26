@@ -15,6 +15,7 @@ export default function NavBar() {
   };
 
   return (
+    
     <div className={darkTheme ? "dark-theme" : "light-theme"}>
       <div className={stl.navbar}></div>
 
@@ -61,42 +62,6 @@ export default function NavBar() {
             />
         </div>
       
-
-
-        <div className="dropdown">
-          <p onClick={handleOpen}>Info</p>
-          {open ? (
-            <ul className="menu">
-              <li className="menu-item">
-                <Link to="/givepet">
-                  <p className="drop">Donar Mascota</p>
-                </Link>
-              </li>
-              <li className="menu-item">
-                <Link to="/buscarmascota">
-                  <p className="drop">Mascota Perdida</p>
-                </Link>
-              </li>
-              <li className="menu-item">
-                <Link to="/reportarmaltrato">
-                  <p className="drop">Denunciar Maltrato</p>
-                </Link>
-              </li>
-              <li className="menu-item">
-                <Link to="/tepuedeinteresar">
-                  <p className="drop">Otras Cosas</p>
-                </Link>
-              </li>
-            </ul>
-          ) : null}
-          {open ? <div></div> : <div></div>}
-        </div>
-        <DayNightToggle
-          onChange={() => setDarkTheme(!darkTheme)}
-          checked={darkTheme}
-        />
-      </div>
-
       <div className={stl.login}>
         <Link to="/usuarios/signup">
           <button className={stl.buttons}>Registrarse</button>
