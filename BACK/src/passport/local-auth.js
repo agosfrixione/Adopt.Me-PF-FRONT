@@ -14,6 +14,8 @@ passport.deserializeUser(async (id, done) => {
   done(null, usuario);
 });
 
+
+
 passport.use(
   "local-signup",
   new localStrategy(
@@ -66,6 +68,8 @@ passport.use(
   )
 );
 
+
+
 passport.use(
   "local-signin",
   new localStrategy(
@@ -75,7 +79,10 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, usuario, contraseña, done) => {
-      const user = await User.findOne({ mail: req.body.mail });
+      console.log("entre al passport local-signIn");
+
+      // Verificamos que el usuario exista
+      const user = await User.findOne({ usuario: usuario });
       if (!user) {
         return done(
           null,
@@ -83,6 +90,8 @@ passport.use(
           req.flash("signinMessage", "Usuario no encontrado")*/
         );
       }
+
+      // Verificamos que las contraseñas coincidan
       if (!user.compararContraseña(contraseña)) {
         // El compararContraseña revuelve un booleano, true si coincide, false si no.
         return done(
@@ -91,6 +100,7 @@ passport.use(
           req.flash("signinMessage", "Contraseña incorrecta")*/
         );
       }
+      console.log("Ingreso exitoso");
       done(null, user);
     }
   )

@@ -93,21 +93,6 @@ export default function FormRegistro() {
     let noRepeatUser = users.filter((u) => u.usuario === input.usuario);
     let noRepeatMail = users.filter((u) => u.mail === input.mail);
 
-    console.log("OK. Formulario recibido. Despacho la action con estos datos:");
-    console.log(input);
-    dispatch(createuser(input));
-    setInput({
-      usuario: "",
-      contraseña: "",
-      repitaContraseña: "",
-      nombre: "",
-      telefono: "",
-      mail: "",
-      nacimiento: "",
-      localidad: "",
-      fotoPerfil: "",
-    });
-
     if (noRepeatUser.length) {
       errors.usuario = `El nombre de usuario ${input.usuario} no está disponible`;
     } else if (noRepeatMail.length) {
