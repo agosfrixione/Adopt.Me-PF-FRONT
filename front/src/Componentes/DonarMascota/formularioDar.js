@@ -45,8 +45,8 @@ function validation(input){
  const dispatch = useDispatch();
 
  const [input, setInput] = useState({
-        perro: "",
-        gato: "",
+        perro: true,
+        gato: true,
         nombre: "",
         raza: "",
         edad: "",
@@ -55,8 +55,8 @@ function validation(input){
         peso: "",
         localidad: "",
         descripcion: "",
-        castrado: "",
-        vacunado: ""
+        castrado: true,
+        vacunado: true
       });
       
   const [errors, setErrors] = useState({});
@@ -69,8 +69,8 @@ function validation(input){
     alert("Mascota Agregada");
 
     setInput({
-        perro: "",
-        gato: "",
+        perro: true,
+        gato: true,
         nombre: "",
         raza: "",
         edad: "",
@@ -79,8 +79,8 @@ function validation(input){
         peso: "",
         localidad: "",
         descripcion: "",
-        castrado: "",
-        vacunado: ""
+        castrado: true,
+        vacunado: true
     })
 
     navigate("/homepage")
@@ -103,10 +103,26 @@ function validation(input){
   }
 
   const [isChecked, setIsChecked] = useState(false);
+  const [isChecked2, setIsChecked2] = useState(false);
+  const [isChecked3, setIsChecked3] = useState(false);
+  const [isChecked4, setIsChecked4] = useState(false);
+
 
   function handleCheck() {
       setIsChecked(!isChecked)
     }
+
+    function handleCheck2() {
+        setIsChecked2(!isChecked2)
+      }
+
+      function handleCheck3() {
+        setIsChecked3(!isChecked3)
+      }
+
+      function handleCheck4() {
+        setIsChecked4(!isChecked4)
+      }
 
 /////////////////////////////////////////////////////////// TE KAVIO EL RETURN  ///////////////////////////////////////////////////
 
@@ -114,18 +130,18 @@ function validation(input){
     
     <>
         <form onSubmit={handleSubmit}>
-
-             <div>
+       
+         <div>
                 <label>Gato:</label>
-                <input onChange={handleCheck} 
+                <input onChange={ (e) => { handleCheck(e); handleChange(e); } }
                 type="checkbox" name="gato" checked={isChecked} value={input.gato}/>
                  {errors.gato && ( <p>{errors.gato}</p>)}            
             </div> 
             
             <div>
                 <label>Perro:</label>
-                <input onChange={handleCheck} 
-                type="checkbox" name="perro" checked={isChecked} value={input.perro}/>
+                <input onChange={ (e) => { handleCheck2(e); handleChange(e); } }
+                type="checkbox" name="perro" checked={isChecked2} value={input.perro}/>
                  {errors.perro && ( <p>{errors.perro}</p>)}            
             </div>
 
@@ -186,15 +202,15 @@ function validation(input){
 
             <div>
             <label>Castrado:</label>
-                <input onChange={handleCheck} 
-                type="checkbox" name="castrado" checked={isChecked} value={input.castrado}/>
+                <input onChange={ (e) => { handleCheck3(e); handleChange(e); } }
+                type="checkbox" name="castrado" checked={isChecked3} value={input.castrado}/>
                 {errors.castrado && ( <p>{errors.castrado}</p>)} 
             </div> 
 
             <div>
             <label>Vacunado:</label>
-                <input onChange={handleCheck} 
-                type="checkbox" name="vacunado"  checked={isChecked} value={input.vacunado}/>
+                <input onChange={ (e) => { handleCheck4(e); handleChange(e); } }
+                type="checkbox" name="vacunado"  checked={isChecked4} value={input.vacunado}/>
                 {errors.vacunado && ( <p>{errors.vacunado}</p>)} 
             </div>    
               
