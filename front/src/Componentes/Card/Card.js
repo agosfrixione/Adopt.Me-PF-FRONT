@@ -10,11 +10,11 @@ export default function Card({ nombre, raza, localidad,id, perro }) {
     <div class="cards">
   <div class="viendo">
     <div href="" class="card">
+    <div class="link">
             <Link to = {`/animales/${id}`}>
-              <div>
       <img src="https://t1.ea.ltmcdn.com/es/posts/2/6/8/la_presentacion_de_un_perro_y_un_gato_adultos_21862_1_600.jpg" class="card__image" alt="" />
-      </div>
             </Link>
+            </div>
       <div class="card__overlay">
         <div class="card__header">
           <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                     

@@ -27,7 +27,7 @@ const HomeGatos = () => {
     useEffect(()=>{
         dispatch(getgato())
     }, [dispatch])
-    // if(allPets.map(e=>e.perro === true))
+   
     return (
 
         <div className={stl.paginaadopcionperros}>
