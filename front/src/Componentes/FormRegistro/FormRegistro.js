@@ -10,7 +10,6 @@ import createuser from "../../Actions/createuser";
 export default function FormRegistro() {
   const params = useParams();
   const dispatch = useDispatch();
-  // const dispatch = useDispatch();
   const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
   const users = useSelector((state) => state.users); // (o el estado global que usemos para guardar todos los usuarios)
 
@@ -89,14 +88,13 @@ export default function FormRegistro() {
   }
 
   function handleSubmit(e) {
-    console.log("Formulario recibido estos son los input:" + input);
-
+    console.log("Ingreso al handleSubmit");
     e.preventDefault();
     let noRepeatUser = users.filter((u) => u.usuario === input.usuario);
     let noRepeatMail = users.filter((u) => u.mail === input.mail);
 
+    console.log("OK. Formulario recibido. Despacho la action con estos datos:");
     console.log(input);
-    console.log("Voy a despachar la action con esos datos");
     dispatch(createuser(input));
     setInput({
       usuario: "",
@@ -110,10 +108,9 @@ export default function FormRegistro() {
       fotoPerfil: "",
     });
 
-    /*
     if (noRepeatUser.length) {
       errors.usuario = `El nombre de usuario ${input.usuario} no está disponible`;
-    } else if (noRepeatMail) {
+    } else if (noRepeatMail.length) {
       errors.mail = "Ya existe una cuenta vinculada a ese mail";
     } else {
       if (
@@ -129,27 +126,27 @@ export default function FormRegistro() {
         console.log("falta info");
         alert("Falta información");
       } else {
-        console.log("entro al else del handleSubmit");
+        console.log(
+          "OK. Formulario recibido. Despacho la action con estos datos:"
+        );
+        console.log(input);
         dispatch(createuser(input));
         setInput({
-
-            usuario:"",
-            contraseña:"",
-            repitaContraseña:"",
-            nombre:"",
-            telefono:"",
-            mail:"",
-            nacimiento:"",
-            localidad:"",
-            fotoPerfil:""
-
-        }); // Reinicio el formulario
+          usuario: "",
+          contraseña: "",
+          repitaContraseña: "",
+          nombre: "",
+          telefono: "",
+          mail: "",
+          nacimiento: "",
+          localidad: "",
+          fotoPerfil: "",
+        });
+        console.log("Input reseteado. Vamos a redirigir al /signIn");
+        navigate("/usuarios/signin");
       }
-      */
+    }
   }
-
-  /*
-    navigate("/confirmation");*/
 
   function handleChange(e) {
     e.preventDefault();
@@ -161,11 +158,11 @@ export default function FormRegistro() {
         [e.target.name]: [e.target.value],
       })
     );
-    /*
-      navigate('/confirmation')*/
   }
 
   function handleOpenWidget(e) {
+    console.log("Entre el handleOpenWidget");
+    e.preventDefault();
     const imagen = document.querySelector("#user-photo");
     var myWidget = window.cloudinary.createUploadWidget(
       {
@@ -183,6 +180,7 @@ export default function FormRegistro() {
         }
       }
     );
+    console.log("abro el widget");
     myWidget.open();
   }
 
@@ -200,7 +198,7 @@ export default function FormRegistro() {
             <label>NOMBRE DE USUARIO </label>
             <input
               type="text"
-              required
+              pipo
               name="usuario"
               value={input.usuario}
               onChange={(e) => handleChange(e)}
@@ -212,6 +210,7 @@ export default function FormRegistro() {
           <div key={params.id}>
             <label>CONTRASEÑA </label>
             <input
+              required
               type="password"
               name="contraseña"
               value={input.contraseña}
@@ -224,6 +223,7 @@ export default function FormRegistro() {
           <div key={params.id}>
             <label>REPITA CONTRASEÑA </label>
             <input
+              required
               type="password"
               name="repitaContraseña"
               value={input.repitaContraseña}
