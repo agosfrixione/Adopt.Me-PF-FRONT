@@ -1,17 +1,22 @@
-import { Link, useParams, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { Link, useParams, useNavigate, UNSAFE_NavigationContext } from "react-router-dom";
+import React, { useState , useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import stl from "../FormSignIn/FormSignIn.module.css";
 import signinUser from "../../Actions/signinUser";
+import getusers from "../../Actions/getusers";
 
 export default function FormSignIn() {
   const params = useParams();
   const dispatch = useDispatch();
-  // const dispatch = useDispatch();
   const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
-  const users = useSelector((state) => state.users); // (o el estado global que usemos para guardar todos los usuarios)
+  const Allusers = useSelector((state) => state.users).data; // (o el estado global que usemos para guardar todos los usuarios)
+
+  useEffect(() => {
+    dispatch(getusers());
+    console.log(Allusers)
+  }, [dispatch]);
 
   const [input, setInput] = useState({
     usuario: "",
@@ -19,11 +24,14 @@ export default function FormSignIn() {
   });
 
   const [errors, setErrors] = useState({});
-  const [isSubmit, setisSubmit] = useState(true);
+  const [isSubmit, setisSubmit] = useState(false);
 
   function validation(input) {
     let errors = {};
+    let existUser = Allusers.filter((u) => u.usuario == input.usuario);
+    console.log(existUser)
 
+    ///////////////////////////////////////////////////////
     if (!input.usuario) {
       errors.usuario = "Tenes que ingresar un nombre de usuario";
     } else if (
@@ -31,8 +39,12 @@ export default function FormSignIn() {
     ) {
       // max 15 caracteres alfanumericos
       errors.usuario = "El nombre de usuario no es válido";
-    }
+    } 
+    if (existUser.length === 0) {
+      errors.usuario = "No encontramos ningun usuario con ese nombre";
+    } 
 
+    ///////////////////////////////////////////////////////////
     if (!input.contraseña) {
       errors.contraseña = "Tenes que ingresar una contraseña";
     } else if (/^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,}$/.test(input.contraseña)) {
@@ -40,41 +52,8 @@ export default function FormSignIn() {
         "La contraseña debe tener mínimo 8 caracteres, al menos una letra y un número";
     }
 
-    if (!input.repitaContraseña) {
-      errors.repitaContraseña = "Tenes que repetir la contraseña";
-    } else if (input.repitaContraseña != input.contraseña) {
-      errors.repitaContraseña = "Las contraseñas no coincide";
-    }
-
-    if (!input.nombre) {
-      errors.nombre = "Tenes que ingresar un nombre";
-    } else if (!/^[a-z\s]+$/i.test(input.nombre)) {
-      errors.nombre = "El nombre no es válido";
-    }
-
-    if (!input.telefono) {
-      errors.telefono = "Tenes que ingresar un telefono";
-    } else if (input.telefono.length > 15) {
-      errors.telefono = "El teléfono no es válido";
-    }
-
-    if (!input.mail) {
-      errors.mail = "Tenes que ingresar un e-mail";
-    } else if (!/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/gim.test(input.mail)) {
-      errors.mail = "El e-mail no es válido";
-    }
-
-    if (!input.nacimiento) {
-      errors.nacimiento = "Tenes que ingresar una fecha de nacimiento";
-    } else if (
-      input.nacimiento.length > 10 ||
-      !/^[0-9-]+$/.test(input.nacimiento)
-    ) {
-      errors.nacimiento = "Tenes  que ingresar una fecha válida (dd-mm-yyyy)";
-    }
-
     if (Object.keys(errors).length === 0) {
-      setisSubmit(false);
+      setisSubmit(true);
     }
 
     return errors;
@@ -83,27 +62,20 @@ export default function FormSignIn() {
   function handleSubmit(e) {
     console.log("entro al handlesubmit");
     e.preventDefault();
-
-    // Checkeamos que el usuario exista
-    let usuarioExistente = users.filter((i) => i.usuario === input.usuario);
-
-    // Si existe despachamos la accion que va a validar los datos
-    if (usuarioExistente.length) {
-      return alert("Usuario no existe");
-    } else {
-      console.log(
-        "OK. Formulario recibido. Despacho la action con estos datos:"
-      );
+    if (isSubmit) { 
+      console.log("OK. Formulario recibido. Despacho la action con estos datos:");
       console.log(input);
       dispatch(signinUser(input));
       setInput({
         usuario: "",
         contraseña: "",
       });
-      console.log("Input reseteado. Vamos a redirigir al /homepage");
-      navigate("/homepage");
+      navigate("/perfil");
       alert("Ingreso exitoso. Bienvenido");
+    } else {
+      alert("No se pudo ingresar. Revise los campos")
     }
+    
   }
 
   function handleChange(e) {
@@ -118,26 +90,6 @@ export default function FormSignIn() {
     );
   }
 
-  function handleOpenWidget(e) {
-    const imagen = document.querySelector("#user-photo");
-    var myWidget = window.cloudinary.createUploadWidget(
-      {
-        cloudName: "dvw0vrnxp",
-        uploadPreset: "usuarios",
-      },
-      (error, result) => {
-        if (!error && result && result.event === "success") {
-          // console.log('Done! Here is the image info: ', result.info);
-          imagen.src = result.info.secure_url;
-          setInput((prev) => ({
-            ...prev,
-            [e.target.name]: result.info.secure_url,
-          }));
-        }
-      }
-    );
-    myWidget.open();
-  }
 
   return (
     <div className={stl.registro} key={params.id}>
@@ -170,7 +122,7 @@ export default function FormSignIn() {
             {errors.contraseña && <p>{errors.contraseña}</p>}
           </div>
 
-          <button className={stl.buttons} type="submit">
+          <button className={stl.buttons} type="submit" disabled={isSubmit? false : true}>
             ACEPTAR
           </button>
         </form>

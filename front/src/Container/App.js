@@ -17,6 +17,7 @@ import ReportarMascota from "../Componentes/ReportarMascota/ReportarMascota";
 import BuscarMascota from "../Componentes/BuscarMascota/BuscarMascota";
 import DetallePerro from "../Componentes/AdoptarMascota/DetallePerro";
 import DarEnAdopcion from "../Componentes/DonarMascota/formularioDar";
+import Perfil from "../Componentes/Perfil/perfil";
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
           <Route exact path="/reportarmascota" element={<ReportarMascota />} />
           <Route exact path="/buscarmascota" element={<BuscarMascota />} />
           <Route exact path="/registroMascota" element={<DarEnAdopcion />} />
+          <Route exact path="/perfil" element={<Perfil />} />
+
         </Routes>
       </div>
     </BrowserRouter>
