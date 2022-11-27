@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import stl from "../FormRegistro/FormRegistro.module.css";
-
 import createuser from "../../Actions/createuser";
 
 export default function FormRegistro() {
+
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
@@ -26,7 +26,7 @@ export default function FormRegistro() {
   });
 
   const [errors, setErrors] = useState({});
-  const [isSubmit, setisSubmit] = useState(true);
+  const [isSubmit, setisSubmit] = useState(false);
 
   function validation(input) {
     let errors = {};
@@ -49,7 +49,7 @@ export default function FormRegistro() {
 
     if (!input.repitaContraseña) {
       errors.repitaContraseña = "Tenes que repetir la contraseña";
-    } else if (input.repitaContraseña !== input.contraseña) {
+    } else if (input.repitaContraseña != input.contraseña) {
       errors.repitaContraseña = "Las contraseñas no coincide";
     }
 
@@ -81,7 +81,7 @@ export default function FormRegistro() {
     }
 
     if (Object.keys(errors).length === 0) {
-      setisSubmit(false);
+      setisSubmit(true);
     }
 
     return errors;
@@ -89,7 +89,7 @@ export default function FormRegistro() {
 
 
   function handleSubmit(e) {
-    console.log("Ingreso al handleSubmit");
+    // console.log("Ingreso al handleSubmit");
     e.preventDefault();
     let noRepeatUser = users.filter((u) => u.usuario === input.usuario);
     let noRepeatMail = users.filter((u) => u.mail === input.mail);
@@ -109,13 +109,13 @@ export default function FormRegistro() {
         !input.nacimiento ||
         !input.localidad
       ) {
-        console.log("falta info");
-        alert("Falta información");
-      } else {
-        console.log(
-          "OK. Formulario recibido. Despacho la action con estos datos:"
-        );
-        console.log(input);
+        // console.log("falta info");
+        return alert("Falta información");
+      // } else if(isSubmit === false){
+      //   return alert("No se pudo completar el registro, revise los campos")
+      }else if (isSubmit){
+        // console.log("OK. Formulario recibido. Despacho la action con estos datos:");
+        // console.log(input);
         dispatch(createuser(input));
         setInput({
           usuario: "",
@@ -128,9 +128,11 @@ export default function FormRegistro() {
           localidad: "",
           fotoPerfil: "",
         });
-        console.log("Input reseteado. Vamos a redirigir al /signIn");
+        // console.log("Input reseteado. Vamos a redirigir al /signIn");
         navigate("/usuarios/signin");
         alert("Usuario creado correctamente")
+      }else {
+        alert("No se pudo completar el registro, revise los campos")
       }
 
     }
@@ -152,7 +154,7 @@ export default function FormRegistro() {
   }
 
   function handleOpenWidget(e) {
-    console.log("Entre el handleOpenWidget");
+    // console.log("Entre el handleOpenWidget");
     e.preventDefault();
     const imagen = document.querySelector("#user-photo");
     var myWidget = window.cloudinary.createUploadWidget(
@@ -171,7 +173,7 @@ export default function FormRegistro() {
         }
       }
     );
-    console.log("abro el widget");
+    // console.log("abro el widget");
     myWidget.open();
   }
 
@@ -310,7 +312,10 @@ export default function FormRegistro() {
             {errors.fotoPerfil && <p>{errors.fotoPerfil}</p>}
           </div>
 
-          <button className={stl.buttons} type="submit">
+          <button 
+          className={stl.buttons} 
+          type="submit"
+          disabled={isSubmit ? false : true}>
             ACEPTAR
           </button>
         </form>
