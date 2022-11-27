@@ -48,11 +48,11 @@ const AnimalSchema = new Schema({
         required: false,
     },
     castrado: {
-        type: Boolean,
+        type: String,
         required: false,
     },
     vacunado: {
-        type: Boolean,
+        type: String,
         required: false,
     },   
 });

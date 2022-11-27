@@ -45,8 +45,8 @@ function validation(input){
  const dispatch = useDispatch();
 
  const [input, setInput] = useState({
-        perro: "",
-        gato: "",
+        perro: true,
+        gato: true,
         nombre: "",
         raza: "",
         edad: "",
@@ -69,8 +69,8 @@ function validation(input){
     alert("Mascota Agregada");
 
     setInput({
-        perro: "",
-        gato: "",
+        perro: true,
+        gato: true,
         nombre: "",
         raza: "",
         edad: "",
@@ -103,10 +103,18 @@ function validation(input){
   }
 
   const [isChecked, setIsChecked] = useState(false);
-
+  const [isChecked2, setIsChecked2] = useState(false);
+  
+ 
   function handleCheck() {
-      setIsChecked(!isChecked)
-    }
+    if(isChecked2)return   
+    setIsChecked(!isChecked)      
+    } 
+  
+    function handleCheck2() {
+      if(isChecked)return        
+        setIsChecked2(!isChecked2)
+      }
 
 /////////////////////////////////////////////////////////// TE KAVIO EL RETURN  ///////////////////////////////////////////////////
 
@@ -114,18 +122,18 @@ function validation(input){
     
     <>
         <form onSubmit={handleSubmit}>
-
-             <div>
+       
+         <div>
                 <label>Gato:</label>
-                <input onChange={handleCheck} 
+                <input onChange={ (e) => { handleCheck(e); handleChange(e); } }
                 type="checkbox" name="gato" checked={isChecked} value={input.gato}/>
                  {errors.gato && ( <p>{errors.gato}</p>)}            
             </div> 
             
             <div>
                 <label>Perro:</label>
-                <input onChange={handleCheck} 
-                type="checkbox" name="perro" checked={isChecked} value={input.perro}/>
+                <input onChange={ (e) => { handleCheck2(e); handleChange(e); } }
+                type="checkbox" name="perro" checked={isChecked2} value={input.perro}/>
                  {errors.perro && ( <p>{errors.perro}</p>)}            
             </div>
 
@@ -151,21 +159,21 @@ function validation(input){
             </div>
 
             <div>
-            <label>Estado:</label>
+            <label>Estado de la mascota:</label>
                 <input onChange={handleChange} 
                 type="text" name="estado" value={input.estado}/>
                 {errors.estado && ( <p>{errors.estado}</p>)} 
             </div>
 
             <div>
-            <label>Tamaño:</label>
+            <label>Tamaño:(Cm)</label>
                 <input onChange={handleChange} 
                 type="text" name="tamaño" value={input.tamaño}/>
                 {errors.tamaño && ( <p>{errors.tamaño}</p>)} 
             </div>
         
             <div>
-            <label>Peso:</label>
+            <label>Peso:(Kg)</label>
                 <input onChange={handleChange} 
                 type="text" name="peso" value={input.peso}/>
                 {errors.peso && ( <p>{errors.peso}</p>)} 
@@ -185,16 +193,16 @@ function validation(input){
             </div>
 
             <div>
-            <label>Castrado:</label>
-                <input onChange={handleCheck} 
-                type="checkbox" name="castrado" checked={isChecked} value={input.castrado}/>
-                {errors.castrado && ( <p>{errors.castrado}</p>)} 
+            <label>Castrado: (si/no)</label>
+                <input onChange={ (e) =>handleChange(e)}type="text" name="castrado" value={input.castrado}/>
+                {errors.castrado && ( <p>{errors.castrado}</p>)}
+                
+
             </div> 
 
             <div>
-            <label>Vacunado:</label>
-                <input onChange={handleCheck} 
-                type="checkbox" name="vacunado"  checked={isChecked} value={input.vacunado}/>
+            <label>Vacunado: (si/no)</label>
+                <input onChange={ (e) =>handleChange(e)} type="text" name="vacunado"  value={input.vacunado}/>
                 {errors.vacunado && ( <p>{errors.vacunado}</p>)} 
             </div>    
               

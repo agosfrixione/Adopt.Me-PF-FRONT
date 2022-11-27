@@ -2,7 +2,7 @@ import React from 'react';
 import stl from "../Pagination/Pagination.module.css"
 
 
-export default function Paging({mascotasPerPage, allPets, actualPage, currentPage, currentPets}) {
+export default function Paging({mascotasPerPage, allPets, actualPage, currentPage}) {
 
     const pageNumbers = []
     const maxpage = Math.ceil(allPets/mascotasPerPage)

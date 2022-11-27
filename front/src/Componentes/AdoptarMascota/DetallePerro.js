@@ -8,20 +8,18 @@ import Footer from "../Footer/Footer";
 import stl from "../AdoptarMascota/DetalleMascotas.module.css";
 
 
-export default function DetallePerro (props) {
+export default function DetallePerro () {
     const {id} = useParams();
     // console.log(id);
     
     const dispatch = useDispatch();
     const detail = useSelector((state) => state.animalesdetail);
-   
-
 
     useEffect(() => {
-        dispatch(getmascotasbyid(id))
-        // console.log(id);                
+        dispatch(getmascotasbyid(id))               
     }, [id, dispatch])
-
+   
+   
     return (
 
         <div className={stl.paginaAdopcion}>
@@ -29,10 +27,10 @@ export default function DetallePerro (props) {
             <NavBar />
 
               <div className={stl.imgn} alt="">{detail.imagen}</div>
-        <div className={stl.cardDetalles}>                   
+              <div className={stl.cardDetalles}>                   
               <div className={stl.datosAdopcion}>
               <div className={stl.tituloAdopcion}>Datos de la Mascota</div>
-              <div className={stl.datos2}>              
+            <div className={stl.datos2}>              
               <div className={stl.titulos2}>Nombre: {detail.nombre}</div>
               <div className={stl.titulos2}>Localidad: {detail.localidad} </div>              
               <div className={stl.titulos2}>Raza: {detail.raza}</div>
@@ -41,9 +39,10 @@ export default function DetallePerro (props) {
               <div className={stl.titulos2}>Tamaño: {detail.tamaño}</div>
               <div className={stl.titulos2}>Peso: {detail.peso}</div>
               <div className={stl.titulos2}>Descripcion: {detail.descripcion}</div>
-              <div className={stl.titulos2}>Castrado: {detail.castrado}</div>
+              <div className={stl.titulos2}>Castrado: {detail.castrado}</div>              
               <div className={stl.titulos2}>Vacunado: {detail.vacunado}</div>  
-                </div>
+            </div>
+               
               <Link to='/contacto'>
                 <button className={stl.botonDarAdopcion}>ADOPTAR</button>
         </Link>  
