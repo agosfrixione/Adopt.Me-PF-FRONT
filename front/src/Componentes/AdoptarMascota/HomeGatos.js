@@ -35,6 +35,7 @@ const HomeGatos = () => {
     useEffect(()=>{
         dispatch(getgato())
     }, [dispatch])
+    
     // if(allPets.map(e=>e.perro === true))
 
     const handleInput = (e) => {
@@ -57,6 +58,7 @@ const HomeGatos = () => {
     setCurrentPage(1)
     setOrden(`Ordenado ${e.target.value}`)
   }
+
     return (
 
         <div className={stl.paginaadopcionperros}>

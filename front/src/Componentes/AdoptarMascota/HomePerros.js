@@ -36,10 +36,8 @@ export default function HomePerros () {
     const actualPage = (pageNumber) => {setCurrentPage(pageNumber)}
 
         useEffect(() => {
-            if (allPets.length === 0) {
-                dispatch(getperro())
-            }
-        }, [allPets.length, dispatch])
+            dispatch(getperro())
+        }, [dispatch])
 
 
         

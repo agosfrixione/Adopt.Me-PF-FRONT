@@ -1,113 +1,208 @@
-import React from "react";
-import stl from "../DonarMascota/formularioDar.module.css";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import createanimal from "../../Actions/createanimal";
+import "./formularioDar.css";
 
-class FormDarEnAdopcion extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = [""];
-      this.state2 = [""];
-      this.state3 = [""];
-      this.state4 = [""];
-      this.state5 = [""];
-      this.state6 = [""];
-      this.state7 = [""];
+////////////////////////////////////////////////////// VALIDACION ///////////////////////////////////////////////////////////////
+
+function validation(input){
+    let errors = {};
+    const whitespace = /\S+/;
+    const validString = /^[a-z]+$/i;
+    const validNumber = /^\d+$/;
+ 
   
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-  
-    handleChange(event) {
-      this.setState({value: event.target.value});
-    }
-  
-    handleSubmit(event) {
-      alert("Has inscripto tu mascota exitosamente");
-      event.preventDefault();
-    }
-  
-    render() {
-      return (
-        <div className={stl.formulario}>    
-        <form className={stl.formForm} onSubmit={this.handleSubmit}>
+   if (
+     !whitespace.test(input.nombre) ||                
+     !validString.test(input.nombre) ||               
+     input.nombre.length < 3                          
+    ) errors.nombre = "Nombre is required. Must be longer than two characters and cannot contain numbers or special characters.";
+                                                
+                                        
+   if ( 
+       !validNumber.test(input.edad) ||      
+       parseInt(input.edad) < 1      ||      
+       parseInt(input.edad) > 20            
+     ) errors.edad = "Edad is required. Must be higher than 1 and less than 20.";
+                                   
+                                    
+     if (!input.descripcion) {
+       errors.descripcion = "Tienes que agregar una descripcion informativa de la mascota";
+     } else if (!/^[a-z\s]+$/i.test(input.descrpcion)) {
+       errors.descripcion = "La descripcion no es válida";
+     }
+                                
+     return errors
+ }
 
-        <div className={stl.datosForm}>
-          <div>
-            Nombre:
-            <input className={stl.inputAdopcion} type="text" value={this.state.nombre} onChange={this.handleChange} />
-          </div>
+ //////////////////////////////////////////////////// PA ADOPTAR AMEGO ////////////////////////////////////////////////////////////
+ 
+ export default function DarEnAdopcion() {
+       
 
-          <div>
-            Edad:
-            <input className={stl.inputAdopcion} type="text" value={this.state2.edad} onChange={this.handleChange} />
-          </div>
+ const navigate = useNavigate();
+ const dispatch = useDispatch();
 
-          <div className={stl.descriptionTitulo}>
-          Descripcion:
-          <textarea value={this.state3.descripcion} onChange={this.handleChange} />
-        </div>
+ const [input, setInput] = useState({
+        perro: "",
+        gato: "",
+        nombre: "",
+        raza: "",
+        edad: "",
+        estado: "",
+        tamaño: "",
+        peso: "",
+        localidad: "",
+        descripcion: "",
+        castrado: "",
+        vacunado: ""
+      });
+      
+  const [errors, setErrors] = useState({});
 
-        <div className={stl.secciones}>
-          Gato / Perro
-          <select  className={stl.opcionesForm} value={this.state4.especie} onChange={this.handleChange}>
-            <option value="Perro">Perro</option>
-            <option value="Gato">Gato</option>
-          </select>
-        </div>
+    function handleSubmit(e){
+         e.preventDefault();
 
-        <div className={stl.secciones}>
-          Tamaño:
-          <select  className={stl.opcionesForm} value={this.state5.tamaño} onChange={this.handleChange}>
-            <option value="Chico">Chico</option>
-            <option value="Mediano">Mediano</option>
-            <option value="Grande">Grande</option>
-          </select>
-        </div>
+    dispatch(createanimal(input));
 
-        <div className={stl.secciones}>
-         Salud:
-          <select  className={stl.opcionesForm} value={this.state6.salud} onChange={this.handleChange}>
-            <option value="vacunado">Vacunado</option>
-            <option value="desparacitado">Desparacitado</option>
-            <option value="castrado">Castrado</option>
-          </select>
-        </div>
+    alert("Mascota Agregada");
 
-        <div className={stl.secciones}>
-          Sociabilidad:
-          <select className={stl.opcionesForm}  value={this.state7.sociabilidad} onChange={this.handleChange}>
-            <option value="Timido">Timido</option>
-            <option value="Independiente">Independiente</option>
-            <option value="Agresivo">Agresivo</option>
-            <option value="Alegre">Alegre</option>
-            <option value="Compañero">Compañero</option>
-            <option value="Inteligente">Inteligente</option>
-            <option value="Leal">Leal</option>
-            <option value="Tranquilo">Tranquilo</option>
-            <option value="Guardian">Guardian</option>
-            <option value="Vigilante">Vigilante</option>
-            <option value="Amigable">Amigable</option>
-            <option value=" Desconfiado"> Desconfiado</option>
-            <option value="Cariñoso">Cariñoso</option>
-            <option value="Testarudo">Testarudo</option>
-            <option value="Activo"> Activo</option>
-            <option value="Jugueton">Jugueton</option>
-            <option value="Agil">Agil</option>
-            <option value="Rapido">Rapido</option>
-            <option value="Amable"> Amable</option>
-          </select>
-        </div>
+    setInput({
+        perro: "",
+        gato: "",
+        nombre: "",
+        raza: "",
+        edad: "",
+        estado: "",
+        tamaño: "",
+        peso: "",
+        localidad: "",
+        descripcion: "",
+        castrado: "",
+        vacunado: ""
+    })
 
-        <div>Imagen
-        <input type="file" />
-        </div>
+    navigate("/homepage")
+ }
 
-          <button className={stl.buttons} type="submit" value="Submit">Submit</button>
-          
-          </div>
-        </form>
-        </div>
-      );
-    }
+
+ function handleChange(e) {
+
+    setInput({
+       ...input,
+       [e.target.name]: e.target.value
+    })
+
+    setErrors(
+        validation({
+            ...input,
+            status: e.target.value,
+        })
+    )
   }
 
-  export default FormDarEnAdopcion;
+  const [isChecked, setIsChecked] = useState(false);
+
+  function handleCheck() {
+      setIsChecked(!isChecked)
+    }
+
+/////////////////////////////////////////////////////////// TE KAVIO EL RETURN  ///////////////////////////////////////////////////
+
+  return (
+    
+    <>
+        <form onSubmit={handleSubmit}>
+
+             <div>
+                <label>Gato:</label>
+                <input onChange={handleCheck} 
+                type="checkbox" name="gato" checked={isChecked} value={input.gato}/>
+                 {errors.gato && ( <p>{errors.gato}</p>)}            
+            </div> 
+            
+            <div>
+                <label>Perro:</label>
+                <input onChange={handleCheck} 
+                type="checkbox" name="perro" checked={isChecked} value={input.perro}/>
+                 {errors.perro && ( <p>{errors.perro}</p>)}            
+            </div>
+
+              <div>
+                <label>Nombre:</label>
+                <input onChange={handleChange} 
+                type="text" name="nombre" value={input.nombre}/>
+                 {errors.nombre && ( <p>{errors.nombre}</p>)}            
+            </div>
+ 
+            <div>
+            <label>Raza:</label>
+                <input onChange={handleChange} 
+                type="text" name="raza" value={input.raza}/>
+                {errors.raza && ( <p>{errors.raza}</p>)} 
+            </div>
+
+            <div>
+            <label>Edad:</label>
+                <input onChange={handleChange}
+                type="text" name="edad" value={input.edad}/>
+                {errors.edad && ( <p>{errors.edad}</p>)} 
+            </div>
+
+            <div>
+            <label>Estado:</label>
+                <input onChange={handleChange} 
+                type="text" name="estado" value={input.estado}/>
+                {errors.estado && ( <p>{errors.estado}</p>)} 
+            </div>
+
+            <div>
+            <label>Tamaño:</label>
+                <input onChange={handleChange} 
+                type="text" name="tamaño" value={input.tamaño}/>
+                {errors.tamaño && ( <p>{errors.tamaño}</p>)} 
+            </div>
+        
+            <div>
+            <label>Peso:</label>
+                <input onChange={handleChange} 
+                type="text" name="peso" value={input.peso}/>
+                {errors.peso && ( <p>{errors.peso}</p>)} 
+            </div>
+
+            <div>
+            <label>Localidad:</label>
+                <input onChange={handleChange} 
+                type="text" name="localidad" value={input.localidad}/>
+                {errors.localidad && ( <p>{errors.localidad}</p>)} 
+            </div>
+
+            <div>
+            <label>Descripcion:</label>
+                <input onChange={handleChange} type="text" name="descripcion" value={input.descripcion}/>
+                {errors.descripcion && ( <p>{errors.descripcion}</p>)} 
+            </div>
+
+            <div>
+            <label>Castrado:</label>
+                <input onChange={handleCheck} 
+                type="checkbox" name="castrado" checked={isChecked} value={input.castrado}/>
+                {errors.castrado && ( <p>{errors.castrado}</p>)} 
+            </div> 
+
+            <div>
+            <label>Vacunado:</label>
+                <input onChange={handleCheck} 
+                type="checkbox" name="vacunado"  checked={isChecked} value={input.vacunado}/>
+                {errors.vacunado && ( <p>{errors.vacunado}</p>)} 
+            </div>    
+              
+        <div>
+             <button type="submit">Dar en Adopcion</button>
+        </div>
+
+        </form>
+       
+    </>
+  )}
