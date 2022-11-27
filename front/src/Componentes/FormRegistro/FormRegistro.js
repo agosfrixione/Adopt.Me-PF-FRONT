@@ -45,14 +45,14 @@ export default function FormRegistro() {
       // max 15 caracteres alfanumericos
       errors.usuario = "El nombre de usuario no es válido";
     } else if (noRepeatUser.length) {
-      errors.usuario = `El nombre de usuario ya esta en uso`;
+      errors.usuario = `El nombre de usuario ${input.usuario} no está disponible`;
     }
 
     if (!input.contraseña) {
       errors.contraseña = "Tenes que ingresar una contraseña";
-    } else if (/^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,}$/.test(input.contraseña)) {
+    } else if (!/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(input.contraseña)) {
       errors.contraseña =
-        "La contraseña debe tener mínimo 8 caracteres, al menos una letra y un número";
+        "La contraseña debe tener entre 8 y 16 caracteres, al menos un número, al menos una minúscula y al menos una mayúscula.";
     }
 
     if (!input.repitaContraseña) {
@@ -88,6 +88,12 @@ export default function FormRegistro() {
       !/^[0-9-]+$/.test(input.nacimiento)
     ) {
       errors.nacimiento = "Tenes  que ingresar una fecha válida (dd-mm-yyyy)";
+    }
+
+    if (!input.fotoPerfil || input.fotoPerfil === "") {
+      setInput({
+        fotoPerfil: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
+      });
     }
 
     if (Object.keys(errors).length === 0) {
