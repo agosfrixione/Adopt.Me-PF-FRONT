@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import createanimal from "../../Actions/createanimal";
 import "./formularioDar.css";
+import NavBar from "../NavBar/NavBar";
+import Footer from "../Footer/Footer"
+import stl from "../DonarMascota/formularioDar.module.css"
 
 ////////////////////////////////////////////////////// VALIDACION ///////////////////////////////////////////////////////////////
 
@@ -17,7 +20,7 @@ function validation(input){
      !whitespace.test(input.nombre) ||                
      !validString.test(input.nombre) ||               
      input.nombre.length < 3                          
-    ) errors.nombre = "Nombre is required. Must be longer than two characters and cannot contain numbers or special characters.";
+    ) errors.nombre = "Nombre Requerido. Debe contener mas de dos caracteres y no incluir ningun simbolo o caracter especial";
                                                 
                                         
    if ( 
@@ -120,8 +123,10 @@ function validation(input){
 
   return (
     
-    <>
-        <form onSubmit={handleSubmit}>
+  <div className={stl.formDarAdopcion}>
+    <NavBar />
+      
+        <form className={stl.formularito} onSubmit={handleSubmit}>
        
          <div>
                 <label>Gato:</label>
@@ -141,7 +146,7 @@ function validation(input){
                 <label>Nombre:</label>
                 <input onChange={handleChange} 
                 type="text" name="nombre" value={input.nombre}/>
-                 {errors.nombre && ( <p>{errors.nombre}</p>)}            
+                 {errors.nombre && ( <p className="error">{errors.nombre}</p>)}            
             </div>
  
             <div>
@@ -155,7 +160,7 @@ function validation(input){
             <label>Edad:</label>
                 <input onChange={handleChange}
                 type="text" name="edad" value={input.edad}/>
-                {errors.edad && ( <p>{errors.edad}</p>)} 
+                {errors.edad && ( <p className="error">{errors.edad}</p>)} 
             </div>
 
             <div>
@@ -189,7 +194,7 @@ function validation(input){
             <div>
             <label>Descripcion:</label>
                 <input onChange={handleChange} type="text" name="descripcion" value={input.descripcion}/>
-                {errors.descripcion && ( <p>{errors.descripcion}</p>)} 
+                {errors.descripcion && ( <p className="error">{errors.descripcion}</p>)} 
             </div>
 
             <div>
@@ -211,6 +216,7 @@ function validation(input){
         </div>
 
         </form>
-       
-    </>
+        <Footer />
+    </div>
+  
   )}
