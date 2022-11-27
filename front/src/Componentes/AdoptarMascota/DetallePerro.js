@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import getmascotasbyid from "../../Actions/getmascotabyid";
 import { useParams } from "react-router-dom";
+import NavBar from "../NavBar/NavBar";
+import Footer from "../Footer/Footer";
+import stl from "../AdoptarMascota/DetalleMascotas.module.css";
 
 
 export default function DetallePerro (props) {
@@ -17,32 +20,37 @@ export default function DetallePerro (props) {
     useEffect(() => {
         dispatch(getmascotasbyid(id))
         // console.log(id);                
-    }, [dispatch])
+    }, [id, dispatch])
 
     return (
 
-        <div>
-        <div>Detalle</div>
+        <div className={stl.paginaAdopcion}>
+            
+            <NavBar />
 
-        <div >                   
-              <img>{detail.imagen}</img>
-              <h2>Mascota</h2>              
-              <h3>Nombre: {detail.nombre}</h3>
-              <h3>Localidad: {detail.localidad} </h3>              
-              <h3>Raza: {detail.raza}</h3>
-              <h3>Edad: {detail.edad}</h3>
-              <h3>Estado: {detail.estado}</h3>
-              <h3>Tamaño: {detail.tamaño}</h3>
-              <h3>Peso: {detail.peso}</h3>
-              <h3>Descripcion: {detail.descripcion}</h3>
-              <h3>Castrado: {detail.castrado}</h3>
-              <h3>Vacunado: {detail.vacunado}</h3>     
+              <div className={stl.imgn} alt="">{detail.imagen}</div>
+        <div className={stl.cardDetalles}>                   
+              <div className={stl.datosAdopcion}>
+              <div className={stl.tituloAdopcion}>Datos de la Mascota</div>
+              <div className={stl.datos2}>              
+              <div className={stl.titulos2}>Nombre: {detail.nombre}</div>
+              <div className={stl.titulos2}>Localidad: {detail.localidad} </div>              
+              <div className={stl.titulos2}>Raza: {detail.raza}</div>
+              <div className={stl.titulos2}>Edad: {detail.edad}</div>
+              <div className={stl.titulos2}>Estado: {detail.estado}</div>
+              <div className={stl.titulos2}>Tamaño: {detail.tamaño}</div>
+              <div className={stl.titulos2}>Peso: {detail.peso}</div>
+              <div className={stl.titulos2}>Descripcion: {detail.descripcion}</div>
+              <div className={stl.titulos2}>Castrado: {detail.castrado}</div>
+              <div className={stl.titulos2}>Vacunado: {detail.vacunado}</div>  
+                </div>
+              <Link to='/contacto'>
+                <button className={stl.botonDarAdopcion}>ADOPTAR</button>
+        </Link>  
+        </div> 
         </div>
 
-
-        <Link to='/contacto'>
-                <button>ADOPTAR</button>
-        </Link>
+        <Footer />
 
         </div>
 
