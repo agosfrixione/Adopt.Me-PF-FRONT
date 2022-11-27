@@ -7,3 +7,7 @@ export const PAGO_PAYPAL = "PAGO_PAYPAL";
 export const GET_GATO = 'GET_GATO';
 export const GET_PERRO = 'GET_PERRO';
 export const PAGO_MERCADO_PAGO = "PAGO_MERCADO_PAGO";
+export const GET_DOG_NAME = "GET_DOG_NAME";
+export const ORDEN_PERRO = "ORDEN_PERRO";
+export const ORDEN_GATO = "ORDEN_GATO";
+export const GET_CAT_NAME = "GET_CAT_NAME"
