@@ -1,3 +1,4 @@
+const { isObjectIdOrHexString } = require("mongoose");
 const AnimalModel = require("../modelos/animales");
 const infoAnimal = {};
 
@@ -11,15 +12,62 @@ getAnimales = async (req, res) => {
 };
 
 getPerros = async (req,res) => {  
-    try {
-    let animalitos = await AnimalModel.find({perro: true});
-    console.log(animalitos);           
-    if(animalitos.length) 
-    await res.status(200).json(animalitos)
-  } catch (error) {
-    res.status(400).json('UPS! no se encontraron perritos')    
-  }
+  try {
+  let animalitos = await AnimalModel.find({perro: true});
+  console.log(animalitos);           
+  if(animalitos.length) 
+  await res.status(200).json(animalitos)
+} catch (error) {
+  res.status(400).json('UPS! no se encontraron perritos')    
 }
+} 
+
+
+getPerrosByName = async (req, res) => {
+  try {
+    const { nombre } = req.query;
+    console.log({nombre});
+    let mascotaName= await AnimalModel.find({nombre: nombre}); 
+    console.log(mascotaName);
+    res.status(200).send(mascotaName);
+    
+  } catch (error) {
+    res.status(400).json(`no encontrado`);
+  }
+};
+
+getGatosByName = async (req, res) => {
+  try {
+    const { nombre } = req.query;
+    console.log({nombre});
+    let gatoName= await AnimalModel.find({nombre: nombre}); 
+    console.log(gatoName);
+    res.status(200).send(gatoName);
+    
+  } catch (error) {
+    res.status(400).json(`no encontrado`);
+  }
+};
+
+/* getPerrosByName = async (req,res) => {  
+  const nombre = req.query.nombre;
+  const allDogs = await getPerros()
+    try {
+      if(nombre) {
+        const dogSelected = await allDogs.filter((d) => d.nombre.toLowerCase().includes(nombre.toLowerCase()))
+        if (dogSelected.length){
+          return res.status(200).json(dogSelected)
+         }else{
+          return res.status(400).json({error: 'The dog is at the park'})
+        }
+      }else {
+        return res.status(201).json(allDogs) 
+      }
+    } catch (error) {
+      res.json({error: 'The dog is at the park'})
+    }
+}   */
+
 
 getGatos = async (req,res) => {
   try {
@@ -34,7 +82,8 @@ getGatos = async (req,res) => {
 
 postAnimal = async (req, res) => {
   try {
-    const {      
+    const {  
+      _id: _id,    
       perro,
       gato,
       nombre,
@@ -50,7 +99,7 @@ postAnimal = async (req, res) => {
       imagen,} = req.body;
 
       const animales = await new AnimalModel({
-      
+      _id: _id,
       perro,
       gato,
       nombre,
@@ -77,9 +126,11 @@ postAnimal = async (req, res) => {
 getDetalleAnimal = async (req, res) => {
   try {
     const { id } = req.params;
-    let anmId = await AnimalModel.findById( id );
+    console.log({id});
+    let anmId = await AnimalModel.findById(id); 
     console.log(anmId);
-    if (anmId) return res.status(200).json(anmId);   
+    res.status(200).send(anmId);
+    
   } catch (error) {
     res.status(400).json(`no encontrado`);
   }

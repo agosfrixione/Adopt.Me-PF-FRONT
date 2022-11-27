@@ -28,8 +28,8 @@ export default function InfoProceso () {
             <div>
             <h2 className={stl.h2s}>Crea tu cuenta en Adopta.ME</h2>
             <h3 className={stl.h3s}>Registrate gratis. Una vez que completes el formulario vas a recibir un correo con tu usuario y contraseña y vas a poder comenzar a publicar tus mascotas.</h3>
-            <Link to='/sigup'>
-                <button className={stl.botones2}>REGISTRARSE</button>
+            <Link to='/registroMascota'>
+                <button className={stl.botones2}>REGISTRAR MASCOTA</button>
             </Link>
             </div>
 

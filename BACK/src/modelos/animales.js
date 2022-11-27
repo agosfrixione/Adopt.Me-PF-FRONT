@@ -21,7 +21,7 @@ const AnimalSchema = new Schema({
     },
     raza: {
         type: String,
-        required: true,
+        required: false,
     },
     edad: {
         type: Number,
@@ -52,7 +52,7 @@ const AnimalSchema = new Schema({
         required: false,
     },
     vacunado: {
-        type: String,
+        type: Boolean,
         required: false,
     },   
 });
