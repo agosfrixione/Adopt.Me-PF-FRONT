@@ -35,10 +35,9 @@ export default function Donar() {
 
                <label>Donar a:
                 <select className={stl.opcionesDonacion}>
-                    <option>Andres</option>
-                    <option>Noelia</option>
-                    <option>Agos</option>
-                    <option>Nacho</option>
+                    <option>El Arca de Noé (Cba)</option>
+                    <option>Adopteros Argentina (Bs.As)</option>
+                    <option>El Campito Refugio (Bs.As)</option>                    
                 </select>
                </label>
 
@@ -53,7 +52,7 @@ export default function Donar() {
                 // )}
                 // </div> */}
                 {/* <button>Mercado Pago</button>
-                <button>Crypto</button> */}
+                <button>Crypto</button>
 
                 {/* <MercadoPago /> */}
 
