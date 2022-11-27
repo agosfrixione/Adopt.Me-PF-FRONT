@@ -12,15 +12,62 @@ getAnimales = async (req, res) => {
 };
 
 getPerros = async (req,res) => {  
-    try {
-    let animalitos = await AnimalModel.find({perro: true});
-    console.log(animalitos);           
-    if(animalitos.length) 
-    await res.status(200).json(animalitos)
-  } catch (error) {
-    res.status(400).json('UPS! no se encontraron perritos')    
-  }
+  try {
+  let animalitos = await AnimalModel.find({perro: true});
+  console.log(animalitos);           
+  if(animalitos.length) 
+  await res.status(200).json(animalitos)
+} catch (error) {
+  res.status(400).json('UPS! no se encontraron perritos')    
 }
+} 
+
+
+getPerrosByName = async (req, res) => {
+  try {
+    const { nombre } = req.query;
+    console.log({nombre});
+    let mascotaName= await AnimalModel.find({nombre: nombre}); 
+    console.log(mascotaName);
+    res.status(200).send(mascotaName);
+    
+  } catch (error) {
+    res.status(400).json(`no encontrado`);
+  }
+};
+
+getGatosByName = async (req, res) => {
+  try {
+    const { nombre } = req.query;
+    console.log({nombre});
+    let gatoName= await AnimalModel.find({nombre: nombre}); 
+    console.log(gatoName);
+    res.status(200).send(gatoName);
+    
+  } catch (error) {
+    res.status(400).json(`no encontrado`);
+  }
+};
+
+/* getPerrosByName = async (req,res) => {  
+  const nombre = req.query.nombre;
+  const allDogs = await getPerros()
+    try {
+      if(nombre) {
+        const dogSelected = await allDogs.filter((d) => d.nombre.toLowerCase().includes(nombre.toLowerCase()))
+        if (dogSelected.length){
+          return res.status(200).json(dogSelected)
+         }else{
+          return res.status(400).json({error: 'The dog is at the park'})
+        }
+      }else {
+        return res.status(201).json(allDogs) 
+      }
+    } catch (error) {
+      res.json({error: 'The dog is at the park'})
+    }
+}   */
+
 
 getGatos = async (req,res) => {
   try {

@@ -1,4 +1,4 @@
-import { CREATE_ANIMAL, CREATE_USER, GET_ANIMAL_BY_ID, GET_MASCOTAS, PAGO_PAYPAL, PAGO_MERCADO_PAGO, GET_USERS, GET_GATO, GET_PERRO } from "../Actions";
+import { CREATE_ANIMAL, CREATE_USER, GET_ANIMAL_BY_ID, GET_MASCOTAS, PAGO_PAYPAL, PAGO_MERCADO_PAGO, GET_USERS, GET_GATO, GET_PERRO, GET_DOG_NAME, ORDEN_PERRO, ORDEN_GATO, GET_CAT_NAME } from "../Actions";
 
 const initialState = {
    animales: [],
@@ -7,6 +7,7 @@ const initialState = {
    users: [],
    gatos: [],
    perros: [],
+   perrosFiltrados: []
 }
 
 export default function rootReducer(state = initialState, action){
@@ -51,7 +52,45 @@ export default function rootReducer(state = initialState, action){
         //     return{
         //         ...state,
         //         animalesdetailgatos: action.payload,
-        //     }
+        //     }  GET_DOG_NAME
+        case GET_DOG_NAME:
+            return {
+                ...state,
+                perros: action.payload
+            }
+            case GET_CAT_NAME:
+            return {
+                ...state,
+                gatos: action.payload
+            }
+        case ORDEN_PERRO:
+                let perrosOrdenados= action.payload === "A-Z" ? state.perros.sort((a, b) => {
+                    if(a.nombre.toLowerCase() > b.nombre.toLowerCase()) return 1;
+                    if(a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
+                        return 0;
+                     }): state.perros.sort((a, b) => {
+                    if(a.nombre.toLowerCase() > b.nombre.toLowerCase()) return -1;
+                    if(a.nombre.toLowerCase() < b.nombre.toLowerCase()) return 1;
+                        return 0;
+                     });
+                return {
+                   ...state,
+                   perros: perrosOrdenados,
+                      } 
+         case ORDEN_GATO:
+                        let gatosOrdenados = action.payload === "A-Z" ? state.gatos.sort((a, b) => {
+                            if(a.nombre.toLowerCase() > b.nombre.toLowerCase()) return 1;
+                            if(a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
+                                return 0;
+                             }): state.gatos.sort((a, b) => {
+                            if(a.nombre.toLowerCase() > b.nombre.toLowerCase()) return -1;
+                            if(a.nombre.toLowerCase() < b.nombre.toLowerCase()) return 1;
+                                return 0;
+                             });
+                        return {
+                           ...state,
+                           gatos: gatosOrdenados,
+                              } 
 
         case PAGO_PAYPAL:
             return {...state}
