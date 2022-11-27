@@ -18,20 +18,7 @@ export default function DetallePerro () {
     useEffect(() => {
         dispatch(getmascotasbyid(id))               
     }, [id, dispatch])
-
-    // if (detail.vacunado.value === true) {
-    //   detail.vacunado = "Si"
-    // } else {
-    //   detail.vacunado = "No"
-    // }
-    
-
-    // if (detail.castrado === true) {
-    
-    //   detail.castrado = "Si"
-    // } else {
-    //   detail.castrado = "No"
-    // }
+   
    
     return (
 
@@ -40,10 +27,10 @@ export default function DetallePerro () {
             <NavBar />
 
               <div className={stl.imgn} alt="">{detail.imagen}</div>
-        <div className={stl.cardDetalles}>                   
+              <div className={stl.cardDetalles}>                   
               <div className={stl.datosAdopcion}>
               <div className={stl.tituloAdopcion}>Datos de la Mascota</div>
-              <div className={stl.datos2}>              
+            <div className={stl.datos2}>              
               <div className={stl.titulos2}>Nombre: {detail.nombre}</div>
               <div className={stl.titulos2}>Localidad: {detail.localidad} </div>              
               <div className={stl.titulos2}>Raza: {detail.raza}</div>
@@ -52,10 +39,10 @@ export default function DetallePerro () {
               <div className={stl.titulos2}>Tamaño: {detail.tamaño}</div>
               <div className={stl.titulos2}>Peso: {detail.peso}</div>
               <div className={stl.titulos2}>Descripcion: {detail.descripcion}</div>
-              <div className={stl.titulos2}>Castrado: {detail.castrado}</div>
-            
+              <div className={stl.titulos2}>Castrado: {detail.castrado}</div>              
               <div className={stl.titulos2}>Vacunado: {detail.vacunado}</div>  
-                </div>
+            </div>
+               
               <Link to='/contacto'>
                 <button className={stl.botonDarAdopcion}>ADOPTAR</button>
         </Link>  
