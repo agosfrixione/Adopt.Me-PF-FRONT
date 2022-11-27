@@ -82,58 +82,29 @@ export default function FormSignIn() {
 
   function handleSubmit(e) {
     console.log("entro al handlesubmit");
-
     e.preventDefault();
-    let noRepeatUser = users.filter((u) => u.usuario === input.usuario);
-    let noRepeatMail = users.filter((u) => u.mail === input.mail);
 
-    console.log("entro al else del handleSubmit");
-    dispatch(signinUser(input));
-    setInput({
-      usuario: "",
-      contraseña: "",
-    });
+    // Checkeamos que el usuario exista
+    let usuarioExistente = users.filter((i) => i.usuario === input.usuario);
 
-    /*
-    if (noRepeatUser.length) {
-      errors.usuario = `El nombre de usuario ${input.usuario} no está disponible`;
-    } else if (noRepeatMail) {
-      errors.mail = "Ya existe una cuenta vinculada a ese mail";
+    // Si existe despachamos la accion que va a validar los datos
+    if (usuarioExistente.length) {
+      return alert("Usuario no existe");
     } else {
-      if (
-        !input.usuario ||
-        !input.contraseña ||
-        !input.repitaContraseña ||
-        !input.nombre ||
-        !input.telefono ||
-        !input.mail ||
-        !input.nacimiento ||
-        !input.localidad
-      ) {
-        console.log("falta info");
-        alert("Falta información");
-      } else {
-        console.log("entro al else del handleSubmit");
-        dispatch(createuser(input));
-        setInput({
-
-            usuario:"",
-            contraseña:"",
-            repitaContraseña:"",
-            nombre:"",
-            telefono:"",
-            mail:"",
-            nacimiento:"",
-            localidad:"",
-            fotoPerfil:""
-
-        }); // Reinicio el formulario
-      }
-      */
+      console.log(
+        "OK. Formulario recibido. Despacho la action con estos datos:"
+      );
+      console.log(input);
+      dispatch(signinUser(input));
+      setInput({
+        usuario: "",
+        contraseña: "",
+      });
+      console.log("Input reseteado. Vamos a redirigir al /homepage");
+      navigate("/homepage");
+      alert("Ingreso exitoso. Bienvenido");
+    }
   }
-
-  /*
-    navigate("/confirmation");*/
 
   function handleChange(e) {
     e.preventDefault();
@@ -145,8 +116,6 @@ export default function FormSignIn() {
         [e.target.name]: [e.target.value],
       })
     );
-    /*
-      navigate('/confirmation')*/
   }
 
   function handleOpenWidget(e) {
