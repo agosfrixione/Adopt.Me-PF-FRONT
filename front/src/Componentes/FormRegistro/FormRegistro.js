@@ -15,7 +15,7 @@ export default function FormRegistro() {
 
   useEffect(() => {
     dispatch(getusers());
-  }, []);
+  }, [dispatch]);
 
   const [input, setInput] = useState({
     usuario: "",
@@ -34,8 +34,8 @@ export default function FormRegistro() {
 
   function validation(input) {
     let errors = {};
-    let noRepeatUser = Allusers.filter((u) => u.usuario == input.usuario);
-    let noRepeatMail = Allusers.filter((u) => u.mail == input.mail);
+    let noRepeatUser = Allusers.filter((u) => u.usuario === input.usuario);
+    let noRepeatMail = Allusers.filter((u) => u.mail === input.mail);
 
     if (!input.usuario) {
       errors.usuario = "Tenes que ingresar un nombre de usuario";
@@ -57,7 +57,7 @@ export default function FormRegistro() {
 
     if (!input.repitaContraseña) {
       errors.repitaContraseña = "Tenes que repetir la contraseña";
-    } else if (input.repitaContraseña != input.contraseña) {
+    } else if (input.repitaContraseña !== input.contraseña) {
       errors.repitaContraseña = "Las contraseñas no coinciden";
     }
 
@@ -172,15 +172,28 @@ export default function FormRegistro() {
     <div className={stl.registro} key={params.id}>
       <NavBar />
 
+      <div className={stl.errores}>
+          {errors.usuario && <p className={stl.error}>{errors.usuario}</p>}
+          {errors.contraseña && <p className={stl.error}>{errors.contraseña}</p>}
+          {errors.repitaContraseña && <p className={stl.error}>{errors.repitaContraseña}</p>}
+          {errors.nombre && <p className={stl.error}>{errors.nombre}</p>}
+          {errors.telefono && <p className={stl.error}>{errors.telefono}</p>}
+          {errors.mail && <p className={stl.error}>{errors.mail}</p>}
+          {errors.nacimiento && <p className={stl.error}>{errors.nacimiento}</p>}
+          {errors.localidad && <p className={stl.error}>{errors.localidad}</p>}
+      </div>
+
       <div className={stl.form} key={params.id}>
+        <div className={stl.titulomayor}>Registro de Usuario</div>
         <form
           onSubmit={(e) => handleSubmit(e)}
           action="/usuarios/signup"
           method="POST"
         >
-          <div key={params.id}>
-            <label>NOMBRE DE USUARIO </label>
-            <input
+
+          <div className={stl.datosRegistro} key={params.id}>
+            <div>NOMBRE DE USUARIO: </div>
+            <input className={stl.inputs} 
               type="text"
               pipo
               name="usuario"
@@ -188,12 +201,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-            {errors.usuario && <p>{errors.usuario}</p>}
+            
           </div>
 
-          <div key={params.id}>
-            <label>CONTRASEÑA </label>
-            <input
+          <div className={stl.datosRegistro} key={params.id}>
+            <div>CONTRASEÑA: </div>
+            <input className={stl.inputs}
               required
               type="password"
               name="contraseña"
@@ -201,12 +214,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-            {errors.contraseña && <p>{errors.contraseña}</p>}
+            
           </div>
 
-          <div key={params.id}>
-            <label>REPITA CONTRASEÑA </label>
-            <input
+          <div className={stl.datosRegistro} key={params.id}>
+            <div>REPITA CONTRASEÑA: </div>
+            <input className={stl.inputs}
               required
               type="password"
               name="repitaContraseña"
@@ -214,12 +227,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-            {errors.repitaContraseña && <p>{errors.repitaContraseña}</p>}
+            
           </div>
 
-          <div key={params.id}>
-            <label>NOMBRE Y APELLIDO / REFUGIO </label>
-            <input
+          <div className={stl.datosRegistro} key={params.id}>
+            <div>NOMBRE Y APELLIDO / REFUGIO: </div>
+            <input className={stl.inputs}
               type="text"
               required
               name="nombre"
@@ -227,12 +240,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-            {errors.nombre && <p>{errors.nombre}</p>}
+           
           </div>
 
-          <div key={params.id}>
-            <label>TELÉFONO DE CONTACTO </label>
-            <input
+          <div className={stl.datosRegistro} key={params.id}>
+            <div>TELÉFONO DE CONTACTO: </div>
+            <input className={stl.inputs}
               type="text"
               required
               name="telefono"
@@ -240,12 +253,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-            {errors.telefono && <p>{errors.telefono}</p>}
+          
           </div>
 
-          <div key={params.id}>
-            <label>E-MAIL </label>
-            <input
+          <div className={stl.datosRegistro}  key={params.id}>
+            <div>E-MAIL: </div>
+            <input className={stl.inputs}
               type="email"
               required
               name="mail"
@@ -253,12 +266,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-            {errors.mail && <p>{errors.mail}</p>}
+         
           </div>
 
-          <div key={params.id}>
-            <label>FECHA DE NACIMIENTO </label>
-            <input
+          <div className={stl.datosRegistro} key={params.id}>
+            <div>FECHA DE NACIMIENTO: </div>
+            <input className={stl.inputs}
               required
               type="date"
               name="nacimiento"
@@ -267,12 +280,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-            {errors.nacimiento && <p>{errors.nacimiento}</p>}
+            
           </div>
 
-          <div key={params.id}>
-            <label>LOCALIDAD </label>
-            <input
+          <div className={stl.datosRegistro} key={params.id}>
+            <div>LOCALIDAD: </div>
+            <input className={stl.inputs}
               type="text"
               required
               name="localidad"
@@ -280,10 +293,10 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-            {errors.localidad && <p>{errors.localidad}</p>}
+            
           </div>
 
-          <div key={params.id}>
+          <div className={stl.datosRegistro} key={params.id}>
             <img
               src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
               id="user-photo"
@@ -292,10 +305,12 @@ export default function FormRegistro() {
               width="150"
             />
 
+        
             <button
               id="btn-foto"
               name="fotoPerfil"
               onClick={(e) => handleOpenWidget(e)}
+              className={stl.botonImagen}
             >
               SELECCIONE FOTO DE PERFIL
             </button>
@@ -303,21 +318,23 @@ export default function FormRegistro() {
             {errors.fotoPerfil && <p>{errors.fotoPerfil}</p>}
           </div>
 
+          <div>
+
           <button
             className={stl.buttons}
             type="submit"
-            disabled={isSubmit ? false : true}
-          >
-            ACEPTAR
-          </button>
-        </form>
+            disabled={isSubmit ? false : true}>ACEPTAR</button>    
+
+          <Link to="/givepet">
+            <button className={stl.buttons}>CANCELAR</button>
+            </Link>
+
       </div>
 
-      <Link to="/givepet">
-        <button className={stl.buttons}>CANCELAR</button>
-      </Link>
-
+      </form>
+      </div>
       <Footer />
-    </div>
+    
+      </div>
   );
 }

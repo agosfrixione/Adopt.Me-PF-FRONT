@@ -1,0 +1,18 @@
+
+
+.formDarAdopcion {
+    border: 1px solid red;
+    height: 800px;
+}
+
+.formularito {
+    border: 1px solid yellow;
+    height: 500px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 500px;
+    margin-top: 100px;
+}
