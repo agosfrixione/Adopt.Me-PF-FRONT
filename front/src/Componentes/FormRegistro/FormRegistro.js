@@ -49,7 +49,7 @@ export default function FormRegistro() {
 
     if (!input.repitaContraseña) {
       errors.repitaContraseña = "Tenes que repetir la contraseña";
-    } else if (input.repitaContraseña != input.contraseña) {
+    } else if (input.repitaContraseña !== input.contraseña) {
       errors.repitaContraseña = "Las contraseñas no coincide";
     }
 
@@ -86,6 +86,7 @@ export default function FormRegistro() {
 
     return errors;
   }
+
 
   function handleSubmit(e) {
     console.log("Ingreso al handleSubmit");
@@ -131,8 +132,12 @@ export default function FormRegistro() {
         navigate("/usuarios/signin");
         alert("Usuario creado correctamente")
       }
+
     }
   }
+
+      
+
 
   function handleChange(e) {
     e.preventDefault();
@@ -289,7 +294,7 @@ export default function FormRegistro() {
             <img
               src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
               id="user-photo"
-              alt="profile picture"
+              alt=""
               height="150"
               width="150"
             />
