@@ -210,7 +210,7 @@ function validation(input){
             <div>
             <label>Vacunado:</label>
                 <input onChange={ (e) => { handleCheck4(e); handleChange(e); } }
-                type="checkbox" name="vacunado"  checked={isChecked4} value={input.vacunado}/>
+                type="checkbox" name="vacunado" checked={isChecked4} value={input.vacunado}/>
                 {errors.vacunado && ( <p>{errors.vacunado}</p>)} 
             </div>    
               

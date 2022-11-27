@@ -8,20 +8,31 @@ import Footer from "../Footer/Footer";
 import stl from "../AdoptarMascota/DetalleMascotas.module.css";
 
 
-export default function DetallePerro (props) {
+export default function DetallePerro () {
     const {id} = useParams();
     // console.log(id);
     
     const dispatch = useDispatch();
     const detail = useSelector((state) => state.animalesdetail);
-   
-
 
     useEffect(() => {
-        dispatch(getmascotasbyid(id))
-        // console.log(id);                
+        dispatch(getmascotasbyid(id))               
     }, [id, dispatch])
 
+    // if (detail.vacunado.value === true) {
+    //   detail.vacunado = "Si"
+    // } else {
+    //   detail.vacunado = "No"
+    // }
+    
+
+    // if (detail.castrado === true) {
+    
+    //   detail.castrado = "Si"
+    // } else {
+    //   detail.castrado = "No"
+    // }
+   
     return (
 
         <div className={stl.paginaAdopcion}>
@@ -42,6 +53,7 @@ export default function DetallePerro (props) {
               <div className={stl.titulos2}>Peso: {detail.peso}</div>
               <div className={stl.titulos2}>Descripcion: {detail.descripcion}</div>
               <div className={stl.titulos2}>Castrado: {detail.castrado}</div>
+            
               <div className={stl.titulos2}>Vacunado: {detail.vacunado}</div>  
                 </div>
               <Link to='/contacto'>
