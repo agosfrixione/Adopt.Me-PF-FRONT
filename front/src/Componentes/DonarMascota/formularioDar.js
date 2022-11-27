@@ -55,8 +55,8 @@ function validation(input){
         peso: "",
         localidad: "",
         descripcion: "",
-        castrado: true,
-        vacunado: true
+        castrado: "",
+        vacunado: ""
       });
       
   const [errors, setErrors] = useState({});
@@ -79,8 +79,8 @@ function validation(input){
         peso: "",
         localidad: "",
         descripcion: "",
-        castrado: true,
-        vacunado: true
+        castrado: "",
+        vacunado: ""
     })
 
     navigate("/homepage")
@@ -104,24 +104,16 @@ function validation(input){
 
   const [isChecked, setIsChecked] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
-  const [isChecked3, setIsChecked3] = useState(false);
-  const [isChecked4, setIsChecked4] = useState(false);
-
-
+  
+ 
   function handleCheck() {
-      setIsChecked(!isChecked)
-    }
-
+    if(isChecked2)return   
+    setIsChecked(!isChecked)      
+    } 
+  
     function handleCheck2() {
+      if(isChecked)return        
         setIsChecked2(!isChecked2)
-      }
-
-      function handleCheck3() {
-        setIsChecked3(!isChecked3)
-      }
-
-      function handleCheck4() {
-        setIsChecked4(!isChecked4)
       }
 
 /////////////////////////////////////////////////////////// TE KAVIO EL RETURN  ///////////////////////////////////////////////////
@@ -167,21 +159,21 @@ function validation(input){
             </div>
 
             <div>
-            <label>Estado:</label>
+            <label>Estado de la mascota:</label>
                 <input onChange={handleChange} 
                 type="text" name="estado" value={input.estado}/>
                 {errors.estado && ( <p>{errors.estado}</p>)} 
             </div>
 
             <div>
-            <label>Tamaño:</label>
+            <label>Tamaño:(Cm)</label>
                 <input onChange={handleChange} 
                 type="text" name="tamaño" value={input.tamaño}/>
                 {errors.tamaño && ( <p>{errors.tamaño}</p>)} 
             </div>
         
             <div>
-            <label>Peso:</label>
+            <label>Peso:(Kg)</label>
                 <input onChange={handleChange} 
                 type="text" name="peso" value={input.peso}/>
                 {errors.peso && ( <p>{errors.peso}</p>)} 
@@ -201,16 +193,16 @@ function validation(input){
             </div>
 
             <div>
-            <label>Castrado:</label>
-                <input onChange={ (e) => { handleCheck3(e); handleChange(e); } }
-                type="checkbox" name="castrado" checked={isChecked3} value={input.castrado}/>
-                {errors.castrado && ( <p>{errors.castrado}</p>)} 
+            <label>Castrado: (si/no)</label>
+                <input onChange={ (e) =>handleChange(e)}type="text" name="castrado" value={input.castrado}/>
+                {errors.castrado && ( <p>{errors.castrado}</p>)}
+                
+
             </div> 
 
             <div>
-            <label>Vacunado:</label>
-                <input onChange={ (e) => { handleCheck4(e); handleChange(e); } }
-                type="checkbox" name="vacunado" checked={isChecked4} value={input.vacunado}/>
+            <label>Vacunado: (si/no)</label>
+                <input onChange={ (e) =>handleChange(e)} type="text" name="vacunado"  value={input.vacunado}/>
                 {errors.vacunado && ( <p>{errors.vacunado}</p>)} 
             </div>    
               
