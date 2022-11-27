@@ -144,6 +144,7 @@ export default function FormRegistro() {
         });
         console.log("Input reseteado. Vamos a redirigir al /signIn");
         navigate("/usuarios/signin");
+        alert("Usuario creado correctamente")
       }
     }
   }
