@@ -19,7 +19,11 @@ app.use(express.json());
 
 //middlewares
 app.use(morgan('dev'));
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }))
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true
+}))
 app.use(session({
     secret: "mysecretsession",
     resave: true,
