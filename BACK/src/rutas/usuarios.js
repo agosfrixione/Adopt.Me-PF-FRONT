@@ -18,16 +18,16 @@ router.put("/:id", putUsuario);
 router.delete("/:id", deleteUsuario);
 
 router.post("/signup", passport.authenticate("local-signup" , {
-    successRedirect: "http://localhost:3000/usuarios/signin",
-    failureRedirect: "http://localhost:3000/homepage",
+    successRedirect: "/usuarios/signin",
+    failureRedirect: "/usuarios/signup",
     passReqToCallback: true,
 }));
 
-router.post("/signin", passport.authenticate("local-signin" /*, {
-  successRedirect: "/usuarios/signin",
-  failureRedirect: "/usuarios/signup",
+router.post("/signin", passport.authenticate("local-signin" , {
+  successRedirect: "/homepage",
+  failureRedirect: "/usuarios/signin",
   passReqToCallback: true,
-}*/));
+}));
 
 router.get("/logout", (req, res) => {
   req.logOut();

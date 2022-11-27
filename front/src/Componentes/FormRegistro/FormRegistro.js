@@ -15,6 +15,7 @@ export default function FormRegistro() {
 
   useEffect(() => {
     dispatch(getusers());
+
   }, [dispatch]);
 
   const [input, setInput] = useState({

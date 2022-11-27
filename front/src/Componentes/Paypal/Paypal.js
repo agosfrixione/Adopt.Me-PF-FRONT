@@ -23,6 +23,8 @@ export default function Paypal() {
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture()
                 console.log(order)
+                await alert ('SU DONACIÓN A SIDO REALIZADA CON EXITO')
+                window.location.replace('/homepage')
             },
             onError: (err) => {
                 console.log(err)
