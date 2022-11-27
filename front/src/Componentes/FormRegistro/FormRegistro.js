@@ -1,17 +1,21 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import stl from "../FormRegistro/FormRegistro.module.css";
 import createuser from "../../Actions/createuser";
+import getusers from "../../Actions/getusers";
 
 export default function FormRegistro() {
-
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
-  const users = useSelector((state) => state.users); // (o el estado global que usemos para guardar todos los usuarios)
+  const Allusers = useSelector((state) => state.users).data; // (o el estado global que usemos para guardar todos los usuarios)
+
+  useEffect(() => {
+    dispatch(getusers());
+  }, []);
 
   const [input, setInput] = useState({
     usuario: "",
@@ -30,6 +34,8 @@ export default function FormRegistro() {
 
   function validation(input) {
     let errors = {};
+    let noRepeatUser = Allusers.filter((u) => u.usuario == input.usuario);
+    let noRepeatMail = Allusers.filter((u) => u.mail == input.mail);
 
     if (!input.usuario) {
       errors.usuario = "Tenes que ingresar un nombre de usuario";
@@ -38,19 +44,21 @@ export default function FormRegistro() {
     ) {
       // max 15 caracteres alfanumericos
       errors.usuario = "El nombre de usuario no es válido";
+    } else if (noRepeatUser.length) {
+      errors.usuario = `El nombre de usuario ${input.usuario} no está disponible`;
     }
 
     if (!input.contraseña) {
       errors.contraseña = "Tenes que ingresar una contraseña";
-    } else if (/^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,}$/.test(input.contraseña)) {
+    } else if (!/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(input.contraseña)) {
       errors.contraseña =
-        "La contraseña debe tener mínimo 8 caracteres, al menos una letra y un número";
+        "La contraseña debe tener entre 8 y 16 caracteres, al menos un número, al menos una minúscula y al menos una mayúscula.";
     }
 
     if (!input.repitaContraseña) {
       errors.repitaContraseña = "Tenes que repetir la contraseña";
     } else if (input.repitaContraseña != input.contraseña) {
-      errors.repitaContraseña = "Las contraseñas no coincide";
+      errors.repitaContraseña = "Las contraseñas no coinciden";
     }
 
     if (!input.nombre) {
@@ -69,6 +77,8 @@ export default function FormRegistro() {
       errors.mail = "Tenes que ingresar un e-mail";
     } else if (!/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/gim.test(input.mail)) {
       errors.mail = "El e-mail no es válido";
+    } else if (noRepeatMail.length) {
+      errors.mail = "Ya existe una cuenta vinculada a ese mail";
     }
 
     if (!input.nacimiento) {
@@ -80,6 +90,12 @@ export default function FormRegistro() {
       errors.nacimiento = "Tenes  que ingresar una fecha válida (dd-mm-yyyy)";
     }
 
+    if (!input.fotoPerfil || input.fotoPerfil === "") {
+      setInput({
+        fotoPerfil: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
+      });
+    }
+
     if (Object.keys(errors).length === 0) {
       setisSubmit(true);
     }
@@ -87,59 +103,34 @@ export default function FormRegistro() {
     return errors;
   }
 
-
   function handleSubmit(e) {
-    // console.log("Ingreso al handleSubmit");
+    console.log("Ingreso al handleSubmit");
     e.preventDefault();
-    let noRepeatUser = users.filter((u) => u.usuario === input.usuario);
-    let noRepeatMail = users.filter((u) => u.mail === input.mail);
-
-    if (noRepeatUser.length) {
-      errors.usuario = `El nombre de usuario ${input.usuario} no está disponible`;
-    } else if (noRepeatMail.length) {
-      errors.mail = "Ya existe una cuenta vinculada a ese mail";
+    console.log(Allusers);
+    //Si no hay errores, el isSubmit esta en true
+    if (isSubmit) {
+      console.log(
+        "OK. Formulario recibido. Despacho la action con estos datos:"
+      );
+      console.log(input);
+      dispatch(createuser(input));
+      setInput({
+        usuario: "",
+        contraseña: "",
+        repitaContraseña: "",
+        nombre: "",
+        telefono: "",
+        mail: "",
+        nacimiento: "",
+        localidad: "",
+        fotoPerfil: "",
+      });
+      navigate("/usuarios/signin");
+      alert("Usuario creado correctamente");
     } else {
-      if (
-        !input.usuario ||
-        !input.contraseña ||
-        !input.repitaContraseña ||
-        !input.nombre ||
-        !input.telefono ||
-        !input.mail ||
-        !input.nacimiento ||
-        !input.localidad
-      ) {
-        // console.log("falta info");
-        return alert("Falta información");
-      // } else if(isSubmit === false){
-      //   return alert("No se pudo completar el registro, revise los campos")
-      }else if (isSubmit){
-        // console.log("OK. Formulario recibido. Despacho la action con estos datos:");
-        // console.log(input);
-        dispatch(createuser(input));
-        setInput({
-          usuario: "",
-          contraseña: "",
-          repitaContraseña: "",
-          nombre: "",
-          telefono: "",
-          mail: "",
-          nacimiento: "",
-          localidad: "",
-          fotoPerfil: "",
-        });
-        // console.log("Input reseteado. Vamos a redirigir al /signIn");
-        navigate("/usuarios/signin");
-        alert("Usuario creado correctamente")
-      }else {
-        alert("No se pudo completar el registro, revise los campos")
-      }
-
+      alert("No se pudo completar el registro, revise los campos");
     }
   }
-
-      
-
 
   function handleChange(e) {
     e.preventDefault();
@@ -312,10 +303,11 @@ export default function FormRegistro() {
             {errors.fotoPerfil && <p>{errors.fotoPerfil}</p>}
           </div>
 
-          <button 
-          className={stl.buttons} 
-          type="submit"
-          disabled={isSubmit ? false : true}>
+          <button
+            className={stl.buttons}
+            type="submit"
+            disabled={isSubmit ? false : true}
+          >
             ACEPTAR
           </button>
         </form>

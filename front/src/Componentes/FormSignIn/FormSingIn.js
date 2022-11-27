@@ -176,7 +176,7 @@ export default function FormSignIn() {
         </form>
       </div>
 
-      <Link to="/givepet">
+      <Link to="/homepage">
         <button className={stl.buttons}>CANCELAR</button>
       </Link>
 
