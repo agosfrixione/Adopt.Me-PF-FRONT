@@ -9,7 +9,7 @@ import stl from './HomeGatos.module.css';
 import ordenAlfaGato from "../../Actions/ordenAlfaGato";
 import getCatByName from "../../Actions/getCatByName";
 import FloatingUI from "../Floating UI/FloatingUI";
-
+import getCatsLocal from "../../Actions/getCatsLocal"
 
 const HomeGatos = () => {
 
@@ -29,6 +29,7 @@ const HomeGatos = () => {
     const [input, setInput] = useState("");
     const [orden, setOrden] = useState("");
     const [searchCat, setSearchCat] = useState("");
+    const [localCat, setlocalCat] = useState("");
 
     const actualPage = (pageNumber) => {setCurrentPage(pageNumber)}
 
@@ -37,10 +38,19 @@ const HomeGatos = () => {
     }, [dispatch])
     
     // if(allPets.map(e=>e.perro === true))
+    const handleClick = (e) => {
+        e.preventDefault()
+        window.location.reload();
+        }
 
     const handleInput = (e) => {
         e.preventDefault();
         setSearchCat(e.target.value)
+    }
+
+    const handleInputLocal = (e) => {
+        e.preventDefault();
+        setlocalCat(e.target.value)
     }
 
     const handleSubmit = (e) => {//mando la accion y me trae el dog
@@ -52,6 +62,16 @@ const HomeGatos = () => {
         actualPage(1)
         }
    }
+
+   const handleLocalSubmit = (e) => {//mando la accion y me trae el dog
+    e.preventDefault();
+    if(localCat){
+    dispatch(getCatsLocal(localCat))
+    setlocalCat("")
+    navigate("/adoptdog") 
+    actualPage(1)
+    }
+}
 
    const handleOrden = (e) => {
     dispatch(ordenAlfaGato(e.target.value))
@@ -74,7 +94,7 @@ const HomeGatos = () => {
         currentPets={currentPets}
         />
        <div>
-        <label className={stl.labelSearch}>Buscar:</label>
+        <label className={stl.labelSearch}>Nombre:</label>
            <input className={stl.inputNav}
                value={searchCat}
                type="text"
@@ -85,6 +105,18 @@ const HomeGatos = () => {
                type="submit"
                onClick={handleSubmit}>Ir</button>    
         </div>
+        <div>
+        <label className={stl.labelSearch}><strong>Localidad:</strong> </label>
+          <input className={stl.inputNav}
+              value={localCat}
+               type="text"
+               placeholder=" Localidad..."
+              onChange={handleInputLocal}>  
+           </input> 
+           <button className={stl.btnNav}
+               type="submit"
+               onClick={handleLocalSubmit}>Ir</button>   
+        </div>
         <div className={stl.filtros}>Filtar: 
                
                <select className={stl.op}onChange={(e) => handleOrden(e)}>
@@ -94,22 +126,24 @@ const HomeGatos = () => {
                     <option value='A-Z'>A-Z</option>
                     <option value='Z-A'>Z-A</option>
                 </select>
-                <select className={stl.op}>
+               {/*  <select className={stl.op}>
                     <option disabled selected defaultValue>
                         Localidad
                     </option>
                     <option key={1} value='All'>All</option>
-                </select>
+                </select> */}
                 <select className={stl.op}>
                     <option disabled selected defaultValue>
                         Tamaño
                     </option>
                     <option key={1} value="Pequeño">Pequeño</option>
-                    <option key={1} value="Mediano">Mediano</option>
-                    <option key={1} value="Grande">Grande</option>
+                    <option key={2} value="Mediano">Mediano</option>
+                    <option key={3} value="Grande">Grande</option>
                 </select>
         </div>
-
+        <div>
+        <button onClick={handleClick}>HomeGatos</button>
+        </div>
         <div className={stl.listadoCards}>
 
 

@@ -1,4 +1,4 @@
-import { CREATE_ANIMAL, CREATE_USER, GET_ANIMAL_BY_ID, GET_MASCOTAS, PAGO_PAYPAL, PAGO_MERCADO_PAGO, GET_USERS, GET_GATO, GET_PERRO, GET_DOG_NAME, ORDEN_PERRO, ORDEN_GATO, GET_CAT_NAME } from "../Actions";
+import { CREATE_ANIMAL, CREATE_USER, GET_ANIMAL_BY_ID, GET_MASCOTAS, PAGO_PAYPAL, PAGO_MERCADO_PAGO, GET_USERS, GET_GATO, GET_PERRO, GET_DOG_NAME, ORDEN_PERRO, ORDEN_GATO, GET_CAT_NAME, GET_DOG_LOCALIDAD, GET_CAT_LOCALIDAD } from "../Actions";
 
 const initialState = {
    animales: [],
@@ -48,6 +48,16 @@ export default function rootReducer(state = initialState, action){
                 ...state,
                 perros: action.payload,
             }
+        case GET_DOG_LOCALIDAD:
+            return {
+             ...state,
+             perros: action.payload
+             }
+        case GET_CAT_LOCALIDAD:
+            return {
+             ...state,
+             gatos: action.payload
+             }
         // case GET_GATO_BY_ID:
         //     return{
         //         ...state,

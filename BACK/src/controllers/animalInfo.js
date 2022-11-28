@@ -22,65 +22,6 @@ getPerros = async (req,res) => {
 }
 } 
 
-
-getPerrosByName = async (req, res) => {
-  try {
-    const { nombre } = req.query;
-    console.log({nombre});
-    let mascotaName= await AnimalModel.find({nombre: nombre}); 
-    console.log(mascotaName);
-    res.status(200).send(mascotaName);
-    
-  } catch (error) {
-    res.status(400).json(`no encontrado`);
-  }
-};
-
-getGatosByName = async (req, res) => {
-  try {
-    const { nombre } = req.query;
-    console.log({nombre});
-    let gatoName= await AnimalModel.find({nombre: nombre}); 
-    console.log(gatoName);
-    res.status(200).send(gatoName);
-    
-  } catch (error) {
-    res.status(400).json(`no encontrado`);
-  }
-};
-
-/* getPerrosByName = async (req,res) => {  
-  const nombre = req.query.nombre;
-  const allDogs = await getPerros()
-    try {
-      if(nombre) {
-        const dogSelected = await allDogs.filter((d) => d.nombre.toLowerCase().includes(nombre.toLowerCase()))
-        if (dogSelected.length){
-          return res.status(200).json(dogSelected)
-         }else{
-          return res.status(400).json({error: 'The dog is at the park'})
-        }
-      }else {
-        return res.status(201).json(allDogs) 
-      }
-    } catch (error) {
-      res.json({error: 'The dog is at the park'})
-    }
-}   */
-
-getPerrosLocalidad = async (req,res) => {
-  try {
-    const {localidad} = req.query;
-    console.log(localidad);
-    let ubicacion = await AnimalModel.find({localidad: localidad});
-    console.log(ubicacion);
-    if (ubicacion.length) await res.status(200).json(ubicacion)
-  } catch (error) {
-    res.status(400).json('UPS! algo salio mal')   
-  }
-}
-
-
 getGatos = async (req,res) => {
   try {
     let animalitos1 = await AnimalModel.find({gato: true});
@@ -91,6 +32,58 @@ getGatos = async (req,res) => {
     res.status(400).json('UPS! No se encontraron gatitos')   
   }
 }
+
+
+getPerrosByName = async (req, res) => {
+  try {
+    const { nombre } = req.query;
+    console.log({nombre});
+    let mascotaName = await AnimalModel.findOne({nombre: { $regex: nombre, $options:"i"}}); 
+    console.log(mascotaName);
+    if(mascotaName.length) await res.status(200).send(mascotaName)
+    
+  } catch (error) {
+    res.status(400).json(`no encontrado`);
+  }
+};
+
+getGatosByName = async (req, res) => {
+  try {
+    const { nombre } = req.query;
+    console.log({nombre});
+    let gatoName= await AnimalModel.find({nombre: { $regex: nombre, $options:"i"}}); 
+    console.log(gatoName);
+    if(gatoName.length) await res.status(200).json(gatoName)
+   
+  } catch (error) {
+    res.status(400).json(`no encontrado`);
+  }
+};
+
+getLocalidad = async (req,res) => {
+  try {
+    const {localidad} = req.query;
+    console.log(localidad);
+    let ubicacion = await AnimalModel.find({localidad: { $regex: localidad, $options:"i"}});
+    console.log(ubicacion);
+    if (ubicacion.length) await res.status(200).json(ubicacion)
+  } catch (error) {
+    res.status(400).json('UPS! algo salio mal')   
+  }
+}
+
+getTamaño= async (req,res) => {
+  try {
+    const {tamaño} = req.body;
+    console.log(tamaño);
+    let mascotaTamaño = await AnimalModel.find({tamaño: tamaño});
+    console.log(mascotaTamaño);
+    if (mascotaTamaño.length) await res.status(200).json(mascotaTamaño)
+  } catch (error) {
+    res.status(400).json('UPS! algo salio mal')   
+  }
+}
+
 
 postAnimal = async (req, res) => {
   try {
