@@ -49,8 +49,8 @@ function validation(input){
  const dispatch = useDispatch();
 
  const [input, setInput] = useState({
-        perro: true,
-        gato: true,
+        perro: false,
+        gato: false,
         nombre: "",
         raza: "",
         edad: "",
@@ -73,8 +73,8 @@ function validation(input){
     alert("Mascota Agregada");
 
     setInput({
-        perro: true,
-        gato: true,
+        perro: false,
+        gato: false,
         nombre: "",
         raza: "",
         edad: "",
@@ -109,16 +109,43 @@ function validation(input){
   const [isChecked, setIsChecked] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   
+ /////////////////////// HANDLE DE GATO
  
-  function handleCheck() {
-    if(isChecked2)return   
-    setIsChecked(!isChecked)      
+  function handleCheck() {  
+    setIsChecked(!isChecked)
     } 
-  
-    function handleCheck2() {
-      if(isChecked)return        
+
+    function handleGato(e) {
+      if(e.target.checked === !isChecked) { 
+        setInput({
+          ...input,
+          [e.target.name]: e.target.checked
+       })
+  } else {
+      setInput({
+      ...input,
+      [e.target.name]: false
+     })
+  }}
+
+  ///////////////////////////// HANDLE DE PERRO
+
+    function handleCheck2() {     
         setIsChecked2(!isChecked2)
       }
+
+      function handlePerro(e) {
+        if(e.target.checked === !isChecked2) { 
+        setInput({
+         ...input,
+        [e.target.name]: e.target.checked
+       })
+    } else {
+        setInput({
+        ...input,
+        [e.target.value]: false
+       })
+    }}
 
 /////////////////////////////////////////////////////////// TE KAVIO EL RETURN  ///////////////////////////////////////////////////
 
@@ -143,13 +170,13 @@ function validation(input){
        <div className={stl.gatoPerro}>
          <div className={stl.opciones2}>
                 <label className={stl.titulos2}>Gato:</label>
-                <input className={stl.inputs2} onChange={ (e) => { handleCheck(e); handleChange(e); } }
+                <input className={stl.inputs2} onChange={ (e) => { handleCheck(e); handleGato(e); } }
                 type="checkbox" name="gato" checked={isChecked} value={input.gato}/>                       
             </div> 
             
             <div className={stl.opciones2}>
                 <label className={stl.titulos2}>Perro:</label>
-                <input className={stl.inputs2} onChange={ (e) => { handleCheck2(e); handleChange(e); } }
+                <input className={stl.inputs2} onChange={ (e) => { handleCheck2(e); handlePerro(e); } }
                 type="checkbox" name="perro" checked={isChecked2} value={input.perro}/>                         
             </div>
             </div>
@@ -204,12 +231,12 @@ function validation(input){
 
             <div className={stl.opciones}>
             <label className={stl.titulos}>Esta Castrado? (Si/No):</label>
-                <input onChange={ (e) =>handleChange(e)}type="text" name="castrado" value={input.castrado}/>
+                <input onChange={handleChange}type="text" name="castrado" value={input.castrado}/>
             </div> 
 
             <div className={stl.opciones}>
             <label className={stl.titulos}>Esta Vacunado? (Si/No):</label>
-                <input onChange={ (e) =>handleChange(e)} type="text" name="vacunado"  value={input.vacunado}/>
+                <input onChange={handleChange} type="text" name="vacunado"  value={input.vacunado}/>
             </div>    
               
              <button className={stl.boton} type="submit">Dar en Adopcion</button>
