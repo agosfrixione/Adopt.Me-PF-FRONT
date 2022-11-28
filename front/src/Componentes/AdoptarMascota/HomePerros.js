@@ -10,7 +10,8 @@ import FloatingUI from "../Floating UI/FloatingUI";
 import getperro from "../../Actions/getperros";
 import getDogByName from "../../Actions/getDogByName";
 import ordenAlfabetico from "../../Actions/ordenAlfabetico";
-
+import getDogsLocal from "../../Actions/getDogsLocal";
+import filtradoTamaño from "../../Actions/filtradoTamaño";
 
 
 
@@ -31,6 +32,7 @@ export default function HomePerros () {
     const [input, setInput] = useState("");
     const [orden, setOrden] = useState("");
     const [searchDog, setSearchDog] = useState("");
+    const [localDog, setlocalDog] = useState("");
 
     const actualPage = (pageNumber) => {setCurrentPage(pageNumber)}
 
@@ -38,11 +40,19 @@ export default function HomePerros () {
             dispatch(getperro())
         }, [dispatch])
 
-
+        const handleClick = (e) => {
+            e.preventDefault()
+            window.location.reload();
+        }
         
         const handleInput = (e) => {//cambia cada caracter
         e.preventDefault();
         setSearchDog(e.target.value)
+    }
+
+    const handleInputLocal = (e) => {//cambia cada caracter
+        e.preventDefault();
+        setlocalDog(e.target.value)
     }
 
     const handleSubmit = (e) => {//mando la accion y me trae el dog
@@ -55,11 +65,27 @@ export default function HomePerros () {
         }
    }
 
+   const handleLocalSubmit = (e) => {//mando la accion y me trae el dog
+    e.preventDefault();
+    if(localDog){
+    dispatch(getDogsLocal(localDog))
+    setlocalDog("")
+    navigate("/adoptdog") 
+    actualPage(1)
+    }
+}
+
    const handleOrden = (e) => {
      dispatch(ordenAlfabetico(e.target.value))
      setCurrentPage(1)
      setOrden(`Ordenado ${e.target.value}`)
    }
+
+   function handlerTamaño (e) {
+    dispatch(filtradoTamaño(e.target.value))
+    setCurrentPage(1)
+    setOrden(`Ordenado ${e.target.value}`)
+}
         
    return(
         <div className={stl.paginaadopcionperros}>
@@ -76,7 +102,7 @@ export default function HomePerros () {
         />
 
         <div>
-        <label className={stl.labelSearch}>Buscar:</label>
+        <label className={stl.labelSearch}>Nombre:</label>
            <input className={stl.inputNav}
                value={searchDog}
                type="text"
@@ -87,6 +113,18 @@ export default function HomePerros () {
                type="submit"
                onClick={handleSubmit}>Ir</button>    
         </div>
+        <div>
+        <label className={stl.labelSearch}><strong>Localidad:</strong> </label>
+           <input className={stl.inputNav}
+               value={localDog}
+               type="text"
+               placeholder=" Localidad..."
+               onChange={handleInputLocal}>
+           </input>
+           <button className={stl.btnNav}
+               type="submit"
+               onClick={handleLocalSubmit}>Ir</button>    
+        </div>
         <div className={stl.filtros}>Filtar: 
                
                <select className={stl.op}onChange={(e) => handleOrden(e)}>
@@ -96,20 +134,24 @@ export default function HomePerros () {
                     <option value='A-Z'>A-Z</option>
                     <option value='Z-A'>Z-A</option>
                 </select>
-                <select className={stl.op}>
+                {/* <select className={stl.op}>
                     <option disabled selected defaultValue>
                         Localidad
                     </option>
                     <option key={1} value='All'>All</option>
-                </select>
+                </select> */}
                 <select className={stl.op}>
                     <option disabled selected defaultValue>
                         Tamaño
                     </option>
                     <option key={1} value="Pequeño">Pequeño</option>
-                    <option key={1} value="Mediano">Mediano</option>
-                    <option key={1} value="Grande">Grande</option>
+                    <option key={2} value="Mediano">Mediano</option>
+                    <option key={3} value="Grande">Grande</option>
                 </select>
+        </div>
+        <br/>
+        <div>
+            <button onClick={handleClick}>HomePerros</button>
         </div>
 
         <div className={stl.listadoCards}> 
