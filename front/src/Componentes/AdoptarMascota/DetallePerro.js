@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import stl from "../AdoptarMascota/DetalleMascotas.module.css";
+import FloatingUI from "../Floating UI/FloatingUI";
 
 
 export default function DetallePerro () {
@@ -25,22 +26,22 @@ export default function DetallePerro () {
         <div className={stl.paginaAdopcion}>
             
             <NavBar />
-
+            <FloatingUI />
               <div className={stl.imgn} alt="">{detail.imagen}</div>
               <div className={stl.cardDetalles}>                   
               <div className={stl.datosAdopcion}>
               <div className={stl.tituloAdopcion}>Datos de la Mascota</div>
             <div className={stl.datos2}>              
-              <div className={stl.titulos2}>Nombre: {detail.nombre}</div>
-              <div className={stl.titulos2}>Localidad: {detail.localidad} </div>              
-              <div className={stl.titulos2}>Raza: {detail.raza}</div>
-              <div className={stl.titulos2}>Edad: {detail.edad}</div>
-              <div className={stl.titulos2}>Estado: {detail.estado}</div>
-              <div className={stl.titulos2}>Tamaño: {detail.tamaño}</div>
-              <div className={stl.titulos2}>Peso: {detail.peso}</div>
-              <div className={stl.titulos2}>Descripcion: {detail.descripcion}</div>
-              <div className={stl.titulos2}>Castrado: {detail.castrado}</div>              
-              <div className={stl.titulos2}>Vacunado: {detail.vacunado}</div>  
+              <div className={stl.titulos2}>Nombre: <p className={stl.details}>{detail.nombre}</p></div>
+              <div className={stl.titulos2}>Localidad: <p className={stl.details}>{detail.localidad}</p> </div>              
+              <div className={stl.titulos2}>Raza: <p className={stl.details}>{detail.raza}</p></div>
+              <div className={stl.titulos2}>Edad: <p className={stl.details}>{detail.edad}</p></div>
+              <div className={stl.titulos2}>Estado: <p className={stl.details}>{detail.estado}</p></div>
+              <div className={stl.titulos2}>Tamaño: <p className={stl.details}>{detail.tamaño}</p></div>
+              <div className={stl.titulos2}>Peso: <p className={stl.details}>{detail.peso}</p></div>
+              <div className={stl.titulos2}>Descripcion: <p className={stl.details}>{detail.descripcion}</p></div>
+              <div className={stl.titulos2}>Castrado: <p className={stl.details}>{detail.castrado}</p></div>              
+              <div className={stl.titulos2}>Vacunado: <p className={stl.details}>{detail.vacunado}</p></div>  
             </div>
                
               <Link to='/contacto'>

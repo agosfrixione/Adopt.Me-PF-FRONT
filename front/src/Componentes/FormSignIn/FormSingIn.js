@@ -6,6 +6,7 @@ import NavBar from "../NavBar/NavBar";
 import stl from "../FormSignIn/FormSignIn.module.css";
 import signinUser from "../../Actions/signinUser";
 import getusers from "../../Actions/getusers";
+import FloatingUI from "../Floating UI/FloatingUI";
 
 export default function FormSignIn() {
   const params = useParams();
@@ -94,6 +95,7 @@ export default function FormSignIn() {
   return (
     <div className={stl.registro} key={params.id}>
       <NavBar />
+      <FloatingUI />
 
       <div className={stl.form} key={params.id}>
         <form onSubmit={(e) => handleSubmit(e)}>

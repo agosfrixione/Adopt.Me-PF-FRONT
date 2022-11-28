@@ -4,6 +4,7 @@ import Card from "../Card/Card";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import stl from "../BuscarMascota/BuscarMascota.module.css";
+import FloatingUI from "../Floating UI/FloatingUI";
 
 export default function BuscarMascota() {
   const params = useParams();
@@ -12,6 +13,7 @@ export default function BuscarMascota() {
     <>
       <div key={params.id}></div>
       <NavBar />
+      <FloatingUI />
       <div>
         <h1 className={stl.titulo}>BUSCA AQUI TU MASCOTA PERDIDA</h1>
       </div>

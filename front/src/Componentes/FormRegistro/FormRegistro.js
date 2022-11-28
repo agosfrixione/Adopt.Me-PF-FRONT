@@ -6,6 +6,7 @@ import NavBar from "../NavBar/NavBar";
 import stl from "../FormRegistro/FormRegistro.module.css";
 import createuser from "../../Actions/createuser";
 import getusers from "../../Actions/getusers";
+import FloatingUI from "../Floating UI/FloatingUI";
 
 export default function FormRegistro() {
   const params = useParams();
@@ -172,6 +173,7 @@ export default function FormRegistro() {
   return (
     <div className={stl.registro} key={params.id}>
       <NavBar />
+      <FloatingUI />
 
       <div className={stl.errores}>
           {errors.usuario && <p className={stl.error}>{errors.usuario}</p>}

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import  {useNavigate}  from "react-router-dom"
-
 import Card from "../Card/Card";
 import stl from "./HomePerros.module.css";
 import NavBar from "../NavBar/NavBar";
 import Paging from "../Pagination/Pagination";
 import Footer from "../Footer/Footer";
-
+import FloatingUI from "../Floating UI/FloatingUI";
 import getperro from "../../Actions/getperros";
 import getDogByName from "../../Actions/getDogByName";
 import ordenAlfabetico from "../../Actions/ordenAlfabetico";
@@ -65,6 +64,7 @@ export default function HomePerros () {
    return(
         <div className={stl.paginaadopcionperros}>
             <NavBar />
+            <FloatingUI />
         <div className={stl.tituloPerros}>Perros en Adopcion</div>
 
         <Paging 
@@ -76,7 +76,7 @@ export default function HomePerros () {
         />
 
         <div>
-        <label className={stl.labelSearch}><strong>Buscar:</strong> </label>
+        <label className={stl.labelSearch}>Buscar:</label>
            <input className={stl.inputNav}
                value={searchDog}
                type="text"
@@ -87,28 +87,28 @@ export default function HomePerros () {
                type="submit"
                onClick={handleSubmit}>Ir</button>    
         </div>
-        <div>Filtros:
+        <div className={stl.filtros}>Filtar: 
                
-               <select onChange={(e) => handleOrden(e)}>
+               <select className={stl.op}onChange={(e) => handleOrden(e)}>
                     <option disabled selected defaultValue>
                         Alfabeticamente
                     </option>
                     <option value='A-Z'>A-Z</option>
                     <option value='Z-A'>Z-A</option>
                 </select>
-                <select>
+                <select className={stl.op}>
                     <option disabled selected defaultValue>
                         Localidad
                     </option>
                     <option key={1} value='All'>All</option>
                 </select>
-                <select>
+                <select className={stl.op}>
                     <option disabled selected defaultValue>
                         Tamaño
                     </option>
-                    <option key={1} value="0_a_20_cm">0 a 20 cm</option>
-                    <option key={1} value="20_a_40_cm">20 a 40 cm</option>
-                    <option key={1} value="40_cm_en_adelante">40 cm en adelante</option>
+                    <option key={1} value="Pequeño">Pequeño</option>
+                    <option key={1} value="Mediano">Mediano</option>
+                    <option key={1} value="Grande">Grande</option>
                 </select>
         </div>
 

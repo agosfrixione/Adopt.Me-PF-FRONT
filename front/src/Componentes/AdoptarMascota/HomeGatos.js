@@ -8,7 +8,7 @@ import Paging from "../Pagination/Pagination";
 import stl from './HomeGatos.module.css';
 import ordenAlfaGato from "../../Actions/ordenAlfaGato";
 import getCatByName from "../../Actions/getCatByName";
-
+import FloatingUI from "../Floating UI/FloatingUI";
 
 
 const HomeGatos = () => {
@@ -63,6 +63,7 @@ const HomeGatos = () => {
 
         <div className={stl.paginaadopcionperros}>
             <NavBar/>
+            <FloatingUI />
         <div className={stl.tituloGatos}>Gatos en Adopcion</div>
 
        <Paging 
@@ -72,41 +73,40 @@ const HomeGatos = () => {
         actualPage={actualPage}
         currentPets={currentPets}
         />
-        <div>
-        <label className={stl.labelSearch}><strong>Buscar:</strong> </label>
-          <input className={stl.inputNav}
-              value={searchCat}
+       <div>
+        <label className={stl.labelSearch}>Buscar:</label>
+           <input className={stl.inputNav}
+               value={searchCat}
                type="text"
                placeholder=" Nombre..."
-              onChange={handleInput}>  
-           </input> 
+               onChange={handleInput}>
+           </input>
            <button className={stl.btnNav}
                type="submit"
-               onClick={handleSubmit}>Ir</button>   
+               onClick={handleSubmit}>Ir</button>    
         </div>
-        <div>Filtros:
-                <select onChange={e => handleOrden(e)}>
+        <div className={stl.filtros}>Filtar: 
+               
+               <select className={stl.op}onChange={(e) => handleOrden(e)}>
                     <option disabled selected defaultValue>
                         Alfabeticamente
                     </option>
-                    <option key={1} value='A-Z'>A-Z</option>
-                    <option key={2} value='Z-A'>Z-A</option>
+                    <option value='A-Z'>A-Z</option>
+                    <option value='Z-A'>Z-A</option>
                 </select>
-
-                    <select>
+                <select className={stl.op}>
                     <option disabled selected defaultValue>
                         Localidad
                     </option>
                     <option key={1} value='All'>All</option>
                 </select>
-              
-                     <select>
+                <select className={stl.op}>
                     <option disabled selected defaultValue>
                         Tamaño
                     </option>
-                    <option key={1} value="0_a_20_cm">0 a 20 cm</option>
-                    <option key={1} value="20_a_40_cm">20 a 40 cm</option>
-                    <option key={1} value="40_cm_en_adelante">40 cm en adelante</option>
+                    <option key={1} value="Pequeño">Pequeño</option>
+                    <option key={1} value="Mediano">Mediano</option>
+                    <option key={1} value="Grande">Grande</option>
                 </select>
         </div>
 

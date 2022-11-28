@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import stl from "../TePuedeInteresar/TePuedeInteresar.module.css";
+import FloatingUI from "../Floating UI/FloatingUI";
 
 export default function TePuedeInteresar () {
 
@@ -13,6 +14,7 @@ export default function TePuedeInteresar () {
         <div className={stl.pagina} key={params.id}>
             
             <NavBar />
+            <FloatingUI />
 
             <h1 className={stl.titulo}>TE PUEDE INTERESAR</h1>
 

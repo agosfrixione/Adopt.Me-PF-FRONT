@@ -52,6 +52,13 @@
     box-shadow: rgba(72, 35, 7, .46) 0 0 0 4px, -6px 8px 10px rgba(81,41,10,0.1), 0px 2px 2px rgba(81,41,10,0.2);
   }
 
+  .boton:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-4px);
+    background-color: white;
+    color: black;
+  }
+
   .vacunacion {
     background-image: url("../../Imagenes/vacunacion.jpg");
     background-repeat: no-repeat;
