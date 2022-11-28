@@ -11,7 +11,7 @@ import getperro from "../../Actions/getperros";
 import getDogByName from "../../Actions/getDogByName";
 import ordenAlfabetico from "../../Actions/ordenAlfabetico";
 import getDogsLocal from "../../Actions/getDogsLocal";
-import filtradoTamaño from "../../Actions/filtradoTamaño";
+/* import filtradoTamaño from "../../Actions/filtradoTamaño"; */
 
 
 
@@ -81,11 +81,11 @@ export default function HomePerros () {
      setOrden(`Ordenado ${e.target.value}`)
    }
 
-   function handlerTamaño (e) {
+  /*  function handlerTamaño (e) {
     dispatch(filtradoTamaño(e.target.value))
     setCurrentPage(1)
     setOrden(`Ordenado ${e.target.value}`)
-}
+} */
         
    return(
         <div className={stl.paginaadopcionperros}>
@@ -138,14 +138,14 @@ export default function HomePerros () {
                     </option>
                     <option key={1} value='All'>All</option>
                 </select> */}
-                <select className={stl.op}>
+                {/* <select className={stl.op}>
                     <option disabled selected defaultValue>
                         Tamaño
                     </option>
                     <option key={1} value="Pequeño">Pequeño</option>
                     <option key={2} value="Mediano">Mediano</option>
                     <option key={3} value="Grande">Grande</option>
-                </select>
+                </select> */}
         </div>
         <br/>
         <div>
