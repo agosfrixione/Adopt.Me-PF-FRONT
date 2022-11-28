@@ -7,6 +7,7 @@ import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer"
 import stl from "../DonarMascota/formularioDar.module.css"
 import FloatingUI from "../Floating UI/FloatingUI";
+import axios from "axios";
 
 ////////////////////////////////////////////////////// VALIDACION ///////////////////////////////////////////////////////////////
 
@@ -64,6 +65,8 @@ function validation(input){
       });
 
   const [imagenes, setImagenes] = useState([]);
+
+  // const [imageRemove, setImageRemove] = useState(null);
       
   const [errors, setErrors] = useState({});
 
@@ -177,6 +180,13 @@ function validation(input){
 
       myWidget.open();
       }
+
+  ///////////////////////////// HANDLE DELETE FOTO
+
+  // function handleDelete(f) {
+  //   setImageRemove(f.public_id);
+  //   axios.delete('')
+  // }
 
 /////////////////////////////////////////////////////////// TE KAVIO EL RETURN  ///////////////////////////////////////////////////
 
