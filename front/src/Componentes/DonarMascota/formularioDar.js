@@ -62,13 +62,15 @@ function validation(input){
         castrado: "",
         vacunado: ""
       });
+
+  const [imagenes, setImagenes] = useState([]);
       
   const [errors, setErrors] = useState({});
 
     function handleSubmit(e){
          e.preventDefault();
 
-    dispatch(createanimal(input));
+    dispatch(createanimal(input, imagenes));
 
     alert("Mascota Agregada");
 
@@ -86,6 +88,8 @@ function validation(input){
         castrado: "",
         vacunado: ""
     })
+
+    setImagenes([])
 
     navigate("/homepage")
  }
@@ -147,6 +151,33 @@ function validation(input){
        })
     }}
 
+
+  ///////////////////////////// HANDLE DE CLOUDINARY
+
+    function handleOpenWidget(e) {
+      // console.log("Entre el handleOpenWidget");
+      e.preventDefault();
+      var myWidget = window.cloudinary.createUploadWidget(
+          {
+              cloudName: "dvw0vrnxp",
+              uploadPreset: "mascotas",
+          },
+          (error, result) => {
+              if (!error && result && result.event === "success") {
+              console.log('Done! Here is the image info: ', result.info);
+
+              setImagenes((prev) => [
+                ...prev, {
+                  url: result.info.secure_url, 
+                  id: result.info.public_id
+                }])
+              }
+            }
+          );
+
+      myWidget.open();
+      }
+
 /////////////////////////////////////////////////////////// TE KAVIO EL RETURN  ///////////////////////////////////////////////////
 
   return (
@@ -166,6 +197,27 @@ function validation(input){
       </div> 
 
           <div className={stl.titulo}>Registra los datos de tu Mascota</div>
+          
+          <div className={stl.imageContainer}>
+            {imagenes.map((f) => {
+              return (
+              <div className={stl.imagePreview}>
+                <img src= {f.url}/>
+                </div>
+                );
+                })}
+                <div className={stl.imagePreview}>
+                  <img src= "https://www.sourcedogg.com/wp-content/uploads/2015/05/default-placeholder.png"/>
+                  </div>
+                  </div>
+                  <div>
+                    <button
+                    id="btn-foto"
+                    name="fotos"
+                    onClick={(e) => handleOpenWidget(e)}>
+                      AGREGAR FOTOS
+                      </button>
+                      </div>
        
        <div className={stl.gatoPerro}>
          <div className={stl.opciones2}>

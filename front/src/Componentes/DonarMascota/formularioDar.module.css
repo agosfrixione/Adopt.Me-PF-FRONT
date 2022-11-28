@@ -105,4 +105,22 @@
     color: black;
   }
 
+  .imagePreview {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin: 20px;
+  }
+
+  .imagePreview img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .imageContainer {
+    display: flex;
+    justify-content: center;
+  }
+
 
