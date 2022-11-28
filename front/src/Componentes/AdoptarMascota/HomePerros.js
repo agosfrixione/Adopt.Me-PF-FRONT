@@ -112,9 +112,7 @@ export default function HomePerros () {
            <button className={stl.btnNav}
                type="submit"
                onClick={handleSubmit}>Ir</button>    
-        </div>
-        <div>
-        <label className={stl.labelSearch}><strong>Localidad:</strong> </label>
+        <label className={stl.labelSearch}>Localidad:</label>
            <input className={stl.inputNav}
                value={localDog}
                type="text"
@@ -151,7 +149,7 @@ export default function HomePerros () {
         </div>
         <br/>
         <div>
-            <button onClick={handleClick}>HomePerros</button>
+            <button className={stl.btnNavHome} onClick={handleClick}>HomePerros</button>
         </div>
 
         <div className={stl.listadoCards}> 
