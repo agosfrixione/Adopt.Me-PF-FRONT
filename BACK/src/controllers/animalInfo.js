@@ -68,6 +68,18 @@ getGatosByName = async (req, res) => {
     }
 }   */
 
+getPerrosLocalidad = async (req,res) => {
+  try {
+    const {localidad} = req.query;
+    console.log(localidad);
+    let ubicacion = await AnimalModel.find({localidad: localidad});
+    console.log(ubicacion);
+    if (ubicacion.length) await res.status(200).json(ubicacion)
+  } catch (error) {
+    res.status(400).json('UPS! algo salio mal')   
+  }
+}
+
 
 getGatos = async (req,res) => {
   try {
