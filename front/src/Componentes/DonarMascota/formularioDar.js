@@ -6,6 +6,7 @@ import "./formularioDar.css";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer"
 import stl from "../DonarMascota/formularioDar.module.css"
+import FloatingUI from "../Floating UI/FloatingUI";
 
 ////////////////////////////////////////////////////// VALIDACION ///////////////////////////////////////////////////////////////
 
@@ -125,95 +126,93 @@ function validation(input){
     
   <div className={stl.formDarAdopcion}>
     <NavBar />
-      
+    <FloatingUI />
+   
         <form className={stl.formularito} onSubmit={handleSubmit}>
+
+         <div className={stl.error}>
+      {errors.gato && ( <p class="error2">{errors.gato}</p>)} 
+      {errors.perro && ( <p class="error2">{errors.perro}</p>)}
+      {errors.nombre && ( <p class="error2">{errors.nombre}</p>)} 
+      {errors.edad && ( <p class="error2">{errors.edad}</p>)} 
+      {errors.descripcion && ( <p class="error2">{errors.descripcion}</p>)} 
+      </div> 
+
+          <div className={stl.titulo}>Registra los datos de tu Mascota</div>
        
-         <div>
-                <label>Gato:</label>
-                <input onChange={ (e) => { handleCheck(e); handleChange(e); } }
-                type="checkbox" name="gato" checked={isChecked} value={input.gato}/>
-                 {errors.gato && ( <p>{errors.gato}</p>)}            
+       <div className={stl.gatoPerro}>
+         <div className={stl.opciones2}>
+                <label className={stl.titulos2}>Gato:</label>
+                <input className={stl.inputs2} onChange={ (e) => { handleCheck(e); handleChange(e); } }
+                type="checkbox" name="gato" checked={isChecked} value={input.gato}/>                       
             </div> 
             
-            <div>
-                <label>Perro:</label>
-                <input onChange={ (e) => { handleCheck2(e); handleChange(e); } }
-                type="checkbox" name="perro" checked={isChecked2} value={input.perro}/>
-                 {errors.perro && ( <p>{errors.perro}</p>)}            
+            <div className={stl.opciones2}>
+                <label className={stl.titulos2}>Perro:</label>
+                <input className={stl.inputs2} onChange={ (e) => { handleCheck2(e); handleChange(e); } }
+                type="checkbox" name="perro" checked={isChecked2} value={input.perro}/>                         
+            </div>
             </div>
 
-              <div>
-                <label>Nombre:</label>
+              <div className={stl.opciones}>
+                <label className={stl.titulos}>Nombre:</label>
                 <input onChange={handleChange} 
-                type="text" name="nombre" value={input.nombre}/>
-                 {errors.nombre && ( <p className="error">{errors.nombre}</p>)}            
+                type="text" name="nombre" value={input.nombre}/>                        
             </div>
  
-            <div>
-            <label>Raza:</label>
+            <div className={stl.opciones}>
+            <label className={stl.titulos}>Raza:</label>
                 <input onChange={handleChange} 
-                type="text" name="raza" value={input.raza}/>
-                {errors.raza && ( <p>{errors.raza}</p>)} 
+                type="text" name="raza" value={input.raza}/>           
             </div>
 
-            <div>
-            <label>Edad:</label>
+            <div className={stl.opciones}>
+            <label className={stl.titulos}>Edad (Solo Numeros):</label>
                 <input onChange={handleChange}
-                type="text" name="edad" value={input.edad}/>
-                {errors.edad && ( <p className="error">{errors.edad}</p>)} 
+                type="text" name="edad" value={input.edad}/>           
             </div>
 
-            <div>
-            <label>Estado de la mascota:</label>
+            <div className={stl.opciones}>
+            <label className={stl.titulos}>Estado de la mascota:</label>
                 <input onChange={handleChange} 
-                type="text" name="estado" value={input.estado}/>
-                {errors.estado && ( <p>{errors.estado}</p>)} 
+                type="text" name="estado" value={input.estado}/>          
             </div>
 
-            <div>
-            <label>Tamaño:(Cm)</label>
+            <div className={stl.opciones}>
+            <label className={stl.titulos}>Tamaño (Chico/Mediano/Grande):</label>
                 <input onChange={handleChange} 
-                type="text" name="tamaño" value={input.tamaño}/>
-                {errors.tamaño && ( <p>{errors.tamaño}</p>)} 
+                type="text" name="tamaño" value={input.tamaño}/>            
             </div>
         
-            <div>
-            <label>Peso:(Kg)</label>
+            <div className={stl.opciones}>
+            <label className={stl.titulos}>Peso (Solo Numeros):</label>
                 <input onChange={handleChange} 
-                type="text" name="peso" value={input.peso}/>
-                {errors.peso && ( <p>{errors.peso}</p>)} 
+                type="text" name="peso" value={input.peso}/>           
             </div>
 
-            <div>
-            <label>Localidad:</label>
+            <div className={stl.opciones}>
+            <label className={stl.titulos}>Localidad:</label>
                 <input onChange={handleChange} 
-                type="text" name="localidad" value={input.localidad}/>
-                {errors.localidad && ( <p>{errors.localidad}</p>)} 
+                type="text" name="localidad" value={input.localidad}/>            
             </div>
 
-            <div>
-            <label>Descripcion:</label>
+            <div className={stl.opciones}>
+            <label className={stl.titulos}>Descripcion:</label>
                 <input onChange={handleChange} type="text" name="descripcion" value={input.descripcion}/>
-                {errors.descripcion && ( <p className="error">{errors.descripcion}</p>)} 
+               
             </div>
 
-            <div>
-            <label>Castrado: (si/no)</label>
+            <div className={stl.opciones}>
+            <label className={stl.titulos}>Esta Castrado? (Si/No):</label>
                 <input onChange={ (e) =>handleChange(e)}type="text" name="castrado" value={input.castrado}/>
-                {errors.castrado && ( <p>{errors.castrado}</p>)}
-                
-
             </div> 
 
-            <div>
-            <label>Vacunado: (si/no)</label>
+            <div className={stl.opciones}>
+            <label className={stl.titulos}>Esta Vacunado? (Si/No):</label>
                 <input onChange={ (e) =>handleChange(e)} type="text" name="vacunado"  value={input.vacunado}/>
-                {errors.vacunado && ( <p>{errors.vacunado}</p>)} 
             </div>    
               
-        <div>
-             <button type="submit">Dar en Adopcion</button>
-        </div>
+             <button className={stl.boton} type="submit">Dar en Adopcion</button>
 
         </form>
         <Footer />

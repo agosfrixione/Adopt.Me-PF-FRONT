@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import stl from "../DonarMascota/InfoProceso.module.css";
+import FloatingUI from "../Floating UI/FloatingUI";
 
 export default function InfoProceso () {
 
@@ -12,6 +13,7 @@ export default function InfoProceso () {
 
         <div className={stl.donarmascota} key={params.id}>
             <NavBar/>
+            <FloatingUI />
             <div>
             <h1 className={stl.tituloDonarMascota}>PUBLICA LOS ANIMALES QUE TIENES EN ADOPCIÓN</h1>
             </div>
