@@ -83,15 +83,15 @@ export default function HomePerros () {
      setOrden(`Ordenado ${e.target.value}`)
    }
 
-   function handleTamaño(e) {
-    e.preventDefault();
-    dispatch(filtradoTamaño(e.target.value))
-    setCurrentPage(1)
-}
+//    function handleTamaño(e) {
+//     e.preventDefault();
+//     dispatch(filtradoTamaño(e.target.value))
+//     setCurrentPage(1)
+// }
 
-useEffect (() => {
-    dispatch(getDogstamaño())
-  }, [dispatch])
+// useEffect (() => {
+//     dispatch(getDogstamaño())
+//   }, [dispatch])
         
    return(
         <div className={stl.paginaadopcionperros}>
@@ -141,13 +141,13 @@ useEffect (() => {
                     <option value='Z-A'>Z-A</option>
                 </select>
               
-                <div>                    
+                {/* <div>                    
                   <select className={stl.op} onChange={e => handleTamaño(e)}>
                     { allTamaños && allTamaños.sort().map(e => {
                       return <option value={e} key={e}>{e}</option>
                     }) }      
                   </select>
-                </div>
+                </div> */}
         </div>
         <br/>
         <div>
