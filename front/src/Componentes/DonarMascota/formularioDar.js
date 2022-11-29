@@ -7,7 +7,6 @@ import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer"
 import stl from "../DonarMascota/formularioDar.module.css"
 import FloatingUI from "../Floating UI/FloatingUI";
-// import axios from "axios";
 
 ////////////////////////////////////////////////////// VALIDACION ///////////////////////////////////////////////////////////////
 
@@ -44,7 +43,8 @@ function validation(input){
  //////////////////////////////////////////////////// PA ADOPTAR AMEGO ////////////////////////////////////////////////////////////
  
  export default function DarEnAdopcion() {
-       
+ 
+ 
  const navigate = useNavigate();
  const dispatch = useDispatch();
 
@@ -64,8 +64,6 @@ function validation(input){
       });
 
   const [imagenes, setImagenes] = useState([]);
-
-  // const [imageRemove, setImageRemove] = useState(null);
       
   const [errors, setErrors] = useState({});
 
@@ -190,16 +188,18 @@ function validation(input){
               }
             }
           );
-
+          console.log('imagenes', imagenes)
       myWidget.open();
       }
 
   ///////////////////////////// HANDLE DELETE FOTO
 
-  // function handleDelete(f) {
-  //   setImageRemove(f.public_id);
-  //   axios.delete('')
-  // }
+  function handleDelete(f) {
+    setImagenes({
+      ...imagenes,
+      id: imagenes.id.filter((id) => id !== f)
+    });
+  }
 
 /////////////////////////////////////////////////////////// TE KAVIO EL RETURN  ///////////////////////////////////////////////////
 
@@ -225,12 +225,15 @@ function validation(input){
             {imagenes.map((f) => {
               return (
               <div className={stl.imagePreview}>
-                <img src= {f.url} alt=""/>
+                <img src= {f.url} value={f.id} alt="foto"/>
+                {imagenes.map((f) => (
+                  <i className="fa fa-times close-icon" onClick={() => handleDelete(f)} value={f.id}></i>
+                ))}
                 </div>
                 );
                 })}
                 <div className={stl.imagePreview}>
-                  <img src= "https://www.sourcedogg.com/wp-content/uploads/2015/05/default-placeholder.png" alt=""/>
+                  <img src= "https://www.sourcedogg.com/wp-content/uploads/2015/05/default-placeholder.png" alt="default"/>
                   </div>
                   </div>
                   <div>
