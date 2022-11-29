@@ -1,4 +1,4 @@
-import { CREATE_ANIMAL, CREATE_USER, GET_ANIMAL_BY_ID, GET_MASCOTAS, PAGO_PAYPAL, PAGO_MERCADO_PAGO, GET_USERS, GET_GATO, GET_PERRO, GET_DOG_NAME, ORDEN_PERRO, ORDEN_GATO, GET_CAT_NAME, GET_DOG_LOCALIDAD, GET_CAT_LOCALIDAD } from "../Actions";
+import { CREATE_ANIMAL, CREATE_USER, GET_ANIMAL_BY_ID, GET_MASCOTAS, PAGO_PAYPAL, PAGO_MERCADO_PAGO, GET_USERS, GET_GATO, GET_PERRO, GET_DOG_NAME, ORDEN_PERRO, ORDEN_GATO, GET_CAT_NAME, GET_DOG_LOCALIDAD, GET_CAT_LOCALIDAD, FILTRA_TAMAÑO, GET_DOG_TAMAÑO } from "../Actions";
 
 const initialState = {
    animales: [],
@@ -7,8 +7,12 @@ const initialState = {
    users: [],
    gatos: [],
    perros: [],
-   perrosFiltrados: []
+   perrosFiltrados: [],
+   tamañoFiltrado: [],
+   tamañosDog: [],
+   
 }
+
 
 export default function rootReducer(state = initialState, action){
     switch(action.type){
@@ -17,7 +21,9 @@ export default function rootReducer(state = initialState, action){
         if(action.payload) { 
             return {       
                 ...state,   
-                animales: action.payload
+                animales: action.payload,
+                tamañoFiltrado: action.payload
+             
             }              
         } else { 
             return { ...state, animales:[] } }
@@ -58,11 +64,21 @@ export default function rootReducer(state = initialState, action){
              ...state,
              gatos: action.payload
              }
-        // case GET_GATO_BY_ID:
-        //     return{
-        //         ...state,
-        //         animalesdetailgatos: action.payload,
-        //     }  GET_DOG_NAME
+
+             case GET_DOG_TAMAÑO:
+                let dogTam = action.payload 
+                return{ ...state, tamañosDog: dogTam }
+        
+             case FILTRA_TAMAÑO:
+                const allTamDog = state.tamañoFiltrado
+                console.log("tamañoFiltrado:", allTamDog)
+                const tamañofilter = action.payload === ("all") ? allTamDog : allTamDog.filter(p => p.tamañosDog.includes(action.payload))
+            
+                if (tamañofilter.length === 0) {
+                    alert(`No hay videojuegos con el genero ${action.payload}`)
+                    return state
+                } else { return { ...state, animales: tamañofilter } }
+
         case GET_DOG_NAME:
             return {
                 ...state,

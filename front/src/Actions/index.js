@@ -14,4 +14,5 @@ export const GET_CAT_NAME = "GET_CAT_NAME";
 export const GET_DOG_LOCALIDAD = "GET_DOG_LOCALIDAD";
 export const RESET_DOG = "RESET_DOG";
 export const FILTRA_TAMAÑO = "FILTRA_TAMAÑO";
-export const GET_CAT_LOCALIDAD = "GET_CAT_LOCALIDAD"
+export const GET_CAT_LOCALIDAD = "GET_CAT_LOCALIDAD";
+export const GET_DOG_TAMAÑO = "GET_DOG_TAMAÑO";
