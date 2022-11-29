@@ -1,4 +1,3 @@
-const { isObjectIdOrHexString } = require("mongoose");
 const AnimalModel = require("../modelos/animales");
 const infoAnimal = {};
 
