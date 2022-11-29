@@ -117,7 +117,8 @@ useEffect (() => {
            </input>
            <button className={stl.btnNav}
                type="submit"
-               onClick={handleSubmit}>Ir</button>    
+               onClick={handleSubmit}>Ir</button>  
+
         <label className={stl.labelSearch}>Localidad:</label>
            <input className={stl.inputNav}
                value={localDog}
@@ -129,6 +130,7 @@ useEffect (() => {
                type="submit"
                onClick={handleLocalSubmit}>Ir</button>    
         </div>
+
         <div className={stl.filtros}>Filtar: 
                
                <select className={stl.op} onChange={(e) => handleOrden(e)}>
@@ -138,13 +140,7 @@ useEffect (() => {
                     <option value='A-Z'>A-Z</option>
                     <option value='Z-A'>Z-A</option>
                 </select>
-                {/* <select className={stl.op}>
-                    <option disabled selected defaultValue>
-                        Localidad
-                    </option>
-                    <option key={1} value='All'>All</option>
-                </select> */}
-
+              
                 <div>                    
                   <select className={stl.op} onChange={e => handleTamaño(e)}>
                     { allTamaños && allTamaños.sort().map(e => {
