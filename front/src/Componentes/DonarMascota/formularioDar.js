@@ -43,8 +43,8 @@ function validation(input){
  //////////////////////////////////////////////////// PA ADOPTAR AMEGO ////////////////////////////////////////////////////////////
  
  export default function DarEnAdopcion() {
-       
-
+ 
+ 
  const navigate = useNavigate();
  const dispatch = useDispatch();
 
@@ -53,14 +53,14 @@ function validation(input){
         gato: false,
         nombre: "",
         raza: "",
-        edad: "",
+        edad: [],
         estado: "",
-        tamaño: "",
+        tamaño: [],
         peso: "",
         localidad: "",
         descripcion: "",
         castrado: "",
-        vacunado: ""
+        vacunado: "",
       });
 
   const [imagenes, setImagenes] = useState([]);
@@ -79,14 +79,14 @@ function validation(input){
         gato: false,
         nombre: "",
         raza: "",
-        edad: "",
+        edad: [],
         estado: "",
-        tamaño: "",
+        tamaño: [],
         peso: "",
         localidad: "",
         descripcion: "",
         castrado: "",
-        vacunado: ""
+        vacunado: "",
     })
 
     setImagenes([])
@@ -109,6 +109,20 @@ function validation(input){
         })
     )
   }
+
+  function handleEdad(e) {
+      setInput({
+        ...input,
+        edad: [...input.edad, e.target.value]
+      })
+   } 
+
+   function handleTamaño(e) {
+    setInput({
+      ...input,
+      tamaño: [...input.tamaño, e.target.value]
+    })
+ } 
 
   const [isChecked, setIsChecked] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
@@ -257,11 +271,16 @@ function validation(input){
                 type="text" name="raza" value={input.raza}/>           
             </div>
 
-            <div className={stl.opciones}>
+            <div className={stl.opciones}>                                
             <label className={stl.titulos}>Edad (Solo Numeros):</label>
-                <input onChange={handleChange}
-                type="text" name="edad" value={input.edad}/>           
-            </div>
+            <select className={stl.edad} onChange={handleEdad}>
+                        <option></option>
+                       <option>Menos de 45 dias</option>
+                       <option>Mas de 45 dias</option>
+                       <option>Adulto</option>
+                       <option>Anciano</option>
+                        </select>
+                        </div>
 
             <div className={stl.opciones}>
             <label className={stl.titulos}>Estado de la mascota:</label>
@@ -269,11 +288,15 @@ function validation(input){
                 type="text" name="estado" value={input.estado}/>          
             </div>
 
-            <div className={stl.opciones}>
-            <label className={stl.titulos}>Tamaño (Chico/Mediano/Grande):</label>
-                <input onChange={handleChange} 
-                type="text" name="tamaño" value={input.tamaño}/>            
-            </div>
+            <div className={stl.opciones}>                                     
+            <label className={stl.titulos}>Tamaño:</label>
+            <select className={stl.tamaño} onChange={handleTamaño}>
+                       <option></option>
+                       <option>Chico</option>
+                       <option>Mediano</option>
+                       <option>Grande</option>
+                       </select>
+                        </div>
         
             <div className={stl.opciones}>
             <label className={stl.titulos}>Peso (Solo Numeros):</label>
@@ -291,7 +314,7 @@ function validation(input){
             <label className={stl.titulos}>Descripcion:</label>
                 <input onChange={handleChange} type="text" name="descripcion" value={input.descripcion}/>
                
-            </div>
+           </div>
 
             <div className={stl.opciones}>
             <label className={stl.titulos}>Esta Castrado? (Si/No):</label>

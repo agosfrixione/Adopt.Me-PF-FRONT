@@ -33,7 +33,7 @@ export default function NavBar() {
         <div className="menu">
           <div className="menu-item">
             <Link to = "/givepet">
-            <div className="drop">Donar Mascota</div>
+            <div className="drop">Dar en Adopcion</div>
             </Link>
           </div>
           <div className="menu-item">

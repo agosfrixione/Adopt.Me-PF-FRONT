@@ -91,7 +91,7 @@ export default function FormRegistro() {
     ) {
       errors.nacimiento = "Tenes  que ingresar una fecha válida (dd-mm-yyyy)";
     }
-
+    
     if (!input.fotoPerfil || input.fotoPerfil === "") {
       setInput({
         fotoPerfil: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",

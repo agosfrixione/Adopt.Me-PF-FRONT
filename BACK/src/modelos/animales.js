@@ -24,7 +24,7 @@ const AnimalSchema = new Schema({
         required: false,
     },
     edad: {
-        type: Number,
+        type: Array,
         required: false,
     },
     estado: {
@@ -32,7 +32,7 @@ const AnimalSchema = new Schema({
         required: false,
     },
     tamaño: {
-        type: String,
+        type: Array,
         required: false,
     },
     peso: {
@@ -54,7 +54,7 @@ const AnimalSchema = new Schema({
     vacunado: {
         type: String,
         required: false,
-    },   
+    }, 
 });
 
 const AnimalModel = mongoose.model('animales', AnimalSchema)

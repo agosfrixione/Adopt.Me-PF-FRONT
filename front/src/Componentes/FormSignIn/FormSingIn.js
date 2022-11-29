@@ -16,7 +16,6 @@ export default function FormSignIn() {
 
   useEffect(() => {
     dispatch(getusers());
-    console.log(Allusers)
   }, [dispatch]);
 
   const [input, setInput] = useState({
@@ -56,27 +55,22 @@ export default function FormSignIn() {
     if (Object.keys(errors).length === 0) {
       setisSubmit(true);
     }
-
     return errors;
   }
 
   function handleSubmit(e) {
-    console.log("entro al handlesubmit");
     e.preventDefault();
     if (isSubmit) { 
-      console.log("OK. Formulario recibido. Despacho la action con estos datos:");
-      console.log(input);
       dispatch(signinUser(input));
       setInput({
         usuario: "",
         contraseña: "",
       });
-      navigate("/perfil");
-      alert("Ingreso exitoso. Bienvenido");
+      //navigate("/perfil");
+      //alert("Ingreso exitoso. Bienvenido");
     } else {
       alert("No se pudo ingresar. Revise los campos")
     }
-    
   }
 
   function handleChange(e) {

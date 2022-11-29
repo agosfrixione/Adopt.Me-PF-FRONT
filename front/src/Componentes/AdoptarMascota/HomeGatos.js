@@ -132,14 +132,14 @@ const HomeGatos = () => {
                     </option>
                     <option key={1} value='All'>All</option>
                 </select> */}
-                <select className={stl.op}>
+                {/* <select className={stl.op}>
                     <option disabled selected defaultValue>
                         Tamaño
                     </option>
                     <option key={1} value="Pequeño">Pequeño</option>
                     <option key={2} value="Mediano">Mediano</option>
                     <option key={3} value="Grande">Grande</option>
-                </select>
+                </select> */}
         </div>
         <div>
         <button onClick={handleClick}>HomeGatos</button>
