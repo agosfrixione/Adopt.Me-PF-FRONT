@@ -311,7 +311,7 @@ function validation(input){
             <label className={stl.titulos}>Descripcion:</label>
                 <input onChange={handleChange} type="text" name="descripcion" value={input.descripcion}/>
                
-            </div>
+           </div>
 
             <div className={stl.opciones}>
             <label className={stl.titulos}>Esta Castrado? (Si/No):</label>
