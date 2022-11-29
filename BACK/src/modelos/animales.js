@@ -54,7 +54,11 @@ const AnimalSchema = new Schema({
     vacunado: {
         type: String,
         required: false,
-    }, 
+    },
+    imagen: {
+        type: String,
+        required: false,
+    } 
 });
 
 const AnimalModel = mongoose.model('animales', AnimalSchema)
