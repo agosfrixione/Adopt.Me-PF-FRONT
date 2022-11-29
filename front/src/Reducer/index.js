@@ -1,16 +1,36 @@
-import { CREATE_ANIMAL, CREATE_USER, GET_ANIMAL_BY_ID, GET_MASCOTAS, PAGO_PAYPAL, PAGO_MERCADO_PAGO, GET_USERS, GET_GATO, GET_PERRO, GET_DOG_NAME, ORDEN_PERRO, ORDEN_GATO, GET_CAT_NAME, GET_DOG_LOCALIDAD, GET_CAT_LOCALIDAD, FILTRA_TAMAÑO, GET_DOG_TAMAÑO } from "../Actions";
+
+import { 
+    CREATE_ANIMAL,
+    CREATE_USER,
+    GET_ANIMAL_BY_ID,
+    GET_MASCOTAS,
+    PAGO_PAYPAL,
+    PAGO_MERCADO_PAGO,
+    GET_USERS, GET_GATO,
+    GET_PERRO, GET_DOG_NAME,
+    ORDEN_PERRO, ORDEN_GATO,
+    GET_CAT_NAME,
+    GET_DOG_LOCALIDAD,
+    GET_CAT_LOCALIDAD,
+    GET_TAMAÑO_PERDIDOS, 
+    GET_ANIMALES_PERDIDOS,
+    GET_TAMAÑO_FILTRO, FILTRA_TAMAÑO, GET_DOG_TAMAÑO
+    GET_DETAIL_MASCOTA_PERDIDA} from "../Actions";
+
 
 const initialState = {
    animales: [],
+   animalesPerdidos: [],
+   animalesPerdidosDetail: [],
    animalesdetail: [],
-//    animalesdetailgatos: [],
    users: [],
    gatos: [],
    perros: [],
    perrosFiltrados: [],
    tamañoFiltrado: [],
    tamañosDog: [],
-   
+   filtroPerdidos: [],
+
 }
 
 
@@ -48,6 +68,29 @@ export default function rootReducer(state = initialState, action){
                 ...state,
                 gatos: action.payload
             }
+        case GET_TAMAÑO_FILTRO:
+            
+            return{
+                ...state,
+                filtroPerdidos: action.payload,
+            }
+        case GET_DETAIL_MASCOTA_PERDIDA:
+            return{
+                ...state,
+                animalesPerdidosDetail: action.payload,
+            }               
+        
+        case GET_TAMAÑO_PERDIDOS:
+            
+            return{
+                ...state,
+                filtroPerdidos: action.payload,
+            }
+        case GET_ANIMALES_PERDIDOS:
+            return{
+                ...state,
+                animalesPerdidos: action.payload,
+            }
 
         case GET_PERRO:
             return{
@@ -75,7 +118,7 @@ export default function rootReducer(state = initialState, action){
                 const tamañofilter = action.payload === ("all") ? allTamDog : allTamDog.filter(p => p.tamañosDog.includes(action.payload))
             
                 if (tamañofilter.length === 0) {
-                    alert(`No hay videojuegos con el genero ${action.payload}`)
+                    alert(`No hay perros de este tamaño ${action.payload}`)
                     return state
                 } else { return { ...state, animales: tamañofilter } }
 
@@ -116,7 +159,7 @@ export default function rootReducer(state = initialState, action){
                         return {
                            ...state,
                            gatos: gatosOrdenados,
-                              } 
+                              }
 
         case PAGO_PAYPAL:
             return {...state}
