@@ -30,8 +30,7 @@ const initialState = {
    tamañoFiltrado: [],
    tamañosDog: [],
    filtroPerdidos: [],
-   animalesdetail: [],
-
+   detalleUsuario: []
 }
 
 
