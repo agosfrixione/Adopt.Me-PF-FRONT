@@ -14,9 +14,12 @@ import {
     GET_TAMAÑO_PERDIDOS, 
     GET_ANIMALES_PERDIDOS,
     GET_TAMAÑO_FILTRO,
-    GET_DETAIL_MASCOTA_PERDIDA, 
-    GET_DOG_TAMAÑOS,
-    FILTRA_TAMAÑO} from "../Actions";
+
+    GET_DETAIL_MASCOTA_PERDIDA,
+    FILTRADO_ESTADO_PERDIDO,
+    GET_GATO_PERDIDO,
+    CREATE_ANIMAL_PERDIDO} from "../Actions";
+
 
 
 const initialState = {
@@ -27,6 +30,8 @@ const initialState = {
 
    animalesPerdidos: [],
    animalesPerdidosCopia: [],
+
+   gatosPerdidos: [],
 
    animalesPerdidosDetail: [],
    animalesdetail: [],
@@ -89,8 +94,9 @@ export default function rootReducer(state = initialState, action){
       return {
         ...state,
         gatos: action.payload,
-      };
-   
+
+      };   
+
     case GET_DOG_NAME:
       return {
         ...state,
@@ -139,7 +145,7 @@ export default function rootReducer(state = initialState, action){
             let filterByTam = filtered.filter(
                 (t)=>t.tama.map(
                     (ty)=>ty.tama).includes(
-                        action.payload === 'chico'|| action.payload === 'grande' || action.payload === 'mediano')
+                        action.payload === 'Chico'|| action.payload === 'Grande' || action.payload === 'Mediano')
                  || t.tama.includes(action.payload))            
             if(action.payload === 'All')filterByTam = filtered;           
             
@@ -167,8 +173,29 @@ export default function rootReducer(state = initialState, action){
                 animalesPerdidos: action.payload,
                 animalesPerdidosCopia: action.payload,
             }
-
-
+        case FILTRADO_ESTADO_PERDIDO:
+            let animPerdidos = state.animalesPerdidosCopia;
+            let filterByEstado = animPerdidos.filter(
+                (e)=>e.estado.map(
+                    (e)=>e.estado).includes(
+                        action.payload === 'Perdido'|| action.payload === 'Encontrado')
+                 || e.estado.includes(action.payload))            
+            if(action.payload === 'estado')filterByEstado = animPerdidos;          
+            console.log(filterByEstado);
+            return{
+                ...state,
+                animalesPerdidos: filterByEstado, 
+            };
+        case GET_GATO_PERDIDO:            
+            return{
+                ...state,
+                animalesPerdidos: action.payload,
+            }
+        case CREATE_ANIMAL_PERDIDO:
+            return{
+                ...state,                      
+                // animalesPerdidosCopia: action.payload,
+            }
     case "signin":
       return { ...state };
 
