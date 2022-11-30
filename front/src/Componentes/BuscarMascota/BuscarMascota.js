@@ -15,8 +15,10 @@ import Paging from "../Pagination/Pagination";
 export default function BuscarMascota() {
   const params = useParams();
   const dispatch = useDispatch();
-  const tamaño = useSelector((state)=>state.filtroPerdidos)
+  
   const allPets = useSelector((state)=>state.animalesPerdidos)
+  const copia = useSelector((state)=>state.animalesPerdidosCopia)
+  console.log("copia", copia)
 
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(4)
@@ -25,18 +27,20 @@ export default function BuscarMascota() {
     const currentPets = allPets.slice(firstPetIndex,lastPetIndex);
     const actualPage = (pageNumber) => {setCurrentPage(pageNumber)}
 
+    const [refresh, setReefresh]= useState(copia)
 
-  useEffect(()=>{
-    dispatch(getTamañoPerdidos())
-    dispatch(getAnimalesPerdidos())
+
+  useEffect(()=>{      
+    dispatch(getAnimalesPerdidos())    
+    setCurrentPage(1)
   }, [dispatch]);
 
-  const handleTamaño = (e)=>{
-    e.preventDefault();
-    setCurrentPage(1)
-    dispatch(getTamañofiltro(e.target.value))
-    console.log(e.target.value);
+  async function handleTamaño (e){  
+    await e.preventDefault(copia);   
+    await dispatch(getTamañofiltro(e.target.value))  
+    console.log(copia);    
   }
+
 
   return (
     <>
@@ -47,22 +51,25 @@ export default function BuscarMascota() {
         <h1 className={stl.titulo}>BUSCA AQUI TU MASCOTA PERDIDA</h1>
       </div>
        <Paging
-       mascotasPerPage={mascotasPerPage} 
+        mascotasPerPage={mascotasPerPage} 
         allPets={allPets.length} 
         currentPage={currentPage} 
         actualPage={actualPage}
         currentPets={currentPets}
        />
 
+                {/* // <option value = 'mediano'>Mediano</option>
+                // <option value = 'chico'>Chico</option>
+                // <option value = 'grande'>Grande</option>                     */}
        
        {/* TODAVIA NO ANDA BIEN EL FILTRO POR TAMAÑOS, PERO LO DEJO COMENTADO PARA SEGUIR */}
       <div>
-      {/* <select onChange={(e)=>handleTamaño(e)}>
-                <option value='All'>Tamaño</option>
-                <option value = 'mediano'>{tamaño.tama}</option>
-                <option value = 'grande'>{tamaño.tama}</option>
-                <option value = 'chico'>{tamaño.tama}</option>             
-            </select>   */}
+      <select onChange={(e)=>handleTamaño(e)}>
+                <option value='All' disabled selected defaultValue>Tamaño</option>
+                <option value = 'mediano'>Mediano</option>
+                <option value = 'chico'>Chico</option>
+                <option value = 'grande'>Grande</option>                               
+            </select>  
 
             
       </div>

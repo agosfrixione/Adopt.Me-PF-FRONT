@@ -11,8 +11,9 @@ import getperro from "../../Actions/getperros";
 import getDogByName from "../../Actions/getDogByName";
 import ordenAlfabetico from "../../Actions/ordenAlfabetico";
 import getDogsLocal from "../../Actions/getDogsLocal";
- import filtradoTamaño from "../../Actions/filtradoTamaño"; 
-import getDogstamaño from "../../Actions/getDogTamaño";
+ import getdogtamaños from "../../Actions/getDogTamaños";
+ 
+
 
 
 
@@ -22,7 +23,8 @@ export default function HomePerros () {
     const navigate = useNavigate();
 
     const allPets = useSelector((state) => state.perros);
-    const allTamaños = useSelector((state) => state.tamañosDog)
+    const copiaPerros = useSelector((state)=>state.perrosCopia)
+    console.log("copiaperros", copiaPerros)
 
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(4)
@@ -35,11 +37,13 @@ export default function HomePerros () {
     const [orden, setOrden] = useState("");
     const [searchDog, setSearchDog] = useState("");
     const [localDog, setlocalDog] = useState("");
+    const [refresh, setReefresh]= useState(copiaPerros)
 
     const actualPage = (pageNumber) => {setCurrentPage(pageNumber)}
 
         useEffect(() => {
             dispatch(getperro())
+            setCurrentPage(1)
         }, [dispatch])
 
         const handleClick = (e) => {
@@ -83,15 +87,12 @@ export default function HomePerros () {
      setOrden(`Ordenado ${e.target.value}`)
    }
 
-   function handleTamaño(e) {
-    e.preventDefault();
-    dispatch(filtradoTamaño(e.target.value))
-    setCurrentPage(1)
-}
 
-useEffect (() => {
-    dispatch(getDogstamaño())
-  }, [dispatch])
+//   async function handleTamaño (e){  
+//      e.preventDefault(copiaPerros);   
+//      dispatch(getdogtamaños(e.target.value))  
+//     console.log("copia perros:", copiaPerros);    
+//   }
         
    return(
         <div className={stl.paginaadopcionperros}>
@@ -117,7 +118,8 @@ useEffect (() => {
            </input>
            <button className={stl.btnNav}
                type="submit"
-               onClick={handleSubmit}>Ir</button>    
+               onClick={handleSubmit}>Ir</button>  
+
         <label className={stl.labelSearch}>Localidad:</label>
            <input className={stl.inputNav}
                value={localDog}
@@ -129,6 +131,7 @@ useEffect (() => {
                type="submit"
                onClick={handleLocalSubmit}>Ir</button>    
         </div>
+
         <div className={stl.filtros}>Filtar: 
                
                <select className={stl.op} onChange={(e) => handleOrden(e)}>
@@ -138,20 +141,13 @@ useEffect (() => {
                     <option value='A-Z'>A-Z</option>
                     <option value='Z-A'>Z-A</option>
                 </select>
-                {/* <select className={stl.op}>
-                    <option disabled selected defaultValue>
-                        Localidad
-                    </option>
-                    <option key={1} value='All'>All</option>
-                </select> */}
-
-                <div>                    
-                  <select className={stl.op} onChange={e => handleTamaño(e)}>
-                    { allTamaños && allTamaños.sort().map(e => {
-                      return <option value={e} key={e}>{e}</option>
-                    }) }      
-                  </select>
-                </div>
+              
+                {/* <select onChange={(e)=>handleTamaño(e)}>
+                <option value='All' disabled selected defaultValue>Tamaño</option>
+                <option value = 'mediano'>Mediano</option>
+                <option value = 'chico'>Chico</option>
+                <option value = 'grande'>Grande</option>                               
+            </select>  */}
         </div>
         <br/>
         <div>

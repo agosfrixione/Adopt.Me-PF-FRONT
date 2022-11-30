@@ -8,72 +8,147 @@ import {
     PAGO_MERCADO_PAGO,
     GET_USERS, GET_GATO,
     GET_PERRO, GET_DOG_NAME,
-    ORDEN_PERRO, ORDEN_GATO,
     GET_CAT_NAME,
     GET_DOG_LOCALIDAD,
     GET_CAT_LOCALIDAD,
     GET_TAMAÑO_PERDIDOS, 
     GET_ANIMALES_PERDIDOS,
-    GET_TAMAÑO_FILTRO, FILTRA_TAMAÑO, GET_DOG_TAMAÑO
-    GET_DETAIL_MASCOTA_PERDIDA} from "../Actions";
+    GET_TAMAÑO_FILTRO,
+    GET_DETAIL_MASCOTA_PERDIDA, 
+    GET_DOG_TAMAÑOS,
+    FILTRA_TAMAÑO} from "../Actions";
 
 
 const initialState = {
    animales: [],
+
+   perrosCopia: [],
+   gatosCopia: [],
+
    animalesPerdidos: [],
+   animalesPerdidosCopia: [],
+
    animalesPerdidosDetail: [],
    animalesdetail: [],
    users: [],
    gatos: [],
    perros: [],
-   perrosFiltrados: [],
+  
    tamañoFiltrado: [],
-   tamañosDog: [],
+   
    filtroPerdidos: [],
-
+   detalleUsuario: []
 }
 
 
 export default function rootReducer(state = initialState, action){
     switch(action.type){
 
-        case GET_MASCOTAS:     
+    case GET_MASCOTAS:     
         if(action.payload) { 
             return {       
                 ...state,   
-                animales: action.payload,
-                tamañoFiltrado: action.payload
-             
+                animales: action.payload,           
             }              
         } else { 
             return { ...state, animales:[] } }
-
-        case CREATE_USER:
-            return {...state}
-
-        case CREATE_ANIMAL:
-            return {...state}
-
-        case GET_ANIMAL_BY_ID:  
-            return { ...state,
-                animalesdetail: action.payload }
-
-        case GET_USERS:
-            return {
-                ...state,
-                users: action.payload
-            }
-        case GET_GATO:
-            return{
-                ...state,
-                gatos: action.payload
-            }
-        case GET_TAMAÑO_FILTRO:
             
+    case CREATE_USER:
+      return { ...state };
+
+    case CREATE_ANIMAL:
+      return { ...state };
+    
+    case GET_ANIMAL_BY_ID:
+      return { ...state, animalesdetail: action.payload };
+
+    case GET_USERS:
+      return {
+        ...state,
+        users: action.payload,
+      };
+    case GET_GATO:
+      return {
+        ...state,
+        gatos: action.payload,
+        gatosCopia: action.payload
+      };
+
+    case GET_PERRO:
+      return {
+        ...state,
+        perros: action.payload,
+        perrosCopia: action.payload
+      };
+    case GET_DOG_LOCALIDAD:
+      return {
+        ...state,
+        perros: action.payload,
+      };
+    case GET_CAT_LOCALIDAD:
+      return {
+        ...state,
+        gatos: action.payload,
+      };
+   
+    case GET_DOG_NAME:
+      return {
+        ...state,
+        perros: action.payload,
+      };
+    case GET_CAT_NAME:
+      return {
+        ...state,
+        gatos: action.payload,
+      };
+
+    case PAGO_PAYPAL:
+      return { ...state };
+
+    case PAGO_MERCADO_PAGO:
+      return { ...state };
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// case GET_DOG_TAMAÑOS:
+//   let filtered2 = state.perrosCopia;
+//   let filterByTam2 = filtered2.filter(
+//       (t)=>t.tamaño.map(
+//           (ty)=>ty.tamaño).includes(
+//               action.payload === 'chico'|| action.payload === 'grande' || action.payload === 'mediano')
+//        || t.tamaño.includes(action.payload))            
+//   if(action.payload === 'All')filterByTam2 = filtered2;           
+  
+//   console.log(filterByTam2);
+//   return{
+//       ...state,
+//       perros: filterByTam2,                            
+//   };
+               
+        
+//         case FILTRA_TAMAÑO:
+            
+//             return{
+//                 ...state,
+//                 tamañoFiltrado: action.payload,
+//             }
+        
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+        case GET_TAMAÑO_FILTRO:
+            let filtered = state.animalesPerdidosCopia;
+            let filterByTam = filtered.filter(
+                (t)=>t.tama.map(
+                    (ty)=>ty.tama).includes(
+                        action.payload === 'chico'|| action.payload === 'grande' || action.payload === 'mediano')
+                 || t.tama.includes(action.payload))            
+            if(action.payload === 'All')filterByTam = filtered;           
+            
+            console.log(filterByTam);
             return{
                 ...state,
-                filtroPerdidos: action.payload,
-            }
+                animalesPerdidos: filterByTam,                            
+            };
+
         case GET_DETAIL_MASCOTA_PERDIDA:
             return{
                 ...state,
@@ -90,87 +165,20 @@ export default function rootReducer(state = initialState, action){
             return{
                 ...state,
                 animalesPerdidos: action.payload,
+                animalesPerdidosCopia: action.payload,
             }
 
-        case GET_PERRO:
-            return{
-                ...state,
-                perros: action.payload,
-            }
-        case GET_DOG_LOCALIDAD:
-            return {
-             ...state,
-             perros: action.payload
-             }
-        case GET_CAT_LOCALIDAD:
-            return {
-             ...state,
-             gatos: action.payload
-             }
 
-             case GET_DOG_TAMAÑO:
-                let dogTam = action.payload 
-                return{ ...state, tamañosDog: dogTam }
-        
-             case FILTRA_TAMAÑO:
-                const allTamDog = state.tamañoFiltrado
-                console.log("tamañoFiltrado:", allTamDog)
-                const tamañofilter = action.payload === ("all") ? allTamDog : allTamDog.filter(p => p.tamañosDog.includes(action.payload))
-            
-                if (tamañofilter.length === 0) {
-                    alert(`No hay perros de este tamaño ${action.payload}`)
-                    return state
-                } else { return { ...state, animales: tamañofilter } }
+    case "signin":
+      return { ...state };
 
-        case GET_DOG_NAME:
-            return {
-                ...state,
-                perros: action.payload
-            }
-            case GET_CAT_NAME:
-            return {
-                ...state,
-                gatos: action.payload
-            }
-        case ORDEN_PERRO:
-                let perrosOrdenados= action.payload === "A-Z" ? state.perros.sort((a, b) => {
-                    if(a.nombre.toLowerCase() > b.nombre.toLowerCase()) return 1;
-                    if(a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
-                        return 0;
-                     }): state.perros.sort((a, b) => {
-                    if(a.nombre.toLowerCase() > b.nombre.toLowerCase()) return -1;
-                    if(a.nombre.toLowerCase() < b.nombre.toLowerCase()) return 1;
-                        return 0;
-                     });
-                return {
-                   ...state,
-                   perros: perrosOrdenados,
-                      } 
-         case ORDEN_GATO:
-                        let gatosOrdenados = action.payload === "A-Z" ? state.gatos.sort((a, b) => {
-                            if(a.nombre.toLowerCase() > b.nombre.toLowerCase()) return 1;
-                            if(a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
-                                return 0;
-                             }): state.gatos.sort((a, b) => {
-                            if(a.nombre.toLowerCase() > b.nombre.toLowerCase()) return -1;
-                            if(a.nombre.toLowerCase() < b.nombre.toLowerCase()) return 1;
-                                return 0;
-                             });
-                        return {
-                           ...state,
-                           gatos: gatosOrdenados,
-                              }
+    case "getDetalleUsuario":
+      return {
+        ...state,
+        detalleUsuario: action.payload,
+      };
 
-        case PAGO_PAYPAL:
-            return {...state}
-
-        case PAGO_MERCADO_PAGO:
-            return { ...state }
-        
-        case "signin":
-            return {...state}
-            
-        default:
-            return state;
-    }
-}    
+    default:
+      return state;
+  }
+}
