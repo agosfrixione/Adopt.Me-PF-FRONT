@@ -18,6 +18,7 @@ export default function BuscarMascota() {
   
   const allPets = useSelector((state)=>state.animalesPerdidos)
   const copia = useSelector((state)=>state.animalesPerdidosCopia)
+  console.log("copia", copia)
 
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(4)
