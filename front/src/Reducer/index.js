@@ -21,6 +21,7 @@ import {
 const initialState = {
    animales: [],
    animalesPerdidos: [],
+   animalesPerdidosCopia: [],
    animalesPerdidosDetail: [],
    animalesdetail: [],
    users: [],
@@ -43,8 +44,7 @@ export default function rootReducer(state = initialState, action){
             return {       
                 ...state,   
                 animales: action.payload,
-                tamañoFiltrado: action.payload
-             
+                tamañoFiltrado: action.payload,            
             }              
         } else { 
             return { ...state, animales:[] } }
@@ -156,11 +156,19 @@ export default function rootReducer(state = initialState, action){
                 gatos: action.payload
             }
         case GET_TAMAÑO_FILTRO:
+            let filtered = state.animalesPerdidosCopia;
+            let filterByTam = filtered.filter(
+                (t)=>t.tama.map(
+                    (ty)=>ty.tama).includes(
+                        action.payload === 'chico'|| action.payload === 'grande' || action.payload === 'mediano')
+                 || t.tama.includes(action.payload))            
+            if(action.payload === 'All')filterByTam = filtered;           
             
+            console.log(filterByTam);
             return{
                 ...state,
-                filtroPerdidos: action.payload,
-            }
+                animalesPerdidos: filterByTam,                            
+            };
         case GET_DETAIL_MASCOTA_PERDIDA:
             return{
                 ...state,
@@ -177,6 +185,7 @@ export default function rootReducer(state = initialState, action){
             return{
                 ...state,
                 animalesPerdidos: action.payload,
+                animalesPerdidosCopia: action.payload,
             }
 
         case GET_PERRO:
