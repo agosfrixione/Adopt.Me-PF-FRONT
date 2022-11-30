@@ -11,7 +11,8 @@ import getperro from "../../Actions/getperros";
 import getDogByName from "../../Actions/getDogByName";
 import ordenAlfabetico from "../../Actions/ordenAlfabetico";
 import getDogsLocal from "../../Actions/getDogsLocal";
-/* import filtradoTamaño from "../../Actions/filtradoTamaño"; */
+ import filtradoTamaño from "../../Actions/filtradoTamaño"; 
+import getDogstamaño from "../../Actions/getDogTamaño";
 
 
 
@@ -21,6 +22,7 @@ export default function HomePerros () {
     const navigate = useNavigate();
 
     const allPets = useSelector((state) => state.perros);
+    const allTamaños = useSelector((state) => state.tamañosDog)
 
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(4)
@@ -81,11 +83,15 @@ export default function HomePerros () {
      setOrden(`Ordenado ${e.target.value}`)
    }
 
-  /*  function handlerTamaño (e) {
-    dispatch(filtradoTamaño(e.target.value))
-    setCurrentPage(1)
-    setOrden(`Ordenado ${e.target.value}`)
-} */
+//    function handleTamaño(e) {
+//     e.preventDefault();
+//     dispatch(filtradoTamaño(e.target.value))
+//     setCurrentPage(1)
+// }
+
+// useEffect (() => {
+//     dispatch(getDogstamaño())
+//   }, [dispatch])
         
    return(
         <div className={stl.paginaadopcionperros}>
@@ -111,7 +117,8 @@ export default function HomePerros () {
            </input>
            <button className={stl.btnNav}
                type="submit"
-               onClick={handleSubmit}>Ir</button>    
+               onClick={handleSubmit}>Ir</button>  
+
         <label className={stl.labelSearch}>Localidad:</label>
            <input className={stl.inputNav}
                value={localDog}
@@ -123,29 +130,24 @@ export default function HomePerros () {
                type="submit"
                onClick={handleLocalSubmit}>Ir</button>    
         </div>
+
         <div className={stl.filtros}>Filtar: 
                
-               <select className={stl.op}onChange={(e) => handleOrden(e)}>
+               <select className={stl.op} onChange={(e) => handleOrden(e)}>
                     <option disabled selected defaultValue>
                         Alfabeticamente
                     </option>
                     <option value='A-Z'>A-Z</option>
                     <option value='Z-A'>Z-A</option>
                 </select>
-                {/* <select className={stl.op}>
-                    <option disabled selected defaultValue>
-                        Localidad
-                    </option>
-                    <option key={1} value='All'>All</option>
-                </select> */}
-                {/* <select className={stl.op}>
-                    <option disabled selected defaultValue>
-                        Tamaño
-                    </option>
-                    <option key={1} value="Pequeño">Pequeño</option>
-                    <option key={2} value="Mediano">Mediano</option>
-                    <option key={3} value="Grande">Grande</option>
-                </select> */}
+              
+                {/* <div>                    
+                  <select className={stl.op} onChange={e => handleTamaño(e)}>
+                    { allTamaños && allTamaños.sort().map(e => {
+                      return <option value={e} key={e}>{e}</option>
+                    }) }      
+                  </select>
+                </div> */}
         </div>
         <br/>
         <div>

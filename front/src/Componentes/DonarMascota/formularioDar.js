@@ -7,7 +7,6 @@ import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer"
 import stl from "../DonarMascota/formularioDar.module.css"
 import FloatingUI from "../Floating UI/FloatingUI";
-// import axios from "axios";
 
 ////////////////////////////////////////////////////// VALIDACION ///////////////////////////////////////////////////////////////
 
@@ -44,7 +43,8 @@ function validation(input){
  //////////////////////////////////////////////////// PA ADOPTAR AMEGO ////////////////////////////////////////////////////////////
  
  export default function DarEnAdopcion() {
-       
+ 
+ 
  const navigate = useNavigate();
  const dispatch = useDispatch();
 
@@ -61,11 +61,10 @@ function validation(input){
         descripcion: "",
         castrado: "",
         vacunado: "",
+        imagen: ""
       });
-
+console.log(input)
   const [imagenes, setImagenes] = useState([]);
-
-  // const [imageRemove, setImageRemove] = useState(null);
       
   const [errors, setErrors] = useState({});
 
@@ -89,13 +88,33 @@ function validation(input){
         descripcion: "",
         castrado: "",
         vacunado: "",
+        imagen: ""
     })
-
-    setImagenes([])
+    
+    // setImagenes([])
 
     navigate("/homepage")
  }
 
+ /////////////////////////// EXTRAYENDO URL DE CLAUDINARY /////////////////////////////////////////////////////////////////////
+
+ const img = []
+ for (let i = 0; i < imagenes.length; i++) {
+    img.push(imagenes[i])
+ }
+
+ let imgUrl = img.map(({ url }) => url)
+
+ let urlImagen = imgUrl.toString();
+
+  function handleImagen() {
+    setInput({
+      ...input,
+      imagen: urlImagen
+    })
+  }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
 
  function handleChange(e) {
 
@@ -190,16 +209,18 @@ function validation(input){
               }
             }
           );
-
+          
       myWidget.open();
       }
 
   ///////////////////////////// HANDLE DELETE FOTO
 
-  // function handleDelete(f) {
-  //   setImageRemove(f.public_id);
-  //   axios.delete('')
-  // }
+  function handleDelete(f) {
+    setImagenes({
+      ...imagenes,
+      id: imagenes.id.filter((id) => id !== f)
+    });
+  }
 
 /////////////////////////////////////////////////////////// TE KAVIO EL RETURN  ///////////////////////////////////////////////////
 
@@ -225,40 +246,45 @@ function validation(input){
             {imagenes.map((f) => {
               return (
               <div className={stl.imagePreview}>
-                <img src= {f.url} alt=""/>
+                <img src= {f.url} value={f.id} alt="foto"/>
+                {imagenes.map((f) => (
+                  <i className="fa fa-times close-icon" onClick={() => handleDelete(f)} value={f.id}></i>
+                ))}
                 </div>
                 );
                 })}
                 <div className={stl.imagePreview}>
-                  <img src= "https://www.sourcedogg.com/wp-content/uploads/2015/05/default-placeholder.png" alt=""/>
-                  </div>
+                  
                   </div>
                   <div>
                     <button
-                    id="btn-foto"
+                    className={stl.botonFoto}
                     name="fotos"
-                    onClick={(e) => handleOpenWidget(e)}>
+                    onClick={handleOpenWidget}> 
                       AGREGAR FOTOS
                       </button>
+                     
                       </div>
+                  </div>
+                  
        
        <div className={stl.gatoPerro}>
          <div className={stl.opciones2}>
                 <label className={stl.titulos2}>Gato:</label>
-                <input className={stl.inputs2} onChange={ (e) => { handleCheck(e); handleGato(e); } }
+                <input className={stl.inputs2} onChange={ (e) => { handleCheck(e); handleGato(e); }}
                 type="checkbox" name="gato" checked={isChecked} value={input.gato}/>                       
             </div> 
-            
+          
             <div className={stl.opciones2}>
                 <label className={stl.titulos2}>Perro:</label>
-                <input className={stl.inputs2} onChange={ (e) => { handleCheck2(e); handlePerro(e); } }
-                type="checkbox" name="perro" checked={isChecked2} value={input.perro}/>                         
+                <input className={stl.inputs2} onChange={ (e) => { handleCheck2(e); handlePerro(e); }}
+                type="checkbox" name="perro" checked={isChecked2} value={input.perro}/>                        
             </div>
             </div>
 
               <div className={stl.opciones}>
                 <label className={stl.titulos}>Nombre:</label>
-                <input onChange={handleChange} 
+                <input onChange={handleChange}
                 type="text" name="nombre" value={input.nombre}/>                        
             </div>
  
@@ -311,7 +337,7 @@ function validation(input){
             <label className={stl.titulos}>Descripcion:</label>
                 <input onChange={handleChange} type="text" name="descripcion" value={input.descripcion}/>
                
-            </div>
+           </div>
 
             <div className={stl.opciones}>
             <label className={stl.titulos}>Esta Castrado? (Si/No):</label>
@@ -321,9 +347,10 @@ function validation(input){
             <div className={stl.opciones}>
             <label className={stl.titulos}>Esta Vacunado? (Si/No):</label>
                 <input onChange={handleChange} type="text" name="vacunado"  value={input.vacunado}/>
-            </div>    
-              
-             <button className={stl.boton} type="submit">Dar en Adopcion</button>
+            </div>  
+
+            <button className={stl.boton} onClick={handleImagen}>Dar en Adopcion</button>
+             {/* <button className={stl.boton} type="submit">Dar en Adopcion</button> */}
 
         </form>
         <Footer />

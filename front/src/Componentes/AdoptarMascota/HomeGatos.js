@@ -5,7 +5,7 @@ import getgato from "../../Actions/getgatos";
 import CardGato from "../Card/CardGato";
 import NavBar from "../NavBar/NavBar";
 import Paging from "../Pagination/Pagination";
-import stl from './HomeGatos.module.css';
+import stl from './HomePerros.module.css';
 import ordenAlfaGato from "../../Actions/ordenAlfaGato";
 import getCatByName from "../../Actions/getCatByName";
 import FloatingUI from "../Floating UI/FloatingUI";
@@ -84,7 +84,7 @@ const HomeGatos = () => {
         <div className={stl.paginaadopcionperros}>
             <NavBar/>
             <FloatingUI />
-        <div className={stl.tituloGatos}>Gatos en Adopcion</div>
+        <div className={stl.tituloPerros}>Gatos en Adopcion</div>
 
        <Paging 
         mascotasPerPage={mascotasPerPage} 
@@ -104,9 +104,8 @@ const HomeGatos = () => {
            <button className={stl.btnNav}
                type="submit"
                onClick={handleSubmit}>Ir</button>    
-        </div>
-        <div>
-        <label className={stl.labelSearch}><strong>Localidad:</strong> </label>
+        
+        <label className={stl.labelSearch}>Localidad: </label>
           <input className={stl.inputNav}
               value={localCat}
                type="text"
@@ -126,23 +125,11 @@ const HomeGatos = () => {
                     <option value='A-Z'>A-Z</option>
                     <option value='Z-A'>Z-A</option>
                 </select>
-               {/*  <select className={stl.op}>
-                    <option disabled selected defaultValue>
-                        Localidad
-                    </option>
-                    <option key={1} value='All'>All</option>
-                </select> */}
-                {/* <select className={stl.op}>
-                    <option disabled selected defaultValue>
-                        Tamaño
-                    </option>
-                    <option key={1} value="Pequeño">Pequeño</option>
-                    <option key={2} value="Mediano">Mediano</option>
-                    <option key={3} value="Grande">Grande</option>
-                </select> */}
+              
         </div>
+        <br/>
         <div>
-        <button onClick={handleClick}>HomeGatos</button>
+        <button className={stl.btnNavHome} onClick={handleClick}>HomeGatos</button>
         </div>
         <div className={stl.listadoCards}>
 
