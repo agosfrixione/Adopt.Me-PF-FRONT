@@ -2,9 +2,18 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
 const AnimalSchema = new Schema({
-    especie: {
-        type: String,
-        required: true,
+
+    // _id: {
+    //     type: String,
+    //     require: true        
+    // },    
+    perro: {
+        type: Boolean,
+        require: true
+    },
+    gato:{
+        type: Boolean,
+        require: true
     },
     nombre: {
         type: String,
@@ -12,10 +21,10 @@ const AnimalSchema = new Schema({
     },
     raza: {
         type: String,
-        required: true,
+        required: false,
     },
     edad: {
-        type: Number,
+        type: Array,
         required: false,
     },
     estado: {
@@ -23,7 +32,7 @@ const AnimalSchema = new Schema({
         required: false,
     },
     tamaño: {
-        type: String,
+        type: Array,
         required: false,
     },
     peso: {
@@ -39,17 +48,17 @@ const AnimalSchema = new Schema({
         required: false,
     },
     castrado: {
-        type: Boolean,
+        type: String,
         required: false,
     },
     vacunado: {
         type: String,
         required: false,
-    },  
+    },
     imagen: {
         type: String,
         required: false,
-    },  
+    } 
 });
 
 const AnimalModel = mongoose.model('animales', AnimalSchema)

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
+import FloatingUI from "../Floating UI/FloatingUI";
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
 import stl from "../TePuedeInteresar/ReportarMaltrato.module.css";
@@ -12,6 +13,7 @@ export default function ReportarMaltrato () {
         <div className={stl.maltrato} key={params.id}>
             
             <NavBar />
+            <FloatingUI />
 
             <div>
             <h1 className={stl.titulo}>REPORTAR MALTRATO ANIMAL</h1>
@@ -19,7 +21,7 @@ export default function ReportarMaltrato () {
             </div>
 
             <div>
-                <h3>¿Qué se entiende por maltrato a animales?</h3>
+                <h3 className={stl.h3s}>¿Qué se entiende por maltrato a animales?</h3>
                 <ul>
                     <li>No alimentarlos bien.</li>
                     <li>Estimularlos con instrumentos que les causan dolor, como el látigo.</li>
@@ -31,7 +33,7 @@ export default function ReportarMaltrato () {
             </div>
 
             <div>
-                <h3>¿Qué se entiende por actos de crueldad con los animales?</h3>
+                <h3 className={stl.h3s}>¿Qué se entiende por actos de crueldad con los animales?</h3>
                 <ul>
                     <li>No alimentarlos bien.</li>
                     <li>Cortar cualquier parte del cuerpo del animal, salvo para marcación o higiene.</li>
@@ -46,7 +48,7 @@ export default function ReportarMaltrato () {
             </div>
 
             <div>
-                <h3>¿Donde se puede realizar la denuncia?</h3>
+                <h3 className={stl.h3s}>¿Donde se puede realizar la denuncia?</h3>
                 <ul>
                     <li>En la comisaría más cercana al lugar donde ocurrió el hecho.</li>
                     <li>En la fiscalía o UFI (Unidad Funcional de Instrucción).</li>
@@ -55,12 +57,12 @@ export default function ReportarMaltrato () {
             </div>
 
             <div>
-                <h3>¿Que hacer si el hecho ocurre en la vía pública?</h3>
+                <h3 className={stl.h3s}>¿Que hacer si el hecho ocurre en la vía pública?</h3>
                 <p>Llamá al 911. En Ciudad de Buenos Aires también podés llamar al 0800-333-47225 que es el teléfono del Ministerio Público Fiscal de la Ciudad que funciona las 24 horas.</p>
             </div>
 
             <div>
-                <h3>¿Que hacer si el hecho ocurre en un lugar privado?</h3>
+                <h3 className={stl.h3s}>¿Que hacer si el hecho ocurre en un lugar privado?</h3>
                 <p>Si el hecho sucede en una casa, galpón, quinta, etc. no ingreses. Identificá el lugar (calle, número, etc.) y a las personas y llamá al 911.</p>
             </div>
 
