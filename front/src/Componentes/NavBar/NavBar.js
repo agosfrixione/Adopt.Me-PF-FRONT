@@ -10,10 +10,15 @@ export default function NavBar() {
   const [darkTheme, setDarkTheme] = useState(false);
   const { user, isAuthenticated } = useAuth0();
   const { logout } = useAuth0();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
 
   const handleOpen = () => {
     setOpen(!open);
+  };
+
+  const handleOpen2 = () => {
+    setOpen2(!open2);
   };
 
   return (
@@ -58,6 +63,7 @@ export default function NavBar() {
           ) : null}
           {open ? <div></div> : <div></div>}
         </div>
+        
         <DayNightToggle
           onChange={() => setDarkTheme(!darkTheme)}
           checked={darkTheme}
@@ -76,15 +82,15 @@ export default function NavBar() {
       )}
 
       {isAuthenticated && (
-        <div className="dropdown">
-          <div className="info" onClick={handleOpen}>
+        <div className={stl.dropdown}>
+          <div className={stl.info} onClick={handleOpen2}>
             Perfil
           </div>
-          {open ? (
-            <div className="menu">
-              <div className="menu-item">
+          {open2 ? (
+            <div className="menu2">
+              <div className="menu-item2">
                 <Link to="/perfil">
-                  <div className="drop">Mi perfil</div>
+                  <div className="drop2">Mi perfil</div>
                 </Link>
               </div>
               <div className="menu-item">
@@ -92,7 +98,7 @@ export default function NavBar() {
               </div>
             </div>
           ) : null}
-          {open ? <div></div> : <div></div>}
+          {open2 ? <div></div> : <div></div>}
         </div>
       )}
     </div>
