@@ -1,21 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './Container/App';
-import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
-import store  from './Store';
-import axios from 'axios';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./Container/App";
+import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import store from "./Store";
+import axios from "axios";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 axios.defaults.baseURL = process.env.READT_APP_API || "http://localhost:3001";
 
 ReactDOM.render(
-  <Provider store = {store} > 
+  <Provider store={store}>
     <React.StrictMode>
-        <App /> 
+      <Auth0Provider
+        domain="dev-77nfowmcbvvszdyt.us.auth0.com"
+        clientId="eChd9pg5QYfd7HnBDa1W5KJY1CRMKWj1"
+        redirectUri="http://localhost:3000/homepage"
+      >
+        <App />
+      </Auth0Provider>
     </React.StrictMode>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
