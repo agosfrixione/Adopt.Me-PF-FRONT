@@ -16,7 +16,6 @@ export default function FormRegistro() {
 
   useEffect(() => {
     dispatch(getusers());
-
   }, [dispatch]);
 
   const [input, setInput] = useState({
@@ -52,7 +51,9 @@ export default function FormRegistro() {
 
     if (!input.contraseña) {
       errors.contraseña = "Tenes que ingresar una contraseña";
-    } else if (!/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(input.contraseña)) {
+    } else if (
+      !/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(input.contraseña)
+    ) {
       errors.contraseña =
         "La contraseña debe tener entre 8 y 16 caracteres, al menos un número, al menos una minúscula y al menos una mayúscula.";
     }
@@ -91,10 +92,11 @@ export default function FormRegistro() {
     ) {
       errors.nacimiento = "Tenes  que ingresar una fecha válida (dd-mm-yyyy)";
     }
-    
+
     if (!input.fotoPerfil || input.fotoPerfil === "") {
       setInput({
-        fotoPerfil: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
+        fotoPerfil:
+          "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
       });
     }
 
@@ -127,7 +129,7 @@ export default function FormRegistro() {
         localidad: "",
         fotoPerfil: "",
       });
-      navigate("/usuarios/signin");
+      navigate("/prueba");
       alert("Usuario creado correctamente");
     } else {
       alert("No se pudo completar el registro, revise los campos");
@@ -176,14 +178,16 @@ export default function FormRegistro() {
       <FloatingUI />
 
       <div className={stl.errores}>
-          {errors.usuario && <p className={stl.error}>{errors.usuario}</p>}
-          {errors.contraseña && <p className={stl.error}>{errors.contraseña}</p>}
-          {errors.repitaContraseña && <p className={stl.error}>{errors.repitaContraseña}</p>}
-          {errors.nombre && <p className={stl.error}>{errors.nombre}</p>}
-          {errors.telefono && <p className={stl.error}>{errors.telefono}</p>}
-          {errors.mail && <p className={stl.error}>{errors.mail}</p>}
-          {errors.nacimiento && <p className={stl.error}>{errors.nacimiento}</p>}
-          {errors.localidad && <p className={stl.error}>{errors.localidad}</p>}
+        {errors.usuario && <p className={stl.error}>{errors.usuario}</p>}
+        {errors.contraseña && <p className={stl.error}>{errors.contraseña}</p>}
+        {errors.repitaContraseña && (
+          <p className={stl.error}>{errors.repitaContraseña}</p>
+        )}
+        {errors.nombre && <p className={stl.error}>{errors.nombre}</p>}
+        {errors.telefono && <p className={stl.error}>{errors.telefono}</p>}
+        {errors.mail && <p className={stl.error}>{errors.mail}</p>}
+        {errors.nacimiento && <p className={stl.error}>{errors.nacimiento}</p>}
+        {errors.localidad && <p className={stl.error}>{errors.localidad}</p>}
       </div>
 
       <div className={stl.form} key={params.id}>
@@ -193,10 +197,10 @@ export default function FormRegistro() {
           action="/usuarios/signup"
           method="POST"
         >
-
           <div className={stl.datosRegistro} key={params.id}>
             <div>NOMBRE DE USUARIO: </div>
-            <input className={stl.inputs} 
+            <input
+              className={stl.inputs}
               type="text"
               pipo
               name="usuario"
@@ -204,12 +208,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-            
           </div>
 
           <div className={stl.datosRegistro} key={params.id}>
             <div>CONTRASEÑA: </div>
-            <input className={stl.inputs}
+            <input
+              className={stl.inputs}
               required
               type="password"
               name="contraseña"
@@ -217,12 +221,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-            
           </div>
 
           <div className={stl.datosRegistro} key={params.id}>
             <div>REPITA CONTRASEÑA: </div>
-            <input className={stl.inputs}
+            <input
+              className={stl.inputs}
               required
               type="password"
               name="repitaContraseña"
@@ -230,12 +234,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-            
           </div>
 
           <div className={stl.datosRegistro} key={params.id}>
             <div>NOMBRE Y APELLIDO / REFUGIO: </div>
-            <input className={stl.inputs}
+            <input
+              className={stl.inputs}
               type="text"
               required
               name="nombre"
@@ -243,12 +247,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-           
           </div>
 
           <div className={stl.datosRegistro} key={params.id}>
             <div>TELÉFONO DE CONTACTO: </div>
-            <input className={stl.inputs}
+            <input
+              className={stl.inputs}
               type="text"
               required
               name="telefono"
@@ -256,12 +260,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-          
           </div>
 
-          <div className={stl.datosRegistro}  key={params.id}>
+          <div className={stl.datosRegistro} key={params.id}>
             <div>E-MAIL: </div>
-            <input className={stl.inputs}
+            <input
+              className={stl.inputs}
               type="email"
               required
               name="mail"
@@ -269,12 +273,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-         
           </div>
 
           <div className={stl.datosRegistro} key={params.id}>
             <div>FECHA DE NACIMIENTO: </div>
-            <input className={stl.inputs}
+            <input
+              className={stl.inputs}
               required
               type="date"
               name="nacimiento"
@@ -283,12 +287,12 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-            
           </div>
 
           <div className={stl.datosRegistro} key={params.id}>
             <div>LOCALIDAD: </div>
-            <input className={stl.inputs}
+            <input
+              className={stl.inputs}
               type="text"
               required
               name="localidad"
@@ -296,7 +300,6 @@ export default function FormRegistro() {
               onChange={(e) => handleChange(e)}
             />{" "}
             <span></span>
-            
           </div>
 
           <div className={stl.datosRegistro} key={params.id}>
@@ -308,7 +311,6 @@ export default function FormRegistro() {
               width="150"
             />
 
-        
             <button
               id="btn-foto"
               name="fotoPerfil"
@@ -322,22 +324,21 @@ export default function FormRegistro() {
           </div>
 
           <div>
+            <button
+              className={stl.buttons}
+              type="submit"
+              disabled={isSubmit ? false : true}
+            >
+              ACEPTAR
+            </button>
 
-          <button
-            className={stl.buttons}
-            type="submit"
-            disabled={isSubmit ? false : true}>ACEPTAR</button>    
-
-          <Link to="/givepet">
-            <button className={stl.buttons}>CANCELAR</button>
+            <Link to="/givepet">
+              <button className={stl.buttons}>CANCELAR</button>
             </Link>
-
-      </div>
-
-      </form>
+          </div>
+        </form>
       </div>
       <Footer />
-    
-      </div>
+    </div>
   );
 }
