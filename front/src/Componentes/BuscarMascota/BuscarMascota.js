@@ -82,7 +82,7 @@ export default function BuscarMascota() {
                 <option value='All' disabled selected defaultValue>Tamaño</option>
                 <option value = 'Chico'>Chico</option>
                 <option value = 'Mediano'>Mediano</option>
-                <option value = 'rande'>Grande</option>                               
+                <option value = 'Grande'>Grande</option>                               
             </select>            
       </div>
 
