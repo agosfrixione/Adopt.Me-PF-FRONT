@@ -16,6 +16,7 @@ import getPerroPerdido from "../../Actions/getPerrosPerdidos";
 
 export default function BuscarMascota() {
   const params = useParams();
+
   const dispatch = useDispatch();
   
 
@@ -30,8 +31,7 @@ export default function BuscarMascota() {
 
   useEffect(()=>{      
     dispatch(getAnimalesPerdidos());
-    dispatch(getGatoPerdido());
-    dispatch(getPerroPerdido());   
+     
     setCurrentPage(1)
   }, [dispatch]);
 
