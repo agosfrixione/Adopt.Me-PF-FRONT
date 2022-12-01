@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
@@ -36,7 +35,7 @@ export default function DetallePerro () {
               <div className={stl.titulos2}>Tamaño: <p className={stl.details}>{detail.tama}</p></div>                 
               <div className={stl.titulos2}>Estado: <p className={stl.details}>{detail.estado}</p></div>             
               <div className={stl.titulos2}>Descripcion: <p className={stl.details}>{detail.descripcion}</p></div>
-              {/* <div className={stl.titulos2}>Gato <p className={stl.details}>{detail.gato}</p></div>            */}
+           
             </div>
                
               {/* <Link to='/contacto'>

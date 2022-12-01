@@ -37,7 +37,7 @@ export default function BuscarMascota() {
     await e.preventDefault();   
     await dispatch(getTamañofiltro(e.target.value));
   };
-  async function handleEstado (e){  
+  async function handleEstado (e){ 
     await e.preventDefault();   
     await dispatch(filtradoEstadoPerdido(e.target.value));
   };
@@ -129,3 +129,4 @@ export default function BuscarMascota() {
     </>
   );
 };
+//resubiendo
