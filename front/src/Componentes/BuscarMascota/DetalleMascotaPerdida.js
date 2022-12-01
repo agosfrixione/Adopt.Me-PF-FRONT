@@ -27,7 +27,7 @@ export default function DetallePerro () {
             
             <NavBar />
             <FloatingUI />
-              <img src={detail.imagen} alt=""></img>
+              <img className={stl.img} src={detail.imagen} alt=""></img>
               <div className={stl.cardDetalles}>                   
               <div className={stl.datosAdopcion}>
               <div className={stl.tituloAdopcion}>Datos de la Mascota</div>
