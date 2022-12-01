@@ -15,7 +15,7 @@ export default function Perfil() {
 
     useEffect(() => {
             dispatch(getDetalleUsuario(id));
-    }, [dispatch]);
+    }, [dispatch, id]);
     
     console.log(isAuthenticated)
 

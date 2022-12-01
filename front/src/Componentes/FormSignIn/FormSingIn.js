@@ -1,4 +1,4 @@
-import { Link, useParams, useNavigate, UNSAFE_NavigationContext } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import React, { useState , useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Footer from "../Footer/Footer";
@@ -11,7 +11,7 @@ import FloatingUI from "../Floating UI/FloatingUI";
 export default function FormSignIn() {
   const params = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
+  // const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
   const Allusers = useSelector((state) => state.users).data; // (o el estado global que usemos para guardar todos los usuarios)
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function FormSignIn() {
 
   function validation(input) {
     let errors = {};
-    let existUser = Allusers.filter((u) => u.usuario == input.usuario);
+    let existUser = Allusers.filter((u) => u.usuario === input.usuario);
     console.log(existUser)
 
     ///////////////////////////////////////////////////////

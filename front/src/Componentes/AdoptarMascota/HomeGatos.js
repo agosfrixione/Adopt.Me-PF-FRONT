@@ -26,8 +26,8 @@ const HomeGatos = () => {
     const currentPets = allPets.slice(firstPetIndex,lastPetIndex) 
 
 
-    const [input, setInput] = useState("");
-    const [orden, setOrden] = useState("");
+    const [, setInput] = useState("");
+    const [, setOrden] = useState("");
     const [searchCat, setSearchCat] = useState("");
     const [localCat, setlocalCat] = useState("");
 

@@ -11,7 +11,7 @@ import getperro from "../../Actions/getperros";
 import getDogByName from "../../Actions/getDogByName";
 import ordenAlfabetico from "../../Actions/ordenAlfabetico";
 import getDogsLocal from "../../Actions/getDogsLocal";
- import getdogtamaños from "../../Actions/getDogTamaños";
+// import getdogtamaños from "../../Actions/getDogTamaños";
  
 
 
@@ -33,11 +33,11 @@ export default function HomePerros () {
     const firstPetIndex = lastPetIndex - mascotasPerPage 
     const currentPets = allPets.slice(firstPetIndex,lastPetIndex) 
 
-    const [input, setInput] = useState("");
-    const [orden, setOrden] = useState("");
+    const [, setInput] = useState("");
+    const [, setOrden] = useState("");
     const [searchDog, setSearchDog] = useState("");
     const [localDog, setlocalDog] = useState("");
-    const [refresh, setReefresh]= useState(copiaPerros)
+    // const [refresh, setReefresh]= useState(copiaPerros)
 
     const actualPage = (pageNumber) => {setCurrentPage(pageNumber)}
 
