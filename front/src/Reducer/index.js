@@ -15,8 +15,9 @@ import {
     GET_ANIMALES_PERDIDOS,
     GET_TAMAÑO_FILTRO,
     GET_DETAIL_MASCOTA_PERDIDA, 
-    GET_DOG_TAMAÑOS,
-    FILTRA_TAMAÑO} from "../Actions";
+    // GET_DOG_TAMAÑOS,
+    // FILTRA_TAMAÑO
+  } from "../Actions";
 
 
 const initialState = {
