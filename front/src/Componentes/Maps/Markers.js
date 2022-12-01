@@ -1,12 +1,13 @@
-import React from "react";
-import {IconLocation} from "./IconLocation"
+// import React, { useEffect } from "react";
 
-import {Marker} from "react-leaflet"
+// export default function Markers() {
 
-export default function Markers() {
-    return (
-        <>
-        <Marker position={{lat: "-34.57105858739396", lng: "-58.4088607655246"}} icon={IconLocation}/>
-    </>
-    )
-}
+//     useEffect(() => {
+//         dispatch(getLocation())
+//     })
+
+//     return (
+//         <div></div>
+//     )
+
+// }
