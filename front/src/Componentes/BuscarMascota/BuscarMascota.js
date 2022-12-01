@@ -16,9 +16,10 @@ import getPerroPerdido from "../../Actions/getPerrosPerdidos";
 
 export default function BuscarMascota() {
   const params = useParams();
-  const dispatch = useDispatch();  
 
- 
+  const dispatch = useDispatch();
+  
+
   const allPets = useSelector((state)=>state.animalesPerdidos);
   const [currentPage, setCurrentPage] = useState(1);
   const [mascotasPerPage] = useState(4);
@@ -26,6 +27,7 @@ export default function BuscarMascota() {
   const firstPetIndex = lastPetIndex - mascotasPerPage ;
   const currentPets = allPets.slice(firstPetIndex,lastPetIndex);
   const actualPage = (pageNumber) => {setCurrentPage(pageNumber)};
+
 
   useEffect(()=>{      
     dispatch(getAnimalesPerdidos());
