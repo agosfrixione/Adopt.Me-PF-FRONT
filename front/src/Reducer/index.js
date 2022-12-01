@@ -17,7 +17,8 @@ import {
     GET_DETAIL_MASCOTA_PERDIDA,
     FILTRADO_ESTADO_PERDIDO,
     GET_GATO_PERDIDO,
-    CREATE_ANIMAL_PERDIDO} from "../Actions";
+    CREATE_ANIMAL_PERDIDO,
+    GET_PERRO_PERDIDO} from "../Actions";
 
 
 const initialState = {
@@ -153,6 +154,11 @@ export default function rootReducer(state = initialState, action){
             return{
                 ...state,
                 animalesPerdidos: action.payload,
+            }
+          case GET_PERRO_PERDIDO:
+            return{
+              ...state,
+              animalesPerdidos: action.payload,
             }
         case CREATE_ANIMAL_PERDIDO:
             return{
