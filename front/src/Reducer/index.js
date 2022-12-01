@@ -14,13 +14,10 @@ import {
     GET_TAMAÑO_PERDIDOS, 
     GET_ANIMALES_PERDIDOS,
     GET_TAMAÑO_FILTRO,
-
-    GET_DETAIL_MASCOTA_PERDIDA,
-    FILTRADO_ESTADO_PERDIDO,
-    GET_GATO_PERDIDO,
-    CREATE_ANIMAL_PERDIDO,
-    GET_PERRO_PERDIDO} from "../Actions";
-
+    GET_DETAIL_MASCOTA_PERDIDA, 
+    // GET_DOG_TAMAÑOS,
+    // FILTRA_TAMAÑO
+  } from "../Actions";
 
 
 const initialState = {
