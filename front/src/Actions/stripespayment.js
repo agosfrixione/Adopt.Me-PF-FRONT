@@ -3,7 +3,7 @@ import { PAGO_STRIPES } from ".";
 
 export default function pagosStripes() {
     return async function (dispatch) {
-        const result = await axios.post("http://localhost:3001/payment")
+        const result = await axios.post("/payment")
         return dispatch = ({ type: PAGO_STRIPES, payload: result})
     }
 }
