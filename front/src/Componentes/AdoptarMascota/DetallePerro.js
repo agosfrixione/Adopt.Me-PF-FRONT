@@ -27,7 +27,7 @@ export default function DetallePerro () {
   
      useEffect(() => {
       dispatch(getDetalleUsuario(_id));
-    }, [dispatch]);
+    }, [_id, dispatch]);
   
     
   
