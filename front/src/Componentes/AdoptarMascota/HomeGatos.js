@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import  {useNavigate}  from "react-router-dom"
+import  {Link, useNavigate}  from "react-router-dom"
 import getgato from "../../Actions/getgatos";
 import CardGato from "../Card/CardGato";
 import NavBar from "../NavBar/NavBar";
@@ -9,6 +9,8 @@ import stl from './HomePerros.module.css';
 import ordenAlfaGato from "../../Actions/ordenAlfaGato";
 import getCatByName from "../../Actions/getCatByName";
 import FloatingUI from "../Floating UI/FloatingUI";
+import getCatTamaños from "../../Actions/getCatTamaños";
+import getCatEdad from '../../Actions/getCatEdad';
 import getCatsLocal from "../../Actions/getCatsLocal"
 
 const HomeGatos = () => {
@@ -17,6 +19,7 @@ const HomeGatos = () => {
     const navigate = useNavigate();
 
     const allPets = useSelector((state) => state.gatos);
+    const copiaGatos = useSelector((state)=>state.gatosCopia);
 
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(4)
@@ -26,8 +29,8 @@ const HomeGatos = () => {
     const currentPets = allPets.slice(firstPetIndex,lastPetIndex) 
 
 
-    const [, setInput] = useState("");
-    const [, setOrden] = useState("");
+    const [input, setInput] = useState("");
+    const [orden, setOrden] = useState("");
     const [searchCat, setSearchCat] = useState("");
     const [localCat, setlocalCat] = useState("");
 
@@ -48,11 +51,6 @@ const HomeGatos = () => {
         setSearchCat(e.target.value)
     }
 
-    const handleInputLocal = (e) => {
-        e.preventDefault();
-        setlocalCat(e.target.value)
-    }
-
     const handleSubmit = (e) => {//mando la accion y me trae el dog
         e.preventDefault();
         if(searchCat){
@@ -63,21 +61,22 @@ const HomeGatos = () => {
         }
    }
 
-   const handleLocalSubmit = (e) => {//mando la accion y me trae el dog
-    e.preventDefault();
-    if(localCat){
-    dispatch(getCatsLocal(localCat))
-    setlocalCat("")
-    navigate("/adoptdog") 
-    actualPage(1)
-    }
-}
-
    const handleOrden = (e) => {
     dispatch(ordenAlfaGato(e.target.value))
     setCurrentPage(1)
     setOrden(`Ordenado ${e.target.value}`)
   }
+
+  async function handleTamaño (e){  
+    await e.preventDefault();   
+    await dispatch(getCatTamaños(e.target.value));
+    console.log(e.target.value);
+  };
+  async function handleEdad (e){  
+    await e.preventDefault();   
+    await dispatch(getCatEdad(e.target.value));
+    console.log(e.target.value);
+  };
 
     return (
 
@@ -85,14 +84,8 @@ const HomeGatos = () => {
             <NavBar/>
             <FloatingUI />
         <div className={stl.tituloPerros}>Gatos en Adopcion</div>
-
-       <Paging 
-        mascotasPerPage={mascotasPerPage} 
-        allPets={allPets.length} 
-        currentPage={currentPage} 
-        actualPage={actualPage}
-        currentPets={currentPets}
-        />
+        <br></br><br></br>
+       
        <div>
         <label className={stl.labelSearch}>Nombre:</label>
            <input className={stl.inputNav}
@@ -104,17 +97,7 @@ const HomeGatos = () => {
            <button className={stl.btnNav}
                type="submit"
                onClick={handleSubmit}>Ir</button>    
-        
-        <label className={stl.labelSearch}>Localidad: </label>
-          <input className={stl.inputNav}
-              value={localCat}
-               type="text"
-               placeholder=" Localidad..."
-              onChange={handleInputLocal}>  
-           </input> 
-           <button className={stl.btnNav}
-               type="submit"
-               onClick={handleLocalSubmit}>Ir</button>   
+     
         </div>
         <div className={stl.filtros}>Filtar: 
                
@@ -125,12 +108,41 @@ const HomeGatos = () => {
                     <option value='A-Z'>A-Z</option>
                     <option value='Z-A'>Z-A</option>
                 </select>
+                <select onChange={(e)=>handleTamaño(e)}>
+                <option value='All' disabled selected defaultValue>Tamaño</option>
+                <option value = 'Mediano'>Mediano</option>
+                <option value = 'Chico'>Chico</option>
+                <option value = 'Grande'>Grande</option>                               
+                </select> 
+                <select onChange={(e)=>handleEdad(e)}>
+                <option value='edad' disabled selected defaultValue>Edad</option>
+                <option value = 'Menos de 45 dias'>Menos de 45 dias</option>
+                <option value = 'Mas de 45 dias'>Mas de 45 dias</option>
+                <option value = 'Adulto'>Adulto</option>
+                <option value = 'Anciano'>Anciano</option>                                  
+                </select> 
               
         </div>
         <br/>
         <div>
         <button className={stl.btnNavHome} onClick={handleClick}>HomeGatos</button>
         </div>
+
+        <div className={stl.ico}></div>
+        <div className={stl.mapapets}>
+            <Link to ="/mappets2">
+           <button className={stl.btnMap}>Ver mascotas a mi alrededor</button>
+           </Link>
+        </div>
+
+        <Paging 
+        mascotasPerPage={mascotasPerPage} 
+        allPets={allPets.length} 
+        currentPage={currentPage} 
+        actualPage={actualPage}
+        currentPets={currentPets}
+        />
+
         <div className={stl.listadoCards}>
 
 
@@ -142,7 +154,6 @@ const HomeGatos = () => {
                         id = {g._id}
                         gato = {g.gato}
                         nombre = {g.nombre}
-                        localidad = {g.localidad}
                         />                  
                 )
             })}

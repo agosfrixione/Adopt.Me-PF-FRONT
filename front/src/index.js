@@ -8,7 +8,7 @@ import store from "./Store";
 import axios from "axios";
 import { Auth0Provider } from "@auth0/auth0-react";
 
-axios.defaults.baseURL = "https://adopt-me-server.onrender.com";
+axios.defaults.baseURL = "http://localhost:3001";
 
 ReactDOM.render(
   <Provider store={store}>

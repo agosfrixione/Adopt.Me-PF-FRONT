@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet"
+import {MapContainer, Marker, Popup, TileLayer, useMap} from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import "./Maps.css";
 import {IconLocation} from "./IconLocation";
@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import createLocation from "../../Actions/createLocation";
 import { useDispatch } from "react-redux";
 import Markers from "./Markers";
+import stl from "../Maps/Maps.module.css";
+import Toast from 'light-toast';
 
 export default function MapView() {
 
@@ -40,66 +42,81 @@ export default function MapView() {
     ///////////////////////////////////////////////////// GUARDA LA UBICACION EN LA BASE DE DATOS //////////////////////
 
     const [location, setLocation] = useState({
-        longitude: "",
-        latitude: ""
+            latitude: "",
+            longitude: ""
     })
 
     function handleLocation() {
         setLocation({
-            longitude: geo.longitude,
-            latitude: geo.latitude
+                latitude: geo.longitude,
+                longitude: geo.latitude
         })
-        console.log("primer handle", location)
-        alert("Ubicacion Establecida. Por favor seleccione 'Guardar mi Ubicacion'")
+       
+        Toast.success("Ubicacion Establecida. Por favor seleccione 'Guardar mi Ubicacion'", 3000, () => {});
     }
 
     function handleLocation2() {
         setLocation({
-            longitude: geo.longitude,
-            latitude: geo.latitude
+                latitude: geo.longitude,
+                longitude: geo.latitude
         })
-        console.log("segundo handle", location)
-        alert("Ubicacion Guardada con exito")
+        Toast.success("Ubicacion Guardada con exito. Por favor seleccione 'Confirmar y volver'", 3000, () => {});
     }
 
-    useEffect(() => {
-        if (location.longitude.length >= 1 && location.latitude.length >= 1) {
-            dispatch(createLocation())
-        }
-    }, [location.longitude.length, location.latitude.length, dispatch])
+    function handleSubmit() {
+        dispatch(createLocation(location))
+    }
+
 
     /////////////////////////////////////////////////// GUARDA MI UBICACION ACTUAL EN UN ESTADO Y RENDERIZO  ///////
 
     const position = [geo.latitude, geo.longitude]
-    console.log("position", position)
+
+    const local = position
+
+    function FlyMapTo() {
+
+      const map = useMap()
+  
+      useEffect(() => {
+          map.flyTo(local)
+          
+      }, {enableHighAccuracy: true})
+  
+      return null
+  }
+
 
     return (    
     <div>
         <NavBar />
       
         <p>Por favor. Para guardar su ubicacion exitosamente<br></br>
-        Primero seleccione Confirmar su Ubicacion, y luego Guardar mi Ubicacion</p>
-        <button onClick={handleLocation}>Confirmar su Ubicacion</button>
-        <button onClick={handleLocation2}>Guardar mi Ubicacion</button>
+        Primero seleccione "Establecer mi Ubicacion", y luego "Guardar mi Ubicacion".</p>
+        <p>Finalmente "Confirmar y Volver"</p>
+        <div className={stl.botones}>
+        <button className={stl.botonMapa2} onClick={handleLocation}>Establecer mi Ubicacion</button>
+        <button className={stl.botonMapa2} onClick={handleLocation2}>Guardar mi Ubicacion</button>
         <Link to ="/registroMascota">
-            <button>Volver</button>
+            <button className={stl.botonMapa3} type="submit" onClick={handleSubmit}>Confirmar y Volver</button>
             </Link>
+            </div>
 
-        <MapContainer center={position} zoom={5}>
-        
+        <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+        <FlyMapTo />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
 
         <Marker position={position} icon={IconLocation}>
-
+ 
            <Popup>
                Esta es mi ubicacion
           </Popup>
 
     </Marker>
 
-        <Markers />
+    <Markers />
         
     </MapContainer>
     
@@ -107,4 +124,6 @@ export default function MapView() {
     </div>
     )
 }
+
+
 
