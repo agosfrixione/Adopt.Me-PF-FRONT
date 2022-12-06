@@ -14,8 +14,8 @@ ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <Auth0Provider
-        domain="dev-77nfowmcbvvszdyt.us.auth0.com"
-        clientId="eChd9pg5QYfd7HnBDa1W5KJY1CRMKWj1"
+        domain="dev-oyj74hb0bfnfndw3.us.auth0.com"
+        clientId="sgqT3nj98fYLvGbtrXhMpWZu7BKXhN6p"
         redirectUri="https://adoptme-eta.vercel.app/homepage"
       >
         <App />
