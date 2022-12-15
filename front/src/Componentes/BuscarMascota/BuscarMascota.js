@@ -8,11 +8,11 @@ import FloatingUI from "../Floating UI/FloatingUI";
 import getAnimalesPerdidos from "../../Actions/getAnimalesPerdidos";
 import filtradoEstadoPerdido from "../../Actions/filtradoEstadoPerdido";
 import getTamañofiltro from "../../Actions/getTamañoFiltro";
-import getGatoPerdido from "../../Actions/getGatosPerdidos";
+// import getGatoPerdido from "../../Actions/getGatosPerdidos";
 import {useSelector, useDispatch} from 'react-redux';
 import { useState } from "react";
 import Paging from "../Pagination/Pagination";
-import getPerroPerdido from "../../Actions/getPerrosPerdidos";
+// import getPerroPerdido from "../../Actions/getPerrosPerdidos";
 
 export default function BuscarMascota() {
   const params = useParams();
@@ -30,8 +30,8 @@ export default function BuscarMascota() {
 
   useEffect(()=>{      
     dispatch(getAnimalesPerdidos());
-    dispatch(getGatoPerdido());
-    dispatch(getPerroPerdido());   
+    // dispatch(getGatoPerdido());
+    // dispatch(getPerroPerdido());   
     setCurrentPage(1)
   }, [dispatch]);
 
