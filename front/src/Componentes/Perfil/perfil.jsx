@@ -10,9 +10,10 @@ import MiInformacion from "../ContenidoPerfil/MiInformacion";
 import MisFavoritos from "../ContenidoPerfil/MisFavoritos";
 import CambiarContraseña from "../ContenidoPerfil/CambiarContraseña";
 import CompletarRegistro from "../ContenidoPerfil/CompletarRegistro";
-import MisMascotas from "../ContenidoPerfil/MisMascotas.js";
+import MisMascotas from "../ContenidoPerfil/MisMascotas";
 import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
 import Footer from "../Footer/Footer";
+import CartelPerfil from "../ContenidoPerfil/CartelRegistroCompleto";
 import CartelRegistroCompleto from "../ContenidoPerfil/CartelRegistroCompleto";
 import CartelCambiarContraseña from "../ContenidoPerfil/CartelCambiarContraseña";
 import CartelCompletarRegistro from "../ContenidoPerfil/CartelCompletarRegistro";
@@ -50,12 +51,9 @@ export default function Perfil() {
     }, [id, dispatch]);
     
     
-    let usuario = undefined
-    const detalleUser = useSelector((state) => state.detalleUsuario);
-    console.log("detalleruser", detalleUser)
-    if (isAuthenticated) {
-        usuario = detalleUser.roles[0]
-    }
+
+    const detalleUser = useSelector((state) => state.detalleUsuario); // Estado global con los datos del usuario
+    const usuario = detalleUser.roles[0]
     const detalleUserGoogle = useSelector((state) => state.detalleUsuarioGoogle) 
 
     /////////////////// ON CLICKS ////////////////////////
@@ -238,3 +236,9 @@ export default function Perfil() {
     )
 }
 };
+
+
+
+// Una vez que esta logueado el usuario --> despachar una action de getusuariodetalle --> guardarlo en el estado global --> usar los datos desde el estado
+
+// Cuando se desloguea --> despachar action para limpiar el estado global.
