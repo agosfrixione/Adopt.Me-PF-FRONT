@@ -122,7 +122,7 @@ export default function BuscarMascota() {
   
     <div className={stl.listadoCards}>
 
-      {currentPets.length > 0 && currentPets.map(a =>{
+      {currentPets && currentPets.map(a =>{
         return(  
         <CardPerdidos
         id = {a._id}
