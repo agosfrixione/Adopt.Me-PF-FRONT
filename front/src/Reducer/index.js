@@ -45,6 +45,7 @@ import {
   POST_PAYPAL,
   GET_PAGOS,
   DELETE_USER,
+  LIMPIEZA_ESTADO
 } from "../Actions";
 
 const initialState = {
@@ -504,6 +505,14 @@ export default function rootReducer(state = initialState, action) {
       case DELETE_USER:
         return {
           ...state
+        };
+
+      case LIMPIEZA_ESTADO:
+        return {
+          ...state,
+          animalesPerdidosDetail: [],
+          animalesdetail: []
+
         };
 
 

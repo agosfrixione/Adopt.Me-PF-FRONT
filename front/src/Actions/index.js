@@ -48,6 +48,7 @@ export const UPDATE_MASCOTA = "UPDATE_MASCOTA";
 export const POST_PAYPAL = "POST_PAYPAL";
 export const GET_PAGOS = "GET_PAGOS";
 export const DELETE_USER = "DELETE_USER";
+export const LIMPIEZA_ESTADO = "LIMPIEZA_ESTADO";
 
 
 

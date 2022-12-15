@@ -12,6 +12,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Toast from "light-toast";
 import getusers from "../../Actions/getusers";
 import emailInfoAdoptante from "../../Actions/emailInfoAdoptante"
+import limpiezaEstado from "../../Actions/limpiezaDeEstado";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import { IconLocation } from "../Maps/IconLocation";
 import axios from "axios";
@@ -34,6 +35,9 @@ export default function DetallePerro() {
   useEffect(() => {
     dispatch(getmascotasbyid(id));
     dispatch(getusers());
+    return () => {
+      dispatch(limpiezaEstado())
+  }
   }, [id, dispatch]);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
