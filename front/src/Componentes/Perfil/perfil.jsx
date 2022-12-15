@@ -10,7 +10,7 @@ import MiInformacion from "../ContenidoPerfil/MiInformacion";
 import MisFavoritos from "../ContenidoPerfil/MisFavoritos";
 import CambiarContraseña from "../ContenidoPerfil/CambiarContraseña";
 import CompletarRegistro from "../ContenidoPerfil/CompletarRegistro";
-import MisMascotas from "../ContenidoPerfil/MisMascotas.js";
+import MisMascotas from "../ContenidoPerfil/MisMascotas";
 import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
 import Footer from "../Footer/Footer";
 import CartelPerfil from "../ContenidoPerfil/CartelRegistroCompleto";
@@ -52,8 +52,9 @@ export default function Perfil() {
     
     
     let usuario = undefined
-    const detalleUser = useSelector((state) => state.detalleUsuario); // Estado global con los datos del usuario
-    if (user) {
+    const detalleUser = useSelector((state) => state.detalleUsuario);
+    console.log("detalleruser", detalleUser)
+    if (isAuthenticated) {
         usuario = detalleUser.roles[0]
     }
     const detalleUserGoogle = useSelector((state) => state.detalleUsuarioGoogle) 
