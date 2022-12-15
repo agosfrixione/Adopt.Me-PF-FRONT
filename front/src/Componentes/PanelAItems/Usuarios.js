@@ -21,7 +21,7 @@ const Usuarios = () => {
  const allUsersData = useSelector((state) => state.users)
  const usuarios = allUsersData.data
  const cantidadUsuarios = usuarios.length
- console.log(cantidadUsuarios)
+ // console.log(cantidadUsuarios)
 
   /* const allUsers = allUsersData.data 
    console.log(allUsersData)*/

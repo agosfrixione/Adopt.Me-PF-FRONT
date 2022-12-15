@@ -29,7 +29,7 @@ useEffect(() => {
 }, [dispatch])
   
 
-console.log("perdidosDog", perdidosDog)
+// console.log("perdidosDog", perdidosDog)
 
 return (
   <div className={stl.grafica}>

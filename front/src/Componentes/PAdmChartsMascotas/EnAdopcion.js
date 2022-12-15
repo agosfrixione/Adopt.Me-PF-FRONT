@@ -29,7 +29,7 @@ useEffect(() => {
   dispatch(getmascotas())
 }, [dispatch])
 
-console.log("allpets", allpets)
+// console.log("allpets", allpets)
 
 
   

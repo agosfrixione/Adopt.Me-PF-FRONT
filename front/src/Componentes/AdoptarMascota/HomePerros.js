@@ -74,15 +74,15 @@ export default function HomePerros () {
    }
 
 
-   async function handleTamaño (e){  
-    await e.preventDefault();   
+   function handleTamaño (e){  
+   e.preventDefault();   
    dispatch(getdogtamaños(e.target.value));
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
-  async function handleEdad (e){  
-    await e.preventDefault();   
+  function handleEdad (e){  
+   e.preventDefault();   
    dispatch(getDogEdad(e.target.value));
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
         
   

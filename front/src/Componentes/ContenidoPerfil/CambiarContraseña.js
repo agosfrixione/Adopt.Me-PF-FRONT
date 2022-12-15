@@ -40,8 +40,8 @@ export default function CambiarContraseña() {
   const [errors, setErrors] = useState({});
   const [isSubmit, setisSubmit] = useState(false);
 
-  console.log("Contraseña");
-  console.log(input.contraseñaActual);
+  // console.log("Contraseña");
+  // console.log(input.contraseñaActual);
 
   function validation(input) {
     let errors = {};
@@ -70,8 +70,8 @@ export default function CambiarContraseña() {
     return errors;
   }
 
-  console.log("estos son los errores");
-  console.log(errors);
+  // console.log("estos son los errores");
+  // console.log(errors);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -85,8 +85,8 @@ export default function CambiarContraseña() {
 
     //Si no hay errores, el isSubmit esta en true
     if (isSubmit) {
-      console.log("Este es el input antes de despachar");
-      console.log(input);
+      // console.log("Este es el input antes de despachar");
+      // console.log(input);
 
       dispatch(putUsuario(input, id));
       setInput({

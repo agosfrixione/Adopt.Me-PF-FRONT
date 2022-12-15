@@ -47,8 +47,8 @@ export default function MiInformacion(props) {
     noRepeatMail = Allusers.filter((u) => u.mail === input.mail);
   }
 
-  console.log("no repetir mail");
-  console.log(noRepeatMail);
+  // console.log("no repetir mail");
+  // console.log(noRepeatMail);
 
   function validation(input) {
     let errors = {};
@@ -125,10 +125,10 @@ export default function MiInformacion(props) {
 
     return errors;
   }
-  console.log("este es el input");
-  console.log(input);
-  console.log("estos son los errors");
-  console.log(errors);
+  // console.log("este es el input");
+  // console.log(input);
+  // console.log("estos son los errors");
+  // console.log(errors);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -142,10 +142,10 @@ export default function MiInformacion(props) {
     }
     //Si no hay errores, el isSubmit esta en true
     if (isSubmit) {
-      console.log(
-        "OK. Formulario recibido. Despacho la action con estos datos:"
-      );
-      console.log(input);
+      // console.log(
+      //   "OK. Formulario recibido. Despacho la action con estos datos:"
+      // );
+      // console.log(input);
       dispatch(putUser(input, id));
       setInput({
         usuario: "",

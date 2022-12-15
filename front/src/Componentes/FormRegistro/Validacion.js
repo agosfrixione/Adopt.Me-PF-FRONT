@@ -53,7 +53,7 @@ export default function Validacion() {
   }
 
 
-  console.log('input', input)
+  // console.log('input', input)
 
   function onClick(e) {
     e.preventDefault();

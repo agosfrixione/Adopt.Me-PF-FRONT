@@ -18,7 +18,7 @@ export default function DetallePerro () {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const detail = useSelector((state) => state.animalesPerdidosDetail);
-    console.log("detail", detail)
+    // console.log("detail", detail)
 
     useEffect(() => {
         dispatch(getDetailMascotaPerdida(id))               
@@ -61,7 +61,7 @@ function handleLocation() {
 const [adopt, setAdopt] = useState({
   adoptado: false,
 })
-console.log("adopt", adopt)
+// .log("adopt", adopt)
 
 useEffect(() => {
   setAdopt({

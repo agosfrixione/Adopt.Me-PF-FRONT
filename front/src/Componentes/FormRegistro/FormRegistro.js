@@ -131,8 +131,8 @@ export default function FormRegistro() {
     return errors;
   }
 
-  console.log("Estos son los errores");
-  console.log(errors);
+  // console.log("Estos son los errores");
+  // console.log(errors);
 
   function handleSubmit(e) {
     e.preventDefault();

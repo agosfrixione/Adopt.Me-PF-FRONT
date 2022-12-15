@@ -11,7 +11,7 @@ import getCatByName from "../../Actions/getCatByName";
 import FloatingUI from "../Floating UI/FloatingUI";
 import getCatTamaños from "../../Actions/getCatTamaños";
 import getCatEdad from '../../Actions/getCatEdad';
-import getCatsLocal from "../../Actions/getCatsLocal"
+// import getCatsLocal from "../../Actions/getCatsLocal"
 import Footer from "../Footer/Footer";
 
 const HomeGatos = () => {
@@ -70,15 +70,15 @@ const HomeGatos = () => {
     setOrden(`Ordenado ${e.target.value}`)
   }
 
-  async function handleTamaño (e){  
-    await e.preventDefault();   
-    await dispatch(getCatTamaños(e.target.value));
-    console.log(e.target.value);
+  function handleTamaño (e){  
+    e.preventDefault();   
+    dispatch(getCatTamaños(e.target.value));
+    // console.log(e.target.value);
   };
-  async function handleEdad (e){  
-    await e.preventDefault();   
-    await dispatch(getCatEdad(e.target.value));
-    console.log(e.target.value);
+   function handleEdad (e){  
+    e.preventDefault();   
+    dispatch(getCatEdad(e.target.value));
+    // console.log(e.target.value);
   };
 
     return (

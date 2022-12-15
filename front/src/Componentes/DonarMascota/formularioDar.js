@@ -75,7 +75,7 @@ import "../DonarMascota/formularioDar.css"
   // console.log(input.pichina)
   const [errors, setErrors] = useState({});
   // const [isSubmit, setisSubmit] = useState(false);
-console.log("input 1", input)
+  // console.log("input 1", input)
   
   ////////////////////////////////////////////////////// VALIDACION ///////////////////////////////////////////////////////////////
 
@@ -173,7 +173,7 @@ console.log("input 1", input)
 
     //Si no hay errores, el isSubmit esta en true
     // if (isSubmit === true) {
-    console.log(input)
+    // console.log(input)
       dispatch(createLocation(input));
       dispatch(createanimal(input));
       
@@ -197,7 +197,7 @@ console.log("input 1", input)
         lng: "",
         adoptado: false
       });
-      console.log("input 2", input)
+      // console.log("input 2", input)
       Toast.success("Mascota publicada correctamente", 1500, () => {
         navigate("/homepage")
       });

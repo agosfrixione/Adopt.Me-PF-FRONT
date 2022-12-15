@@ -30,7 +30,7 @@ useEffect(() => {
   dispatch(getusers())
 }, [dispatch])
 
-console.log("allUsers", allUsers) 
+// console.log("allUsers", allUsers) 
 
   
 return (

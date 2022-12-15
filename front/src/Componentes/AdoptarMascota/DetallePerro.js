@@ -166,7 +166,7 @@ const [adopt, setAdopt] = useState({
   adoptado: false,
   estado: "En adopcion"
 })
-console.log("estado", adopt)
+// console.log("estado", adopt)
 
 useEffect(() => {
   setAdopt({
@@ -189,7 +189,7 @@ function handleAdoptado() {
   })
   axios.put("animales/" + id, adopt)
    .then((res) => {
-  console.log("res", res.data)
+   console.log("res", res.data)
 }).catch((error) => {
   console.log(error)
 })

@@ -19,7 +19,7 @@ export default function FormRegistro() {
   const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
   const Allusers = useSelector((state) => state.users).data; // (o el estado global que usemos para guardar todos los usuarios)
   const { user, isAuthenticated } = useAuth0();
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     dispatch(getusers());
@@ -83,15 +83,15 @@ export default function FormRegistro() {
   }
 
   function handleSubmit(e) {
-    console.log("Ingreso al handleSubmit");
+    // console.log("Ingreso al handleSubmit");
     e.preventDefault();
-    console.log(Allusers);
+    // console.log(Allusers);
     //Si no hay errores, el isSubmit esta en true
     if (isSubmit) {
-      console.log(
-        "OK. Formulario recibido. Despacho la action con estos datos:"
-      );
-      console.log(input);
+      // console.log(
+      // "OK. Formulario recibido. Despacho la action con estos datos:"
+      // );
+      // console.log(input);
       dispatch(createUserGoogle(input));
       setInput({
         usuario: "",

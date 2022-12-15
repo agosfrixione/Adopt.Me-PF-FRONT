@@ -58,8 +58,8 @@ import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
   // Usuario va a tener los datos del usuario logueado, sin importar si esta logueado con google o normal
   let usuario = detalleUserGoogle.usuario ? detalleUserGoogle : detalleUser;
 
-  console.log("Estos son los detalles del usaurio");
-  console.log(usuario);
+  // console.log("Estos son los detalles del usaurio");
+  // console.log(usuario);
 
 
 

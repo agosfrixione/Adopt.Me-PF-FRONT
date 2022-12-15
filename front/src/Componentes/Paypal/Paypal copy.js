@@ -15,7 +15,7 @@ export default function PayPal2({ cost, desc }) {
   const [pago, setPago] = useState({
     donacion: 5
   })
-  console.log("pago", pago)
+  // console.log("pago", pago)
 
 
   function handlePago(e) {

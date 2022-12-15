@@ -4,7 +4,7 @@ import stl from "./Cartelito.module.css";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
 export default function Cartelito({ input }) {
-  console.log(input);
+  // console.log(input);
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
 
