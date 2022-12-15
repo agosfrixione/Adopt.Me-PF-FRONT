@@ -14,9 +14,11 @@ ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <Auth0Provider
-        domain="dev-oyj74hb0bfnfndw3.us.auth0.com"
-        clientId="sgqT3nj98fYLvGbtrXhMpWZu7BKXhN6p"
-        redirectUri="https://adoptme-eta.vercel.app/homepage"
+        domain="dev-77nfowmcbvvszdyt.us.auth0.com"
+        clientId="eChd9pg5QYfd7HnBDa1W5KJY1CRMKWj1"
+        redirectUri={window.location.origin}
+        useRefreshTokens={true}
+        cacheLocation="localstorage"
       >
         <App />
       </Auth0Provider>
@@ -24,7 +26,6 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

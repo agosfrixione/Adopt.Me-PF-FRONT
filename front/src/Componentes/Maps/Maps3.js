@@ -11,16 +11,16 @@ import stl from "../Maps/Maps.module.css";
 export default function MapPets2() {
 
    const [geo, setGeo] = useState({
-    longitude: -61.043988,
-    latitude: -34.7361,
+    lng: -61.043988,
+    lat: -34.7361,
 })
 
 useEffect(() => {
     navigator.geolocation.getCurrentPosition(
         function (position) {
             setGeo({
-                longitude: position.coords.longitude,
-                latitude: position.coords.latitude
+                lng: position.coords.longitude,
+                lat: position.coords.latitude
             })
         }, 
         function(error) {
@@ -31,7 +31,7 @@ useEffect(() => {
     
 }, [])
 
-    const position = [geo.latitude, geo.longitude]
+    const position = [geo.lat, geo.lng]
 
     const local = position
 
@@ -51,6 +51,7 @@ useEffect(() => {
 
     <div>
        <NavBar />
+       <div className={stl.ubicacionmapa}>
         <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
         <FlyMapTo />
         <TileLayer
@@ -64,6 +65,7 @@ useEffect(() => {
         <Link to ="/adoptcat">
         <button className={stl.botonMapa}>Volver</button>
         </Link>
+        </div>
         <Footer />
     </div>
     )

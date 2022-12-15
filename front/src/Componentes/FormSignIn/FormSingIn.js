@@ -30,7 +30,7 @@ export default function FormSignIn() {
   function validation(input) {
     let errors = {};
     let existUser = Allusers.filter((u) => u.usuario == input.usuario);
-    console.log(existUser)
+
 
     ///////////////////////////////////////////////////////
     if (!input.usuario) {
@@ -67,11 +67,11 @@ export default function FormSignIn() {
         usuario: "",
         contraseña: "",
       });
-      Toast.success("Ingreso exitoso. Bienvenido", 3000, () => {
+      Toast.success("Ingreso exitoso. Bienvenido", 1500, () => {
         navigate("/perfil");
       });
     } else {
-      Toast.fail("No se pudo ingresar. Revise los campos", 3000, () => {});
+      Toast.fail("No se pudo ingresar. Revise los campos", 1500, () => {});
     }
   }
 

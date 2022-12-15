@@ -18,7 +18,9 @@ export default function BuscarMascota() {
   const params = useParams();
   const dispatch = useDispatch();
   
-  const allPets = useSelector((state)=>state.animalesPerdidos);
+  const allPets = useSelector((state)=>state.animalesPerdidosCopia);
+
+
   const [currentPage, setCurrentPage] = useState(1);
   const [mascotasPerPage] = useState(4);
   const lastPetIndex = currentPage * mascotasPerPage; 
@@ -33,32 +35,34 @@ export default function BuscarMascota() {
     setCurrentPage(1)
   }, [dispatch]);
 
-  async function handleTamaño (e){  
-    await e.preventDefault();   
-    await dispatch(getTamañofiltro(e.target.value));
+
+  function handleTamaño (e){  
+    e.preventDefault();   
+    dispatch(getTamañofiltro(e.target.value));
   };
-  async function handleEstado (e){  
-    await e.preventDefault();   
-    await dispatch(filtradoEstadoPerdido(e.target.value));
+  function handleEstado (e){  
+    e.preventDefault();   
+    dispatch(filtradoEstadoPerdido(e.target.value));
   };
-  async function handleGato (e){  
-    await e.preventDefault();   
-    await dispatch(getGatoPerdido(e.target.value))    
+  function handleGato (e){  
+    e.preventDefault();   
+    dispatch(getGatoPerdido(e.target.value))    
   };
-  async function handlePerro (e){  
-    await e.preventDefault();   
-    await dispatch(getPerroPerdido(e.target.value)); 
+  function handlePerro (e){  
+    e.preventDefault();   
+    dispatch(getPerroPerdido(e.target.value)); 
   };
-  async function handleRecargar (e){  
-    await e.preventDefault();   
-    await dispatch(getAnimalesPerdidos(e.target.value));
+  function handleRecargar (e){  
+    e.preventDefault();   
+
+    dispatch(getAnimalesPerdidos(e.target.value));
     setCurrentPage(1)
   };
 
 
   return (
-    <>
-      <div className={stl.paginaadopcionperros} key={params.id}></div>
+
+      <div className={stl.paginaadopcionperros} key={params.id}>
       <NavBar />
       <FloatingUI />
       <div>
@@ -106,6 +110,7 @@ export default function BuscarMascota() {
         </Link>
       </div>
 
+    <div className={stl.paginado}>
       <Paging
         mascotasPerPage={mascotasPerPage} 
         allPets={allPets.length} 
@@ -113,7 +118,8 @@ export default function BuscarMascota() {
         actualPage={actualPage}
         currentPets={currentPets}
        />
-
+  </div>
+  
     <div className={stl.listadoCards}>
 
       {currentPets.length > 0 && currentPets.map(a =>{
@@ -125,18 +131,20 @@ export default function BuscarMascota() {
         tama = {a.tama}       
         description = {a.descripcion}
         estado = {a.estado}
+        imagen = {a.imagen}
         />                  
                )
            })}
 
-</div>
       
       <Link to="/homepage">
         <button className={stl.boton}>VOLVER</button>
       </Link>
 
-      <Footer />
 
-    </>
+</div>
+      <Footer />
+</div>
+  
   );
 };

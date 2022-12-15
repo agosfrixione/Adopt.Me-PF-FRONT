@@ -14,7 +14,7 @@ export default function Directorio () {
         <div>
 
         <NavBar />
-        <br></br>
+        
         <div className={stl.paginadirectorio} key={params.id}>
             
             <FloatingUI />
@@ -61,8 +61,9 @@ export default function Directorio () {
                 <button className={stl.botondirectorio}>VOLVER</button>
             </Link>
             
+      
             <Footer />
-
+           
         </div>
         </div>
     )

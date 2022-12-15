@@ -4,7 +4,7 @@
     /* border: 2px solid red; */
     display: flex;
     width: 600px;  
-    height: 750px; 
+    height: 850px; 
     margin-top: 60px;
     justify-content: center;
     position: relative;
@@ -48,9 +48,9 @@ input {
 .metodosPago {
     display: block;
     position: absolute;
-    margin-top: 350px;
+    margin-top: 90px;
     width: 450px;
-    height: 330px;
+    height: 630px;
     background-color: #F2E7D5;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;    
 }
@@ -75,4 +75,18 @@ label {
  .botonstripes  {
     margin-top: 160px;
     margin-left: 54px;
+ }
+
+ /*////////////////////////////////////////////////////////////////////////////////////////*/
+
+ @media (min-width: 481px) and (max-width: 767px) {
+
+    .formulario {
+        width: 400px;
+    }
+
+    .metodosPago {
+        width: 340px;
+    }
+
  }

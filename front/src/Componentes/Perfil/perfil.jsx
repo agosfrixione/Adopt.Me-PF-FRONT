@@ -10,18 +10,22 @@ import MiInformacion from "../ContenidoPerfil/MiInformacion";
 import MisFavoritos from "../ContenidoPerfil/MisFavoritos";
 import CambiarContraseña from "../ContenidoPerfil/CambiarContraseña";
 import CompletarRegistro from "../ContenidoPerfil/CompletarRegistro";
-import MisPublicaciones from "../ContenidoPerfil/MisPublicaciones";
+import MisMascotas from "../ContenidoPerfil/MisMascotas.js";
 import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
+import Footer from "../Footer/Footer";
+import CartelPerfil from "../ContenidoPerfil/CartelRegistroCompleto";
+import CartelRegistroCompleto from "../ContenidoPerfil/CartelRegistroCompleto";
+import CartelCambiarContraseña from "../ContenidoPerfil/CartelCambiarContraseña";
+import CartelCompletarRegistro from "../ContenidoPerfil/CartelCompletarRegistro";
+
 
 
 export default function Perfil() {
     const { logout } = useAuth0()
     const dispatch = useDispatch();
-    const [Render, setRender] = useState(0); 
+    const [Render, setRender] = useState(1); 
 
     const { user, isAuthenticated } = useAuth0()
-    console.log(isAuthenticated)
-    console.log(user)
 
     
     let usuarioIdRaro = ""
@@ -49,12 +53,8 @@ export default function Perfil() {
     
 
     const detalleUser = useSelector((state) => state.detalleUsuario); // Estado global con los datos del usuario
-    console.log("Estos son los datos de detalleUser")
-    console.log(detalleUser)
-
-    const detalleUserGoogle = useSelector((state) => state.detalleUsuarioGoogle)
-    console.log("Estos son los datos del userGoogle")
-    console.log(detalleUserGoogle)
+    const usuario = detalleUser.roles[0]
+    const detalleUserGoogle = useSelector((state) => state.detalleUsuarioGoogle) 
 
     /////////////////// ON CLICKS ////////////////////////
 
@@ -82,6 +82,7 @@ export default function Perfil() {
         setRender(5)
     } 
     
+    if (usuario === "6397ce1035c65595db3f409e") {
     return (
         <div >
             <NavBar/>
@@ -89,68 +90,70 @@ export default function Perfil() {
                 <div className={css.miniContainer}>
                     
                     <div className={css.sideBar}>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                       
                         <div>
-                            <button onClick={(e) => onClick1(e)} className={css.boton}>Mi informacion</button>
+                            <button onClick={(e) => onClick1(e)} className={css.botonSideBar}>Mi informacion</button>
                         </div>
-                        <br />
-                        <br />
+
+                        <div >
+                            <Link to="/panel-Administrador">
+                        <button className={css.botonSideBar}>
+                             Admin
+                                </button>
+                                </Link>
+                            </div>
+                       
                         <div>
-                            <button onClick={(e) => onClick2(e)} className={css.boton}>Mis favoritos</button>
+                            <button onClick={(e) => onClick2(e)} className={css.botonSideBar}>Mis favoritos</button>
                         </div>
-                        <br />
-                        <br />
+                     
                         <div>
-                            <button onClick={(e) => onClick3(e)} className={css.boton}>Mis publicaciones</button>
+                            <button onClick={(e) => onClick3(e)} className={css.botonSideBar}>Mis Mascotas</button>
                         </div>
-                        <br />
-                        <br />
+                      
                         <div>
-                            <button onClick={(e) => onClick4(e)} className={css.boton}>Cambiar contraseña</button>
+                            <button onClick={(e) => onClick4(e)} className={css.botonSideBar}>Cambiar contraseña</button>
                         </div>
-                        <br />
-                        <br />
+                       
                         <div>
-                            <button onClick={(e) => onClick5(e)} className={css.boton}>Completar registro</button>
+                            <button onClick={(e) => onClick5(e)} className={css.botonSideBar}>Completar registro</button>
                         </div>
-                        <br />
-                        <br />
+                      
                         <div>
                             <Link to="/homepage">
-                                <button className={css.boton}>Inicio</button>
+                                <button className={css.botonSideBar}>Inicio</button>
                             </Link>
                         </div>
-                        <br />
-                        <br />
+                        
                     </div>
 
                     <div className={css.contenido}> 
-                        <br />
-                        <br /><br />
-                        <br /><br />
-                        <br />
-                        <div>
+                        
+                        
+                        <div className={css.datos}>
                         {Render === 1 && detalleUser.usuario ? <MiInformacion datos={detalleUser} /> : null}
                         {Render === 1 && detalleUserGoogle.usuario ? <MiInformacion datos={detalleUserGoogle} /> : null}
-                        {Render === 1 && !detalleUser.usuario && !detalleUserGoogle.usuario ? <h1>Por favor, completa el registro para ver tus datos</h1> : null}
+                        {Render === 1 && !detalleUser.usuario && !detalleUserGoogle.usuario ? <CartelCompletarRegistro></CartelCompletarRegistro> : null}
                         
                         {Render === 2 ? <MisFavoritos></MisFavoritos>: null }
-                        {Render === 3 ? <MisPublicaciones></MisPublicaciones> : null}
-                        {Render === 4 ? <CambiarContraseña></CambiarContraseña> : null}
+                        {Render === 3 ? <MisMascotas></MisMascotas> : null}
+
+                        
+                        {Render === 4 && detalleUser.usuario  ?  <CambiarContraseña></CambiarContraseña> : null}
+                        {Render === 4 && detalleUserGoogle.usuario ? <CartelCambiarContraseña></CartelCambiarContraseña> : null}
+                        {Render === 4 && !detalleUserGoogle.usuario && !detalleUser.usuario ? <CartelCambiarContraseña></CartelCambiarContraseña> : null}
+                       
                             
-                        {Render === 5 && detalleUser.usuario ? <h1>Tu registro ya fue completado!! </h1> : null}
-                        {Render === 5 && detalleUserGoogle.usuario ? <h1>Tu registro ya fue completado! </h1> : null}
+                        {Render === 5 && detalleUser.usuario ? <CartelRegistroCompleto></CartelRegistroCompleto> : null}
+                        {Render === 5 && detalleUserGoogle.usuario ? <CartelRegistroCompleto></CartelRegistroCompleto> : null}
                         {Render === 5 && !detalleUser.usuario && !detalleUserGoogle.usuario ? <CompletarRegistro></CompletarRegistro> : null}
                         </div>
                         
                         
                     </div>
+                    
                 </div>
+                <Footer></Footer>
             </div>
 
             
@@ -159,6 +162,79 @@ export default function Perfil() {
         </div>
     
     )
+} else if (usuario === "6397ce1035c65595db3f409d" || detalleUserGoogle.lenght === 1) {
+    return (
+        <div >
+            <NavBar/>
+            <div className={css.container}>
+                <div className={css.miniContainer}>
+                    
+                    <div className={css.sideBar}>
+                       
+                        <div>
+                            <button onClick={(e) => onClick1(e)} className={css.botonSideBar}>Mi informacion</button>
+                        </div>
+                       
+                        <div>
+                            <button onClick={(e) => onClick2(e)} className={css.botonSideBar}>Mis favoritos</button>
+                        </div>
+                     
+                        <div>
+                            <button onClick={(e) => onClick3(e)} className={css.botonSideBar}>Mis Mascotas</button>
+                        </div>
+                      
+                        <div>
+                            <button onClick={(e) => onClick4(e)} className={css.botonSideBar}>Cambiar contraseña</button>
+                        </div>
+                       
+                        <div>
+                            <button onClick={(e) => onClick5(e)} className={css.botonSideBar}>Completar registro</button>
+                        </div>
+                      
+                        <div>
+                            <Link to="/homepage">
+                                <button className={css.botonSideBar}>Inicio</button>
+                            </Link>
+                        </div>
+                        
+                    </div>
+
+                    <div className={css.contenido}> 
+                        
+                        
+                        <div className={css.datos}>
+                        {Render === 1 && detalleUser.usuario ? <MiInformacion datos={detalleUser} /> : null}
+                        {Render === 1 && detalleUserGoogle.usuario ? <MiInformacion datos={detalleUserGoogle} /> : null}
+                        {Render === 1 && !detalleUser.usuario && !detalleUserGoogle.usuario ? <CartelCompletarRegistro></CartelCompletarRegistro> : null}
+                        
+                        {Render === 2 ? <MisFavoritos></MisFavoritos>: null }
+                        {Render === 3 ? <MisMascotas></MisMascotas> : null}
+
+                        
+                        {Render === 4 && detalleUser.usuario  ?  <CambiarContraseña></CambiarContraseña> : null}
+                        {Render === 4 && detalleUserGoogle.usuario ? <CartelCambiarContraseña></CartelCambiarContraseña> : null}
+                        {Render === 4 && !detalleUserGoogle.usuario && !detalleUser.usuario ? <CartelCambiarContraseña></CartelCambiarContraseña> : null}
+                       
+                            
+                        {Render === 5 && detalleUser.usuario ? <CartelRegistroCompleto></CartelRegistroCompleto> : null}
+                        {Render === 5 && detalleUserGoogle.usuario ? <CartelRegistroCompleto></CartelRegistroCompleto> : null}
+                        {Render === 5 && !detalleUser.usuario && !detalleUserGoogle.usuario ? <CompletarRegistro></CompletarRegistro> : null}
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <Footer></Footer>
+            </div>
+
+            
+
+            
+        </div>
+    
+    )
+}
 };
 
 

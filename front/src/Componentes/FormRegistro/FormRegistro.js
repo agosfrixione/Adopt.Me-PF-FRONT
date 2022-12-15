@@ -6,9 +6,11 @@ import NavBar from "../NavBar/NavBar";
 import stl from "../FormRegistro/FormRegistro.module.css";
 import createuser from "../../Actions/createuser";
 import getusers from "../../Actions/getusers";
+// import mailVerificarUsuario from "../../Actions/mailVerificarUsuario"
 import FloatingUI from "../Floating UI/FloatingUI";
 import userImageDefault from "../../Imagenes/userImageDefault.png";
-import Toast from 'light-toast';
+import Toast from "light-toast";
+import Cartelito from "./Cartelito"
 
 export default function FormRegistro() {
   const params = useParams();
@@ -22,8 +24,8 @@ export default function FormRegistro() {
 
   const [input, setInput] = useState({
     usuario: "",
-    contraseña: "",
-    repitaContraseña: "",
+    contrasena: "",
+    repitaContrasena: "",
     nombre: "",
     telefono: "",
     mail: "",
@@ -34,11 +36,20 @@ export default function FormRegistro() {
 
   const [errors, setErrors] = useState({});
   const [isSubmit, setisSubmit] = useState(false);
+  const [cartelito, setCartelito] = useState(false);
+
+  let noRepeatUser = undefined;
+  let noRepeatMail = undefined;
+  //Lo meto en un if pq me rompia el filter
+  if (Allusers) {
+    noRepeatUser = Allusers.filter((u) => u.usuario === input.usuario);
+    noRepeatMail = Allusers.filter((u) => u.mail === input.mail);
+  }
 
   function validation(input) {
     let errors = {};
-    let noRepeatUser = Allusers.filter((u) => u.usuario === input.usuario);
-    let noRepeatMail = Allusers.filter((u) => u.mail === input.mail);
+    // let noRepeatUser = Allusers.filter((u) => u.usuario === input.usuario);
+    // let noRepeatMail = Allusers.filter((u) => u.mail === input.mail);
 
     if (!input.usuario) {
       errors.usuario = "Tenes que ingresar un nombre de usuario";
@@ -51,18 +62,18 @@ export default function FormRegistro() {
       errors.usuario = `El nombre de usuario ${input.usuario} no está disponible`;
     }
 
-    if (!input.contraseña) {
-      errors.contraseña = "Tenes que ingresar una contraseña";
+    if (!input.contrasena) {
+      errors.contrasena = "Tenes que ingresar una contraseña";
     } else if (
-      !/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(input.contraseña)
+      !/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(input.contrasena)
     ) {
-      errors.contraseña =
+      errors.contrasena =
         "La contraseña debe tener entre 8 y 16 caracteres, al menos un número, al menos una minúscula y al menos una mayúscula.";
     }
 
-    if (!input.repitaContraseña) {
+    if (!input.repitaContrasena) {
       errors.repitaContraseña = "Tenes que repetir la contraseña";
-    } else if (input.repitaContraseña !== input.contraseña) {
+    } else if (input.repitaContrasena !== input.contrasena) {
       errors.repitaContraseña = "Las contraseñas no coinciden";
     }
 
@@ -74,7 +85,11 @@ export default function FormRegistro() {
 
     if (!input.telefono) {
       errors.telefono = "Tenes que ingresar un telefono";
-    } else if (input.telefono.length > 15) {
+    }
+    if (!/^[0-9]*(\.?)[0-9]+$/.test(input.telefono)) {
+      errors.telefono = "Este campo solo debe contener numeros"
+    }
+     if (input.telefono.length > 15) {
       errors.telefono = "El teléfono no es válido";
     }
 
@@ -98,40 +113,71 @@ export default function FormRegistro() {
     if (!input.fotoPerfil || input.fotoPerfil === "") {
       setInput({
         fotoPerfil:
-          "https://res.cloudinary.com/dvw0vrnxp/image/upload/v1670012585/usuarios/userImageDefault_bm6bdk.png",
+        "https://res.cloudinary.com/dvw0vrnxp/image/upload/v1671058408/usuarios/avatarvacio_hcmos8.jpg",
       });
+    }
+
+    if (!input.localidad) {
+      errors.localidad = "Tenes que ingresar una localidad";
     }
 
     if (Object.keys(errors).length === 0) {
       setisSubmit(true);
     }
+    if (Object.keys(errors).length !== 0) {
+      setisSubmit(false);
+    }
 
     return errors;
   }
 
+  console.log("Estos son los errores");
+  console.log(errors);
+
   function handleSubmit(e) {
     e.preventDefault();
+    if (noRepeatMail.length) {
+      return alert(`El mail ingresado ${input.mail} ya esta en uso`);
+    }
+    if (noRepeatUser.length) {
+      return alert(
+        `El nombre de usuario ${input.usuario} ingresado ya esta en uso`
+      );
+    }
     //Si no hay errores, el isSubmit esta en true
     if (isSubmit) {
-      console.log("Se despacha el create con estos valores")
-      console.log(input)
+      // console.log("Se despacha el create con estos valores")
+      // console.log(input)
+     // dispatch(createuser(input));
+
       dispatch(createuser(input));
-      setInput({
-        usuario: "",
-        contraseña: "",
-        repitaContraseña: "",
-        nombre: "",
-        telefono: "",
-        mail: "",
-        nacimiento: "",
-        localidad: "",
-        fotoPerfil: "",
-      });
+
+      setCartelito(true);
+
+      // dispatch(mailVerificarUsuario(input));
+
+      // dispatch(mailVerificarUsuario(input));
+      
+      // setInput({
+      //   usuario: "",
+      //   contrasena: "",
+      //   repitaContrasena: "",
+      //   nombre: "",
+      //   telefono: "",
+      //   mail: "",
+      //   nacimiento: "",
+      //   localidad: "",
+      //   fotoPerfil: "",
+      // });
       Toast.success("Usuario creado correctamente", 1500, () => {
-        navigate("/prueba");
-      });    
+       // navigate("/prueba");
+      });
     } else {
-      Toast.fail("No se pudo completar el registro, revise los campos", 1500, () => {});
+      Toast.fail(
+        "No se pudo completar el registro, revise los campos",
+        1500,
+        () => {}
+      );
     }
   }
 
@@ -146,6 +192,13 @@ export default function FormRegistro() {
       })
     );
   }
+
+  // function handleSend(e) {
+  //   e.preventDefault();
+  //   setSent(true);
+  //   dispatch(emailConfirmacion(input.mail));
+  //   console.log('input.mail', input.mail)
+  // }
 
   function handleOpenWidget(e) {
     // console.log("Entre el handleOpenWidget");
@@ -176,169 +229,196 @@ export default function FormRegistro() {
       <NavBar />
       <FloatingUI />
 
-      <div className={stl.errores}>
-        {errors.usuario && <p className={stl.error}>{errors.usuario}</p>}
-        {errors.contraseña && <p className={stl.error}>{errors.contraseña}</p>}
-        {errors.repitaContraseña && (
-          <p className={stl.error}>{errors.repitaContraseña}</p>
-        )}
-        {errors.nombre && <p className={stl.error}>{errors.nombre}</p>}
-        {errors.telefono && <p className={stl.error}>{errors.telefono}</p>}
-        {errors.mail && <p className={stl.error}>{errors.mail}</p>}
-        {errors.nacimiento && <p className={stl.error}>{errors.nacimiento}</p>}
-        {errors.localidad && <p className={stl.error}>{errors.localidad}</p>}
-      </div>
 
-      <div className={stl.form} key={params.id}>
-        <div className={stl.titulomayor}>Registro de Usuario</div>
-        <form
-          onSubmit={(e) => handleSubmit(e)}
-          action="/usuarios/signup"
-          method="POST"
-        >
-          <div className={stl.datosRegistro} key={params.id}>
-            <div>NOMBRE DE USUARIO: </div>
-            <input
-              className={stl.inputs}
-              type="text"
-              pipo
-              name="usuario"
-              value={input.usuario}
-              onChange={(e) => handleChange(e)}
-            />{" "}
-            <span></span>
-          </div>
+      {cartelito ? <Cartelito input={input} /> :
+        <div className={stl.form} key={params.id}>
+          <div className={stl.titulomayor}>Registro de Usuario</div>
+          <form
+            onSubmit={(e) => handleSubmit(e)}
+            action="/usuarios/signup"
+            method="POST"
+          >
+            <div className={stl.datosRegistro} key={params.id}>
+              <img
+                src={userImageDefault}
+                id="user-photo"
+                alt=""
+                height="200"
+                width="200"
+              />
+              <br></br>
+              <button
+                id="btn-foto"
+                name="fotoPerfil"
+                onClick={(e) => handleOpenWidget(e)}
+                className={stl.BotonFoto}
+              >
+                SELECCIONE FOTO DE PERFIL
+              </button>
+              <span></span>
 
-          <div className={stl.datosRegistro} key={params.id}>
-            <div>CONTRASEÑA: </div>
-            <input
-              className={stl.inputs}
-              required
-              type="password"
-              name="contraseña"
-              value={input.contraseña}
-              onChange={(e) => handleChange(e)}
-            />{" "}
-            <span></span>
-          </div>
+            
+              {errors.fotoPerfil && (<p className={stl.err}>{errors.fotoPerfil}</p>)}
+            
+            </div>
+            <div className={stl.datosRegistro} key={params.id}>
+              <div>NOMBRE DE USUARIO: </div>
+              <input
+                className={stl.inputs}
+                type="text"
+                pipo
+                name="usuario"
+                value={input.usuario}
+                onChange={(e) => handleChange(e)}
+              />{" "}
+            
+              {errors.usuario && <p className={stl.err}>{errors.usuario}</p>}
+            
+              <span></span>
+            </div>
 
-          <div className={stl.datosRegistro} key={params.id}>
-            <div>REPITA CONTRASEÑA: </div>
-            <input
-              className={stl.inputs}
-              required
-              type="password"
-              name="repitaContraseña"
-              value={input.repitaContraseña}
-              onChange={(e) => handleChange(e)}
-            />{" "}
-            <span></span>
-          </div>
+            <div className={stl.datosRegistro} key={params.id}>
+              <div>CONTRASEÑA: </div>
+              <input
+                className={stl.inputs}
+                required
+                type="password"
+                name="contrasena"
+                value={input.contrasena}
+                onChange={(e) => handleChange(e)}
+              />{" "}
+            
+              {errors.contrasena && (
+                <p className={stl.err}>{errors.contrasena}</p>
+              )}
+            
+              <span></span>
+            </div>
 
-          <div className={stl.datosRegistro} key={params.id}>
-            <div>NOMBRE Y APELLIDO / REFUGIO: </div>
-            <input
-              className={stl.inputs}
-              type="text"
-              required
-              name="nombre"
-              value={input.nombre}
-              onChange={(e) => handleChange(e)}
-            />{" "}
-            <span></span>
-          </div>
+            <div className={stl.datosRegistro} key={params.id}>
+              <div>REPITA CONTRASEÑA: </div>
+              <input
+                className={stl.inputs}
+                required
+                type="password"
+                name="repitaContrasena"
+                value={input.repitaContrasena}
+                onChange={(e) => handleChange(e)}
+              />{" "}
+            
+              {errors.repitaContraseña && (
+                <p className={stl.err}>{errors.repitaContraseña}</p>
+              )}
+           
+              <span></span>
+            </div>
 
-          <div className={stl.datosRegistro} key={params.id}>
-            <div>TELÉFONO DE CONTACTO: </div>
-            <input
-              className={stl.inputs}
-              type="text"
-              required
-              name="telefono"
-              value={input.telefono}
-              onChange={(e) => handleChange(e)}
-            />{" "}
-            <span></span>
-          </div>
+            <div className={stl.datosRegistro} key={params.id}>
+              <div>NOMBRE Y APELLIDO / REFUGIO: </div>
+              <input
+                className={stl.inputs}
+                type="text"
+                required
+                name="nombre"
+                value={input.nombre}
+                onChange={(e) => handleChange(e)}
+              />
+              {errors.nombre && <p className={stl.err}>{errors.nombre}</p>}
+            </div>
+            
+            <div className={stl.datosRegistro} key={params.id}>
+              <div>TELÉFONO DE CONTACTO: </div>
+              <input
+                className={stl.inputs}
+                type="text"
+                required
+                name="telefono"
+                value={input.telefono}
+                onChange={(e) => handleChange(e)}
+              />{" "}
+            
+              {errors.telefono && (
+                <p className={stl.err}>{errors.telefono}</p>
+              )}
+            
+              <span></span>
+            </div>
 
-          <div className={stl.datosRegistro} key={params.id}>
-            <div>E-MAIL: </div>
-            <input
-              className={stl.inputs}
-              type="email"
-              required
-              name="mail"
-              value={input.mail}
-              onChange={(e) => handleChange(e)}
-            />{" "}
-            <span></span>
-          </div>
+            <div className={stl.datosRegistro} key={params.id}>
+              <div>E-MAIL: </div>
+              <input
+                className={stl.inputs}
+                type="email"
+                required
+                name="mail"
+                value={input.mail}
+                onChange={(e) => handleChange(e)}
+              />{" "}
+           
+              {errors.mail && <p className={stl.err}>{errors.mail}</p>}
+            
+              <span></span>
+            </div>
 
-          <div className={stl.datosRegistro} key={params.id}>
-            <div>FECHA DE NACIMIENTO: </div>
-            <input
-              className={stl.inputs}
-              required
-              type="date"
-              name="nacimiento"
-              value={input.nacimiento}
-              placeholder="dd-mm-yyyy"
-              onChange={(e) => handleChange(e)}
-            />{" "}
-            <span></span>
-          </div>
+            <div className={stl.datosRegistro} key={params.id}>
+              <div>FECHA DE NACIMIENTO: </div>
+              <input
+                className={stl.inputs}
+                required
+                type="date"
+                name="nacimiento"
+                value={input.nacimiento}
+                placeholder="dd-mm-yyyy"
+                onChange={(e) => handleChange(e)}
+              />{" "}
+           
+              {errors.nacimiento && (
+                <p className={stl.err}>{errors.nacimiento}</p>
+              )}
+           
+              <span></span>
+            </div>
 
-          <div className={stl.datosRegistro} key={params.id}>
-            <div>LOCALIDAD: </div>
-            <input
-              className={stl.inputs}
-              type="text"
-              required
-              name="localidad"
-              value={input.localidad}
-              onChange={(e) => handleChange(e)}
-            />{" "}
-            <span></span>
-          </div>
+            <div className={stl.datosRegistro} key={params.id}>
+              <div>LOCALIDAD: </div>
+              <input
+                className={stl.inputs}
+                type="text"
+                required
+                name="localidad"
+                value={input.localidad}
+                onChange={(e) => handleChange(e)}
+              />{" "}
+            
+              {errors.localidad && (
+                <p className={stl.err}>{errors.localidad}</p>
+              )}
+           
 
-          <div className={stl.datosRegistro} key={params.id}>
-            <img
-              src={userImageDefault}
-              id="user-photo"
-              alt=""
-              height="150"
-              width="150"
-            />
+              <span></span>
+            </div>
 
-            <button
-              id="btn-foto"
-              name="fotoPerfil"
-              onClick={(e) => handleOpenWidget(e)}
-              className={stl.botonImagen}
-            >
-              SELECCIONE FOTO DE PERFIL
-            </button>
-            <span></span>
-            {errors.fotoPerfil && <p>{errors.fotoPerfil}</p>}
-          </div>
+            <div>
+              <button
+                className={stl.buttons}
+                type="submit"
+                disabled={isSubmit ? false : true}
+              >
+                ACEPTAR
+              </button>
 
-          <div>
-            <button
-              className={stl.buttons}
-              type="submit"
-              disabled={isSubmit ? false : true}
-            >
-              ACEPTAR
-            </button>
+              <Link to="/homepage">
+                <button className={stl.buttons}>CANCELAR</button>
+              </Link>
+            </div>
+          </form>
 
-            <Link to="/homepage">
-              <button className={stl.buttons}>CANCELAR</button>
-            </Link>
-          </div>
-        </form>
-      </div>
+      
+
+        </div>
+      }
+
       <Footer />
     </div>
   );
-  
 }

@@ -1,19 +1,51 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import FloatingUI from "../Floating UI/FloatingUI";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import stl from "./HomePage.module.css";
-
-
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import getDetalleUsuario from "../../Actions/getDetalleUsuario"
+import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
 
 export default function HomePage() {
+  const { user, isAuthenticated } = useAuth0()
+  const dispatch = useDispatch()
+    
+  let usuarioIdRaro = ""
+  let id = ""
+  if (isAuthenticated) {
+      if (user.sub.startsWith("google")) {
+          usuarioIdRaro = user.sub
+          id = usuarioIdRaro.substring(14)
+      }
+      else {
+          usuarioIdRaro = user.sub
+          id = usuarioIdRaro.substring(6)
+      }
+  }
+  
+
+  useEffect(() => {
+      dispatch(getDetalleUsuarioGoogle(id));
+  }, [id, dispatch]);
+
+  useEffect(() => {
+          dispatch(getDetalleUsuario(id));
+  }, [id, dispatch]);
+  
+  
+
+  useSelector((state) => state.detalleUsuario); // Estado global con los datos del usuario
+
+  useSelector((state) => state.detalleUsuarioGoogle) 
+
 
   return (
     <div className={stl.homepage}>
       
       <NavBar />
-      <FloatingUI />
       
       <div className={stl.donacion}>
         <p className={stl.textoDonacion}>Realiza tu donacion</p>
@@ -144,8 +176,15 @@ export default function HomePage() {
           </Link>
         </div>
       </div>
-
+         <div>
+           
+               <div className={stl.botonadmin}>
+                 
+               </div>
+         
+         </div>
       <Footer />
     </div>
   );
 }
+//

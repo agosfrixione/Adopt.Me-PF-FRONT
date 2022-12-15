@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import createAnimalPerdido from '../../Actions/createAnimalPerdido';
@@ -9,6 +9,10 @@ import stl from "../ReportarMascota/ReportarMascota.module.css"
 import FloatingUI from "../Floating UI/FloatingUI";
 import imagenDefault from "../../Imagenes/imagenDefault.png"
 import Toast from 'light-toast';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import MarkersLost from "../MapaPerdidos/Marcadores";
+import createLocationPerdidos from "../../Actions/createLocationPerdidos";
+import { IconLocation } from "../Maps/IconLocation";
 
 
 ////////////////////////////////////////////////////// VALIDACION ///////////////////////////////////////////////////////////////
@@ -57,11 +61,13 @@ function validation(input){
         estado: [],
         tama: [],
         peso: "",
-        localidad: "",
         descripcion: "",        
-        imagen: ""
+        imagen: "",
+        lng: "",
+        lat: "",
+        adoptado: false
       });
-console.log(input)
+      console.log("input", input)
   const [imagenes, setImagenes] = useState([]);
       
   const [errors, setErrors] = useState({});
@@ -69,6 +75,7 @@ console.log(input)
     function handleSubmit(e){
          e.preventDefault();
 
+    dispatch(createLocationPerdidos(input))
     dispatch(createAnimalPerdido(input, imagenes));
 
     setInput({
@@ -77,13 +84,15 @@ console.log(input)
       estado: [],
       tama: [],
       peso: "",
-      localidad: "",
       descripcion: "",        
-      imagen: ""
+      imagen: "",
+      lng: "",
+      lat: "",
+      adoptado: false
     })
-    
+  
     // setImagenes([])
-    Toast.success("Mascota agregada", 3000, () => {
+    Toast.success("Mascota agregada", 1500, () => {
       navigate("/homepage")
     });
  }
@@ -157,7 +166,7 @@ console.log(input)
   } else {
       setInput({
       ...input,
-      [e.target.name]: false
+      [e.target.value]: false
      })
   }}
 
@@ -220,6 +229,131 @@ console.log(input)
 
 /////////////////////////////////////////////////////////// TE KAVIO EL RETURN  ///////////////////////////////////////////////////
 
+const {descripcion } = input;
+
+  const handleDesc = (e) => {
+   let value = e.target.value;
+   let name = e.target.name;
+
+   setInput((prev) => ({...prev, [name]: value}))
+};
+
+ useEffect(() => {
+   const descS = JSON.parse(localStorage.getItem("desc"));
+   if (descripcion === "") {
+     setInput((prev) => ({ ...prev, ...descS}))
+   }
+ }, [])
+
+ useEffect(() => {
+   localStorage.setItem("desc", JSON.stringify(input))
+ }, )
+
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ const { estado, tama } = input;
+
+ const handleEstadoTama = (e) => {
+  let value = e.target.value;
+  let name = e.target.name;
+
+  setInput((prev) => ({...prev, [name]: value}))
+ };
+
+ useEffect(() => {
+  const estadoS = JSON.parse(localStorage.getItem("estadoTamaño"));
+  console.log("estadoS", estadoS)
+  if (estado === null && tama === null) {
+    setInput((prev) => ({...prev, ...estadoS}))
+
+  }
+ }, [])
+
+ useEffect(() => {
+  localStorage.setItem("estadoTamaño", JSON.stringify(input))
+ }, )
+
+ ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ 
+function handleLocation(e) {
+  e.preventDefault()
+  setInput({
+    ...input,
+          lat: geo.lat,
+          lng: geo.lng
+  })
+  Toast.success("Ubicacion Establecida. Por favor seleccione 'Guardar mi Ubicacion'", 1500, () => {});
+}
+
+function handleLocation2(e) {
+  e.preventDefault()
+  setInput({
+    ...input,
+          lat: geo.lat,
+          lng: geo.lng
+  })
+  Toast.success("Ubicacion Guardada con exito. Por favor seleccione 'Confirmar y volver'", 1500, () => {});
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+const [geo, setGeo] = useState({
+  lng: -61.043988,
+  lat: -34.7361,
+})
+
+useEffect(() => {
+  navigator.geolocation.getCurrentPosition(
+      function (position) {
+          setGeo({
+              lng: position.coords.longitude,
+              lat: position.coords.latitude
+          })
+      }, 
+      function(error) {
+          console.log(error)
+      }, {
+          enableHighAccuracy: true
+      });
+      
+}, [])
+
+
+            const [draggable, setDraggable] = useState(false)
+            const markerRef = useRef(null)
+            const eventHandlers = useMemo(
+            () => ({
+              dragend() {
+                const marker = markerRef.current
+                if (marker != null) {
+                  setGeo(marker.getLatLng())
+                }
+              },
+            }),
+            [],
+            )
+            const toggleDraggable = useCallback(() => {
+            setDraggable((d) => !d)
+            }, [])
+
+            const position = [geo.lat, geo.lng]
+
+            const local = position
+
+            function FlyMapTo() {
+
+            const map = useMap()
+
+            useEffect(() => {
+                map.flyTo(local)
+                
+            }, {enableHighAccuracy: true})
+
+            return null
+            }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     
   <div className={stl.paginareportar}>
@@ -269,15 +403,15 @@ console.log(input)
           
             <div className={stl.opciones2}>
                 <label className={stl.titulos2}>Perro:</label>
-                <input className={stl.inputs2} onChange={ (e) => { handleCheck2(e); handlePerro(e); }}
+                <input className={stl.inputs2} defaultValue="" onChange={ (e) => { handleCheck2(e); handlePerro(e); }}
                 type="checkbox" name="perro" checked={isChecked2} value={input.perro}/>                        
             </div>
             </div>
 
             <div className={stl.opciones}>                                     
             <label className={stl.titulos}>Estado:</label>
-            <select className={stl.tamaño} onChange={handleEstado}>
-                       <option></option>
+            <select className={stl.tamaño} defaultValue="" onChange={(e) => {handleEstado(e); handleEstadoTama(e); }}>
+                      <option value="" disabled hidden>Selecciona estado...</option>
                        <option>Perdido</option>
                        <option>Encontrado</option>                       
                        </select>
@@ -285,8 +419,8 @@ console.log(input)
 
             <div className={stl.opciones}>                                     
             <label className={stl.titulos}>Tamaño:</label>
-            <select className={stl.tamaño} onChange={handleTamaño}>
-                       <option></option>
+            <select className={stl.tamaño} defaultValue="" onChange={(e) => {handleTamaño(e); handleEstadoTama(e); }}>
+            <option value="" disabled hidden>Selecciona tamaño...</option>
                        <option>Chico</option>
                        <option>Mediano</option>
                        <option>Grande</option>
@@ -294,19 +428,59 @@ console.log(input)
                         </div>
         
 
-            <div className={stl.opciones}>
-              <Link to ="/lostpets">
+            <div className={stl.opcionesMapa}>
+              {/* <Link to ="/lostpets">
                 <button className={stl.botonubicacion}>Establecer ubicacion donde se perdio o vio por ultima vez
                   la mascota
                 </button>
-                  </Link>        
+                  </Link>         */}
+        <p className={stl.ps}>Por favor. Para guardar su ubicacion exitosamente<br></br>
+        Primero haga click en el marcador para moverlo  <br></br>a la posicion
+         donde perdio 
+        su mascota o vio una mascota perdida. <br></br><br></br>Despues seleccione "Establecer mi Ubicacion", 
+        y luego "Guardar mi Ubicacion".</p>
+        {/* <p>Finalmente "Confirmar y Volver"</p> */}
+        <div className={stl.botones}>
+        <button className={stl.botonubicacion} onClick={handleLocation}>Establecer mi Ubicacion</button>
+        <button className={stl.botonubicacion} onClick={handleLocation2}>Guardar mi Ubicacion</button>
+        {/* <Link to ="/reportarmascota">
+            <button className={stl.botonMapa3} type="submit" onClick={handleSubmit} >Confirmar y Volver</button>
+            </Link> */}
+            </div>
+
+        <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+        <FlyMapTo />
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+
+        <Marker
+        draggable={draggable}
+        eventHandlers={eventHandlers}
+        position={geo}
+        ref={markerRef}
+        icon={IconLocation}>
+        <Popup minWidth={90}>
+          <div onClick={toggleDraggable}>
+            {draggable
+              ? 'Ya puedes arrastrarlo'
+              : 'Hace "Click" aqui para arrastrarlo'}
+          </div>
+        </Popup>
+      </Marker>
+
+    <MarkersLost />
+        
+    </MapContainer>
+
             </div>
 
             <div className={stl.opciones}>
             <label className={stl.titulos}>Descripcion:</label>
-                <input onChange={handleChange} type="text" name="descripcion" value={input.descripcion}/>
+                <textarea className={stl.textareaRepor} onChange={(e) => {handleChange(e); handleDesc(e); }} type="textarea" name="descripcion" value={input.descripcion}/>
                
            </div>
+            <div className={stl.contacto}>( Por favor deja algun dato de contacto en la descripcion para <br></br>que puedan comunicarse contigo en caso de alguien la encuentre )</div>
           </div>
 
             <button className={stl.botonperdido} onClick={handleImagen}>Reportar</button>
@@ -317,3 +491,5 @@ console.log(input)
     </div>
   
   )}
+
+  //

@@ -19,16 +19,16 @@ export default function MapView() {
     /////////////////////////////////////////////////////////// TOMA MI UBICACION ACTUAL SEGUN MI GPS ///////////////////
 
     const [geo, setGeo] = useState({
-        longitude: -61.043988,
-        latitude: -34.7361,
+        lng: -61.043988,
+        lat: -34.7361,
     })
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
             function (position) {
                 setGeo({
-                    longitude: position.coords.longitude,
-                    latitude: position.coords.latitude
+                    lng: position.coords.longitude,
+                    lat: position.coords.latitude
                 })
             }, 
             function(error) {
@@ -42,25 +42,25 @@ export default function MapView() {
     ///////////////////////////////////////////////////// GUARDA LA UBICACION EN LA BASE DE DATOS //////////////////////
 
     const [location, setLocation] = useState({
-            latitude: "",
-            longitude: ""
+            lat: "",
+            lng: ""
     })
 
     function handleLocation() {
         setLocation({
-                latitude: geo.longitude,
-                longitude: geo.latitude
+                lat: geo.lng,
+                lng: geo.lat
         })
        
-        Toast.success("Ubicacion Establecida. Por favor seleccione 'Guardar mi Ubicacion'", 3000, () => {});
+        Toast.success("Ubicacion Establecida. Por favor seleccione 'Guardar mi Ubicacion'", 1500, () => {});
     }
 
     function handleLocation2() {
         setLocation({
-                latitude: geo.longitude,
-                longitude: geo.latitude
+                lat: geo.lng,
+                lng: geo.lat
         })
-        Toast.success("Ubicacion Guardada con exito. Por favor seleccione 'Confirmar y volver'", 3000, () => {});
+        Toast.success("Ubicacion Guardada con exito. Por favor seleccione 'Confirmar y volver'", 1500, () => {});
     }
 
     function handleSubmit() {
@@ -70,7 +70,7 @@ export default function MapView() {
 
     /////////////////////////////////////////////////// GUARDA MI UBICACION ACTUAL EN UN ESTADO Y RENDERIZO  ///////
 
-    const position = [geo.latitude, geo.longitude]
+    const position = [geo.lat, geo.lng]
 
     const local = position
 
@@ -124,6 +124,3 @@ export default function MapView() {
     </div>
     )
 }
-
-
-

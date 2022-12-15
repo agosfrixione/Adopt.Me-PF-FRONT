@@ -1,23 +1,24 @@
 .paginareportar {
-  height: 800px;
-  background-image: url("../../Imagenes/pisadas.jpg");
-  background-size: contain;
+  /* height: 1200px; */
+  background-image: url("../../Imagenes/Pet-Slide-Backgrounds.jpg");
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   font-family: 'Viga', sans-serif;
 }
 
 .formul {
-  height: 800px;
-  width: 600px;
+  height: 1400px;
+  width: 900px;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items: flex-end;
-  margin-left: 440px;
+  align-items: center;
+  margin-left: 310px;
   margin-top: 80px;
   margin-bottom: 100px;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;    
   background-color: #F2E7D5;
+  border-radius: 10px;
 }
 
 .tituloperdido {
@@ -38,7 +39,7 @@
   height: 200px;
   margin-top: -40px;
   margin-bottom: 20px;
-  margin-right: 150px;
+  /* margin-right: 150px; */
 }
 
 .botonFoto2 {
@@ -138,7 +139,7 @@
   margin: 0;
   outline: 2px solid transparent;
   padding: 9px 10px;
-  margin-right: 95px;
+  /* margin-right: 95px; */
   margin-top: 36px;
   text-align: center;
   text-transform: none;
@@ -147,7 +148,7 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   box-shadow: -6px 8px 10px rgba(81,41,10,0.1),0px 2px 2px rgba(81,41,10,0.2);
-  margin-right: 260px;
+  /* margin-right: 160px; */
 }
 
 .botonperdido:active {
@@ -222,4 +223,79 @@
 
 .inputs2 {
   margin-right: 60px;
+}
+
+.opcionesMapa {
+  
+  margin-left: 120px;
+}
+
+.textareaRepor {
+  margin-top: 30px;
+  width: 400px;
+  height: 100px;
+}
+
+.titulos {
+  margin-right: 30px;
+}
+
+.contacto {
+  margin-left: 100px;
+  color: red;
+}
+
+/*//////////////////////////////////////////////////////////*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+  .tituloperdido {
+    font-size: 30px;
+  }
+
+  .formul {
+    margin-left: 16px;
+    width: 450px;
+    border-radius: 10px;
+  }
+
+  .ps {
+    font-size: 14px;
+    width: 340px;
+    margin-left: 74px;
+  }
+
+  .botonubicacion {
+    margin-left: 18px;
+    margin-right: 20px;
+    margin-top: 40px;
+    margin-bottom: -80px;
+  }
+
+  .titulos {
+    font-size: 16px;
+    margin-right: 20px;
+    margin-left: 26px;
+  }
+
+  .textareaRepor {
+    margin-top: 30px;
+    height: 100px;
+    width: 250px;
+  }
+
+  .botonperdido {
+    margin-top: 20px;
+  }
+
+  .imageContainer2 {
+    margin-top: 10px;
+  }
+
+  .contacto {
+    width: 400px;
+    margin-left: 110px;
+    font-size: 13px;
+  }
+
 }

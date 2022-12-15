@@ -28,23 +28,20 @@ export default function InfoProceso() {
           dispatch(getDetalleUsuario(id));
   }, [dispatch]);
   
-  console.log(isAuthenticated)
 
   const detalleUser = useSelector((state) => state.detalleUsuario); // Estado global con los datos del usuario
-  console.log(detalleUser)
-
   const detalleUserGoogle = useSelector((state) => state.detalleUsuarioGoogle)
-    console.log("Estos son los datos del userGoogle")
-    console.log(detalleUserGoogle)
+
 
   
   function onClick(e) {
     e.preventDefault()
     if (!user) {
-      return Toast.fail("Debes iniciar sesion para poder poner en adopcion", 3000, () => {});
+      return Toast.fail("Debes iniciar sesion para poder poner en adopcion", 1500, () => {});
     }
+
     if (!detalleUser.usuario && detalleUserGoogle.length == 0) {
-      return Toast.fail("Debes completar el registro en tu perfil antes de poner en adopcion", 3000, () => {});
+      return Toast.fail("Debes completar el registro en tu perfil antes de poner en adopcion", 1500, () => {});
     }
     if (user && detalleUser.usuario || detalleUserGoogle.usuario) { 
     navigate("/registroMascota")

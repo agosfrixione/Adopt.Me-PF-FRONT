@@ -9,30 +9,33 @@ import Footer from "../Footer/Footer";
 import FloatingUI from "../Floating UI/FloatingUI";
 import getperro from "../../Actions/getperros";
 import getDogByName from "../../Actions/getDogByName";
-import ordenAlfabetico from "../../Actions/ordenAlfabetico";
+import ordenAlfaPerro from "../../Actions/ordenAlfaPerro.js";
 import getdogtamaños from "../../Actions/getDogTamaños";
 import getDogEdad from "../../Actions/getDogEdad";
 
 
+
 export default function HomePerros () {
 
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const allPets = useSelector((state) => state.perros);
     const copiaPerros = useSelector((state)=>state.perrosCopia)
+    const sinAdopcion = copiaPerros
+    const sinAdoptar = sinAdopcion.filter(({ adoptado }) => adoptado === false)
+    
 
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(4)
 
     const lastPetIndex = currentPage * mascotasPerPage 
     const firstPetIndex = lastPetIndex - mascotasPerPage 
-    const currentPets = allPets.slice(firstPetIndex,lastPetIndex) 
+    const currentPets = sinAdoptar.slice(firstPetIndex,lastPetIndex) 
 
     const [setInput] = useState("");
     const [setOrden] = useState("");
     const [searchDog, setSearchDog] = useState("");
-    useState(copiaPerros)
 
     const actualPage = (pageNumber) => {setCurrentPage(pageNumber)}
 
@@ -64,7 +67,8 @@ export default function HomePerros () {
 
 
    const handleOrden = (e) => {
-     dispatch(ordenAlfabetico(e.target.value))
+     e.preventDefault();
+     dispatch(ordenAlfaPerro(e.target.value))
      setCurrentPage(1)
      setOrden(`Ordenado ${e.target.value}`)
    }
@@ -81,10 +85,10 @@ export default function HomePerros () {
     console.log(e.target.value);
   };
         
+  
    return(
         <div className={stl.paginaadopcionperros}>
             <NavBar />
-            <FloatingUI />
         <div className={stl.tituloPerros}>Perros en Adopcion</div>
 <br></br><br></br>
         <div>
@@ -125,6 +129,7 @@ export default function HomePerros () {
                 <option value = 'Anciano'>Anciano</option>                                  
             </select> 
         </div>
+            <FloatingUI />
         <br/>
         <div>
             <button className={stl.btnNavHome} onClick={handleClick}>HomePerros</button>
@@ -137,13 +142,15 @@ export default function HomePerros () {
            </Link>
         </div>
 
+        <div className={stl.paginado}>
         <Paging 
         mascotasPerPage={mascotasPerPage} 
-        allPets={allPets.length} 
+        allPets={copiaPerros.length} 
         currentPage={currentPage}
         actualPage={actualPage}
         currentPets={currentPets}
         />
+        </div>
 
         <div className={stl.listadoCards}> 
      
@@ -170,3 +177,5 @@ export default function HomePerros () {
     </div>
     )
 }
+//
+  

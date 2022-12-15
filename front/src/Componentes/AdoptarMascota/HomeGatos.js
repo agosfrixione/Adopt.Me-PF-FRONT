@@ -12,21 +12,23 @@ import FloatingUI from "../Floating UI/FloatingUI";
 import getCatTamaños from "../../Actions/getCatTamaños";
 import getCatEdad from '../../Actions/getCatEdad';
 import getCatsLocal from "../../Actions/getCatsLocal"
+import Footer from "../Footer/Footer";
 
 const HomeGatos = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const allPets = useSelector((state) => state.gatos);
     const copiaGatos = useSelector((state)=>state.gatosCopia);
+    const sinAdopcion = copiaGatos
+    const sinAdoptar = sinAdopcion.filter(({ adoptado }) => adoptado === false)
 
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(4)
 
     const lastPetIndex = currentPage * mascotasPerPage 
     const firstPetIndex = lastPetIndex - mascotasPerPage 
-    const currentPets = allPets.slice(firstPetIndex,lastPetIndex) 
+    const currentPets = sinAdoptar.slice(firstPetIndex,lastPetIndex) 
 
 
     const [input, setInput] = useState("");
@@ -62,6 +64,7 @@ const HomeGatos = () => {
    }
 
    const handleOrden = (e) => {
+    e.preventDefault();
     dispatch(ordenAlfaGato(e.target.value))
     setCurrentPage(1)
     setOrden(`Ordenado ${e.target.value}`)
@@ -101,20 +104,18 @@ const HomeGatos = () => {
         </div>
         <div className={stl.filtros}>Filtar: 
                
-               <select className={stl.op}onChange={(e) => handleOrden(e)}>
-                    <option disabled selected defaultValue>
-                        Alfabeticamente
-                    </option>
+               <select className={stl.op} onChange={(e) => handleOrden(e)}>
+                    <option disabled selected defaultValue>Alfabeticamente</option>
                     <option value='A-Z'>A-Z</option>
                     <option value='Z-A'>Z-A</option>
                 </select>
-                <select onChange={(e)=>handleTamaño(e)}>
+                <select className={stl.op} onChange={(e)=>handleTamaño(e)}>
                 <option value='All' disabled selected defaultValue>Tamaño</option>
                 <option value = 'Mediano'>Mediano</option>
                 <option value = 'Chico'>Chico</option>
                 <option value = 'Grande'>Grande</option>                               
                 </select> 
-                <select onChange={(e)=>handleEdad(e)}>
+                <select className={stl.op} onChange={(e)=>handleEdad(e)}>
                 <option value='edad' disabled selected defaultValue>Edad</option>
                 <option value = 'Menos de 45 dias'>Menos de 45 dias</option>
                 <option value = 'Mas de 45 dias'>Mas de 45 dias</option>
@@ -135,13 +136,15 @@ const HomeGatos = () => {
            </Link>
         </div>
 
+        <div className={stl.paginado}>
         <Paging 
         mascotasPerPage={mascotasPerPage} 
-        allPets={allPets.length} 
+        allPets={copiaGatos.length} 
         currentPage={currentPage} 
         actualPage={actualPage}
         currentPets={currentPets}
         />
+        </div>
 
         <div className={stl.listadoCards}>
 
@@ -154,6 +157,8 @@ const HomeGatos = () => {
                         id = {g._id}
                         gato = {g.gato}
                         nombre = {g.nombre}
+                        imagen={g.imagen}
+                        edad={g.edad}
                         />                  
                 )
             })}
@@ -161,6 +166,7 @@ const HomeGatos = () => {
 
         </div>
 
+            <Footer />
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import createanimal from "../../Actions/createanimal";
@@ -7,17 +7,49 @@ import Footer from "../Footer/Footer"
 import stl from "../DonarMascota/formularioDar.module.css"
 import FloatingUI from "../Floating UI/FloatingUI";
 import imagenDefault from "../../Imagenes/imagenDefault.png"
-import Toast from 'light-toast'
-
+import Toast from 'light-toast';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import Markers from "../Maps/Markers";
+import createLocation from "../../Actions/createLocation";
+import { IconLocation } from "../Maps/IconLocation";
+import "../DonarMascota/formularioDar.css"
  
  export default function DarEnAdopcion() {
+
+
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
  
  const navigate = useNavigate();
  const dispatch = useDispatch();
 
  const usuario = useSelector((state) => state.detalleUsuario)
- // console.log(usuario._id)
+ const detalleUserGoogle = useSelector((state) => state.detalleUsuarioGoogle) 
+
+  /////////////////////////////////////////////////////////// TOMA MI UBICACION ACTUAL SEGUN MI GPS ///////////////////
+
+  const [geo, setGeo] = useState({
+    lng: -61.043988,
+    lat: -34.7361,
+  })
+  
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+        function (position) {
+            setGeo({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            })
+        }, 
+        function(error) {
+            console.log(error)
+        }, {
+            enableHighAccuracy: true
+        });
+  }, [])
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  const [input, setInput] = useState({
         perro: false,
@@ -26,21 +58,24 @@ import Toast from 'light-toast'
         raza: "",
         edad: [],
         estado: "En adopción",
-        tamaño: [],
+        tama: [],
         peso: "",
         descripcion: "",
         castrado: "",
         vacunado: "",
         desparasitado: "",
         imagen: "",
-        pichina: usuario._id
+        pichina: "",
+        lat: "",
+        lng: "",
+        adoptado: false
       });
 
   const [imagenes, setImagenes] = useState([]);
   // console.log(input.pichina)
   const [errors, setErrors] = useState({});
   // const [isSubmit, setisSubmit] = useState(false);
-
+console.log("input 1", input)
   
   ////////////////////////////////////////////////////// VALIDACION ///////////////////////////////////////////////////////////////
 
@@ -63,8 +98,8 @@ import Toast from 'light-toast'
       errors.edad = "Tenes que indicar la edad"
     }
 
-    if(!input.tamaño || input.tamaño === []) {
-      errors.tamaño = "Tenes que indicar el tamaño"
+    if(!input.tama || input.tama === []) {
+      errors.tama = "Tenes que indicar el tamaño"
     }
 
     if (!input.peso) {
@@ -138,8 +173,11 @@ import Toast from 'light-toast'
 
     //Si no hay errores, el isSubmit esta en true
     // if (isSubmit === true) {
-
+    console.log(input)
+      dispatch(createLocation(input));
       dispatch(createanimal(input));
+      
+
       setInput({
         perro: false,
         gato: false,
@@ -147,16 +185,20 @@ import Toast from 'light-toast'
         raza: "",
         edad: [],
         estado: "En adopción",
-        tamaño: [],
+        tama: [],
         peso: "",
         descripcion: "",
         castrado: "",
         vacunado: "",
         desparasitado: "",
         imagen: "",
-        pichina: ""
+        pichina: detalleUserGoogle.usuario ? detalleUserGoogle._id : usuario._id,
+        lat: "",
+        lng: "",
+        adoptado: false
       });
-      Toast.success("Mascota publicada correctamente", 3000, () => {
+      console.log("input 2", input)
+      Toast.success("Mascota publicada correctamente", 1500, () => {
         navigate("/homepage")
       });
     // } else {
@@ -205,15 +247,35 @@ function handleChange(e) {
    } 
 
    function handleTamaño(e) {
-    if (input.tamaño.length === 0)
+    if (input.tama.length === 0)
     setInput({
       ...input,
-      tamaño: [...input.tamaño, e.target.value]
+      tama: [...input.tama, e.target.value]
     })
  } 
 
   const [isChecked, setIsChecked] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
+
+  ///////////////////////////////////////////////////// GUARDA LA UBICACION EN LA BASE DE DATOS //////////////////////
+
+function handleLocation() {
+  setInput({
+    ...input,
+          lat: geo.lat,
+          lng: geo.lng
+  })
+  Toast.success("Ubicacion Establecida. Por favor seleccione 'Guardar mi Ubicacion'", 1000, () => {});
+}
+
+function handleLocation2() {
+  setInput({
+    ...input,
+          lat: geo.lat,
+          lng: geo.lng
+  })
+  Toast.success("Ubicacion Guardada con exito", 1000, () => {});
+}
   
  /////////////////////// HANDLE DE GATO ////////////////////////////////////77
  
@@ -291,17 +353,102 @@ function handleChange(e) {
   // }
 
 
-/////////////////////////////////////////////////////////// TE KAVIO EL RETURN  ///////////////////////////////////////////////////
+/////////////////////////////////////////////////////////// GUARDANDO DATOS EN LOCALSTORAGE  ///////////////////////////////////////////////////
 
+  const { nombre, raza, peso, descripcion, castrado, vacunado, desparasitado } = input;
+
+  const handleLocalStorage = (e) => {
+   let value = e.target.value;
+   let name = e.target.name;
+
+   setInput((prev) => ({...prev, [name]: value}))
+};
+
+ useEffect(() => {
+   const nameS = JSON.parse(localStorage.getItem("nom"));
+   if (nombre === "" && raza === "" && peso === "" && descripcion === "" && castrado === "" && vacunado === "" 
+        && desparasitado === "") {
+     setInput((prev) => ({ ...prev, ...nameS}))
+   }
+ }, [])
+
+ useEffect(() => {
+   localStorage.setItem("nom", JSON.stringify(input))
+ }, )
+
+ ////////////////////////////////////////////// EDAD Y TAMAÑO LOCALSTORE /////////////////////////////////////////////////
+
+ const { edad, tama } = input;
+
+ const handleLocalTamEdad = (e) => {
+  let value = e.target.value;
+  let name = e.target.name;
+
+  setInput((prev) => ({...prev, [name]: value}))
+ };
+
+ useEffect(() => {
+  const optionS = JSON.parse(localStorage.getItem("edadTamaño"));
+  
+  if (edad === null && tama === null) {
+    setInput((prev) => ({...prev, ...optionS}))
+
+  }
+ }, [])
+
+ useEffect(() => {
+  localStorage.setItem("edadTamaño", JSON.stringify(input))
+ }, )
+
+
+/////////////////////////////////////////////////// GUARDA MI UBICACION ACTUAL EN UN ESTADO Y RENDERIZO  ///////
+
+const position = [geo.lat, geo.lng]
+
+const local = position
+
+function FlyMapTo() {
+
+const map = useMap()
+
+useEffect(() => {
+    map.flyTo(local)
+    
+}, {enableHighAccuracy: true})
+
+return null
+}
+
+/////////////////////////////////////////////////////  MARCADOR MOVIBLE /////////////////////////////////////////////////////7
+
+const [draggable, setDraggable] = useState(false)
+    const markerRef = useRef(null)
+    const eventHandlers = useMemo(
+      () => ({
+        dragend() {
+          const marker = markerRef.current
+          if (marker != null) {
+            setGeo(marker.getLatLng())
+          }
+        },
+      }),
+      [],
+    )
+    const toggleDraggable = useCallback(() => {
+      setDraggable((d) => !d)
+    }, [])
+
+///////////////////////////////////////////////////////////////////////  TE KAVIO EL RETURN  ///////////////////////////
   return (
     
   <div className={stl.formDarAdopcion}>
     <NavBar />
     <FloatingUI />
+  
 
           <div className={stl.titulo}>REGISTRA LOS DATOS DE LA MASCOTA</div>
           
-          <form className={stl.formularito} onSubmit={handleSubmit}>
+          <form className={stl.formularito} onSubmit={handleSubmit} >
 
           <div className={stl.imageContainer}>
 
@@ -359,13 +506,11 @@ function handleChange(e) {
                 <input className={stl.inputs2} onChange={ (e) => { handleCheck2(e); handlePerro(e); }}
                 type="checkbox" name="perro" checked={isChecked2} value={input.perro}/>                        
             </div>
-            </div>
-
-                     
+            </div>                     
                    
                 <label className={stl.titulos}>Nombre:</label>
               <div className={stl.opciones}>
-                <input onChange={handleChange}
+                <input onChange={ (e) => {handleChange(e); handleLocalStorage(e); }}
                 type="text" name="nombre" value={input.nombre}/>  
                 {errors.nombre && <p className={stl.error}>{errors.nombre}</p>}                      
             </div>
@@ -379,7 +524,7 @@ function handleChange(e) {
 
             <label className={stl.titulos}>Edad:</label>
             <div className={stl.opciones}>                                
-            <select className={stl.edad} defaultValue="" onChange={handleEdad}>
+            <select className={stl.edad} name="edad" defaultValue="" onChange={(e) => {handleEdad(e); handleLocalTamEdad(e); }}>
                        <option value="" disabled hidden>Selecciona edad...</option>
                        <option>Menos de 45 dias</option>
                        <option>Mas de 45 dias</option>
@@ -391,13 +536,13 @@ function handleChange(e) {
 
             <label className={stl.titulos}>Tamaño:</label>
             <div className={stl.opciones}>                                     
-            <select className={stl.tamaño} defaultValue="" onChange={handleTamaño}>
-                       <option value="" disabled hidden>Seleccione tamaño...</option>
+            <select className={stl.tamaño} name="tama" defaultValue="" onChange={(e) => {handleTamaño(e); handleLocalTamEdad(e); }}>
+                       <option value="" disabled hidden >Seleccione tamaño...</option>
                        <option>Chico</option>
                        <option>Mediano</option>
                        <option>Grande</option>
                        </select>
-                       {errors.tamaño && <p className={stl.error}>{errors.tamaño}</p>}
+                       {errors.tama && <p className={stl.error}>{errors.tama}</p>}
                        </div>
         
             <label className={stl.titulos}>Peso (en Kg):</label>
@@ -407,16 +552,53 @@ function handleChange(e) {
                 {errors.peso && <p className={stl.error}>{errors.peso}</p>}          
             </div>
 
-            <div className={stl.opciones}>
-            <label className={stl.titulos}>Localidad:</label>
-            <Link to = "/map">
-                <button className={stl.botonUbicacion}>Establecer tu ubicacion</button>
-                </Link>
-            </div>
+           <div >
+            <p className={stl.mapaInfo}>Por favor. Para guardar su ubicacion exitosamente<br></br>
+            <br></br>1. Primero haga click sobre el marcador azul y muevalo hasta donde se encuentra la mascota
+        <br></br>2. Despues seleccione "Establecer mi Ubicacion"<br></br>3. Luego "Guardar mi Ubicacion".</p>
+        <p>Finalmente "Confirmar y Volver"</p>
+        <div className={stl.botones}>
+        <button className={stl.botonMapa2} onClick={handleLocation}>Establecer mi Ubicacion</button>
+        <button className={stl.botonMapa2} onClick={handleLocation2}>Guardar mi Ubicacion</button>
+             </div>
+
+        <div className={stl.contenedorMapa}>
+
+        <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+
+                <FlyMapTo />
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+
+                <Marker
+                    draggable={draggable}
+                    eventHandlers={eventHandlers}
+                    position={geo}
+                    ref={markerRef}
+                    icon={IconLocation}>
+
+                        <Popup minWidth={90}>
+                          <div onClick={toggleDraggable}>
+                            {draggable
+                              ? 'Ya puedes arrastrarlo'
+                              : 'Hace "Click" aqui para arrastrarlo'}
+                          </div>
+                        </Popup>
+
+                </Marker>
+
+                <Markers />
+        
+        </MapContainer>
+    
+    </div>
+            </div> 
 
             <label className={stl.titulos}>Descripción:</label>
             <div className={stl.opciones}>
             <textarea
+            className={stl.textareaDonar}
               required
               type="text"
               name="descripcion"
@@ -431,7 +613,7 @@ function handleChange(e) {
           
             <div className={stl.opciones}>
             <label className={stl.titulos}>Esta Castrado? (Si/No):</label>
-                <input onChange={handleChange}type="text" name="castrado" value={input.castrado}/>
+                <input className={stl.inputs3} onChange={handleChange}type="text" name="castrado" value={input.castrado}/>
                 {errors.castrado && <p className={stl.error}>{errors.castrado}</p>}
             </div> 
 
@@ -439,7 +621,7 @@ function handleChange(e) {
 
             <div className={stl.opciones}>
             <label className={stl.titulos}>Esta Vacunado? (Si/No):</label>
-                <input onChange={handleChange} type="text" name="vacunado"  value={input.vacunado}/>
+                <input className={stl.inputs3} onChange={handleChange} type="text" name="vacunado"  value={input.vacunado}/>
                 {errors.vacunado && <p className={stl.error}>{errors.vacunado}</p>}
             </div>  
 
@@ -447,7 +629,7 @@ function handleChange(e) {
 
             <div className={stl.opciones}>
             <label className={stl.titulos}>Esta desparasitado? (Si/No):</label>
-                <input onChange={handleChange} type="text" name="desparasitado"  value={input.desparasitado}/>
+                <input className={stl.inputs3} onChange={handleChange} type="text" name="desparasitado"  value={input.desparasitado}/>
                 {errors.vacunado && <p className={stl.error}>{errors.vacunado}</p>}
             </div>  
             </div>
@@ -456,7 +638,7 @@ function handleChange(e) {
             <button
               className={stl.boton}
               type="submit"
-              onClick={handleImagen}
+              onClick={handleImagen }
               // disabled={isSubmit ? false : true}
             >
               PONER EN ADOPCIÓN
