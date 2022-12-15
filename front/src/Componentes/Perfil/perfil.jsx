@@ -10,7 +10,7 @@ import MiInformacion from "../ContenidoPerfil/MiInformacion";
 import MisFavoritos from "../ContenidoPerfil/MisFavoritos";
 import CambiarContraseña from "../ContenidoPerfil/CambiarContraseña";
 import CompletarRegistro from "../ContenidoPerfil/CompletarRegistro";
-import MisMascotas from "../ContenidoPerfil/MisMascotas";
+import MisMascotas from "../ContenidoPerfil/MisMascotas.js";
 import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
 import Footer from "../Footer/Footer";
 import CartelPerfil from "../ContenidoPerfil/CartelRegistroCompleto";
