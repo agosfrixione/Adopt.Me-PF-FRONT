@@ -34,7 +34,7 @@ export default function DetallePerro() {
   useEffect(() => {
     dispatch(getmascotasbyid(id));
     dispatch(getusers());
-  }, []);
+  }, [id, dispatch]);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
