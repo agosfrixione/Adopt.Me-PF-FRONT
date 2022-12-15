@@ -16,7 +16,7 @@ ReactDOM.render(
       <Auth0Provider
         domain="dev-oyj74hb0bfnfndw3.us.auth0.com"
         clientId="sgqT3nj98fYLvGbtrXhMpWZu7BKXhN6p"
-        redirectUri={window.location.origin}
+        redirectUri="https://adoptme-eta.vercel.app/homepage"
         useRefreshTokens={true}
         cacheLocation="localstorage"
       >
