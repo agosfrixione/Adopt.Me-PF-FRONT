@@ -5,7 +5,7 @@ import MetaMaskSDK from '@metamask/sdk';
 export default function Metamask() {
     
     const [buttonText, setButtonText] = useState()
-    const [account, setAccount] = useState(null)
+    const [account] = useState(null)
 
     const options = {
         injectProvider: true,

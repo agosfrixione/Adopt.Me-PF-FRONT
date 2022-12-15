@@ -15,7 +15,7 @@ export default function Validacion() {
 
   useEffect(() => {
     dispatch(getDetalleUsuarioSinValidar(id));
-  }, [dispatch]);
+  }, [id, dispatch]);
 
   const usuario = user.usuario;
   const contrasena = user.contrasena;

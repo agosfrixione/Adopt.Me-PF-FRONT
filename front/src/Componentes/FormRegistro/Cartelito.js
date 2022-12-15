@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import mailVerificarUsuario from "../../Actions/mailVerificarUsuario";
 import stl from "./Cartelito.module.css";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Cartelito({ input }) {
   // console.log(input);

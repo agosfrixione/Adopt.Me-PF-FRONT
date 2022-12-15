@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Paypal.css";
 import Toast from 'light-toast';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
 import postPaypal from "../../Actions/postPaypal";
 
@@ -9,7 +9,7 @@ export default function PayPal({ cost, desc }) {
   const [completed, setCompleted] = useState(false);
   const [paid, setPaid] = useState(false);
   const navigate = useNavigate();
-  const paypal = useSelector((state) => state.paypal)
+  // const paypal = useSelector((state) => state.paypal)
   const dispatch = useDispatch()
 
   const [pago, setPago] = useState({

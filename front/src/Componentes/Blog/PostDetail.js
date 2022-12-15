@@ -23,7 +23,7 @@ export default function PostDetail() {
 
        ////////////////////////////////////////////////////////////////////////////////////////
     
-       const { user, isAuthenticated } = useAuth0();
+       const { user } = useAuth0();
     
        let _id = undefined;
        if (user) {

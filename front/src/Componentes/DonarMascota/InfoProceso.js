@@ -4,7 +4,7 @@ import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import stl from "../DonarMascota/InfoProceso.module.css";
 import FloatingUI from "../Floating UI/FloatingUI";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector, useDispatch } from "react-redux";
 import getDetalleUsuario from "../../Actions/getDetalleUsuario";
@@ -14,7 +14,7 @@ import Toast from 'light-toast';
 export default function InfoProceso() {
   const navigate = useNavigate()
   const params = useParams();
-  const { user, isAuthenticated } = useAuth0()
+  const { user } = useAuth0()
   const dispatch = useDispatch();
 
   
@@ -26,7 +26,7 @@ export default function InfoProceso() {
   
   useEffect(() => {
           dispatch(getDetalleUsuario(id));
-  }, [dispatch]);
+  }, [id, dispatch]);
   
 
   const detalleUser = useSelector((state) => state.detalleUsuario); // Estado global con los datos del usuario
@@ -40,10 +40,10 @@ export default function InfoProceso() {
       return Toast.fail("Debes iniciar sesion para poder poner en adopcion", 1500, () => {});
     }
 
-    if (!detalleUser.usuario && detalleUserGoogle.length == 0) {
+    if (!detalleUser.usuario && detalleUserGoogle.length === 0) {
       return Toast.fail("Debes completar el registro en tu perfil antes de poner en adopcion", 1500, () => {});
     }
-    if (user && detalleUser.usuario || detalleUserGoogle.usuario) { 
+    if (user && (detalleUser.usuario || detalleUserGoogle.usuario)) { 
     navigate("/registroMascota")
     }
   }

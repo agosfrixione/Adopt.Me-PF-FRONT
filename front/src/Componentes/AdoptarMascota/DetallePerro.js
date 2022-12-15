@@ -34,7 +34,7 @@ export default function DetallePerro() {
   useEffect(() => {
     dispatch(getmascotasbyid(id));
     dispatch(getusers());
-  }, []);
+  }, [id, dispatch]);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -52,11 +52,11 @@ export default function DetallePerro() {
 
   useEffect(() => {
     dispatch(getDetalleUsuarioGoogle(_id));
-  }, [id, dispatch]);
+  }, [_id, dispatch]);
 
   useEffect(() => {
     dispatch(getDetalleUsuario(_id));
-  }, [id, dispatch]);
+  }, [_id, dispatch]);
 
   // Usuario va a tener los datos del usuario logueado, sin importar si esta logueado con google o normal
   let usuario = detalleUserGoogle.usuario ? detalleUserGoogle : detalleUser;

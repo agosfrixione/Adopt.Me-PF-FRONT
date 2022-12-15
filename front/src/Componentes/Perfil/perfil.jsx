@@ -13,7 +13,6 @@ import CompletarRegistro from "../ContenidoPerfil/CompletarRegistro";
 import MisMascotas from "../ContenidoPerfil/MisMascotas.js";
 import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
 import Footer from "../Footer/Footer";
-import CartelPerfil from "../ContenidoPerfil/CartelRegistroCompleto";
 import CartelRegistroCompleto from "../ContenidoPerfil/CartelRegistroCompleto";
 import CartelCambiarContraseña from "../ContenidoPerfil/CartelCambiarContraseña";
 import CartelCompletarRegistro from "../ContenidoPerfil/CartelCompletarRegistro";

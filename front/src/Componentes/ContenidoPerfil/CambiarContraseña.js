@@ -1,12 +1,8 @@
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Footer from "../Footer/Footer";
-import NavBar from "../NavBar/NavBar";
 import stl from "./CambiarContraseña.module.css";
-import createuser from "../../Actions/createuser";
 import getusers from "../../Actions/getusers";
-import FloatingUI from "../Floating UI/FloatingUI";
 import Toast from "light-toast";
 import putUsuario from "../../Actions/putUsuario";
 const bcrypt = require("bcryptjs");

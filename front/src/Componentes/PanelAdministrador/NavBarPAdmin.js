@@ -1,6 +1,5 @@
 import React from "react";
 import stl from "./NavPanel.module.css";
-import logo from "../PanelAdministrador/logoProvisorio.png";
 import {Link} from "react-router-dom";
 
 const NavBarPAdmin = () => {

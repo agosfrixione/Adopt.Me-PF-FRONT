@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import stl from "../NavBar/NavBar.module.css";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 export default function NavBar() {
@@ -11,7 +11,6 @@ export default function NavBar() {
   const { logout } = useAuth0();
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
-  const navigate = useNavigate()
 
   const detalleUserGoogle = useSelector((state) => state.detalleUsuarioGoogle)
    

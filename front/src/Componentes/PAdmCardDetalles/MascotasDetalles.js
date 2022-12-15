@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  useNavigate } from "react-router-dom";
 import getmascotasbyid from "../../Actions/getmascotabyid";
 import { useParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
@@ -18,12 +17,11 @@ import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
 
  function MascotasDetalles() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.animalesdetail);
-  const petOwner = useSelector((state) => state.users);
-  const detalleUser = useSelector((state) => state.detalleUsuario);
-  const detalleUserGoogle = useSelector((state) => state.detalleUsuarioGoogle);
+  // const petOwner = useSelector((state) => state.users);
+  // const detalleUser = useSelector((state) => state.detalleUsuario);
+  // const detalleUserGoogle = useSelector((state) => state.detalleUsuarioGoogle);
   const { user, isAuthenticated } = useAuth0();
 
   //////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,7 +29,7 @@ import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
   useEffect(() => {
     dispatch(getmascotasbyid(id));
     dispatch(getusers());
-  }, []);
+  }, [id, dispatch]);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -49,14 +47,14 @@ import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
 
   useEffect(() => {
     dispatch(getDetalleUsuarioGoogle(_id));
-  }, [id, dispatch]);
+  }, [_id, dispatch]);
 
   useEffect(() => {
     dispatch(getDetalleUsuario(_id));
-  }, [id, dispatch]);
+  }, [_id, dispatch]);
 
   // Usuario va a tener los datos del usuario logueado, sin importar si esta logueado con google o normal
-  let usuario = detalleUserGoogle.usuario ? detalleUserGoogle : detalleUser;
+  // let usuario = detalleUserGoogle.usuario ? detalleUserGoogle : detalleUser;
 
   // console.log("Estos son los detalles del usaurio");
   // console.log(usuario);
@@ -66,48 +64,48 @@ import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
   
   ///////////////////////////////////////////////////////////////////////////////////////
 
-  function onClick(e) {
-    e.preventDefault();
-    if (!user) {
-      return Toast.fail(
-        "Debes iniciar sesion para poder adoptar",
-        1500,
-        () => {}
-      );
-    }
+  // function onClick(e) {
+  //   e.preventDefault();
+  //   if (!user) {
+  //     return Toast.fail(
+  //       "Debes iniciar sesion para poder adoptar",
+  //       1500,
+  //       () => {}
+  //     );
+  //   }
 
-    if (!detalleUser.usuario && detalleUserGoogle.length === 0) {
-      return Toast.fail(
-        "Debes completar el registro en tu perfil antes de adoptar",
-        1500,
-        () => {}
-      );
-    }
-    if ((user && detalleUser.usuario) || detalleUserGoogle.usuario) {
-      return Toast.info(
-        `Esta es la informacion del usuario que dio en adopcion esta mascota: \n
-      Se enviara un mail con estos datos a tu correo electronico \n 
-      Nombre: ${nombre} \n 
-      Telefono: ${telefono} \n 
-      Email: ${mail}`,
-        10000,
-        () => {
-          navigate("/homepage");
-        }
-      );
-    }
-  }
+  //   if (!detalleUser.usuario && detalleUserGoogle.length === 0) {
+  //     return Toast.fail(
+  //       "Debes completar el registro en tu perfil antes de adoptar",
+  //       1500,
+  //       () => {}
+  //     );
+  //   }
+  //   if ((user && detalleUser.usuario) || detalleUserGoogle.usuario) {
+  //     return Toast.info(
+  //       `Esta es la informacion del usuario que dio en adopcion esta mascota: \n
+  //     Se enviara un mail con estos datos a tu correo electronico \n 
+  //     Nombre: ${nombre} \n 
+  //     Telefono: ${telefono} \n 
+  //     Email: ${mail}`,
+  //       10000,
+  //       () => {
+  //         navigate("/homepage");
+  //       }
+  //     );
+  //   }
+  // }
 
   //////////////////////////////// DATOS DEL USUARIO QUE DIO EN ADOPCION ESTA MASCOTA //////////////////////////////
 
-  const ownerPet = petOwner.data;
-  const ownerPet2 = ownerPet
-    ? ownerPet.filter(({ _id }) => _id === detail.pichina)
-    : [];
+  // const ownerPet = petOwner.data;
+  // const ownerPet2 = ownerPet
+  //   ? ownerPet.filter(({ _id }) => _id === detail.pichina)
+  //   : [];
 
-  const nombre = ownerPet2.map(({ nombre }) => nombre);
-  const telefono = ownerPet2.map(({ telefono }) => telefono);
-  const mail = ownerPet2.map(({ mail }) => mail);
+  // const nombre = ownerPet2.map(({ nombre }) => nombre);
+  // const telefono = ownerPet2.map(({ telefono }) => telefono);
+  // const mail = ownerPet2.map(({ mail }) => mail);
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
