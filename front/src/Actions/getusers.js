@@ -7,5 +7,3 @@ export default function getusers() {
       return dispatch({ type: GET_USERS, payload: result });
     };
   }
-  
-  

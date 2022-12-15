@@ -3,7 +3,6 @@ export const GET_USERS = "GET_USERS";
 export const CREATE_USER = "CREATE_USER";
 export const CREATE_ANIMAL = "CREATE_ANIMAL";
 export const GET_ANIMAL_BY_ID = "GET_ANIMAL_BY_ID";
-export const PAGO_PAYPAL = "PAGO_PAYPAL";
 export const GET_GATO = "GET_GATO";
 export const GET_PERRO = "GET_PERRO";
 export const PAGO_MERCADO_PAGO = "PAGO_MERCADO_PAGO";
@@ -33,3 +32,25 @@ export const GET_CAT_TAMAÑOS = "GET_CAT_TAMAÑOS";
 export const GET_DOG_EDAD = "GET_DOG_EDAD";
 export const GET_CAT_EDAD = "GET_CAT_EDAD";
 export const CREATE_USER_GOOGLE = "CREATE_USER_GOOGLE";
+export const CREATE_POST = "CREATE_POST";
+export const GET_POSTS = "GET_POSTS";
+export const GET_POST_ID = "GET_POST_ID";
+export const CREATE_RESPUESTA = "CREATE_RESPUESTA";
+export const GET_RESPUESTA = "GET_RESPUESTA";
+export const CREATE_LIKE = "CREATE_LIKE";
+export const GET_LIKES = "GET_LIKES";
+export const MAIL_VERIFICAR_USUARIO = "MAIL_VERIFICAR_USUARIO";
+export const EMAIL_INFO_ADOPTANTE = "EMAIL_INFO_ADOPTANTE";
+export const CREATE_FAVORITO = "CREATE_FAVORITO";
+export const GET_FAVORITOS = "GET_FAVORITOS";
+export const CREAR_USUARIO_VALIDADO = "CREAR_USUARIO_VALIDADO";
+export const UPDATE_MASCOTA = "UPDATE_MASCOTA";
+export const POST_PAYPAL = "POST_PAYPAL";
+export const GET_PAGOS = "GET_PAGOS";
+export const DELETE_USER = "DELETE_USER";
+
+
+
+
+
+// export const VERIFICADO = "VERIFICADO";
