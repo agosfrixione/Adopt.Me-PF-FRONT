@@ -44,14 +44,14 @@ export default function BuscarMascota() {
     e.preventDefault();   
     dispatch(filtradoEstadoPerdido(e.target.value));
   };
-  function handleGato (e){  
-    e.preventDefault();   
-    dispatch(getGatoPerdido(e.target.value))    
-  };
-  function handlePerro (e){  
-    e.preventDefault();   
-    dispatch(getPerroPerdido(e.target.value)); 
-  };
+  // function handleGato (e){  
+  //   e.preventDefault();   
+  //   dispatch(getGatoPerdido(e.target.value))    
+  // };
+  // function handlePerro (e){  
+  //   e.preventDefault();   
+  //   dispatch(getPerroPerdido(e.target.value)); 
+  // };
   function handleRecargar (e){  
     e.preventDefault();   
 
@@ -94,7 +94,7 @@ export default function BuscarMascota() {
       </div>
       </div>
 
-    <div className={stl.perrogato}>
+    {/* <div className={stl.perrogato}>
       <div>
         <button className={stl.btnNav} onClick={(e)=>handleGato(e)}>Gatos</button>
       </div>
@@ -102,7 +102,7 @@ export default function BuscarMascota() {
       <div>
         <button className={stl.btnNav} onClick={(e)=>handlePerro(e)}>Perros</button>
       </div>
-      </div>
+      </div> */}
 
       <div>
         <Link to ="/viewlostpets">
