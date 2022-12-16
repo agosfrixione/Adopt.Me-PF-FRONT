@@ -507,7 +507,7 @@
 
 /*//////////////////////////// MEDIA QUERIE PARA CELULARES ///////////////////////*/
 
-@media (min-width: 481px) and (max-width: 767px) {
+@media only screen and (max-width : 900px) {
 
   .banner {
     height: 75.5px;
@@ -635,3 +635,4 @@
 }
 
 }
+
