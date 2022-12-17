@@ -1,8 +1,15 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Footer from "../Footer/Footer";
+import NavBar from "../NavBar/NavBar";
 import stl from "./MiInformacion.module.css";
+import createuser from "../../Actions/createuser";
 import getusers from "../../Actions/getusers";
+import FloatingUI from "../Floating UI/FloatingUI";
+
+import { useAuth0 } from "@auth0/auth0-react";
+import getDetalleUsuario from "../../Actions/getDetalleUsuario";
 import putUser from "../../Actions/putUsuario";
 
 import Toast from "light-toast";
@@ -40,8 +47,8 @@ export default function MiInformacion(props) {
     noRepeatMail = Allusers.filter((u) => u.mail === input.mail);
   }
 
-  // console.log("no repetir mail");
-  // console.log(noRepeatMail);
+  console.log("no repetir mail");
+  console.log(noRepeatMail);
 
   function validation(input) {
     let errors = {};
@@ -118,10 +125,10 @@ export default function MiInformacion(props) {
 
     return errors;
   }
-  // console.log("este es el input");
-  // console.log(input);
-  // console.log("estos son los errors");
-  // console.log(errors);
+  console.log("este es el input");
+  console.log(input);
+  console.log("estos son los errors");
+  console.log(errors);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -135,10 +142,10 @@ export default function MiInformacion(props) {
     }
     //Si no hay errores, el isSubmit esta en true
     if (isSubmit) {
-      // console.log(
-      //   "OK. Formulario recibido. Despacho la action con estos datos:"
-      // );
-      // console.log(input);
+      console.log(
+        "OK. Formulario recibido. Despacho la action con estos datos:"
+      );
+      console.log(input);
       dispatch(putUser(input, id));
       setInput({
         usuario: "",

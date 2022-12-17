@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { PureComponent, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import stl from "../PAdmChartsMascotas/EnAdopcion.module.css"
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +29,7 @@ useEffect(() => {
   dispatch(getmascotas())
 }, [dispatch])
 
-// console.log("allpets", allpets)
+console.log("allpets", allpets)
 
 
   

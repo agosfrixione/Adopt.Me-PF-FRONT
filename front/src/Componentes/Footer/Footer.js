@@ -1,5 +1,6 @@
 import React from "react";
 import stl from "../Footer/Footer.module.css";
+import { Link } from "react-router-dom";
 
 
 export default function Footer() {

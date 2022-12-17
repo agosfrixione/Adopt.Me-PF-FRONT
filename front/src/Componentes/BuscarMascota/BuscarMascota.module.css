@@ -20,10 +20,10 @@
 }
 
 .paginaadopcionperros {
-    background-image: url("../../Imagenes/pisadas.jpg");
-    background-size:40%;
+    background-image: url("../../Imagenes/Pet-Slide-Backgrounds.jpg");
+    background-size:100% 100%;
     background-repeat: no-repeat;
-    background-position: -130px;
+    /* background-position: -130px; */
 }
 
 .labelSearch {
@@ -257,4 +257,37 @@
     transform: translateY(-4px);
     background-color: white;
     color: black;
+  }
+
+  .ubicacionMascota {
+    margin-top: 10px;
+  }
+
+  /*///////////////////////////////////////////////////////////*/
+
+  @media only screen and (max-width : 900px) {
+
+    .tituloPerros {
+      font-size: 27px;
+      margin-top: 50px;
+    }
+
+    .paginado {
+      margin-left: -180px;
+    }
+
+    .filtros {
+      margin-left: 100px;
+      width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .listadoCards {
+      margin-left: -40px;
+      margin: -100px;
+    }
+
+    .boton {
+      margin-top: -10px;
+    }
   }

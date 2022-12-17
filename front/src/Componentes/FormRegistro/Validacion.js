@@ -15,7 +15,7 @@ export default function Validacion() {
 
   useEffect(() => {
     dispatch(getDetalleUsuarioSinValidar(id));
-  }, [id, dispatch]);
+  }, [dispatch]);
 
   const usuario = user.usuario;
   const contrasena = user.contrasena;
@@ -53,7 +53,7 @@ export default function Validacion() {
   }
 
 
-  // console.log('input', input)
+  console.log('input', input)
 
   function onClick(e) {
     e.preventDefault();

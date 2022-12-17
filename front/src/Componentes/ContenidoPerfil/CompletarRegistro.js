@@ -1,8 +1,12 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Footer from "../Footer/Footer";
+import NavBar from "../NavBar/NavBar";
 import stl from "./CompletarRegistro.module.css";
+import createuser from "../../Actions/createuser";
 import getusers from "../../Actions/getusers";
+import FloatingUI from "../Floating UI/FloatingUI";
 
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -14,8 +18,8 @@ export default function FormRegistro() {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Metodo de router que me redirige a la ruta que yo le diga
   const Allusers = useSelector((state) => state.users).data; // (o el estado global que usemos para guardar todos los usuarios)
-  const { user } = useAuth0();
-  // console.log(user);
+  const { user, isAuthenticated } = useAuth0();
+  console.log(user);
 
   useEffect(() => {
     dispatch(getusers());
@@ -79,15 +83,15 @@ export default function FormRegistro() {
   }
 
   function handleSubmit(e) {
-    // console.log("Ingreso al handleSubmit");
+    console.log("Ingreso al handleSubmit");
     e.preventDefault();
-    // console.log(Allusers);
+    console.log(Allusers);
     //Si no hay errores, el isSubmit esta en true
     if (isSubmit) {
-      // console.log(
-      // "OK. Formulario recibido. Despacho la action con estos datos:"
-      // );
-      // console.log(input);
+      console.log(
+        "OK. Formulario recibido. Despacho la action con estos datos:"
+      );
+      console.log(input);
       dispatch(createUserGoogle(input));
       setInput({
         usuario: "",

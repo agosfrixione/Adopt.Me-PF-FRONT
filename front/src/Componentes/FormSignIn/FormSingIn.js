@@ -1,4 +1,4 @@
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, UNSAFE_NavigationContext } from "react-router-dom";
 import React, { useState , useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Footer from "../Footer/Footer";
@@ -29,7 +29,7 @@ export default function FormSignIn() {
 
   function validation(input) {
     let errors = {};
-    let existUser = Allusers.filter((u) => u.usuario === input.usuario);
+    let existUser = Allusers.filter((u) => u.usuario == input.usuario);
 
 
     ///////////////////////////////////////////////////////
