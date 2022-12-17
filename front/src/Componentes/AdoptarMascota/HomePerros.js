@@ -8,7 +8,7 @@ import Paging from "../Pagination/Pagination";
 import Footer from "../Footer/Footer";
 import FloatingUI from "../Floating UI/FloatingUI";
 import getperro from "../../Actions/getperros";
-import ordenAlfaPerro from "../../Actions/ordenAlfaPerro";
+import ordenAlfaPerro from "../../Actions/ordenAlfaPerro.js";
 import getdogtamaños from "../../Actions/getDogTamaños";
 import getDogEdad from "../../Actions/getDogEdad";
 
