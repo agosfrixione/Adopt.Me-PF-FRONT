@@ -174,34 +174,7 @@ if (detail.adoptado === false) {
                         </div>        
                     </div>
   
-                    {/* <div className={stl.ubicacionMascota}>
-  
-       
-                          <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
-                              <FlyMapTo />
-                              <TileLayer
-                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-  
-                              
-  
-                                  return (
-  
-                                <Marker
-                                position={[geo.lat, geo.lng]} 
-                                icon={IconLocation}> 
-                                <Popup>
-                                  <img className={stl.imagenMarcador}src={detail.imagen} alt="" /><br></br>
-                                  Esta es la ubicacion<br></br> de esta mascota
-                                </Popup>
-                                </Marker>
-                                  )
-                              
-                          </MapContainer>
-                          <button onClick={handleLocation} className={stl.verUbicacion}>Ver ubicacion de esta mascota</button>
-                                  
-  
-                          </div> */}
+                    
                       
   
                </div>
