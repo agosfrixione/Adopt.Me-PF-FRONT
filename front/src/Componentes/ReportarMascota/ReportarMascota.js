@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import createAnimalPerdido from '../../Actions/createAnimalPerdido';
 import './ReportarMascota.module.css'
 import NavBar from "../NavBar/NavBar";
@@ -67,7 +67,7 @@ function validation(input){
         lat: "",
         adoptado: false
       });
-      // console.log("input", input)
+      console.log("input", input)
   const [imagenes, setImagenes] = useState([]);
       
   const [errors, setErrors] = useState({});
@@ -262,7 +262,7 @@ const {descripcion } = input;
 
  useEffect(() => {
   const estadoS = JSON.parse(localStorage.getItem("estadoTamaño"));
-  // console.log("estadoS", estadoS)
+  console.log("estadoS", estadoS)
   if (estado === null && tama === null) {
     setInput((prev) => ({...prev, ...estadoS}))
 

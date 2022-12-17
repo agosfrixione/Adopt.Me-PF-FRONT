@@ -75,7 +75,7 @@ import "../DonarMascota/formularioDar.css"
   // console.log(input.pichina)
   const [errors, setErrors] = useState({});
   // const [isSubmit, setisSubmit] = useState(false);
-  // console.log("input 1", input)
+console.log("input 1", input)
   
   ////////////////////////////////////////////////////// VALIDACION ///////////////////////////////////////////////////////////////
 
@@ -173,7 +173,7 @@ import "../DonarMascota/formularioDar.css"
 
     //Si no hay errores, el isSubmit esta en true
     // if (isSubmit === true) {
-    // console.log(input)
+    console.log(input)
       dispatch(createLocation(input));
       dispatch(createanimal(input));
       
@@ -197,7 +197,7 @@ import "../DonarMascota/formularioDar.css"
         lng: "",
         adoptado: false
       });
-      // console.log("input 2", input)
+      console.log("input 2", input)
       Toast.success("Mascota publicada correctamente", 1500, () => {
         navigate("/homepage")
       });
@@ -556,7 +556,7 @@ const [draggable, setDraggable] = useState(false)
             <p className={stl.mapaInfo}>Por favor. Para guardar su ubicacion exitosamente<br></br>
             <br></br>1. Primero haga click sobre el marcador azul y muevalo hasta donde se encuentra la mascota
         <br></br>2. Despues seleccione "Establecer mi Ubicacion"<br></br>3. Luego "Guardar mi Ubicacion".</p>
-        <p>Finalmente "Confirmar y Volver"</p>
+        
         <div className={stl.botones}>
         <button className={stl.botonMapa2} onClick={handleLocation}>Establecer mi Ubicacion</button>
         <button className={stl.botonMapa2} onClick={handleLocation2}>Guardar mi Ubicacion</button>

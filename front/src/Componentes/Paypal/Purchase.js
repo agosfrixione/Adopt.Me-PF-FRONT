@@ -38,7 +38,7 @@ const Purchases = () => {
     );
   };
 
-// console.log("estoy en el purchase")
+console.log("estoy en el purchase")
   return (
     
     <div >

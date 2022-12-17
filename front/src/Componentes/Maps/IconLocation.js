@@ -12,3 +12,4 @@ export const IconLocation = L.icon({
     iconSize: [35, 35],
     className: "leaflet-venue-icon",
 })
+

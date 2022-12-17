@@ -29,7 +29,7 @@ useEffect(() => {
   dispatch(getperros())
 }, [dispatch])
 
-// console.log("allDogs", allDogs)
+console.log("allDogs", allDogs)
 
   
 return (

@@ -24,7 +24,7 @@ export default function Blog() {
     
     ////////////////////////////////////////////////////////////////////////////////////////
     
-    const { user } = useAuth0();
+    const { user, isAuthenticated } = useAuth0();
     
     let _id = undefined;
     if (user) {

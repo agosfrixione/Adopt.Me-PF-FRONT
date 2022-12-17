@@ -29,7 +29,7 @@ useEffect(() => {
   dispatch(getgatos())
 }, [dispatch])
 
-// console.log("allCats", allCats)
+console.log("allCats", allCats)
 
   
 return (

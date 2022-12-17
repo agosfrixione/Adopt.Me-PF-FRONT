@@ -2,6 +2,7 @@ import React from "react";
 import Footer from "../Footer/Footer";
 import Metamask from "../Metamask/Metamask";
 import NavBar from "../NavBar/NavBar";
+import Paypal from "../Paypal/Paypal";
 import Purchases from "../Paypal/Purchase";
 import Purchases2 from "../Paypal/Purchase copy";
 import Purchases3 from "../Paypal/Purchase copy 2";

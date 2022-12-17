@@ -36,7 +36,7 @@ export default function MapView() {
             }, {
                 enableHighAccuracy: true
             });
-            // console.log("estoy haciendo el primer useEffect")
+            console.log("estoy haciendo el primer useEffect")
     }, [])
 
     ///////////////////////////////////////////////////// GUARDA LA UBICACION EN LA BASE DE DATOS //////////////////////

@@ -6,7 +6,6 @@ import Footer from "../Footer/Footer";
 import stl from "../BuscarMascota/DetalleMascotaPerdida.module.css";
 import FloatingUI from "../Floating UI/FloatingUI";
 import getDetailMascotaPerdida from "../../Actions/detailMascotaPerdida";
-import limpiezaEstado from "../../Actions/limpiezaDeEstado";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import Toast from "light-toast";
 import { IconLocation } from "../Maps/IconLocation";
@@ -19,14 +18,11 @@ export default function DetallePerro () {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const detail = useSelector((state) => state.animalesPerdidosDetail);
-    // console.log("detail", detail)
+    console.log("detail", detail)
 
     useEffect(() => {
-        dispatch(getDetailMascotaPerdida(id));
-        return () => {
-          dispatch(limpiezaEstado())
-      }
-     }, [id, dispatch]);
+        dispatch(getDetailMascotaPerdida(id))               
+    }, [id, dispatch])
    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -65,7 +61,7 @@ function handleLocation() {
 const [adopt, setAdopt] = useState({
   adoptado: false,
 })
-// .log("adopt", adopt)
+console.log("adopt", adopt)
 
 useEffect(() => {
   setAdopt({

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
+import React, { PureComponent, useEffect } from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import stl from "../PAdmChartsMascotas/Perdidos.module.css"
 import { useSelector, useDispatch } from "react-redux";
 import getAnimalesPerdidos from "../../Actions/getAnimalesPerdidos";
@@ -29,7 +29,7 @@ useEffect(() => {
 }, [dispatch])
   
 
-// console.log("perdidos", perdidos)
+console.log("perdidos", perdidos)
 
 return (
   <div className={stl.grafica}>

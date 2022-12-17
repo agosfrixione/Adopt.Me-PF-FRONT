@@ -9,13 +9,13 @@ export default function PayPal2({ cost, desc }) {
   const [completed, setCompleted] = useState(false);
   const [paid, setPaid] = useState(false);
   const navigate = useNavigate()
-  // const paypal = useSelector((state) => state.paypal)
+  const paypal = useSelector((state) => state.paypal)
   const dispatch = useDispatch()
 
   const [pago, setPago] = useState({
     donacion: 5
   })
-  // console.log("pago", pago)
+  console.log("pago", pago)
 
 
   function handlePago(e) {
