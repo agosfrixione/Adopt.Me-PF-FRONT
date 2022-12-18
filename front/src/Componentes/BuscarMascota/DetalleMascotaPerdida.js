@@ -23,6 +23,10 @@ export default function DetallePerro () {
     useEffect(() => {
         dispatch(getDetailMascotaPerdida(id))               
     }, [id, dispatch])
+
+    useEffect(() => {
+      window.scrollTo(0,0);
+    }, [])
    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 

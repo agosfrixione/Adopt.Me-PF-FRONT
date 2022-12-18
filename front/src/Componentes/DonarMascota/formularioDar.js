@@ -27,6 +27,10 @@ import "../DonarMascota/formularioDar.css"
  const usuario = useSelector((state) => state.detalleUsuario)
  const detalleUserGoogle = useSelector((state) => state.detalleUsuarioGoogle) 
 
+ useEffect(() => {
+  window.scrollTo(0,0);
+}, [])
+
   /////////////////////////////////////////////////////////// TOMA MI UBICACION ACTUAL SEGUN MI GPS ///////////////////
 
   const [geo, setGeo] = useState({

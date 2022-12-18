@@ -21,6 +21,10 @@ export default function PostDetail() {
 
     const postDetalles = useSelector((state) => state.postDetails)
 
+    useEffect(() => {
+        window.scrollTo(0,0);
+      }, [])
+
        ////////////////////////////////////////////////////////////////////////////////////////
     
        const { user, isAuthenticated } = useAuth0();

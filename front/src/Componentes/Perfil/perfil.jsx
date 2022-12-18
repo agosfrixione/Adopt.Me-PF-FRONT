@@ -27,6 +27,9 @@ export default function Perfil() {
 
     const { user, isAuthenticated } = useAuth0()
 
+    useEffect(() => {
+        window.scrollTo(0,0);
+      }, [])
     
     let usuarioIdRaro = ""
     let id = ""

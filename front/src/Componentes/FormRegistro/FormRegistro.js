@@ -22,6 +22,10 @@ export default function FormRegistro() {
     dispatch(getusers());
   }, [dispatch]);
 
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, [])
+
   const [input, setInput] = useState({
     usuario: "",
     contrasena: "",

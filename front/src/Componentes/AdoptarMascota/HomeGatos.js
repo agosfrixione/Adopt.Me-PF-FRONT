@@ -35,6 +35,10 @@ const HomeGatos = () => {
     useEffect(()=>{
         dispatch(getgato())
     }, [dispatch])
+
+    useEffect(() => {
+        window.scrollTo(0,0);
+      }, [])
     
     // if(allPets.map(e=>e.perro === true))
     const handleClick = (e) => {

@@ -19,6 +19,10 @@ export default function MisMascotas() {
     dispatch(getmascotas());
   }, [dispatch]);
 
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, [])
+
     
   let usuarioIdRaro = ""
     let id = ""

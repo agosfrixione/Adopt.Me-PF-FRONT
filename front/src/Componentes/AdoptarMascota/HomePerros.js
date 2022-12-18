@@ -46,6 +46,10 @@ export default function HomePerros () {
             window.location.reload();
         }
 
+        useEffect(() => {
+            window.scrollTo(0,0);
+          }, [])
+
 
    const handleOrden = (e) => {
      e.preventDefault();
