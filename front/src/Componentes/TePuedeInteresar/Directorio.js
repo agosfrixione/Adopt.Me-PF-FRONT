@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Footer from '../Footer/Footer';
 import NavBar from '../NavBar/NavBar';
@@ -6,6 +6,10 @@ import FloatingUI from "../Floating UI/FloatingUI";
 import stl from "../TePuedeInteresar/Directorio.module.css";
 
 export default function Directorio () {
+
+    useEffect(() => {
+        window.scrollTo(0,0);
+      }, [])
 
     const params = useParams();
 

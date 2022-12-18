@@ -55,6 +55,10 @@ function validation(input){
  const navigate = useNavigate();
  const dispatch = useDispatch();
 
+ useEffect(() => {
+  window.scrollTo(0,0);
+}, [])
+
  const [input, setInput] = useState({
         perro: false,
         gato: false,        

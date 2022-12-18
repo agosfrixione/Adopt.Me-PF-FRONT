@@ -27,6 +27,10 @@ export default function InfoProceso() {
   useEffect(() => {
           dispatch(getDetalleUsuario(id));
   }, [dispatch]);
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, [])
   
 
   const detalleUser = useSelector((state) => state.detalleUsuario); // Estado global con los datos del usuario

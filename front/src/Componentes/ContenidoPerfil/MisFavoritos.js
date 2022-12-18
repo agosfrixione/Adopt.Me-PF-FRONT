@@ -16,6 +16,10 @@ export default function MisFavoritos() {
         dispatch(getFavoritos())
     }, [dispatch])
 
+    useEffect(() => {
+        window.scrollTo(0,0);
+      }, [])
+
     const favs2 = favs.filter(({ userFav }) => userFav === detalleUser._id)
     
     return (

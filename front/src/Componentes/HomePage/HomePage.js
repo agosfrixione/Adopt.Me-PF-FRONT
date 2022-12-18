@@ -25,6 +25,10 @@ export default function HomePage() {
           id = usuarioIdRaro.substring(6)
       }
   }
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, [])
   
 
   useEffect(() => {

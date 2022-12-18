@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import stl from "../LandingPage/LandingPage.module.css";
 // import Carousel from 'react-multi-carousel';
@@ -7,6 +7,10 @@ import stl from "../LandingPage/LandingPage.module.css";
 
 
 export default function LandingPage() {
+
+   useEffect(() => {
+      window.scrollTo(0,0);
+    }, [])
    
       return (
       <div className={stl.landingPage}> 

@@ -26,6 +26,10 @@ export default function MiInformacion(props) {
     dispatch(getusers());
   }, [dispatch]);
 
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, [])
+
   const [input, setInput] = useState({
     usuario: props.datos.usuario,
     nombre: props.datos.nombre,

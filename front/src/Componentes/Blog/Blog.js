@@ -21,6 +21,10 @@ export default function Blog() {
     useEffect(() => {
         dispatch(getPosts())
     }, [dispatch])
+
+    useEffect(() => {
+        window.scrollTo(0,0);
+      }, [])
     
     ////////////////////////////////////////////////////////////////////////////////////////
     
