@@ -24,16 +24,16 @@ export default function BuscarMascota() {
   const firstPetIndex = lastPetIndex - mascotasPerPage ;
   const currentPets = allPets.slice(firstPetIndex,lastPetIndex);
   const actualPage = (pageNumber) => {setCurrentPage(pageNumber)};
+  console.log("pets", currentPets)
 
-  useEffect(() => {
-    window.scrollTo(0,0);
-  }, [])
+    
 
   useEffect(()=>{      
     dispatch(getAnimalesPerdidos());
     dispatch(getGatoPerdido());
     dispatch(getPerroPerdido());   
     setCurrentPage(1)
+    window.scrollTo(0,0);
   }, [dispatch]);
 
 
