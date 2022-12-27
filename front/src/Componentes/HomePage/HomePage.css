@@ -5,7 +5,6 @@
   .paper {
     --paper-dark: #e5c93d;
     --paper-color: #ffed87;
-    /* border: 1px solid red; */
     position: absolute;
     display: flex;
     margin-left: 670px;
