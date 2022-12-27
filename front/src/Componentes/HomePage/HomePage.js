@@ -111,7 +111,7 @@ for (const element of elements) {
           <a href="/adoptdog"></a>
         </figure>
 
-        <figure class="snip1576 hover">
+        <figure class="snip1576">
           <img  className={stl.gatos}/>
           <figcaption>
             <h3>Adoptar <span>Gato</span></h3>
