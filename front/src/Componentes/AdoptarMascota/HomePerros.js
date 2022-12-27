@@ -11,44 +11,37 @@ import getperro from "../../Actions/getperros";
 import ordenAlfaPerro from "../../Actions/ordenAlfaPerro.js";
 import getdogtamaños from "../../Actions/getDogTamaños";
 import getDogEdad from "../../Actions/getDogEdad";
+import Loading from "../Loader/Loader";
 
 
 
 export default function HomePerros () {
 
-    
     const dispatch = useDispatch();
-
     const copiaPerros = useSelector((state)=>state.perrosCopia)
     const sinAdopcion = copiaPerros
     const sinAdoptar = sinAdopcion.filter(({ adoptado }) => adoptado === false)
-    
-
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(4)
-
     const lastPetIndex = currentPage * mascotasPerPage 
     const firstPetIndex = lastPetIndex - mascotasPerPage 
     const currentPets = sinAdoptar.slice(firstPetIndex,lastPetIndex) 
-
     const [setOrden] = useState("");
-
-
     const actualPage = (pageNumber) => {setCurrentPage(pageNumber)}
+
+   
+        
 
         useEffect(() => {
             dispatch(getperro())
             setCurrentPage(1)
+            window.scrollTo(0,0);
         }, [dispatch])
 
         const handleClick = (e) => {
             e.preventDefault()
             window.location.reload();
         }
-
-        useEffect(() => {
-            window.scrollTo(0,0);
-          }, [])
 
 
    const handleOrden = (e) => {
@@ -71,6 +64,14 @@ export default function HomePerros () {
   };
         
   
+if (copiaPerros.length === 0) {
+    return (
+        <>
+        <Loading />
+        </>
+    )
+}
+
    return(
         <div className={stl.paginaadopcionperros}>
             <NavBar />

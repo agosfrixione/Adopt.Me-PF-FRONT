@@ -16,9 +16,11 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import { IconLocation } from "../Maps/IconLocation";
 import axios from "axios";
 import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
+import Loading from "../Loader/Loader";
 
 
 export default function DetallePerro() {
+  
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,19 +29,22 @@ export default function DetallePerro() {
   const detalleUser = useSelector((state) => state.detalleUsuario);
   const detalleUserGoogle = useSelector((state) => state.detalleUsuarioGoogle);
   const { user, isAuthenticated } = useAuth0();
-
+  
+  window.onbeforeunload = function () {
+    window.scrollTo(0,0);
+};
+  
 
   //////////////////////////////////////////////////////////////////////////////////////////////
-
+  
   useEffect(() => {
     dispatch(getmascotasbyid(id));
     dispatch(getusers());
-    window.scrollTo(0,0);
+      window.scrollTo(0,0);
   }, []);
-
   
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  
   let usuarioIdRaro = "";
   let _id = "";
   if (isAuthenticated) {
@@ -196,6 +201,14 @@ function handleAdoptado() {
 })
 Toast.success("La mascota se dio en adopcion. \nYa no aparecera en los listados de Adopcion.\n", 1500, () => {});
 navigate("/homepage")
+}
+
+if (detail.length === 0) {
+  return (
+      <>
+      <Loading />
+      </>
+  )
 }
 
 

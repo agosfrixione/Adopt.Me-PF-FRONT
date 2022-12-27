@@ -11,34 +11,29 @@ import FloatingUI from "../Floating UI/FloatingUI";
 import getCatTamaños from "../../Actions/getCatTamaños";
 import getCatEdad from '../../Actions/getCatEdad';
 import Footer from "../Footer/Footer";
+import Loading from "../Loader/Loader";
 
 const HomeGatos = () => {
 
-    const dispatch = useDispatch();
-
+    const dispatch = useDispatch()
     const copiaGatos = useSelector((state)=>state.gatosCopia);
     const sinAdopcion = copiaGatos
     const sinAdoptar = sinAdopcion.filter(({ adoptado }) => adoptado === false)
-
     const [currentPage, setCurrentPage] = useState(1) 
     const [mascotasPerPage] = useState(4)
-
     const lastPetIndex = currentPage * mascotasPerPage 
     const firstPetIndex = lastPetIndex - mascotasPerPage 
     const currentPets = sinAdoptar.slice(firstPetIndex,lastPetIndex) 
-
-
     const [orden, setOrden] = useState("");
-
     const actualPage = (pageNumber) => {setCurrentPage(pageNumber)}
+
+
+        
 
     useEffect(()=>{
         dispatch(getgato())
-    }, [dispatch])
-
-    useEffect(() => {
         window.scrollTo(0,0);
-      }, [])
+    }, [dispatch])
     
     // if(allPets.map(e=>e.perro === true))
     const handleClick = (e) => {
@@ -64,6 +59,14 @@ const HomeGatos = () => {
      dispatch(getCatEdad(e.target.value));
     console.log(e.target.value);
   };
+
+  if (copiaGatos.length === 0) {
+    return (
+        <>
+        <Loading />
+        </>
+    )
+}
 
     return (
 
