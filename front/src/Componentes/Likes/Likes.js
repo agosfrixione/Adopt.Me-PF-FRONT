@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import getLikesFromBackend from '../../Actions/getlikes';
+import getLikesFromBackend from '../../Actions/getLikes';
 import "../Likes/Likes.css";
 import Toast from 'light-toast';
 //////////
