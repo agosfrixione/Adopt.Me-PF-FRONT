@@ -10,23 +10,21 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import Toast from "light-toast";
 import { IconLocation } from "../Maps/IconLocation";
 import axios from "axios";
+import Loading from "../Loader/Loader";
 
 
 export default function DetallePerro () {
     const {id} = useParams();
-    
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const detail = useSelector((state) => state.animalesPerdidosDetail);
-    console.log("detail", detail)
+    
+
 
     useEffect(() => {
-        dispatch(getDetailMascotaPerdida(id))               
+        dispatch(getDetailMascotaPerdida(id))  
+        window.scrollTo(0,0);             
     }, [id, dispatch])
-
-    useEffect(() => {
-      window.scrollTo(0,0);
-    }, [])
    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -91,6 +89,14 @@ function handleAdoptado() {
 })
 Toast.success("Gracias por informar que la mascota ya fue encontrada", 1500, () => {});
 navigate("/homepage")
+}
+
+if (detail.length === 0) {
+  return (
+      <>
+      <Loading />
+      </>
+  )
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
