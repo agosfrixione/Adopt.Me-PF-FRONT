@@ -382,7 +382,6 @@
   margin-left: 80px;
   margin-top: 83px;
   font-family: 'Viga', sans-serif;
-  /* border: 1px solid red; */
 }
 
 .banner2 {
@@ -553,14 +552,14 @@
     /* border: 1px solid red; */
     margin-left: 10px;
     width: 380px;
-    height: 500px;
+    height: 550px;
     border-radius: 15px;
   }
 
   .darEnAdopcion {
     /* border: 1px solid blue; */
-    margin-top: 940px;
-    margin-left: -390px;
+    margin-top: 1020px;
+    margin-left: -396px;
     width: 380px;
     position: absolute;
     border-radius: 15px;
@@ -570,8 +569,8 @@
     /* border: 1px solid green; */
     position: absolute;
     width: 380px;
-    margin-left: -390px;
-    margin-top: 570px;
+    margin-left: -396px;
+    margin-top: 700px;
     border-radius: 15px;
   }
 
@@ -596,13 +595,13 @@
 }
 
 .perros {
-  width: 155px;
-  height: 134.5px;
+  width: 355px;
+  height: 234.5px;
 }
 
 .gatos {
-  width: 155px;
-  height: 134.5px;
+  width: 355px;
+  height: 234.5px;
 }
 
 .parrafo {
@@ -637,6 +636,15 @@
 
 .botonadmin {
   margin-top: 950px;
+}
+
+.tituloAdoptar {
+  margin-top: -10px;
+  font-size: 25px;
+}
+
+.likebutton {
+  margin-left: 00px;
 }
 
 }

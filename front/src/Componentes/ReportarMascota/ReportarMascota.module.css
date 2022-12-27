@@ -1,5 +1,4 @@
 .paginareportar {
-  /* height: 1200px; */
   background-image: url("../../Imagenes/Pet-Slide-Backgrounds.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -39,7 +38,7 @@
   height: 200px;
   margin-top: -40px;
   margin-bottom: 20px;
-  
+  /* margin-right: 150px; */
 }
 
 .botonFoto2 {
@@ -139,6 +138,7 @@
   margin: 0;
   outline: 2px solid transparent;
   padding: 9px 10px;
+  /* margin-right: 95px; */
   margin-top: 36px;
   text-align: center;
   text-transform: none;
@@ -262,7 +262,7 @@
   .ps {
     font-size: 14px;
     width: 340px;
-    margin-left: 74px;
+    margin-left: 44px;
   }
 
   .botonubicacion {

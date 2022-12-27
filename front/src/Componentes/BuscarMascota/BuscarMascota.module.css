@@ -2,7 +2,7 @@
 
 
 .listadoCards {
-    
+    /* border: 3px solid red; */
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -23,7 +23,6 @@
     background-image: url("../../Imagenes/Pet-Slide-Backgrounds.jpg");
     background-size:100% 100%;
     background-repeat: no-repeat;
-    /* background-position: -130px; */
 }
 
 .labelSearch {
@@ -227,7 +226,7 @@
     margin: 0;
     outline: 2px solid transparent;
     padding: 9px 10px;
-   
+    /* border: 1px solid blue; */
     margin-left: 10px;
     text-align: center;
     text-transform: none;
@@ -237,7 +236,7 @@
     touch-action: manipulation;
     box-shadow: -6px 8px 10px rgba(81,41,10,0.1),0px 2px 2px rgba(81,41,10,0.2);
     width: 90px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     margin-right: 20px;
     justify-content: center;
 }

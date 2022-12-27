@@ -61,3 +61,19 @@
     border-color: rgb(65, 163, 12);
   }
   
+  @media only screen and (max-width : 900px) {
+
+    .corazon {
+      /* border: 1px solid red; */
+      margin-left: 130px;
+      margin-top: -140px;
+    }
+
+    .daleclick {
+      margin-left: -45px;
+      margin-bottom: 150px;
+      font-size: 10px;
+    }
+
+
+  }
