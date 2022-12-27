@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import getDetalleUsuario from "../../Actions/getDetalleUsuario"
 import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
-// import LikeButton from "../Likes/Likes";
+import LikeButton from "../Likes/Likes";
 import "./HomePage.css";
 
 export default function HomePage() {
@@ -64,7 +64,7 @@ for (const element of elements) {
       <NavBar />
       
       <div className={stl.likebutton}>
-      {/* <LikeButton /> */}
+      <LikeButton />
       </div>
       <div className={stl.donacion}>
         <p className={stl.textoDonacion}>Realiza tu donacion</p>
