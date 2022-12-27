@@ -6,9 +6,9 @@ import stl from "./HomePage.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import getDetalleUsuario from "../../Actions/getDetalleUsuario"
+import getDetalleUsuario from "../../Actions/getDetalleUsuario.js"
 import getDetalleUsuarioGoogle from "../../Actions/getDetalleUsuarioGoogle";
-// import LikeButton from "../Likes/Likes";
+import LikeButton from "../Likes/Likes";
 import "./HomePage.css";
 
 export default function HomePage() {
@@ -64,7 +64,7 @@ for (const element of elements) {
       <NavBar />
       
       <div className={stl.likebutton}>
-      {/* <LikeButton /> */}
+      <LikeButton />
       </div>
       <div className={stl.donacion}>
         <p className={stl.textoDonacion}>Realiza tu donacion</p>
