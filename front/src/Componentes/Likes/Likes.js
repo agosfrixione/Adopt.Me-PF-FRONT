@@ -2,10 +2,10 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import getLikesFromBackend from '../../Actions/getLikes';
+import getLikesFromBackend from '../../Actions/getlikes';
 import "../Likes/Likes.css";
 import Toast from 'light-toast';
-//////////
+
 
 const LikeButton = () => {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const saveLikeToBackend = () => {
     <div className={liked ? 'boton-liked' : 'boton-sin-liked'} onClick={handleClick}/>
     <div className="likes">{totalLikes + numLikes} Me gusta</div>
     </div>
-  <div className="daleclick daleclick-popup">(Si te gusta la página hace "Doble Click" para dejarnos un Like)</div>
+  <div className="daleclick">(Si te gusta la página hace "Doble Click" para dejarnos un Like)</div>
     </>
 
   );
