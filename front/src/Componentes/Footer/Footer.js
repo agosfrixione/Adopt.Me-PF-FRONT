@@ -11,7 +11,7 @@ export default function Footer() {
 
             <div className={stl.titulo}>
                 <h2>@ Adopt.Me</h2>
-                <div>adoptmeargentina@gmail.com</div><br></br>
+                <div>adopt.me.pets.arg@gmail.com</div><br></br>
                 <div>Copyright 2022 - Todos los derechos reservados</div>
             </div>
 
