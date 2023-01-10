@@ -22,21 +22,7 @@ function validation(input){
     const whitespace = /\S+/;
     const validString = /^[a-z]+$/i;
     const validNumber = /^\d+$/;
- 
-  
-   if (
-     !whitespace.test(input.nombre) ||                
-     !validString.test(input.nombre) ||               
-     input.nombre.length < 3                          
-    ) errors.nombre = "Nombre Requerido. Debe contener mas de dos caracteres y no incluir ningun simbolo o caracter especial";
-                                                
-                                        
-   if ( 
-       !validNumber.test(input.edad) ||      
-       parseInt(input.edad) < 1      ||      
-       parseInt(input.edad) > 20            
-     ) errors.edad = "Edad is required. Must be higher than 1 and less than 20.";
-                                   
+                                                                               
                                     
      if (!input.descripcion) {
        errors.descripcion = "Tienes que agregar una descripcion informativa de la mascota";
